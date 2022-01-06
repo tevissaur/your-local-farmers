@@ -6,12 +6,10 @@ const userSchema = new Schema(
     firstName: {
       type: String,
       required: true,
-      unique: true,
     },
     lastName: {
       type: String,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -31,10 +29,10 @@ const userSchema = new Schema(
       type: String, 
       required: true
     },
-    reviews: {
-      type: [String],
+    reviews: [{
+      type: Schema.Types.ObjectId,
       ref: 'Review'
-    }
+    }]
   }
 );
 
@@ -53,10 +51,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
-});
+// userSchema.virtual('fullName').get(function() {
+//   return `${this.firstName} ${this.lastName}`
+// })
+
 
 const User = model('User', userSchema);
 

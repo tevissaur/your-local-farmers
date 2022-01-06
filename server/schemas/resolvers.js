@@ -6,16 +6,16 @@ const { signToken } = require('../utils/auth')
 const resolvers = {
     Query: {
         me: async (parent, { _id }) => {
-            console.log(_id)
-            return _id
+            return await User.findById(_id)
         }
     },
     Mutation: {
-        createUser: async (parent, args) => {
-            console.log(args)
-            // const user = await User.create(args)
-            // const token = signToken(user)
-            return args
+        createUser: async (parent, { user }) => {
+            console.log(user)
+            const newUser = await User.create(user)
+            console.log(newUser)
+            const token = signToken(newUser)
+            return { newUser, token }
         },
     }
 }

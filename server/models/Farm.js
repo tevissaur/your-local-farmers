@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const farmSchema = new Schema(
     {
@@ -10,18 +10,18 @@ const farmSchema = new Schema(
             type: String,
             required: true
         },
-        reviews: {
-            type: [Types.ObjectId],
+        reviews: [{
+            type: Schema.Types.ObjectId,
             ref: 'Review'
-        },
-        products: {
-            type: [Types.ObjectId],
-            ref: 'Products'
-        },
-        purchaseOrders: {
-            type: [Types.ObjectId],
+        }],
+        products: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        }],
+        purchaseOrders: [{
+            type: Schema.Types.ObjectId,
             ref: 'PurchaseOrder'
-        }
+        }]
     }
 )
 

@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const productSchema = new Schema(
     {
@@ -14,18 +14,18 @@ const productSchema = new Schema(
             type: Number,
             required: true
         },
-        reviews: {
-            type: [String],
+        reviews: [{
+            type: Schema.Types.ObjectId,
             ref: 'Review'
-        },
+        }],
         inSeason: {
             type: Boolean,
             default: false
         },
-        categories: {
-            type: [String],
+        categories: [{
+            type: Schema.Types.ObjectId,
             ref: 'Category'
-        }
+        }]
     }
 )
 

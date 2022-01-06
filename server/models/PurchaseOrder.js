@@ -21,6 +21,10 @@ const purchaseOrderSchema = new Schema(
         seller: {
             type: Schema.Types.ObjectId,
             required: true
+        },
+        orderTotal: {
+            type: Number,
+            default: 0
         }
     }
 )

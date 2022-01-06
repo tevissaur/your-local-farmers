@@ -5,6 +5,7 @@ const farmSchema = new Schema(
         name: {
             type: String,
             required: true,
+            unique: true
         },
         address: {
             type: String,
@@ -21,6 +22,10 @@ const farmSchema = new Schema(
         purchaseOrders: [{
             type: Schema.Types.ObjectId,
             ref: 'PurchaseOrder'
+        }],
+        owners: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }]
     }
 )

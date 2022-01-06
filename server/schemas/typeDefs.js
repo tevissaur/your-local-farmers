@@ -2,11 +2,13 @@ const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
     type PurchaseOrder {
+        _id: ID!
         seller: Farm!
         buyer: User!
         dateCreated: String
         items: [Product]
         pickUpTime: String!
+        orderTotal: Int
     }
     type Product {
         _id: ID! 
@@ -26,7 +28,6 @@ const typeDefs = gql`
         content: String!
         rating: Int!
     }
-
     type Farm {
         _id: ID!
         name: String!
@@ -34,8 +35,8 @@ const typeDefs = gql`
         reviews: [Review]
         products: [Product]
         purchaseOrders: [PurchaseOrder]
+        owners: [User]
     }
-
     type User {
         _id: ID!
         firstName: String!
@@ -46,7 +47,6 @@ const typeDefs = gql`
         address: String!
         reviews: [Review]
     }
-
     type Auth {
         token: ID!
         user: User
@@ -70,25 +70,40 @@ const typeDefs = gql`
         name: String!
         price: Float!
         quantity: Int!
-        reviews: [ID!]
         inSeason: Boolean
-        categories: [ID!]
     }
     input NewCategory {
         name: String!
     }
+    input NewFarm {
+        name: String!
+        address: String!
+        owners: [ID]!
+    }
+    input NewPurchaseOrder {
+        seller: ID!
+        buyer: ID!
+        dateCreated: String
+        items: [ID]!
+        pickUpTime: String!
+        orderTotal: Int
+    }
+
+
     type Query {
         me(_id: ID!): User
         reviews: [Review]
         products: [Product]
+        getPO(_id: ID!): PurchaseOrder
     }
 
     type Mutation {
         createUser(user: NewUser!): Auth
         postReview(review: NewReview!, product: ID, user: ID, farm: ID): Review
-        createProduct(product: NewProduct!): Product
+        createProduct(product: NewProduct!, farm: ID!, category: ID!): Product
         createCategory(category: NewCategory!): Category
-
+        createFarm(farm: NewFarm): Farm
+        createPO(PO: NewPurchaseOrder): PurchaseOrder
     }
 `
 

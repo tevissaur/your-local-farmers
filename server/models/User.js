@@ -3,7 +3,12 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
-    username: {
+    firstName: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    lastName: {
       type: String,
       required: true,
       unique: true,
@@ -17,13 +22,19 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-    }
-  },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
     },
+    isFarmer: {
+      type: Boolean,
+      default: false,
+    },
+    address: {
+      type: String, 
+      required: true
+    },
+    reviews: {
+      type: [String],
+      ref: 'Review'
+    }
   }
 );
 

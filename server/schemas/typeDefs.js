@@ -8,25 +8,27 @@ const typeDefs = gql`
         email: String!
         password: String!
         isFarmer: Boolean!
-        city: String
-        state: String
+        address: String!
     }
+
     type Auth {
         token: ID!
         user: User
     }
+
     input NewUser {
         firstName: String!
         lastName: String!
         email: String!
         password: String!
         isFarmer: Boolean!
-        city: String
-        state: String
+        address: String!
     }
+    
     type Query {
         me(_id: ID!): User
     }
+
     type Mutation {
         createUser(user: NewUser!): Auth
     }

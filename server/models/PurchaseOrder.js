@@ -13,6 +13,14 @@ const purchaseOrderSchema = new Schema(
         dateCreated: {
             type: Date,
             default: Date.now()
+        },
+        buyer: {
+            type: Schema.Types.ObjectId,
+            required: true
+        },
+        seller: {
+            type: Schema.Types.ObjectId,
+            required: true
         }
     }
 )

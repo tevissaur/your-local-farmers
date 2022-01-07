@@ -19,7 +19,7 @@ const resolvers = {
             return await Review.find().populate('author')
         },
         products: async (parent, args) => {
-            return await Product.find().populate([{
+            const prod = await Product.find().populate([{
                 path: 'reviews',
                 model: 'Review',
                 populate: {
@@ -27,12 +27,14 @@ const resolvers = {
                     model: 'User'
                 }
             }])
+            // console.log(prod[0].getAvgReviewScore())
+            return prod
         },
         getPO: async (parent, { _id }) => {
             return await PurchaseOrder.findById(_id).populate([
                 {
                     path: 'seller',
-                    model: 'User'
+                    model: 'Farm'
                 },
                 {
                     path: 'buyer',
@@ -40,7 +42,11 @@ const resolvers = {
                 },
                 {
                    path: 'items',
-                   model: 'Product'
+                   model: 'Product',
+                   populate: {
+                       path: 'reviews',
+                       model: 'Review'
+                   }
                 }
             ])
         }
@@ -52,10 +58,23 @@ const resolvers = {
             return { newUser, token }
         },
         postReview: async (parent, { review, product, user, farm }) => {
+
+
+
+            const newReview = await Review.create(review)
+            
             product ? console.log('yes product') : console.log('no product')
             user ? console.log('yes user') : console.log('no user')
             farm ? console.log('yes farm') : console.log('no farm')
-            const newReview = await Review.create(review)
+
+            // const reviewedFarm = await Farm.findByIdAndUpdate(
+            //     farm,
+            //     {
+            //         $push: {
+            //             reviews: newReview.id
+            //         }
+            //     }
+            // )
             return newReview
         },
         createProduct: async (parent, { product }) => {
@@ -74,7 +93,7 @@ const resolvers = {
         },
         createPO: async (parent, { PO }) => {
             const newPO = await PurchaseOrder.create(PO)
-            return newPO
+            return newPO.populate()
         }
     }
 }

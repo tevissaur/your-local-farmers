@@ -16,6 +16,7 @@ const typeDefs = gql`
         price: Float!
         quantity: Int!
         reviews: [Review]
+        avgScore: Int
         inSeason: Boolean
         categories: [Category]
     }

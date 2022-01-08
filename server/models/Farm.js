@@ -27,6 +27,9 @@ const farmSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
+        story: {
+            type: String
+        }
     }
 )
 

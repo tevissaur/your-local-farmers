@@ -3,8 +3,8 @@ const { gql } = require('apollo-server-express')
 const typeDefs = gql`
     type PurchaseOrder {
         _id: ID!
-        seller: Farm!
-        buyer: User!
+        seller: Farm
+        buyer: User
         dateCreated: String
         items: [Product]
         pickUpTime: String!
@@ -98,6 +98,8 @@ const typeDefs = gql`
         reviews: [Review]
         products: [Product]
         getPO(_id: ID!): PurchaseOrder
+        farms: [Farm]
+        categories: [Category]
     }
 
     type Mutation {

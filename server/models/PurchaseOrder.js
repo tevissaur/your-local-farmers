@@ -16,13 +16,11 @@ const purchaseOrderSchema = new Schema(
         },
         buyer: {
             type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
         },
         seller: {
             type: Schema.Types.ObjectId,
-            ref: 'Farm',
-            required: true
+            ref: 'Farm'
         },
         orderTotal: {
             type: Number,

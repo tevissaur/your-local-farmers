@@ -12,11 +12,7 @@ function SideNavBar() {
     return (
        <Flex
             pos='sticky'
-<<<<<<< HEAD
-            bg="white"
-=======
             colorScheme="primary.lightGreen"
->>>>>>> 832df1f0a1c7638f7565c089357cfedefca9199f
             marginLeft="5"
             h="95vh"
             marginTop="2.5vh"

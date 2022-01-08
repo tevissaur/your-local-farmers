@@ -10,7 +10,7 @@ function SideNavBar() {
     return (
        <Flex
             pos='sticky'
-            bg="black"
+            bg="white"
             marginLeft="5"
             h="95vh"
             marginTop="2.5vh"

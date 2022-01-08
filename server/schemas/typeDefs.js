@@ -22,6 +22,7 @@ const typeDefs = gql`
     }
     type Category {
         name: String!
+        imgUrl: String
     }
     type Review {
         _id: ID!
@@ -75,6 +76,7 @@ const typeDefs = gql`
     }
     input NewCategory {
         name: String!
+        imgUrl: String
     }
     input NewFarm {
         name: String!

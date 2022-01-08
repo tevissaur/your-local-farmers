@@ -12,7 +12,7 @@ const SmallCategoryIcon = ({ card }) => {
             <Box>
                 <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
                     <Box className='smallCategoryIcon'>
-                        <Image src={card.image} boxSize='145px' height='125px' width='125px'borderRadius='50%'/>
+                        <Image src={card.image} boxSize='145px' height='150px' width='150px' borderRadius='50%'/>
                         <Text textAlign="center">{card.title}</Text>
                     </Box>
                 </Flex>

@@ -17,11 +17,13 @@ const Homepage = () => {
           <Header />
 
           <SearchBar />
-          <Container maxW='98%' mt={2}>
+          <Box mt={2} flex="1">
             <Box
               backgroundColor={customTheme.colors.primary.lightGreen}
-              borderRadius='25px'
-              height='100%'>
+              borderRadius='15px'
+              height='100%'
+              p="15px"
+              pb="30px">
               <Flex justifyContent='center'>
                 <Text
                   fontSize='30px'
@@ -37,8 +39,7 @@ const Homepage = () => {
                 <SmartSmallIcon />
               </Flex>
             </Box>
-
-          </Container>
+          </Box>
           <Box>
             <CategoryCards />
           </Box>

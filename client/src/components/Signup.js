@@ -15,7 +15,8 @@ import {
     Input,
     useDisclosure,
     Box
-  } from '@chakra-ui/react'
+  } from '@chakra-ui/react';
+  import customTheme from "../extendedTheme";
 
 function Signup() {
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -27,10 +28,10 @@ return (
     <>
 
     <Box>
-        <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
+        <Button onClick={onOpen} bg="primary.yellowGreen" mr="4">
         Sign Up
         </Button>
-        <Button bg="primary.lightGreen">Log in</Button>
+        <Button bg="primary.yellowGreen">Log in</Button>
     </Box>
 
     <Modal

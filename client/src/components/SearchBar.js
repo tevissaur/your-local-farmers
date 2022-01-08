@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Input, Text, Container, Flex, Center, InputLeftElement, InputGroup} from '@chakra-ui/react'
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs';
+import customTheme from '../extendedTheme';
 
 
 function SearchBar() {

@@ -1,7 +1,7 @@
 import SideNavBar from "../components/SideNavBar";
 import { Button, Box, Flex, Heading, Spacer, Center } from "@chakra-ui/react";
 import CategoryCards from "../components/CategoryCards";
-
+import SearchBar from '../components/SearchBar'
 const Homepage = () => {
   return (
     <>
@@ -20,6 +20,7 @@ const Homepage = () => {
               <Button bg="primary.lightGreen">Log in</Button>
             </Box>
           </Flex>
+        <SearchBar />
           <Box>
             <CategoryCards />
           </Box>

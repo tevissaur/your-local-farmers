@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex, Menu, MenuButton, Link, Text , Icon } from '@chakra-ui/react'
+import { Flex, Menu, MenuButton, Link, Text , Icon, Center } from '@chakra-ui/react'
+import customTheme from '../extendedTheme'
 function NavItem({navSize, title, icon, active}) {
     return (
         <Flex
@@ -13,13 +14,13 @@ function NavItem({navSize, title, icon, active}) {
                     backgroundColor={active && "AEC8CA"}
                     p={3}
                     borderRadius={8}
-                    _hover={{texDecor: 'none', backgroundColor: '#AEC8CA'}}
+                    _hover={{texDecor: 'none', backgroundColor: customTheme.colors.primary.lightGreen}}
                     w={navSize == "large" && "100%" }
                 >
                     <MenuButton w='100%'>
-                        <Flex>
-                            <Icon as={icon} fontSize='xl' color={active ? "#82AAAD" : "gray.500"} />
-                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+                        <Flex alignItems="center">
+                            <Icon as={icon} fontSize="35px" color={active ? "black" : "black"} />
+                            <Text ml={3} display={navSize == "small" ? "none" : "flex"} fontWeight="bold">{title}</Text>
                         </Flex>
                     </MenuButton>
                 </Link>

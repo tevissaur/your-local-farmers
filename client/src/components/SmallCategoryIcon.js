@@ -6,8 +6,7 @@ import { border } from '@chakra-ui/react'
 import SmallIcon from '../components/SmallIcon.css'
 import SmartSmallIcon from './SmartSmallIcon'
 
-function SmallCategoryIcon(props) {
-    console.log(props)
+const SmallCategoryIcon = ({ card }) => {
     return (
         <Flex justifyContent='space-evenly'>
             <Box>

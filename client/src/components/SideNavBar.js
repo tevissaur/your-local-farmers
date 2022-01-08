@@ -3,14 +3,16 @@ import { Avatar, Flex, Heading, Divider, Text, Image, IconButton } from '@chakra
 import lightLogo  from '../assets/lightmode-logo.png'
 import { FiMenu } from 'react-icons/fi'
 import NavItem from './NavItem'
-import { GiBarn, GiFarmer } from 'react-icons/gi'
+import { GiBarn, GiFarmer, GiFarmTractor } from 'react-icons/gi'
+import { CgProfile } from 'react-icons/cg'
+import { extendTheme } from '@chakra-ui/react'
 
 function SideNavBar() {
     const [navSize, changeNavSize] = useState("large")
     return (
        <Flex
             pos='sticky'
-            bg="black"
+            colorScheme="primary.lightGreen"
             marginLeft="5"
             h="95vh"
             marginTop="2.5vh"
@@ -29,6 +31,7 @@ function SideNavBar() {
             <IconButton 
                 background="none"
                 mt={5}
+                fontSize="20px"
                 _hover={{background: 'none'}}
                 icon={<FiMenu />}
                 onClick={() => {
@@ -38,6 +41,8 @@ function SideNavBar() {
             />
                 <NavItem navSize={navSize} icon={GiBarn} title="Home" active description="Home"/>
                 <NavItem navSize={navSize} icon={GiFarmer} title="Find A Local Farmer Near You"/>
+                <NavItem navSize={navSize} icon={GiFarmTractor} title="Your Farm"/>
+                <NavItem navSize={navSize} icon={CgProfile} title="Profile"/>
             </Flex>
 
                 <Flex

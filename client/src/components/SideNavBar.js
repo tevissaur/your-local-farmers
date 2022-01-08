@@ -10,7 +10,8 @@ function SideNavBar() {
     return (
        <Flex
             pos='sticky'
-            left="5"
+            bg="black"
+            marginLeft="5"
             h="95vh"
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
@@ -19,22 +20,22 @@ function SideNavBar() {
             flexDir="column"
             justifyContent="space-between"
         >
-            <Flex
-                p='5%'
-                flexDir="column"
-                w='100%'
-                alignItems={navSize == "small" ? "center" : "flex-start"}    
+        <Flex
+            p='5%'
+            flexDir="column"
+            w='100%'
+            alignItems={navSize == "small" ? "center" : "flex-start"}    
             >
-                <IconButton 
-                    background="none"
-                    mt={5}
-                    _hover={{background: 'none'}}
-                    icon={<FiMenu />}
-                    onClick={() => {
-                        navSize == "small" ? changeNavSize("large")
-                        : changeNavSize("small")
-                    }}
-                />
+            <IconButton 
+                background="none"
+                mt={5}
+                _hover={{background: 'none'}}
+                icon={<FiMenu />}
+                onClick={() => {
+                    navSize == "small" ? changeNavSize("large")
+                    : changeNavSize("small")
+                }}
+            />
                 <NavItem navSize={navSize} icon={GiBarn} title="Home" active description="Home"/>
                 <NavItem navSize={navSize} icon={GiFarmer} title="Find A Local Farmer Near You"/>
             </Flex>

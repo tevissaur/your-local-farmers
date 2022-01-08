@@ -7,6 +7,9 @@ const categorySchema = new Schema(
             type: String,
             required: true,
             unique: true
+        },
+        imgUrl: {
+            type: String
         }
     }
 )

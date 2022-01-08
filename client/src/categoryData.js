@@ -8,29 +8,29 @@ import seasonalStuffs from './assets/seasonalStuffs-2.jpg';
 
 
 
-export const categoryData =[
- { 
-   title:'Backed Goods',
-    image :bakedGoods
+export const categoryData = [
+  {
+    title: 'Backed Goods',
+    image: bakedGoods
   },
-  { 
-    title:'Dairy, Meat & Eggs',
-     image :DairyMeatEggs
-   },
-   { 
-    title:'Fruits & Vegetables',
-     image :fruitVegetables
-   },
-   { 
-    title:'Flowers & Plants',
-     image :flowersPlants
-   },
-   { 
-    title:'Beverages',
-     image :beverages 
-   },
-   { 
-    title:'Seasonal Stuffs',
-     image :seasonalStuffs
-   },
+  {
+    title: 'Dairy, Meat & Eggs',
+    image: DairyMeatEggs
+  },
+  {
+    title: 'Fruits & Vegetables',
+    image: fruitVegetables
+  },
+  {
+    title: 'Flowers & Plants',
+    image: flowersPlants
+  },
+  {
+    title: 'Beverages',
+    image: beverages
+  },
+  {
+    title: 'Seasonal Stuffs',
+    image: seasonalStuffs
+  },
 ]

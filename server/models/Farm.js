@@ -26,7 +26,10 @@ const farmSchema = new Schema(
         owners: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }]
+        }],
+        story: {
+            type: String
+        }
     }
 )
 

@@ -3,10 +3,13 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
-    username: {
+    firstName: {
       type: String,
       required: true,
-      unique: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,
@@ -17,13 +20,22 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-    }
-  },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
     },
+    isFarmer: {
+      type: Boolean,
+      default: false,
+    },
+    address: {
+      type: String, 
+      required: true
+    },
+    reviews: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Review'
+    }]
+  },
+  {
+    
   }
 );
 
@@ -42,10 +54,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
-});
+userSchema.virtual('fullName').get(function() {
+  return `${this.firstName} ${this.lastName}`
+})
+
 
 const User = model('User', userSchema);
 

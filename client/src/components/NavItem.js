@@ -15,7 +15,7 @@ function NavItem({navSize, title, icon, active}) {
                     backgroundColor={active && "AEC8CA"}
                     p={3}
                     borderRadius={8}
-                    _hover={{texDecor: 'none', backgroundColor: '#AEC8CA'}}
+                    _hover={{texDecor: 'none', backgroundColor: customTheme.colors.primary.lightGreen}}
                     w={navSize == "large" && "100%" }
                 >
                     <MenuButton w='100%'>

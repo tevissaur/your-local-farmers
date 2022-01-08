@@ -1,5 +1,7 @@
 import React from 'react'
-import { Flex, Menu, MenuButton, Link, Text , Icon } from '@chakra-ui/react'
+import { Flex, Menu, MenuButton, Link, Text , Icon } from '@chakra-ui/react';
+import customTheme from '../extendedTheme';
+
 function NavItem({navSize, title, icon, active}) {
     return (
         <Flex
@@ -18,7 +20,7 @@ function NavItem({navSize, title, icon, active}) {
                 >
                     <MenuButton w='100%'>
                         <Flex>
-                            <Icon as={icon} fontSize='xl' color={active ? "#82AAAD" : "gray.500"} />
+                            <Icon as={icon} fontSize='xl' color={active ? "primary.darkGreen" : "primary.yellowGreen"} />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
                         </Flex>
                     </MenuButton>

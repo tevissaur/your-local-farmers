@@ -1,16 +1,20 @@
-import {Link} from 'react-router-dom';
-import {Box} from '@chakra-ui/react'
+import { Box } from "@chakra-ui/react";
 
-const CategoryCard = ({card}) => {
+const CategoryCard = ({ card }) => {
+  console.log(card);
   return (
-    <Box borderRadius='50%'>
-      <h1> {card.title}</h1>
-      <img src={card.image} style={{width:"300px", height:"250px"}} />
-      <Link to={`/products/${card.title.toLowerCase()}`}>View More </Link>
-     
-    </Box>
-        
-  )
-}
+    <>
+      <Box m="1px">
+      <img 
+      src={card.image}
+      style={{ width: "450px", height: "250px" }}
+        />
 
-export default CategoryCard
+      </Box>
+
+    
+    </>
+  );
+};
+
+export default CategoryCard;

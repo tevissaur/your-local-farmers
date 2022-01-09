@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 import {Image, Flex, Box, Text, color} from '@chakra-ui/react'
 import bakedGoods from '../assets/beverages2.jpg'
 import DairyMeatEggs from '../assets/DairyMeatEggs.jpg'
@@ -12,8 +13,12 @@ const SmallCategoryIcon = ({ card }) => {
             <Box>
                 <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
                     <Box className='smallCategoryIcon'>
-                        <Image src={card.image} boxSize='145px' height='150px' width='150px' borderRadius='50%'/>
-                        <Text textAlign="center">{card.title}</Text>
+                        <Link 
+                        to={`/products/${card.title.toLowerCase()}`}
+                        >
+                             <Image src={card.image} boxSize='145px' height='125px' width='125px' borderRadius='50%'/>
+                            <Text textAlign="center">{card.title}</Text>
+                        </Link>
                     </Box>
                 </Flex>
             </Box>

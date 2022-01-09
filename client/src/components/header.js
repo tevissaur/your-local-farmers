@@ -1,5 +1,5 @@
 import { Flex, Center, Heading, Box } from "@chakra-ui/react";
-import Signup from "../components/Signup";
+import Signup from "./Signup";
 import farmerLogo from "../assets/farmerLogo.png";
 
 

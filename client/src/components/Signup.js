@@ -14,15 +14,9 @@ import {
     Button,
     Input,
     useDisclosure,
-<<<<<<< HEAD
     Box
   } from '@chakra-ui/react';
   import customTheme from "../extendedTheme";
-=======
-    Box,
-    Flex
-  } from '@chakra-ui/react'
->>>>>>> 0b84b2216b593c4d09831b7d4870c40214d59087
 
 function Signup() {
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -34,17 +28,10 @@ return (
     <>
 
     <Box>
-<<<<<<< HEAD
         <Button onClick={onOpen} bg="primary.yellowGreen" mr="4">
         Sign Up
         </Button>
         <Button bg="primary.yellowGreen">Log in</Button>
-=======
-        <Flex wrap='wrap'>
-            <Button onClick={onOpen} bg="primary.lightGreen" mr="4">Sign Up</Button>
-            <Button bg="primary.lightGreen">Log in</Button>
-        </Flex>
->>>>>>> 0b84b2216b593c4d09831b7d4870c40214d59087
     </Box>
 
     <Modal

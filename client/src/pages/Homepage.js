@@ -2,6 +2,7 @@ import SideNavBar from "../components/SideNavBar";
 import { Button, Box, Flex, Heading, Spacer, Center, Text, Container } from "@chakra-ui/react";
 import Header from '../components/Header'
 import SearchBar from '../components/SearchBar'
+import Footer from '../components/Footer'
 import customTheme from '../extendedTheme'
 import SmallCategoryIcon from '../components/SmallCategoryIcon'
 import SmartSmallIcon from "../components/SmartSmallIcon";
@@ -40,6 +41,7 @@ const Homepage = () => {
     </Box>
     <HomePageBody />
     </Container>
+<Footer />
   </Box>
 </Flex>
 </>

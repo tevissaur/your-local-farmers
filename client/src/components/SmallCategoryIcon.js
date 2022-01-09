@@ -1,14 +1,11 @@
 import React from 'react'
-import {Image, Flex, Box, Text, color} from '@chakra-ui/react'
-import bakedGoods from '../assets/beverages2.jpg'
-import DairyMeatEggs from '../assets/DairyMeatEggs.jpg'
-import { border } from '@chakra-ui/react'
+import {Image, Flex, Box, Text} from '@chakra-ui/react'
 import SmallIcon from '../components/SmallIcon.css'
-import SmartSmallIcon from './SmartSmallIcon'
+
 
 const SmallCategoryIcon = ({ card }) => {
     return (
-        <Flex justifyContent='space-evenly'>
+        <Flex justifyContent='space-evenly' flexGrow='3' className="icon-basket">
             <Box>
                 <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
                     <Box className='smallCategoryIcon'>

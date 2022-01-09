@@ -10,7 +10,7 @@ import seasonalStuffs from './assets/seasonalStuffs-2.jpg';
 
 export const categoryData = [
   {
-    title: 'Backed Goods',
+    title: 'Baked Goods',
     image: bakedGoods
   },
   {

@@ -11,6 +11,7 @@ const Header = () => {
                     <Heading size="md" color="black">Your Local Farmers</Heading>
                 </Center>
                 <Signup></Signup>
+                <LoginForm></LoginForm>
             </Flex>
 
         </>

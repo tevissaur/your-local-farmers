@@ -14,7 +14,8 @@ import {
     Button,
     Input,
     useDisclosure,
-    Box
+    Box,
+    Flex
   } from '@chakra-ui/react'
 
 function Signup() {
@@ -27,10 +28,10 @@ return (
     <>
 
     <Box>
-        <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
-        Sign Up
-        </Button>
-        <Button bg="primary.lightGreen">Log in</Button>
+        <Flex wrap='wrap'>
+            <Button onClick={onOpen} bg="primary.lightGreen" mr="4">Sign Up</Button>
+            <Button bg="primary.lightGreen">Log in</Button>
+        </Flex>
     </Box>
 
     <Modal

@@ -1,3 +1,5 @@
 .smallCategoryIcon:hover {
     transform: scale(1.15);
+    color: grey;
+    text-decoration: underline;
 }

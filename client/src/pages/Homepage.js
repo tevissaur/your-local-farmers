@@ -17,6 +17,8 @@ import customTheme from "../extendedTheme";
 import SmallCategoryIcon from "../components/SmallCategoryIcon";
 import Footer from '../components/Footer'
 import SmartSmallIcon from "../components/SmartSmallIcon";
+import css from './Homepage.css'
+import HomePageBody from "../components/HomePageBody";
 
 const Homepage = () => {
   return (

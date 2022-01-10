@@ -17,31 +17,22 @@ import {
     Box
   } from '@chakra-ui/react'
 
+
+
 function Signup() {
 const { isOpen, onOpen, onClose } = useDisclosure()
 const [input, setInput] = useState('')
 const initialRef = useRef()
 const finalRef = useRef()
-const isError = input === ''
+const [emailAddress, setEmailAdress] = useState('');
+const [password, setPassword] = useState('');
+const [userName, setUserName] = useState('');
+const isInvalid = password === '' || emailAddress === '' || userName === '';
 
-const handleInputChange = (e) =>{
-    console.log(e.target)
-    setInput(e.target.value)
-} 
 
 const handleFormSubmit = async (e) => {
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    const email = document.getElementById('email').value
-    //const passcheck = document.getElementById('passcheck').value
+    e.preventDefault();
 
-    // if (password != passcheck){
-    //     return
-    // }
-
-    if (email === null){
-        email.isError = true
-    }
 }
 
 
@@ -62,19 +53,20 @@ return (
         onClose={onClose}
     >
         <ModalOverlay />
+        <form onSubmit={handleFormSubmit}>
         <ModalContent>
         <ModalHeader>Create your account</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6}>
+        <ModalBody pb={6}> 
             <FormControl>
             <FormLabel>Username</FormLabel>
             <Input ref={initialRef} 
             placeholder='Username' 
             type='text'
             id='username'
-            onChange={handleInputChange}
+            onChange={({target}) => setUserName(target.value)}
             />
-            {!isError ? (
+            {isInvalid ? (
                 <FormHelperText>
                     Enter a unique username
                 </FormHelperText>
@@ -89,10 +81,10 @@ return (
             placeholder='Email' 
             type='email'
             id='email'
-            
-            onChange={handleInputChange}
+            value={emailAddress}
+            onChange={({target}) => setEmailAdress(target.value)}
             />
-            {!isError ? (
+            {isInvalid ? (
                 <FormHelperText>
                     Enter your email address
                 </FormHelperText>
@@ -107,34 +99,32 @@ return (
             placeholder='Password'
             type='password'
             id='password'
-            onChange={handleInputChange}
+            value={password}
+            onChange={({target}) => setPassword(target.value)}
             />
-            {!isError ? (
+            {isInvalid ? (
                 <FormHelperText>
                     Enter a unique password
                 </FormHelperText>
             ) : (
                 <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
-            </FormControl>
-
-            <FormControl mt={4}>
-            <FormLabel>Confirm Password</FormLabel>
-            <Input placeholder='Password' 
-            onChange={handleInputChange}
-            />
-            </FormControl>
+            </FormControl>     
         </ModalBody>
 
         <ModalFooter>
             
-            <Button onClick={handleFormSubmit} colorScheme='blue' mr={3}>
+            <Button type="submit" colorScheme='blue' mr={3} disabled = {isInvalid}>
             Submit
             </Button>
             <Button onClick={onClose}>Cancel</Button>
+            
         </ModalFooter>
+        
         </ModalContent>
+        </form>
     </Modal>
+    
     </>
 )
 }

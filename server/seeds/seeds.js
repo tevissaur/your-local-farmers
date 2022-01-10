@@ -48,6 +48,34 @@ let productIds = [
     ObjectId(),
     ObjectId(),
     ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
 ]
 
 let farmIds = [
@@ -64,7 +92,8 @@ const categoryData = [
     { 
         _id: categoryIds[0],
         name: 'Baked Goods',
-        imgUrl: './assets/bakedGoods.jpg'
+        imgUrl: './assets/bakedGoods.jpg',
+       
     },
     {
         _id: categoryIds[1],
@@ -225,7 +254,7 @@ const productData = [
         quantity: 6,
         reviews: [reviewIds[3], reviewIds[2]],
         inSeason: true,
-        categories: categoryIds[0]
+        categories: categoryIds[0],
     },
     {
         _id: productIds[1],
@@ -481,7 +510,7 @@ const farmData = [
         name: 'Cypress Farms',
         address: '90 Star Lane',
         reviews: [reviewIds[5], reviewIds[6]],
-        products: [productIds[3],productIds[2],productIds[0],productIds[4],],
+        products: [productIds[1],productIds[2],productIds[0],productIds[4],productIds[4],productIds[6],productIds[10],productIds[18],productIds[4],productIds[22]],
         purchaseOrders: [],
         owners: [userIds[0]],
         story: 'Little farm under a cypress tree'
@@ -491,7 +520,7 @@ const farmData = [
         name: 'Willowbrook Orchards',
         address: '567 Apples Street',
         reviews: [reviewIds[7], reviewIds[8]],
-        products: [productIds[0],productIds[2],productIds[3],productIds[5],],
+        products: [productIds[27],productIds[13],productIds[20],productIds[3],productIds[9],productIds[18],productIds[21],productIds[22],productIds[16],productIds[18],],
         purchaseOrders: [],
         owners: [userIds[0]],
         story: 'Apples and oranges'
@@ -501,7 +530,7 @@ const farmData = [
         name: 'Oakenshield Livestock',
         address: 'Down the street',
         reviews: [reviewIds[5], reviewIds[8]],
-        products: [productIds[3],productIds[2],productIds[0],productIds[4],],
+        products: [productIds[1],productIds[2],productIds[0],productIds[4],productIds[0],productIds[15],productIds[20],productIds[25],productIds[14],productIds[17],],
         purchaseOrders: [],
         owners: [userIds[1]],
         story: 'Oaktrees line this beautiful lot where pigs, and cows roam'
@@ -511,7 +540,7 @@ const farmData = [
         name: 'Martha\'s Vineyard',
         address: 'You know where it is',
         reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
-        products: [productIds[0],productIds[3],productIds[0],productIds[3],],
+        products: [productIds[4],productIds[11],productIds[12],productIds[13],productIds[14],productIds[17],productIds[22],productIds[27],productIds[2],productIds[0],],
         purchaseOrders: [],
         owners: [userIds[2]],
         story: 'Elite, upperclass, better than you.'
@@ -521,7 +550,7 @@ const farmData = [
         name: 'Lenny\'s House',
         address: '34 Gumption Lane',
         reviews: [reviewIds[5], reviewIds[8]],
-        products: [productIds[1],productIds[2],productIds[4],productIds[0],],
+        products: [productIds[1],productIds[2],productIds[4],productIds[7],productIds[8],productIds[9],productIds[17],productIds[19],productIds[20],productIds[24],],
         purchaseOrders: [],
         owners: [userIds[3]],
         story: 'Just a simple homestead that provides food to their local neighborhood.'

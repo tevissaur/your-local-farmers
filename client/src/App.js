@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Homepage />}></Route>
           <Route
-            path="/category/:title"
-            element={<Category data={categoryData} />}
+            path="/category/:name"
+            element={<Category  />}
           ></Route>
           <Route
             path="/farm/:name" element={<Farm />}

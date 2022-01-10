@@ -42,13 +42,16 @@ const typeDefs = gql`
     }
     type User {
         _id: ID!
-        firstName: String!
-        lastName: String!
+        firstName: String
+        lastName: String
+        userName: String!
         email: String!
         password: String!
         isFarmer: Boolean!
-        address: String!
+        address: String
         reviews: [Review]
+        fullName: String
+        profilePic: String 
     }
     type Auth {
         token: ID!
@@ -101,6 +104,7 @@ const typeDefs = gql`
         getPO(_id: ID!): PurchaseOrder
         farms: [Farm]
         categories: [Category]
+        farmDashboard(_id: ID!): Farm
     }
 
     type Mutation {

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Flex, Menu, MenuButton, Link, Text , Icon } from '@chakra-ui/react';
-import customTheme from '../extendedTheme';
-
-function NavItem({navSize, title, icon, active}) {
+import { Link as ReactLink } from 'react-router-dom'
+import { Flex, Menu, MenuButton, Link, Text , Icon, Center } from '@chakra-ui/react'
+import customTheme from '../extendedTheme'
+function NavItem({navSize, title, icon, active, pageUrl}) {
     return (
         <Flex
             mt={30}
@@ -12,6 +12,8 @@ function NavItem({navSize, title, icon, active}) {
         >
             <Menu placement='right'>
                 <Link
+                    as={ReactLink}
+                    to={pageUrl}
                     backgroundColor={active && "AEC8CA"}
                     p={3}
                     borderRadius={8}
@@ -19,9 +21,9 @@ function NavItem({navSize, title, icon, active}) {
                     w={navSize == "large" && "100%" }
                 >
                     <MenuButton w='100%'>
-                        <Flex>
-                            <Icon as={icon} fontSize='xl' color={active ? "primary.darkGreen" : "primary.yellowGreen"} />
-                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+                        <Flex alignItems='center'>
+                            <Icon as={icon} fontSize='35px' color={active ? "primary.emeraldGreen" : "primary.darkGreen"} />
+                            <Text align='left'ml={5} display={navSize == "small" ? "none" : "flex"} fontWeight='600'>{title}</Text>
                         </Flex>
                     </MenuButton>
                 </Link>

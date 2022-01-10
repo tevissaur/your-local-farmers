@@ -3,7 +3,7 @@ import { QUERY_FARM } from "../utils/queries";
 import { useParams } from "react-router-dom";
 
 const Farm = () => {
-  const { name } = useParams();
+  const { name } = useParams(); 
   const { loading, data, error } = useQuery(QUERY_FARM);
 
   if (loading) {
@@ -40,12 +40,12 @@ const Farm = () => {
         </div>
       ))}
       <h1>Farm's review
-      {foundFarm.reviews.map((review,idx) => (
-        <p key ={idx}>{review.rating} {review.author.firstName} {review.content}</p>
-      ))}
+        {foundFarm.reviews.map((review, idx) => (
+          <p key={idx}>{review.rating} {review.author.firstName} {review.content}</p>
+        ))}
 
       </h1>
-      
+
 
 
     </div>

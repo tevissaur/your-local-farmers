@@ -18,20 +18,34 @@ import {
     Flex
   } from '@chakra-ui/react'
 
+
+
 function Signup() {
 const { isOpen, onOpen, onClose } = useDisclosure()
-
+const [input, setInput] = useState('')
 const initialRef = useRef()
 const finalRef = useRef()
+const [emailAddress, setEmailAdress] = useState('');
+const [password, setPassword] = useState('');
+const [userName, setUserName] = useState('');
+const isInvalid = password === '' || emailAddress === '' || userName === '';
+
+
+const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+}
+
+
 
 return (
     <>
 
     <Box>
-        <Flex wrap='wrap'>
-            <Button onClick={onOpen} bg="primary.lightGreen" mr="4">Sign Up</Button>
-            <Button bg="primary.lightGreen">Log in</Button>
-        </Flex>
+        <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
+        Sign Up
+        </Button>
+
     </Box>
 
     <Modal
@@ -41,29 +55,78 @@ return (
         onClose={onClose}
     >
         <ModalOverlay />
+        <form onSubmit={handleFormSubmit}>
         <ModalContent>
         <ModalHeader>Create your account</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6}>
+        <ModalBody pb={6}> 
             <FormControl>
-            <FormLabel>First name</FormLabel>
-            <Input ref={initialRef} placeholder='First name' />
+            <FormLabel>Username</FormLabel>
+            <Input ref={initialRef} 
+            placeholder='Username' 
+            type='text'
+            id='username'
+            onChange={({target}) => setUserName(target.value)}
+            />
+            {isInvalid ? (
+                <FormHelperText>
+                    Enter a unique username
+                </FormHelperText>
+            ) : (
+                <FormErrorMessage>username is required.</FormErrorMessage>
+            )}
             </FormControl>
 
             <FormControl mt={4}>
-            <FormLabel>Last name</FormLabel>
-            <Input placeholder='Last name' />
+            <FormLabel>Email</FormLabel>
+            <Input 
+            placeholder='Email' 
+            type='email'
+            id='email'
+            value={emailAddress}
+            onChange={({target}) => setEmailAdress(target.value)}
+            />
+            {isInvalid ? (
+                <FormHelperText>
+                    Enter your email address
+                </FormHelperText>
+            ) : (
+                <FormErrorMessage>Email is required.</FormErrorMessage>
+            )}
             </FormControl>
+
+            <FormControl mt={4}>
+            <FormLabel>Password</FormLabel>
+            <Input 
+            placeholder='Password'
+            type='password'
+            id='password'
+            value={password}
+            onChange={({target}) => setPassword(target.value)}
+            />
+            {isInvalid ? (
+                <FormHelperText>
+                    Enter a unique password
+                </FormHelperText>
+            ) : (
+                <FormErrorMessage>Password is required.</FormErrorMessage>
+            )}
+            </FormControl>     
         </ModalBody>
 
         <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
-            Save
+            
+            <Button type="submit" colorScheme='blue' mr={3} disabled = {isInvalid}>
+            Submit
             </Button>
             <Button onClick={onClose}>Cancel</Button>
+            
         </ModalFooter>
+        
         </ModalContent>
+        </form>
     </Modal>
+    
     </>
 )
 }

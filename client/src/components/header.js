@@ -9,7 +9,10 @@ const Header = () => {
                 <Center flex="1">
                     <Heading as='h1' fontSize='55px' color="black">Your Local Farmers</Heading>
                 </Center>
-                <Signup />
+
+                <Signup></Signup>
+                <LoginForm></LoginForm>
+
             </Flex>
 
         </>

@@ -9,7 +9,6 @@ import { BsFillHeartFill } from 'react-icons/bs'
 import customTheme from "../extendedTheme";
 import wheat from '../assets/wheat.jpg'
 
-
 const Homepage = () => {
   return (
 <>

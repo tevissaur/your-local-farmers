@@ -10,7 +10,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 import CategoryCards from "../components/CategoryCards";
-import Header from "../components/header";
+import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import wheat from "../assets/wheat.jpg";
 import customTheme from "../extendedTheme";
@@ -19,6 +19,7 @@ import Footer from '../components/Footer'
 import SmartSmallIcon from "../components/SmartSmallIcon";
 import css from './Homepage.css'
 import HomePageBody from "../components/HomePageBody";
+import UploadImage from '../components/UploadImage'
 
 const Homepage = () => {
   return (
@@ -47,6 +48,7 @@ const Homepage = () => {
                 <SmartSmallIcon />
               </Flex>
             </Box>
+            <UploadImage />
             <HomePageBody />
           </Container>
           <Footer />

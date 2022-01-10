@@ -12,13 +12,14 @@ function SideNavBar({ theme }) {
     return (
         <Flex
             pos='sticky'
-            bg="primary.lightGreen"
+            bg="white"
             marginLeft="1"
             marginTop="1"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
             borderRadius={navSize == "small" ? "15px" : "30px"}
             w={navSize == "small" ? "75px" : "280px"}
             flexDir="column"
+            height="100%"
             justifyContent="space-between"
         >
             <Flex

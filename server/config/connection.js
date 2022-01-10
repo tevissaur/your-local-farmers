@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv/config')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/yourlocalfarmersdb', {
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

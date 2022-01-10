@@ -5,11 +5,13 @@ const userSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
-      required: true,
+    },
+    userName: {
+      type: String,
+      required: true
     },
     email: {
       type: String,
@@ -26,13 +28,16 @@ const userSchema = new Schema(
       default: false,
     },
     address: {
-      type: String, 
-      required: true
+      type: String
     },
     reviews: [{
       type: Schema.Types.ObjectId,
       ref: 'Review'
-    }]
+    }],
+    profilePic: {
+      type: Buffer,
+      ref: 'Image'
+    }
   },
   {
     

@@ -1,5 +1,9 @@
-import React from 'react'
-import {Image, Flex, Box, Text} from '@chakra-ui/react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Image, Flex, Box, Text, color } from '@chakra-ui/react'
+import bakedGoods from '../assets/beverages2.jpg'
+import DairyMeatEggs from '../assets/DairyMeatEggs.jpg'
+import { border } from '@chakra-ui/react'
 import SmallIcon from '../components/SmallIcon.css'
 
 

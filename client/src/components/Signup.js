@@ -1,4 +1,4 @@
-import {useState, useRef} from "react";
+import { useState, useRef } from "react";
 import {
     FormControl,
     FormLabel,
@@ -14,9 +14,9 @@ import {
     Button,
     Input,
     useDisclosure,
-    Box,
-    Flex
-  } from '@chakra-ui/react'
+    Box
+  } from '@chakra-ui/react';
+  import customTheme from "../extendedTheme";
 
 
 
@@ -38,8 +38,8 @@ const handleFormSubmit = async (e) => {
 
 
 
-return (
-    <>
+    return (
+        <>
 
     <Box>
         <Button onClick={onOpen} bg="primary.lightGreen" mr="4">

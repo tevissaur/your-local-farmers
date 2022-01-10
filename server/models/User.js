@@ -33,7 +33,11 @@ const userSchema = new Schema(
     reviews: [{
       type: Schema.Types.ObjectId,
       ref: 'Review'
-    }]
+    }],
+    profilePic: {
+      type: Buffer,
+      ref: 'Image'
+    }
   },
   {
     

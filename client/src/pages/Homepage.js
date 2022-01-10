@@ -3,8 +3,6 @@ import { Button, Box, Flex, Heading, Spacer, Center, Text, Container, List, List
 import Header from '../components/Header'
 import SearchBar from '../components/SearchBar'
 import Footer from '../components/Footer'
-import customTheme from '../extendedTheme'
-import SmallCategoryIcon from '../components/SmallCategoryIcon'
 import SmartSmallIcon from "../components/SmartSmallIcon";
 import css from './Homepage.css'
 import { BsFillHeartFill } from 'react-icons/bs'

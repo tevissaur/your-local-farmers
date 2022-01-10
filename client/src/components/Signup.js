@@ -14,7 +14,8 @@ import {
     Button,
     Input,
     useDisclosure,
-    Box
+    Box,
+    Flex
   } from '@chakra-ui/react'
 
 
@@ -44,6 +45,7 @@ return (
         <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
         Sign Up
         </Button>
+
     </Box>
 
     <Modal

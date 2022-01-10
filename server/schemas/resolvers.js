@@ -19,30 +19,75 @@ const resolvers = {
             return await Review.find().populate('author')
         },
         products: async (parent, args) => {
-            return await Product.find().populate([{
-                path: 'reviews',
-                model: 'Review',
-                populate: {
-                    path: 'author',
-                    model: 'User'
+            const prod = await Product.find().populate([
+                {
+                    path: 'reviews',
+                    model: 'Review',
+                    populate: {
+                        path: 'author',
+                        model: 'User'
+                    }
+                },
+                {
+                    path: 'categories',
+                    model: 'Category'
                 }
-            }])
+            ])
+            // console.log(prod[0].getAvgReviewScore())
+            return prod
         },
         getPO: async (parent, { _id }) => {
             return await PurchaseOrder.findById(_id).populate([
                 {
                     path: 'seller',
-                    model: 'User'
+                    model: 'Farm'
                 },
                 {
                     path: 'buyer',
                     model: 'User'
                 },
                 {
-                   path: 'items',
-                   model: 'Product'
+                    path: 'items',
+                    model: 'Product',
+                    populate: {
+                        path: 'reviews',
+                        model: 'Review'
+                    }
                 }
             ])
+        },
+        farms: async (parent, args) => {
+            return await Farm.find().populate(
+                [
+                    {
+                        path: 'reviews', 
+                        model: 'Review'
+                    },
+                    {
+                        path: 'owners',
+                        model: 'User',
+                        populate: {
+                            path: 'reviews',
+                            model: 'Review'
+                        }
+                    },
+                    {
+                        path: 'products',
+                        model: 'Product',
+                        populate: {
+                            path: 'categories',
+                            model: 'Category'
+                        }
+                    },
+                    {
+                        path: 'purchaseOrders',
+                        model: 'PurchaseOrder'
+                    }
+                ]
+            )
+        },
+        categories: async (parent, args) => {
+            return await Category.find()
         }
     },
     Mutation: {
@@ -52,10 +97,23 @@ const resolvers = {
             return { newUser, token }
         },
         postReview: async (parent, { review, product, user, farm }) => {
+
+
+
+            const newReview = await Review.create(review)
+
             product ? console.log('yes product') : console.log('no product')
             user ? console.log('yes user') : console.log('no user')
             farm ? console.log('yes farm') : console.log('no farm')
-            const newReview = await Review.create(review)
+
+            // const reviewedFarm = await Farm.findByIdAndUpdate(
+            //     farm,
+            //     {
+            //         $push: {
+            //             reviews: newReview.id
+            //         }
+            //     }
+            // )
             return newReview
         },
         createProduct: async (parent, { product }) => {
@@ -74,7 +132,7 @@ const resolvers = {
         },
         createPO: async (parent, { PO }) => {
             const newPO = await PurchaseOrder.create(PO)
-            return newPO
+            return newPO.populate()
         }
     }
 }

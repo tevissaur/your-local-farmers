@@ -48,6 +48,34 @@ let productIds = [
     ObjectId(),
     ObjectId(),
     ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
 ]
 
 let farmIds = [
@@ -64,7 +92,8 @@ const categoryData = [
     { 
         _id: categoryIds[0],
         name: 'Baked Goods',
-        imgUrl: './assets/bakedGoods.jpg'
+        imgUrl: './assets/bakedGoods.jpg',
+       
     },
     {
         _id: categoryIds[1],
@@ -170,7 +199,7 @@ const reviewData = [
     {
         _id: reviewIds[5],
         author: userIds[0],
-        content: 'the owner is not frendly at all',
+        content: 'customer service is slow',
         rating: 2
     },
     {
@@ -220,58 +249,259 @@ const purchaseOrderData = [
 const productData = [
     {
         _id: productIds[0],
-        name: 'Carrots',
+        name: 'Blueberry Muffins',
         price: 1,
         quantity: 6,
         reviews: [reviewIds[3], reviewIds[2]],
         inSeason: true,
-        categories: [categoryIds[2], categoryIds[5]]
+        categories: categoryIds[0],
     },
     {
         _id: productIds[1],
-        name: 'Strawberries',
+        name: 'Bread Loaf',
         price: 2,
         quantity: 5,
-        reviews: [reviewIds[3], reviewIds[4], reviewIds[3]],
+        reviews: [reviewIds[3], reviewIds[4],],
         inSeason: true,
-        categories: [categoryIds[2], categoryIds[5]]
+        categories:categoryIds[0]
     },
     {
         _id: productIds[2],
-        name: 'Eggs',
+        name: 'Croissant',
         price: 3,
         quantity: 4,
-        reviews: [reviewIds[3], reviewIds[1], reviewIds[4]],
+        reviews: [reviewIds[1], reviewIds[4]],
         inSeason: true,
-        categories: [categoryIds[1]]
+        categories: categoryIds[0]
     },
     {
         _id: productIds[3],
-        name: 'Mulberry Wine',
+        name: 'Franziskaner Loaf',
         price: 4,
         quantity: 3,
-        reviews: [reviewIds[0], reviewIds[0], reviewIds[3]],
+        reviews: [reviewIds[1], reviewIds[0], reviewIds[3]],
         inSeason: true,
-        categories: [categoryIds[4]]
+        categories: categoryIds[0]
     },
     {
         _id: productIds[4],
-        name: 'Chesnuts',
+        name: 'Pain au Chocolat',
         price: 5,
         quantity: 2,
         reviews: [reviewIds[4], reviewIds[1], reviewIds[2]],
         inSeason: true,
-        categories: [categoryIds[5]]
+        categories: categoryIds[0]
     },
     {
         _id: productIds[5],
-        name: 'Chocochip Cookies',
+        name: 'Celery Smoothie',
         price: 6,
-        quantity: 1,
-        reviews: [reviewIds[0], reviewIds[3], reviewIds[1]],
+        quantity: 6,
+        reviews: [reviewIds[2], reviewIds[3], reviewIds[1]],
         inSeason: true,
-        categories: [categoryIds[0]]
+        categories:categoryIds[4]
     },
+    {
+        _id: productIds[6],
+        name: 'Coffee Slush',
+        price: 2,
+        quantity: 1,
+        reviews: reviewIds[0],
+        inSeason: true,
+        categories:categoryIds[4]
+    },
+    {
+        _id: productIds[7],
+        name: 'Lemonade',
+        price: 3,
+        quantity: 3,
+        reviews: [reviewIds[3], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[4]
+    },
+    {
+        _id: productIds[8],
+        name: 'Milk',
+        price: 2,
+        quantity: 1,
+        reviews: [reviewIds[0],reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[4]
+    },
+    {
+        _id: productIds[9],
+        name: 'Eggs',
+        price: 2,
+        quantity: 1,
+        reviews: [reviewIds[0],reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    {
+        _id: productIds[10],
+        name: 'Herbs Cheddar Cheese',
+        price: 2,
+        quantity: 8,
+        reviews: [reviewIds[3],reviewIds[4]],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    {
+        _id: productIds[11],
+        name: 'Quail Eggs',
+        price: 2,
+        quantity: 10,
+        reviews: [reviewIds[4],reviewIds[2]],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    {
+        _id: productIds[12],
+        name: 'Salmon',
+        price: 5,
+        quantity: 10,
+        reviews: reviewIds[1],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    {
+        _id: productIds[13],
+        name: 'Sausages',
+        price: 4,
+        quantity: 20,
+        reviews: [reviewIds[1], reviewIds[0]],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    {
+        _id: productIds[14],
+        name: 'Steaks and Herbs',
+        price: 6,
+        quantity: 10,
+        reviews: [reviewIds[2], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[1]
+    },
+    
+    {
+        _id: productIds[15],
+        name: 'Aster',
+        price: 1,
+        quantity: 10,
+        reviews: [reviewIds[2], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[3]
+    },
+    {
+        _id: productIds[16],
+        name: 'Mint',
+        price: 1,
+        quantity: 10,
+        reviews: [reviewIds[0], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[3]
+    },
+    {
+        _id: productIds[17],
+        name: 'Rose',
+        price: 1,
+        quantity: 10,
+        reviews: reviewIds[3],
+        inSeason: true,
+        categories:categoryIds[3]
+    },
+    {
+        _id: productIds[18],
+        name: 'Tulip',
+        price: 2,
+        quantity: 10,
+        reviews: [reviewIds[0], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[3]
+    },
+    {
+        _id: productIds[19],
+        name: 'Apricot',
+        price: 2,
+        quantity: 20,
+        reviews: [reviewIds[0], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[2]
+    },
+    {
+        _id: productIds[20],
+        name: 'Carrot',
+        price: 2,
+        quantity: 20,
+        reviews: [reviewIds[3], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[2]
+    },
+    {
+        _id: productIds[21],
+        name: 'Green Bean',
+        price: 2,
+        quantity: 20,
+        reviews: [reviewIds[0], reviewIds[1]],
+        inSeason: true,
+        categories:categoryIds[2]
+    },
+    {
+        _id: productIds[22],
+        name: 'Radish',
+        price: 1,
+        quantity: 30,
+        reviews: [reviewIds[3], reviewIds[4]],
+        inSeason: true,
+        categories:categoryIds[2]
+    },
+    {
+        _id: productIds[23],
+        name: 'Watermelon',
+        price: 4,
+        quantity: 20,
+        reviews: [reviewIds[1], reviewIds[2]],
+        inSeason: true,
+        categories:categoryIds[2]
+    },
+    {
+        _id: productIds[24],
+        name: 'Corn',
+        price: 1,
+        quantity: 20,
+        reviews: [reviewIds[1], reviewIds[2]],
+        inSeason: true,
+        categories:categoryIds[5]
+    },
+    {
+        _id: productIds[25],
+        name: 'Honey',
+        price: 4,
+        quantity: 20,
+        reviews: [reviewIds[3], reviewIds[4]],
+        inSeason: true,
+        categories:categoryIds[5]
+    },
+    {
+        _id: productIds[26],
+        name: 'Mushroom',
+        price: 2,
+        quantity: 20,
+        reviews: [reviewIds[0], reviewIds[2]],
+        inSeason: true,
+        categories:categoryIds[5]
+    },
+    {
+        _id: productIds[27],
+        name: 'Passion fruit',
+        price: 1,
+        quantity: 10,
+        reviews: [reviewIds[2], reviewIds[3]],
+        inSeason: true,
+        categories:categoryIds[5]
+    },
+    
+    
 ]
 
 const farmData = [
@@ -280,7 +510,7 @@ const farmData = [
         name: 'Cypress Farms',
         address: '90 Star Lane',
         reviews: [reviewIds[5], reviewIds[6]],
-        products: [productIds[3],productIds[2],productIds[0],productIds[4],],
+        products: [productIds[1],productIds[2],productIds[0],productIds[4],productIds[4],productIds[6],productIds[10],productIds[18],productIds[4],productIds[22]],
         purchaseOrders: [],
         owners: [userIds[0]],
         story: 'Little farm under a cypress tree'
@@ -290,7 +520,7 @@ const farmData = [
         name: 'Willowbrook Orchards',
         address: '567 Apples Street',
         reviews: [reviewIds[7], reviewIds[8]],
-        products: [productIds[0],productIds[2],productIds[3],productIds[5],],
+        products: [productIds[27],productIds[13],productIds[20],productIds[3],productIds[9],productIds[18],productIds[21],productIds[22],productIds[16],productIds[18],],
         purchaseOrders: [],
         owners: [userIds[0]],
         story: 'Apples and oranges'
@@ -300,7 +530,7 @@ const farmData = [
         name: 'Oakenshield Livestock',
         address: 'Down the street',
         reviews: [reviewIds[5], reviewIds[8]],
-        products: [productIds[3],productIds[2],productIds[0],productIds[4],],
+        products: [productIds[1],productIds[2],productIds[0],productIds[4],productIds[0],productIds[15],productIds[20],productIds[25],productIds[14],productIds[17],],
         purchaseOrders: [],
         owners: [userIds[1]],
         story: 'Oaktrees line this beautiful lot where pigs, and cows roam'
@@ -310,7 +540,7 @@ const farmData = [
         name: 'Martha\'s Vineyard',
         address: 'You know where it is',
         reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
-        products: [productIds[0],productIds[3],productIds[0],productIds[3],],
+        products: [productIds[4],productIds[11],productIds[12],productIds[13],productIds[14],productIds[17],productIds[22],productIds[27],productIds[2],productIds[0],],
         purchaseOrders: [],
         owners: [userIds[2]],
         story: 'Elite, upperclass, better than you.'
@@ -320,7 +550,7 @@ const farmData = [
         name: 'Lenny\'s House',
         address: '34 Gumption Lane',
         reviews: [reviewIds[5], reviewIds[8]],
-        products: [productIds[1],productIds[2],productIds[4],productIds[0],],
+        products: [productIds[1],productIds[2],productIds[4],productIds[7],productIds[8],productIds[9],productIds[17],productIds[19],productIds[20],productIds[24],],
         purchaseOrders: [],
         owners: [userIds[3]],
         story: 'Just a simple homestead that provides food to their local neighborhood.'

@@ -30,4 +30,43 @@ export const QUERY_FARM = gql`
   }
 
 `
+export const QUERY_PRODUCT =gql `
+    query Product {
+      products {
+        _id
+        name
+        price
+        quantity
+        reviews {
+          content
+          rating
+        }
+        categories {
+          name
+          imgUrl
+        }
+      }
+    }
 
+
+`
+
+// export const QUERY_CATEGORIES =gql`
+//   query Categories {
+//     categories {
+//       name
+//       imgUrl
+//       products {
+//         _id
+//         name
+//         price
+//         quantity
+//         reviews {
+//           content
+//           rating
+//         }
+//       }
+//     }
+//   }
+
+// `

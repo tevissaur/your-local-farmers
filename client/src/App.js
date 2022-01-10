@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
 import { categoryData } from "./categoryData";
-import Product from "./components/Product";
+import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Homepage />}></Route>
           <Route
-            path="/products/:title"
-            element={<Product data={categoryData} />}
+            path="/category/:name"
+            element={<Category  />}
           ></Route>
           <Route
             path="/farm/:name" element={<Farm />}

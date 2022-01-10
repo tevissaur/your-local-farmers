@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 
-const Product= ({data}) => {
+const Category= ({data}) => {
  const {title} = useParams()
  const foundCategory = data.find(category => category.title.toLowerCase() === title)
 
@@ -13,4 +13,4 @@ const Product= ({data}) => {
   )
 }
 
-export default Product
+export default Category

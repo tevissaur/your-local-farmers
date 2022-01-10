@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import SmartSmallIcon from "../components/SmartSmallIcon";
 import css from './Homepage.css'
 import { BsFillHeartFill } from 'react-icons/bs'
-
+import customTheme from "../extendedTheme";
 
 const Homepage = () => {
   return (

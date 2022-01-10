@@ -12,13 +12,9 @@ const SmallCategoryIcon = ({ card }) => {
         <Flex justifyContent='space-evenly' flexGrow='3' className="icon-basket">
             <Box>
                 <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
-                    <Box className='smallCategoryIcon'>
-                        <Link
-                            to={`/products/${card.title.toLowerCase()}`}
-                        >
-                            <Image src={card.image} boxSize='145px' height='125px' width='125px' borderRadius='50%' />
-                            <Text textAlign="center">{card.title}</Text>
-                        </Link>
+                    <Box className='smallCategoryIcon' ms={5}>
+                        <Image src={card.image} boxSize='145px' height='125px' width='125px'borderRadius='50%'/>
+                        <Text textAlign="center">{card.title}</Text>
                     </Box>
                 </Flex>
             </Box>

@@ -61,7 +61,11 @@ const resolvers = {
                 [
                     {
                         path: 'reviews', 
-                        model: 'Review'
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
                     },
                     {
                         path: 'owners',
@@ -74,10 +78,16 @@ const resolvers = {
                     {
                         path: 'products',
                         model: 'Product',
-                        populate: {
+                        populate: [
+                            {
                             path: 'categories',
                             model: 'Category'
-                        }
+                            },
+                            {
+                                path: 'reviews',
+                                model: 'Review'
+                            }
+                        ]
                     },
                     {
                         path: 'purchaseOrders',

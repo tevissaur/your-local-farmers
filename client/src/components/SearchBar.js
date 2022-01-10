@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Input, Text, Container, Flex, Center, InputLeftElement, InputGroup} from '@chakra-ui/react'
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs';
+import customTheme from '../extendedTheme';
 
 
 function SearchBar() {
@@ -12,7 +13,7 @@ function SearchBar() {
   }
   return (
 <>
-    <Container mt={5} maxW="100%">
+    <Container my={1} maxW="100%">
         <Flex alignItems="center" fontSize="25px">
             <InputGroup>
                 <InputLeftElement
@@ -26,6 +27,9 @@ function SearchBar() {
                     placeholder='Search for products here!'
                     w='100%'
                     ml={3}
+                    color="primary.lightGreen"
+                    border="1px"
+                    borderColor="primary.lightGreen"
                 />     
             </InputGroup>
         </Flex>

@@ -14,9 +14,9 @@ import {
     Button,
     Input,
     useDisclosure,
-    Box,
-    Flex
-} from '@chakra-ui/react'
+    Box
+  } from '@chakra-ui/react';
+  import customTheme from "../extendedTheme";
 
 function Signup() {
     const { isOpen, onOpen, onClose } = useDisclosure()

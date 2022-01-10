@@ -33,6 +33,12 @@ let reviewIds = [
     ObjectId(),
     ObjectId(),
     ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+    ObjectId(),
+
+    
 ]
 
 let productIds = [
@@ -161,6 +167,31 @@ const reviewData = [
         content: 'this is trash',
         rating: 1
     },
+    {
+        _id: reviewIds[5],
+        author: userIds[0],
+        content: 'the owner is not frendly at all',
+        rating: 2
+    },
+    {
+        _id: reviewIds[6],
+        author: userIds[2],
+        content: 'products are okay but customer service needs to be improved',
+        rating: 3
+    },
+    {
+        _id: reviewIds[7],
+        author: userIds[1],
+        content: 'good quality products and friendly staffs',
+        rating: 4
+    },
+    {
+        _id: reviewIds[8],
+        author: userIds[0],
+        content: 'the best in town, I will be back!',
+        rating: 5
+    },
+   
 ]
 
 const purchaseOrderData = [
@@ -248,7 +279,7 @@ const farmData = [
         _id: farmIds[0],
         name: 'Cypress Farms',
         address: '90 Star Lane',
-        reviews: [reviewIds[3], reviewIds[2]],
+        reviews: [reviewIds[5], reviewIds[6]],
         products: [productIds[3],productIds[2],productIds[0],productIds[4],],
         purchaseOrders: [],
         owners: [userIds[0]],
@@ -258,7 +289,7 @@ const farmData = [
         _id: farmIds[1],
         name: 'Willowbrook Orchards',
         address: '567 Apples Street',
-        reviews: [reviewIds[3], reviewIds[2]],
+        reviews: [reviewIds[7], reviewIds[8]],
         products: [productIds[0],productIds[2],productIds[3],productIds[5],],
         purchaseOrders: [],
         owners: [userIds[0]],
@@ -268,7 +299,7 @@ const farmData = [
         _id: farmIds[2],
         name: 'Oakenshield Livestock',
         address: 'Down the street',
-        reviews: [reviewIds[3], reviewIds[2]],
+        reviews: [reviewIds[5], reviewIds[8]],
         products: [productIds[3],productIds[2],productIds[0],productIds[4],],
         purchaseOrders: [],
         owners: [userIds[1]],
@@ -278,7 +309,7 @@ const farmData = [
         _id: farmIds[3],
         name: 'Martha\'s Vineyard',
         address: 'You know where it is',
-        reviews: [reviewIds[3], reviewIds[2], reviewIds[3], reviewIds[2]],
+        reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
         products: [productIds[0],productIds[3],productIds[0],productIds[3],],
         purchaseOrders: [],
         owners: [userIds[2]],
@@ -288,7 +319,7 @@ const farmData = [
         _id: farmIds[4],
         name: 'Lenny\'s House',
         address: '34 Gumption Lane',
-        reviews: [reviewIds[3], reviewIds[2], reviewIds[3], reviewIds[2]],
+        reviews: [reviewIds[5], reviewIds[8]],
         products: [productIds[1],productIds[2],productIds[4],productIds[0],],
         purchaseOrders: [],
         owners: [userIds[3]],

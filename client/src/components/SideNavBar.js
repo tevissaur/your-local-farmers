@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Flex, Heading, Divider, Text, Image, IconButton } from '@chakra-ui/react'
+import { Avatar, Flex, Heading, Divider, Text, Image, IconButton } from '@chakra-ui/react';
 import lightLogo from '../assets/lightmode-logo.png'
 import { FiMenu } from 'react-icons/fi'
 import NavItem from './NavItem'
@@ -7,15 +7,14 @@ import { GiBarn, GiFarmer, GiFarmTractor } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { extendTheme } from '@chakra-ui/react'
 
-function SideNavBar() {
+function SideNavBar({ theme }) {
     const [navSize, changeNavSize] = useState("large")
     return (
         <Flex
             pos='sticky'
-            colorScheme="primary.lightGreen"
-            marginLeft="5"
-            h="95vh"
-            marginTop="2.5vh"
+            bg="primary.lightGreen"
+            marginLeft="1"
+            marginTop="1"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
             borderRadius={navSize == "small" ? "15px" : "30px"}
             w={navSize == "small" ? "75px" : "280px"}

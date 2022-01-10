@@ -11,40 +11,37 @@ import HomePageBody from "../components/HomePageBody";
 
 const Homepage = () => {
   return (
-<>
-<Flex>
-  <SideNavBar />
-<Box m={4} flex="1">
-  
-  <Header />
-  <SearchBar />
-    
-    <Container maxW='98%' mt={2}>
-      <Box
-        borderRadius='25px'
-        height='100%'>
-        <Flex justifyContent='center'>
-          <Text
-            fontSize='30px'
-            fontWeight='bold'
-            color='#3A7D44'
-            textAlign='center'>
-            Welcome to the online farmers market where you can get locally grown and baked goods!
-          </Text>
-        </Flex>
-        <Flex justifyContent='Center'>
-        </Flex>
-        
-        <Flex justifyContent='center' mt={3}>
-          <SmartSmallIcon />
-        </Flex>
-    </Box>
-    <HomePageBody />
-    </Container>
-<Footer />
-  </Box>
-</Flex>
-</>
+    <>
+      <Flex>
+        <SideNavBar />
+        <Box m={4} flex="1">
+
+          <Header />
+          <SearchBar />
+
+          <Container maxW='98%' mt={2}>
+            <Box
+              borderRadius='25px'
+              height='100%'>
+              <Flex justifyContent='center'>
+                <Text
+                  fontSize='30px'
+                  fontWeight='bold'
+                  color='#3A7D44'
+                  textAlign='center'>
+                  Welcome to the online farmers market where you can get locally grown and baked goods!
+                </Text>
+              </Flex>
+              <Flex justifyContent='center' mt={3}>
+                <SmartSmallIcon />
+              </Flex>
+            </Box>
+            <HomePageBody />
+          </Container>
+          <Footer />
+        </Box>
+      </Flex>
+    </>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link as ReactLink } from 'react-router-dom'
 import { Flex, Menu, MenuButton, Link, Text , Icon, Center } from '@chakra-ui/react'
 import customTheme from '../extendedTheme'
-function NavItem({navSize, title, icon, active}) {
+function NavItem({navSize, title, icon, active, pageUrl}) {
     return (
         <Flex
             mt={30}
@@ -11,6 +12,8 @@ function NavItem({navSize, title, icon, active}) {
         >
             <Menu placement='right'>
                 <Link
+                    as={ReactLink}
+                    to={pageUrl}
                     backgroundColor={active && "AEC8CA"}
                     p={3}
                     borderRadius={8}

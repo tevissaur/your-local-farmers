@@ -4,7 +4,7 @@ import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
 import { categoryData } from "./categoryData";
 import Product from "./components/Product";
-import Farm from "./pages/Farm"
+import Farm from "./pages/Farm";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
   uri: "/graphql",

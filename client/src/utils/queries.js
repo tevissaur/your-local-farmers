@@ -1,5 +1,5 @@
 import {gql} from '@apollo/client';
-const QUERY_FARM = gql`
+export const QUERY_FARM = gql`
   query Farms {
     farms {
       _id
@@ -29,5 +29,5 @@ const QUERY_FARM = gql`
     }
   }
 
-
 `
+

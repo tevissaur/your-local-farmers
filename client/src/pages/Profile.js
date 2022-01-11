@@ -20,7 +20,7 @@ const Profile = () => {
         console.log(userData)
 
         // setUserData(data)
-    }, [userData])
+    }, [])
     return (
         <>
             <h1>

@@ -145,7 +145,7 @@ const resolvers = {
             )
         },
         categories: async (parent, args) => {
-            const productCategory=  await Category.find().populate([
+            const productCategory = await Category.find().populate([
                 {
                     path: 'products',
                     model: 'Product'
@@ -157,10 +157,16 @@ const resolvers = {
     },
     Mutation: {
         createUser: async (parent, args) => {
-            console.log(args)
-            const newUser = await User.create(user)
-            const token = signToken(newUser)
-            return { newUser, token }
+            try {
+
+                const user = await User.create(args)
+                const token = signToken(user)
+                return { user, token }
+
+            } catch (err) {
+                console.log(err)
+                return err
+            }
         },
         postReview: async (parent, { review, product, user, farm }) => {
 

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { GET_ME } from '../utils/queries'
@@ -13,12 +13,12 @@ const Profile = () => {
         variables: { id: "61dcce98a022a51b7cc6465e" }
     })
 
-    
+
     useEffect(() => {
 
         try {
-            loading ? console.log(loading) : setUserData(data.me)
-            
+            loading ? console.log(loading) : console.log(loading)
+
             console.log(data, loading, error)
             // console.log(userData)
 
@@ -30,19 +30,14 @@ const Profile = () => {
     })
     return (
         <>
-            <h1>
-                {loading ? (
-                    <>
-                        loading
-                    </>
-                ) : (
-                    <>
-                        { userData }
-                    </>
-                )}
-            </h1>
-            <Header />
-            <SideNavBar />
+            <Flex>
+
+                <SideNavBar />
+                <Box m={4} flex="1">
+                    <Header />
+
+                </Box>
+            </Flex>
         </>
     )
 }

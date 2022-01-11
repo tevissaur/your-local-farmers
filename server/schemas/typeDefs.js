@@ -24,7 +24,6 @@ const typeDefs = gql`
     type Category {
         name: String!
         imgUrl: String
-        products: [Product]
     }
     type Review {
         _id: ID!
@@ -38,6 +37,7 @@ const typeDefs = gql`
         address: String!
         reviews: [Review]
         products: [Product]
+        categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]
     }

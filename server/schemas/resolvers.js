@@ -177,6 +177,28 @@ const resolvers = {
                     
                 }
             ])
+        },
+        oneProduct: async (parent, { _id }) => {
+            return Product.findById(_id).populate(
+                [
+                    {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
+                    },
+                    {
+                        path: 'categories',
+                        model: 'Category'
+                    },
+                    {
+                        path: 'farm',
+                        model: 'Farm'
+                    }
+                ]
+            )
         }
     },
     Mutation: {

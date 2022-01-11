@@ -1,4 +1,4 @@
-const BlueberryMuffins = require('../../client/assets/bakedGoods/')
+// const BlueberryMuffins = require('../../client/assets/bakedGoods/')
 
 const {
     User,
@@ -261,6 +261,7 @@ const productData = [
         reviews: [reviewIds[3], reviewIds[2]],
         inSeason: true,
         categories: categoryIds[0],
+        farm: farmIds[0]
     },
     {
         _id: productIds[1],
@@ -269,7 +270,8 @@ const productData = [
         quantity: 5,
         reviews: [reviewIds[3], reviewIds[4],],
         inSeason: true,
-        categories:categoryIds[0]
+        categories:categoryIds[0],
+        farm: farmIds[0]
     },
     {
         _id: productIds[2],
@@ -278,7 +280,8 @@ const productData = [
         quantity: 4,
         reviews: [reviewIds[1], reviewIds[4]],
         inSeason: true,
-        categories: categoryIds[0]
+        categories: categoryIds[0],
+        farm: farmIds[0]
     },
     {
         _id: productIds[3],
@@ -287,7 +290,8 @@ const productData = [
         quantity: 3,
         reviews: [reviewIds[1], reviewIds[0], reviewIds[3]],
         inSeason: true,
-        categories: categoryIds[0]
+        categories: categoryIds[0],
+        farm: farmIds[0]
     },
     {
         _id: productIds[4],
@@ -296,7 +300,8 @@ const productData = [
         quantity:2,
         reviews: [reviewIds[4], reviewIds[1], reviewIds[2]],
         inSeason: true,
-        categories: categoryIds[0]
+        categories: categoryIds[0],
+        farm: farmIds[0]
     },
     {
         _id: productIds[5],
@@ -305,7 +310,8 @@ const productData = [
         quantity: 6,
         reviews: [reviewIds[2], reviewIds[3], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[4]
+        categories:categoryIds[4],
+        farm: farmIds[0]
     },
     {
         _id: productIds[6],
@@ -314,7 +320,8 @@ const productData = [
         quantity: 1,
         reviews: reviewIds[0],
         inSeason: true,
-        categories:categoryIds[4]
+        categories:categoryIds[4],
+        farm: farmIds[0]
     },
     {
         _id: productIds[7],
@@ -323,7 +330,8 @@ const productData = [
         quantity: 3,
         reviews: [reviewIds[3], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[4]
+        categories:categoryIds[4],
+        farm: farmIds[0]
     },
     {
         _id: productIds[8],
@@ -332,7 +340,8 @@ const productData = [
         quantity: 1,
         reviews: [reviewIds[0],reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[4]
+        categories:categoryIds[4],
+        farm: farmIds[0]
     },
     {
         _id: productIds[9],
@@ -341,7 +350,8 @@ const productData = [
         quantity: 1,
         reviews: [reviewIds[0],reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     {
         _id: productIds[10],
@@ -350,7 +360,8 @@ const productData = [
         quantity: 8,
         reviews: [reviewIds[3],reviewIds[4]],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     {
         _id: productIds[11],
@@ -359,7 +370,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[4],reviewIds[2]],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     {
         _id: productIds[12],
@@ -368,7 +380,8 @@ const productData = [
         quantity: 10,
         reviews: reviewIds[1],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     {
         _id: productIds[13],
@@ -377,7 +390,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[1], reviewIds[0]],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     {
         _id: productIds[14],
@@ -386,7 +400,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[2], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[1]
+        categories:categoryIds[1],
+        farm: farmIds[0]
     },
     
     {
@@ -396,7 +411,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[2], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[3]
+        categories:categoryIds[3],
+        farm: farmIds[0]
     },
     {
         _id: productIds[16],
@@ -405,7 +421,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[3]
+        categories:categoryIds[3],
+        farm: farmIds[0]
     },
     {
         _id: productIds[17],
@@ -414,7 +431,8 @@ const productData = [
         quantity: 10,
         reviews: reviewIds[3],
         inSeason: true,
-        categories:categoryIds[3]
+        categories:categoryIds[3],
+        farm: farmIds[0]
     },
     {
         _id: productIds[18],
@@ -423,7 +441,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[3]
+        categories:categoryIds[3],
+        farm: farmIds[0]
     },
     {
         _id: productIds[19],
@@ -432,7 +451,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[2]
+        categories:categoryIds[2],
+        farm: farmIds[0]
     },
     {
         _id: productIds[20],
@@ -441,7 +461,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[3], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[2]
+        categories:categoryIds[2],
+        farm: farmIds[0]
     },
     {
         _id: productIds[21],
@@ -450,7 +471,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
-        categories:categoryIds[2]
+        categories:categoryIds[2],
+        farm: farmIds[0]
     },
     {
         _id: productIds[22],
@@ -459,7 +481,8 @@ const productData = [
         quantity: 30,
         reviews: [reviewIds[3], reviewIds[4]],
         inSeason: true,
-        categories:categoryIds[2]
+        categories:categoryIds[2],
+        farm: farmIds[0]
     },
     {
         _id: productIds[23],
@@ -468,7 +491,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[1], reviewIds[2]],
         inSeason: true,
-        categories:categoryIds[2]
+        categories:categoryIds[2],
+        farm: farmIds[0]
     },
     {
         _id: productIds[24],
@@ -477,7 +501,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[1], reviewIds[2]],
         inSeason: true,
-        categories:categoryIds[5]
+        categories:categoryIds[5],
+        farm: farmIds[0]
     },
     {
         _id: productIds[25],
@@ -486,7 +511,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[3], reviewIds[4]],
         inSeason: true,
-        categories:categoryIds[5]
+        categories:categoryIds[5],
+        farm: farmIds[0]
     },
     {
         _id: productIds[26],
@@ -495,7 +521,8 @@ const productData = [
         quantity: 20,
         reviews: [reviewIds[0], reviewIds[2]],
         inSeason: true,
-        categories:categoryIds[5]
+        categories:categoryIds[5],
+        farm: farmIds[0]
     },
     {
         _id: productIds[27],
@@ -504,7 +531,8 @@ const productData = [
         quantity: 10,
         reviews: [reviewIds[2], reviewIds[3]],
         inSeason: true,
-        categories:categoryIds[5]
+        categories:categoryIds[5],
+        farm: farmIds[0]
     },
     
     

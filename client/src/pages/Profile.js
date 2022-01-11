@@ -9,29 +9,28 @@ import Header from '../components/Header'
 import MyFarmForm from '../components/MyFarmForm'
 import MyFarmTabs from '../components/MyFarmTabs'
 import Auth from '../utils/auth';
+import Footer from '../components/Footer'
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
     const { data: { _id } } = Auth.getProfile()
+    console.log(_id)
     const { data, loading, error } = useQuery(GET_ME, {
         variables: { id: _id }
     })
-
-
     useEffect(() => {
-
         try {
             loading ? console.log(loading) : setUserData(data.me)
-
             console.log(data, loading, error)
-            // console.log(userData)
+            console.log(userData)
 
         } catch (err) {
             console.log(err)
         }
 
         // setUserData(data)
-    })
+    }, [loading, data, error, userData])
+
     return (
         <>
             <Flex>
@@ -62,6 +61,7 @@ const Profile = () => {
                     </Flex>
                 </Box>
             </Flex>
+            <Footer />
         </>
     )
 }

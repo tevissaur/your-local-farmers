@@ -12,23 +12,23 @@ function FarmCardAvailableGoods({categories}) {
             {categories.map(category => {
                 switch(category){
                     case 'Baked Goods':
-                        return <BiCookie fontSize='25px'/>
+                        return <BiCookie fontSize='25px' key={1}/>
                         
                     case 'Dairy, Meat & Eggs':
-                        return  <GiMeatCleaver fontSize='25px'/>
+                        return  <GiMeatCleaver fontSize='25px' key={2}/>
                         
                             
                     case 'Flowers & Plants':
-                        return <GiFlowerPot fontSize='25px' />
+                        return <GiFlowerPot fontSize='25px'  key={3}/>
                         
                     case 'Fruits & Vegetables':
-                        return <GiFruitBowl fontSize='25px'/>
+                        return <GiFruitBowl fontSize='25px' key={4}/>
                                     
                     case 'Seasonal Stuffs':
-                        return <BsFillCloudSunFill fontSize='25px'/>
+                        return <BsFillCloudSunFill fontSize='25px' key={5}/>
                                         
                     case 'Beverages':
-                            return <ImMug fontSize='25px'/>
+                            return <ImMug fontSize='25px' key={6}/>
                         }   
                     }
                 )

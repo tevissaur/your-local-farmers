@@ -145,7 +145,7 @@ const resolvers = {
             )
         },
         categories: async (parent, args) => {
-            const productCategory=  await Category.find().populate([
+            const productCategory = await Category.find().populate([
                 {
                     path: 'products',
                     model: 'Product'
@@ -156,10 +156,36 @@ const resolvers = {
         }
     },
     Mutation: {
-        createUser: async (parent, { user }) => {
-            const newUser = await User.create(user)
-            const token = signToken(newUser)
-            return { newUser, token }
+        createUser: async (parent, args) => {
+            try {
+
+                const user = await User.create(args)
+                const token = signToken(user)
+                return { user, token }
+
+            } catch (err) {
+                console.log(err)
+                return err
+            }
+        },
+        login: async (parent, { email, password }) => {
+            try {
+                const user = await User.findOne({ email })
+
+                if (!user) {
+                    throw new AuthenticationError('No Profile with that email')
+                }
+
+                const correctPw = await user.isCorrectPassword(password)
+
+                if (!correctPw) {
+                    throw new AuthenticationError('Incorrect password!');
+                }
+                const token = signToken(user)
+                return { token, user }
+            } catch (err) {
+                console.log(err)
+            }
         },
         postReview: async (parent, { review, product, user, farm }) => {
 

@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react'
 import { GET_ME } from '../utils/queries'
 import SideNavBar from '../components/SideNavBar'
 import Header from '../components/Header'
-
+import Auth from '../utils/auth';
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
+    const id = Auth.getProfile()
+    console.log(id)
     const { data, loading, error } = useQuery(GET_ME, {
         variables: { id: "61dcce98a022a51b7cc6465e" }
     })

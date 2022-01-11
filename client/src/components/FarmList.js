@@ -7,7 +7,7 @@ import Farm from "../pages/Farm";
 const FarmList = () => {
  const {loading, data, error} = useQuery(QUERY_FARM)
  const farmList = data ? data.farms : []
-
+ console.log(farmList)
   return (
     
     <div>

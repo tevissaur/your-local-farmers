@@ -59,12 +59,9 @@ const typeDefs = gql`
     }
 
     input NewUser {
-        firstName: String!
-        lastName: String!
+        username: String!
         email: String!
         password: String!
-        isFarmer: Boolean
-        address: String!
     }
     
     input NewReview {

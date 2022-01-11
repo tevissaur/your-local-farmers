@@ -5,6 +5,7 @@ import customTheme from "./extendedTheme";
 import { categoryData } from "./categoryData";
 import Product from "./components/Product";
 import Profile from "./pages/Profile"
+import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
@@ -32,7 +33,6 @@ function App() {
           </Routes>
         </Router>
       </ChakraProvider>
-
     </ApolloProvider>
   );
 }

@@ -1,16 +1,19 @@
-import {useParams} from "react-router-dom";
+import { Flex, Box ,Spacer} from "@chakra-ui/react";
 
-const Product= ({data}) => {
- const {title} = useParams()
- const foundCategory = data.find(category => category.title.toLowerCase() === title)
-
-
+const Product = ({ product }) => {
   return (
-    <div>
-      <h1>{foundCategory.title}</h1>
-     
-    </div>
-  )
-}
+    <Flex>
+      <h1>{product.name}</h1>
+      <Spacer />
+      <p>Price: {product.price}</p>
+      <Spacer />
+      <h1>Quantity : {product.quantity}</h1>
+      <Spacer />
+       Reviews: {product.reviews.map((review,idx)=> (
+        <h1 key={idx}>{review.content} {review.rating}</h1>
+      ))}
+    </Flex>
+  );
+};
 
-export default Product
+export default Product;

@@ -10,6 +10,9 @@ const productSchema = new Schema(
             type: Number,
             required: true
         },
+        imgUrl: {
+            type: String
+        },
         quantity: {
             type: Number,
             required: true

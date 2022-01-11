@@ -21,9 +21,9 @@ function NavItem({navSize, title, icon, active, pageUrl}) {
                     w={navSize == "large" && "100%" }
                 >
                     <MenuButton w='100%'>
-                        <Flex>
-                            <Icon as={icon} fontSize='xl' color={active ? "primary.darkGreen" : "primary.yellowGreen"} />
-                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+                        <Flex alignItems='center'>
+                            <Icon as={icon} fontSize='35px' color={active ? "primary.emeraldGreen" : "primary.darkGreen"} />
+                            <Text align='left'ml={5} display={navSize == "small" ? "none" : "flex"} fontWeight='600'>{title}</Text>
                         </Flex>
                     </MenuButton>
                 </Link>

@@ -24,6 +24,7 @@ const typeDefs = gql`
     type Category {
         name: String!
         imgUrl: String
+        products: [Product]
     }
     type Review {
         _id: ID!

@@ -145,7 +145,14 @@ const resolvers = {
             )
         },
         categories: async (parent, args) => {
-            return await Category.find()
+            const productCategory=  await Category.find().populate([
+                {
+                    path: 'products',
+                    model: 'Product'
+                }
+            ])
+            console.log(productCategory)
+            return productCategory
         }
     },
     Mutation: {

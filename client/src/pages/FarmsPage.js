@@ -7,13 +7,12 @@ import SideNavBar from '../components/SideNavBar'
 import FarmCard from '../components/FarmCard'
 
 function FarmsPage() {
+
     const {loading, data, error} = useQuery(QUERY_FARM)
     const farmList = data ? data.farms : []
-    console.log(farmList)
+    console.log(farmList.length)
     // console.log(farmList[0].reviews[0].rating)
-    // const reviewAverage = farmList.forEach(farm => {
-    //     console.log(farm.review.rating.length)
-    // })
+    
     return (
     <>
     <Flex>
@@ -22,7 +21,13 @@ function FarmsPage() {
         <Header/>
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                    <FarmCard />
+                    {farmList.map(farm => {
+                        return <FarmCard key={farm._id} title={farm.name} numericReview={farm.reviews.length} categories={farm.products.map(product => {
+                            return product.categories[0].name
+                            // return product.categories
+                            
+                        })}/>
+                    })}
                 </Flex>
             </Container>
         </Box>

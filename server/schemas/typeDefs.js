@@ -37,6 +37,7 @@ const typeDefs = gql`
         address: String!
         reviews: [Review]
         products: [Product]
+        avgScore: Int
         categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]

@@ -5,12 +5,10 @@ import Product from "./Product"
 
 const Category= () => {
  const {name} = useParams()
- console.log(name)
 //  const foundCategory = data.find(category => category.title.toLowerCase() === title)
  const {loading: productLoading, data:productData, error: productError} = useQuery(QUERY_PRODUCT)
  const {loading: farmLoading, data: farmData, error: farmError} = useQuery(QUERY_FARM)
- console.log(productData)
- console.log(farmData)
+
 
 
  const productList = productData? productData.products : []

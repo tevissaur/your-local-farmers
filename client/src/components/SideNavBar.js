@@ -39,7 +39,7 @@ function SideNavBar({ theme }) {
                             : changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} pageUrl="/home" icon={GiBarn} title="Home" active description="Home" />
+                <NavItem navSize={navSize} pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
                 <NavItem navSize={navSize} pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
                 <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
                 <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />

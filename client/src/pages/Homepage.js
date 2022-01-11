@@ -1,5 +1,5 @@
 import SideNavBar from "../components/SideNavBar";
-import { Button, Box, Flex, Heading, Spacer, Center, Text, Container, List, ListItem, OrderedList, UnorderedList, ListIcon, Link, Image} from "@chakra-ui/react";
+import { Button, Box, Flex, Heading, Text, Container, List, ListItem, ListIcon, Link, Image} from "@chakra-ui/react";
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SmartSmallIcon from "../components/SmartSmallIcon";

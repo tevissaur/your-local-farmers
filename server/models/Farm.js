@@ -47,13 +47,13 @@ farmSchema.pre('save', async function(next) {
 })
 
 farmSchema.pre('findOneAndUpdate', async function(next) {
-    let total = 0
-    await this.reviews.forEach((review) => {
-        console.log(review.rating)
-        total += review.rating
-    })
-    this.avgScore = total / this.reviews.length
-    console.log(this, this.avgScore)
+    // let total = 0
+    // await this.reviews.forEach((review) => {
+    //     console.log(review.rating)
+    //     total += review.rating
+    // })
+    // this.avgScore = total / this.reviews.length
+    // console.log(this, this.avgScore)
 })
 
 const Farm = model('Farm', farmSchema)

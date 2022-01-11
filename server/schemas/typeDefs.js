@@ -37,7 +37,6 @@ const typeDefs = gql`
         address: String!
         reviews: [Review]
         products: [Product]
-        categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]
     }
@@ -103,6 +102,7 @@ const typeDefs = gql`
         farms: [Farm]
         categories: [Category]
         farmDashboard(_id: ID!): Farm
+        farmStore(_id: ID!): Farm
     }
 
     type Mutation {

@@ -153,6 +153,26 @@ const resolvers = {
             ])
             console.log(productCategory)
             return productCategory
+        },
+        farmStore: async (parent, { _id }) => {
+            return await Farm.findById(_id).populate([
+                {
+                    path: 'products',
+                    model: 'Product',
+                    populate: {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
+                    }
+                },
+                {
+                    path: 'reviews',
+                    
+                }
+            ])
         }
     },
     Mutation: {

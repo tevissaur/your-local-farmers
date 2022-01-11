@@ -39,7 +39,7 @@ const productSchema = new Schema(
     }
 )
 
-productSchema.post('save', async function(next) {
+productSchema.pre('save', async function(next) {
     let total = 0
     await this.reviews.forEach((review) => {
         console.log(review.rating)

@@ -127,7 +127,7 @@ const userData = [
         _id: userIds[0],
         firstName: 'Linh',
         lastName: 'Bui',
-        userName: 'linhb',
+        username: 'linhb',
         email: 'linh@email.com',
         password: 'pass12345',
         isFarmer: false,
@@ -138,7 +138,7 @@ const userData = [
         _id: userIds[1],
         firstName: 'Alex',
         lastName: 'Leino',
-        userName: 'alexl',
+        username: 'alexl',
         email: 'alex@email.com',
         password: 'pass12345',
         isFarmer: false,
@@ -149,7 +149,7 @@ const userData = [
         _id: userIds[2],
         firstName: 'Quentin',
         lastName: 'Hnilica',
-        userName: 'quenth',
+        username: 'quenth',
         email: 'iamQ@email.com',
         password: '69420hehe',
         isFarmer: false,
@@ -160,7 +160,7 @@ const userData = [
         _id: userIds[3],
         firstName: 'Tevis',
         lastName: 'Reilly',
-        userName: 'tevisr',
+        username: 'tevisr',
         email: 'tevis@email.com',
         password: 'pass12345',
         isFarmer: false,
@@ -566,7 +566,10 @@ const seedData = async () => {
 
         // Seeding Users
         await User.deleteMany({})
-        const userSeed = await User.insertMany(userData)
+        // userData.forEach( async (user) => {
+        //     await User.create(user)
+        // })
+        await User.insertMany(userData)
         console.log('============ USERS SEEDED =============')
         
         // Seeding Products 

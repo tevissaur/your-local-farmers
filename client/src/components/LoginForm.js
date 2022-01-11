@@ -18,6 +18,8 @@ import {
   } from '@chakra-ui/react'
 
 import Auth from '../utils/auth'
+import { useMutation } from '@apollo/client';
+import { LOG_IN } from '../utils/mutations'
 
 function LoginForm() {
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -28,6 +30,8 @@ const [emailAddress, setEmailAdress] = useState('');
 const [password, setPassword] = useState('');
 const isInvalid = password === '' || emailAddress === ''
 
+const [LoginUser] = useMutation(LOG_IN)
+
 const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log('bruh')
@@ -36,19 +40,19 @@ const handleFormSubmit = async (e) => {
         password: password
     }
 
-    // try {
-    //     const { data } = await createUser({
-    //         variables: {
-    //             ...userData
-    //         }
-    //     })
-    //     console.log(data)
-    //     //Auth.login(token)
+    try {
+        const { data: {login: {token} } } = await LoginUser({
+            variables: {
+                ...userData
+            }
+        })
 
-    // }
-    // catch (err) {
-    //     console.log(err)
-    // }
+        Auth.login(token)
+
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
 return (

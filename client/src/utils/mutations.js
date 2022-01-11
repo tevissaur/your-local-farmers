@@ -25,7 +25,7 @@ export const LOG_IN = gql`
 export const CREATE_FARM = gql`
 mutation CreateFarm($name: String!, $address: String!, $story: String!, $owners: String!) {
     createFarm(name: $name, address: $address, owners: $owners, story: $story){
-        
+        _id
     }
 }`
 

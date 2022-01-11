@@ -1,4 +1,6 @@
 import { gql } from '@apollo/client';
+
+
 export const QUERY_FARM = gql`
   query Farms {
     farms {
@@ -68,22 +70,22 @@ export const QUERY_PRODUCT =gql `
 
 `
 
-// export const QUERY_CATEGORIES =gql`
-//   query Categories {
-//     categories {
-//       name
-//       imgUrl
-//       products {
-//         _id
-//         name
-//         price
-//         quantity
-//         reviews {
-//           content
-//           rating
-//         }
-//       }
-//     }
-//   }
+export const QUERY_CATEGORIES =gql`
+  query Categories {
+    categories {
+      name
+      imgUrl
+      products {
+        _id
+        name
+        price
+        quantity
+        reviews {
+          content
+          rating
+        }
+      }
+    }
+  }
 
-// `
+`

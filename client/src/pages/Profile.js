@@ -9,18 +9,25 @@ import Header from '../components/Header'
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
-    const { data: { me }, loading, error } = useQuery(GET_ME, {
-        variables: { id: "61dcbeb64ccfff30f8a93bd0" }
+    const { data, loading, error } = useQuery(GET_ME, {
+        variables: { id: "61dcce98a022a51b7cc6465e" }
     })
+
     
     useEffect(() => {
-        loading ? console.log(loading) : setUserData(me)
-        
-        console.log(me, loading, error)
-        console.log(userData)
+
+        try {
+            loading ? console.log(loading) : setUserData(data.me)
+            
+            console.log(data, loading, error)
+            // console.log(userData)
+
+        } catch (err) {
+            console.log(err)
+        }
 
         // setUserData(data)
-    }, [])
+    })
     return (
         <>
             <h1>
@@ -30,7 +37,7 @@ const Profile = () => {
                     </>
                 ) : (
                     <>
-                        { userData.fullName }
+                        not loading
                     </>
                 )}
             </h1>

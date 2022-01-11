@@ -55,7 +55,7 @@ function Signup() {
                 }
             })
             console.log(data)
-            // Auth.login(token)
+            //Auth.login(token)
 
         }
         catch (err) {

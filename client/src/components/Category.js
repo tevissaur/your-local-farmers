@@ -17,6 +17,7 @@ const Category= () => {
  const foundProducts = productList.filter((product) => {
     return product.categories.find((category)=> category.name.toLowerCase() === name)
  })
+
  const farmList = farmData ? farmData.farms : []
  
 const foundProductsWithFarms = foundProducts.map((product) => {

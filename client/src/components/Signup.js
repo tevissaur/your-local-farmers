@@ -18,8 +18,10 @@ import {
   } from '@chakra-ui/react';
   import customTheme from "../extendedTheme";
 
-import {useMutation} from '@apollo/client'
-import {CREATE_USER} from '../utils/mutations'
+import {useMutation} from '@apollo/client';
+import {CREATE_USER} from '../utils/mutations';
+import Auth from '../utils/auth';
+
 
 function Signup() {
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,7 +33,7 @@ const [password, setPassword] = useState('');
 const [userName, setUserName] = useState('');
 const isInvalid = password === '' || emailAddress === '' || userName === '';
 
-const [createUser, { data, loading, error, reset }] = useMutation(CREATE_USER);
+const [createUser] = useMutation(CREATE_USER);
 
 
 const handleFormSubmit = async (e) => {
@@ -45,7 +47,20 @@ const handleFormSubmit = async (e) => {
         email: emailAddress,
         password: password
     }
-    createUser(userData)
+
+    try {
+        const {data} = await createUser({
+            variables: {user: userData}
+        })
+
+        console.log(data)
+
+    }
+    catch(err){
+        console.error(err)
+    }
+
+
 }
 
 

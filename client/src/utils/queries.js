@@ -28,6 +28,7 @@ export const GET_ME = gql`
       firstName
       lastName
       fullName
+      username
       email
       password
       address

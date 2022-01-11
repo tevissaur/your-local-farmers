@@ -8,6 +8,7 @@ import Profile from "./pages/Profile"
 import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import FarmsPage from "./pages/FarmsPage";
+import MyFarm from './pages/myFarm';
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
   uri: "/graphql",
@@ -35,6 +36,8 @@ function App() {
               path="/category/:name" element={<Category />}
             ></Route>
             <Route path='/farms' element={<FarmsPage />}>
+            </Route>
+            <Route path='/myfarm' element={<MyFarm />}>
             </Route>
           </Routes>
         </Router>

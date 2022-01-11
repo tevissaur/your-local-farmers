@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 export const QUERY_FARM = gql`
   query Farms {
     farms {
@@ -29,6 +29,23 @@ export const QUERY_FARM = gql`
     }
   }
 
+`
+export const GET_ME = gql`
+  query GetMe($id: ID!) {
+    me(_id: $id) {
+      firstName
+      lastName
+      fullName
+      userName
+      email
+      password
+      address
+      reviews {
+      _id
+      }
+      isFarmer
+    }
+  }
 `
 export const QUERY_PRODUCT =gql `
     query Product {

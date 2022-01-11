@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Homepage />}></Route>
             <Route
-              path="/products/:title"
+              path="/category/:title"
               element={<Product data={categoryData} />}
             ></Route>
             <Route

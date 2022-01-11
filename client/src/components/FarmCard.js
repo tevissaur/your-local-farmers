@@ -3,16 +3,16 @@ import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakr
 import localFarm from '../assets/localFarm.jpg'
 import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-
+import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'
 import customTheme from '../extendedTheme'
 
 
 function FarmCard({title, reviews, numericReview, categories}) {
-    console.log(categories)
+    
     let filteredCategories = new Set([...categories])
-    console.log(filteredCategories)
+    
 
     return (
         
@@ -42,11 +42,9 @@ function FarmCard({title, reviews, numericReview, categories}) {
                 </Flex>
                 <Flex mt={2} justifyContent='space-around' w='100%'>
                     {/* //for each project I want to run it through a swtich statement and if a product has x category append it if it hasnt already been appeneded */}
-                <GiGrainBundle fontSize='25px'/>
-                <GiFruitBowl fontSize='25px'/>
-                <GiMeatCleaver fontSize='25px'/>
-                <BiCookie fontSize='25px'/>
-                <ImMug fontSize='25px'/>
+                    
+                    <FarmCardAvailableGoods categories={[...filteredCategories].sort()}/>
+
                 </Flex>
                 <Flex mt={2} alignItems='center'>
                     <Text ms={1} fontWeight='600'>Reviews:</Text>

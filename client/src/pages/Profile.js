@@ -37,7 +37,7 @@ const Profile = () => {
                     </>
                 ) : (
                     <>
-                        not loading
+                        { userData }
                     </>
                 )}
             </h1>

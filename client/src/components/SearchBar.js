@@ -13,7 +13,7 @@ function SearchBar() {
   }
   return (
 <>
-    <Container my={1} maxW="100%">
+    <Container my={1} maxW="100%" >
         <Flex alignItems="center" fontSize="25px">
             <InputGroup>
                 <InputLeftElement
@@ -27,9 +27,9 @@ function SearchBar() {
                     placeholder='Search for products here!'
                     w='100%'
                     ml={3}
-                    color="primary.lightGreen"
                     border="1px"
                     borderColor="primary.lightGreen"
+                    
                 />     
             </InputGroup>
         </Flex>

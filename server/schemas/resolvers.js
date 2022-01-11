@@ -168,6 +168,25 @@ const resolvers = {
                 return err
             }
         },
+        login: async (parent, { email, password }) => {
+            try {
+                const user = await User.findOne({ email })
+
+                if (!user) {
+                    throw new AuthenticationError('No Profile with that email')
+                }
+
+                const correctPw = await user.isCorrectPassword(password)
+
+                if (!correctPw) {
+                    throw new AuthenticationError('Incorrect password!');
+                }
+                const token = signToken(user)
+                return { token, user }
+            } catch (err) {
+                console.log(err)
+            }
+        },
         postReview: async (parent, { review, product, user, farm }) => {
 
 

@@ -45,7 +45,7 @@ const typeDefs = gql`
         _id: ID!
         firstName: String
         lastName: String
-        userName: String!
+        username: String!
         email: String!
         password: String!
         isFarmer: Boolean!
@@ -107,6 +107,7 @@ const typeDefs = gql`
 
     type Mutation {
         createUser(username: String!, password: String!, email: String!): Auth
+        login(email: String!, password: String!): Auth
         postReview(review: NewReview!, product: ID, user: ID, farm: ID): Review
         createProduct(product: NewProduct!, farm: ID!, category: ID!): Product
         createCategory(category: NewCategory!): Category

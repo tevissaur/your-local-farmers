@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Container, Button, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { GET_ME } from '../utils/queries'
@@ -9,17 +9,16 @@ import Auth from '../utils/auth';
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
-    const id = Auth.getProfile()
-    console.log(id)
+    const { data: { _id } } = Auth.getProfile()
     const { data, loading, error } = useQuery(GET_ME, {
-        variables: { id: "61dcce98a022a51b7cc6465e" }
+        variables: { id: _id }
     })
 
 
     useEffect(() => {
 
         try {
-            loading ? console.log(loading) : console.log(loading)
+            loading ? console.log(loading) : setUserData(data.me)
 
             console.log(data, loading, error)
             // console.log(userData)
@@ -37,7 +36,30 @@ const Profile = () => {
                 <SideNavBar />
                 <Box m={4} flex="1">
                     <Header />
+                    <Flex w="100%">
+                        <Flex justifyContent='center' w="100%">
+                            <Tabs isFitted variant='soft-rounded' colorScheme='green'>
+                                <TabList>
+                                    <Tab>Home</Tab>
+                                    <Tab>My Farm</Tab>
+                                    <Tab>My Orders</Tab>
+                                </TabList>
 
+                                <TabPanels>
+                                    {/* Tab for the main profile page */}
+                                    <TabPanel>
+                                        <p>one!</p>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <p>two!</p>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <p>three!</p>
+                                    </TabPanel>
+                                </TabPanels>
+                            </Tabs>
+                        </Flex>
+                    </Flex>
                 </Box>
             </Flex>
         </>

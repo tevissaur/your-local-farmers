@@ -49,19 +49,11 @@ function Signup() {
         }
 
         try {
-<<<<<<< HEAD
             const { data: { createUser: { token } } } = await createUser({
-=======
-            const { data : {createUser: {token} } } = await createUser({
->>>>>>> 4be505256d1d2051597fb41a64ddb014557dbbbf
                 variables: {
                     ...userData
                 }
             })
-<<<<<<< HEAD
-            // console.log(data)
-=======
->>>>>>> 4be505256d1d2051597fb41a64ddb014557dbbbf
             Auth.login(token)
 
         }

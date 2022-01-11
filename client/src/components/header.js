@@ -1,4 +1,4 @@
-import { Flex, Center, Heading, Box, Button } from "@chakra-ui/react";
+import { Flex, Center, Heading, Box, Button, Link } from "@chakra-ui/react";
 import Signup from "./Signup";
 import farmerLogo from "../assets/farmerLogo.png";
 import LoginForm from './LoginForm'
@@ -19,7 +19,10 @@ const Header = () => {
                 <SearchBar />
                 {Auth.loggedIn() ? (
                     <>
-                        <CgShoppingCart fontSize='40px' />
+                        <Link to="/cart">
+                            <CgShoppingCart fontSize='40px' />
+
+                        </Link>
                         <Button onClick={handleLogOut} m="1">
                             Log Out
                         </Button>

@@ -86,7 +86,11 @@ const resolvers = {
                             },
                             {
                                 path: 'reviews',
-                                model: 'Review'
+                                model: 'Review',
+                                populate: {
+                                    path: 'author',
+                                    model: 'User'
+                                }
                             }
                         ]
                     },

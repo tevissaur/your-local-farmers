@@ -30,6 +30,9 @@ function App() {
             <Route
               path="/profile" element={<Profile />}>
             </Route>
+            <Route
+              path="/category/:name" element={<Category />}
+            ></Route>
           </Routes>
         </Router>
       </ChakraProvider>

@@ -7,8 +7,6 @@ import { CgShoppingCart } from 'react-icons/cg'
 import Auth from '../utils/auth'
 
 const Header = () => {
-    console.log(Auth.loggedIn())
-
     const handleLogOut = () => {
 
         Auth.logout()

@@ -38,6 +38,7 @@ const typeDefs = gql`
         reviews: [Review]
         products: [Product]
         avgScore: Int
+        categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]
     }

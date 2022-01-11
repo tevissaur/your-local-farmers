@@ -1,7 +1,6 @@
 import SideNavBar from "../components/SideNavBar";
 import { Button, Box, Flex, Heading, Spacer, Center, Text, Container, List, ListItem, OrderedList, UnorderedList, ListIcon, Link, Image} from "@chakra-ui/react";
 import Header from '../components/Header'
-import SearchBar from '../components/SearchBar'
 import Footer from '../components/Footer'
 import SmartSmallIcon from "../components/SmartSmallIcon";
 import css from './Homepage.css'
@@ -16,18 +15,20 @@ const Homepage = () => {
     <SideNavBar />
   <Box m={4} flex="1">
     <Header />
-    <SearchBar />
-<Container maxW='98%' mt={2}>
+<Container maxW='container.lg' mt={2}>
   <Box
         borderRadius='25px'
-        height='100%'>
+        border='green 2px solid'
+        height='100%'
+        backgroundColor='lightyellow'
+        padding={3}>
         <Flex justifyContent='center'>
           <Text
             fontSize='30px'
             fontWeight='bold'
             color='#3A7D44'
             textAlign='center'>
-            Welcome to the online farmers market where you can get locally grown and baked goods!
+            Explore Our Most Popular Categories
           </Text>
         </Flex>
         <Flex justifyContent='Center'>
@@ -68,12 +69,12 @@ const Homepage = () => {
     mt={5}
     background={customTheme.colors.primary.lightGreen}
     borderRadius='25px'
-    width="container.xl"
+    maxWidth="container.xl"
     boxShadow="5px 5px 1px 1px #3A7D44"
   >
-  <Flex flexDir='Column' w='100%' mb={3}>
-    <Heading as='h2' fontSize='2rem' textAlign='center' color={customTheme.colors.primary.emeraldGreen}>The Whys Behind The Whats</Heading>
-        <Text fontWeight='600'>"The U.S. food and farming system contributes
+  <Heading as='h2' fontSize='3.5rem' textAlign='center' color={customTheme.colors.primary.emeraldGreen}>The Whys Behind The Whats</Heading>
+  <Flex flexDir='row' w='100%' mb={3}>
+        <Text fontWeight='600' padding={3}>"The U.S. food and farming system contributes
     nearly $1 trillion to the national economy—
     or more than 13 percent of the gross domes-
     tic product—and employs 17 percent of the
@@ -107,7 +108,12 @@ const Homepage = () => {
         To read more from this article Click Here!
     </Link>
     </Text>
-    <Image borderRadius='25px' padding={1} src={wheat}></Image>
+    <Image 
+      borderRadius='25px'
+      padding={1} 
+      src={wheat}
+      boxSize='xs'
+      />
   </Flex>
 </Container>
 

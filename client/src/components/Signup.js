@@ -49,13 +49,12 @@ function Signup() {
         }
 
         try {
-            const { data } = await createUser({
+            const { data : {createUser: {token} } } = await createUser({
                 variables: {
                     ...userData
                 }
             })
-            console.log(data)
-            //Auth.login(token)
+            Auth.login(token)
 
         }
         catch (err) {

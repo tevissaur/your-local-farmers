@@ -8,25 +8,15 @@ export const QUERY_FARM = gql`
       name
       address
       reviews {
-        author {
-          firstName
-        }
-        content
         rating
       }
       products {
-        _id
-        name
-        price
-        quantity
-        reviews {
-          rating
-          content
+        categories {
+          name
         }
       }
       owners {
-        firstName
-        lastName
+        fullName
       }
     }
   }

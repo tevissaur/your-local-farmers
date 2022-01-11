@@ -10,7 +10,7 @@ import SmallIcon from '../components/SmallIcon.css'
 const SmallCategoryIcon = ({ card }) => {
     return (
         <Flex justifyContent='space-evenly'className="icon-basket">
-            <Link to={`/products/${card.title.toLowerCase()}`}> 
+            <Link to={`/category/${card.title.toLowerCase()}`}> 
                 <Box>
                     <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
                         <Box className='smallCategoryIcon' ms={5}>

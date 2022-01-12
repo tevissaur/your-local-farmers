@@ -174,7 +174,7 @@ const resolvers = {
                 },
                 {
                     path: 'reviews',
-                    
+
                 }
             ])
         },
@@ -270,6 +270,26 @@ const resolvers = {
         createPO: async (parent, { PO }) => {
             const newPO = await PurchaseOrder.create(PO)
             return newPO.populate()
+        },
+        updateUser: async (parent, { user }) => {
+            console.log(user)
+            const updatedUser = await User.findByIdAndUpdate(user._id, {
+                $set: {
+                    ...user
+                }
+            }, {
+                new: true
+            })
+            return updatedUser.populate([
+                {
+                    path: 'reviews',
+                    model: 'Review',
+                    populate: {
+                        path: 'author',
+                        model: 'User'
+                    }
+                }
+            ])
         }
     }
 }

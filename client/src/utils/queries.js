@@ -25,15 +25,12 @@ export const QUERY_FARM = gql`
 export const GET_ME = gql`
   query GetMe($id: ID!) {
     me(_id: $id) {
+      _id
       firstName
       lastName
-      fullName
       username
       email
       address
-      reviews {
-      _id
-      }
       isFarmer
     }
   }

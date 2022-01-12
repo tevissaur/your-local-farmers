@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
 import localFarm from '../assets/localFarm.jpg'
@@ -8,11 +9,14 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'
 import customTheme from '../extendedTheme'
+
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'
 import customTheme from '../extendedTheme'
-import StarsRender from './StarsRender'
+import StarsRender from './StarsRender';
+import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react';
+import localFarm from '../assets/localFarm.jpg'
 
 
 
@@ -21,8 +25,6 @@ function FarmCard({title, reviews, numericReview, categories}) {
     
     let filteredCategories = new Set([...categories])
     
-    
-
     return (
         
             <Flex 

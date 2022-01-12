@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import {QUERY_FARM} from '../utils/queries';
@@ -8,7 +7,6 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import FarmCard from '../components/FarmCard'
-import { CloseIcon } from '@chakra-ui/icons'
 import customTheme from '../extendedTheme';
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
@@ -16,11 +14,10 @@ import { BsQuestionLg } from 'react-icons/bs'
 import { SiTheconversation } from 'react-icons/si'
 import {VscDebugStackframeDot} from 'react-icons/vsc'
 
-
-
 function FarmsPage() {
-    
-    const {loading, data, error} = useQuery(QUERY_FARM)
+
+    const { loading, data, error } = useQuery(QUERY_FARM)
+
 
     const farmList = data ? data.farms : []
     const [checkedItems, setCheckedItems] = useState([true, true])
@@ -30,7 +27,7 @@ function FarmsPage() {
     <Flex>
         <SideNavBar />
         <Box m={4} flex='1'>
-        <Header/>
+            <Header/>
 
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>

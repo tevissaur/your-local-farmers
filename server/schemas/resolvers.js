@@ -32,10 +32,7 @@ const resolvers = {
                     path: 'categories',
                     model: 'Category'
                 },
-                {
-                    path: 'farm',
-                    model: 'Farm',
-                }
+                
             ])
             // console.log(prod[0].getAvgReviewScore())
             return prod

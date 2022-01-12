@@ -38,6 +38,8 @@ const typeDefs = gql`
         address: String!
         reviews: [Review]
         products: [Product]
+        avgScore: Int
+        categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]
     }
@@ -99,6 +101,7 @@ const typeDefs = gql`
         me(_id: ID!): User
         reviews: [Review]
         products: [Product]
+        oneProduct(_id: ID!): Product
         getPO(_id: ID!): PurchaseOrder
         farms: [Farm]
         categories: [Category]

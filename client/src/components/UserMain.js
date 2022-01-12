@@ -162,19 +162,7 @@ const UserMain = ({ userData }) => {
                         </FormControl>
                         <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
 
-                            {userData.address ? (
-                                <Flex w="100%" justifyContent='start' alignItems='center'>
-                                    <FormLabel width='145px' fontSize={22}>
-                                        Address:
-                                    </FormLabel>
-                                    <Text marginEnd={4} fontSize={20}>
-
-                                        {user.address}
-                                    </Text>
-                                    <Button type="submit" size='sm' onClick={() => setEditingFirstName(true)}>
-                                        <EditIcon />
-                                    </Button>
-                                </Flex>) : (
+                            {editingAddress ? (
                                 <Flex w="100%" justifyContent='start' alignItems='center'>
                                     <FormLabel width='145px' fontSize={22}>
                                         Add Address:
@@ -183,8 +171,25 @@ const UserMain = ({ userData }) => {
                                         ...user,
                                         address: target.value,
                                     })} />
-                                    <Button type="submit" m={3} onClick={handleSubmit}>
+                                    <Button type="submit" m={3} onClick={(e) => {
+
+                                        setEditingAddress(false)
+                                        handleSubmit(e)
+
+                                    }}>
                                         Add Address
+                                    </Button>
+                                </Flex>) : (
+                                <Flex w="100%" justifyContent='start' alignItems='center'>
+                                    <FormLabel width='145px' fontSize={22}>
+                                        Address:
+                                    </FormLabel>
+                                    <Text marginEnd={4} fontSize={20}>
+
+                                        {user.address}
+                                    </Text>
+                                    <Button type="submit" size='sm' onClick={() => setEditingAddress(true)}>
+                                        <EditIcon />
                                     </Button>
                                 </Flex>)}
                         </FormControl>

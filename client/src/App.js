@@ -40,6 +40,9 @@ function App() {
             
             <Route path='/farms' element={<FarmsPage />}>
             </Route>
+
+            <Route path='/myfarm' element={<MyFarm />}>
+            </Route>
           </Routes>
         </Router>
       </ChakraProvider>

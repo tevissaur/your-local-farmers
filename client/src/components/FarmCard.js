@@ -11,45 +11,45 @@ import customTheme from '../extendedTheme'
 
 function FarmCard() {
     return (
-            <Flex 
+        <Flex
             flexDir='column'
             alignItems='center'
             border='2px solid black'
-            padding={2} 
+            padding={2}
             borderRadius='25px'
             backgroundColor='lightyellow'
             mt={4}
-            >
-                <Heading 
-                    as='h6'
-                    size='lg'
-                    pb={2}
-                    >Alex's Ranch Is Here
-                </Heading>
-                <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image>
-                <Box fontWeight='600' mt={1}>Distance:100 Miles</Box>
-                <Flex>
+        >
+            <Heading
+                as='h6'
+                size='lg'
+                pb={2}
+            >Alex's Ranch Is Here
+            </Heading>
+            <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image>
+            <Box fontWeight='600' mt={1}>Distance:100 Miles</Box>
+            <Flex>
                 <Text fontWeight='600' mt={1}>Goods Most Likely Available</Text>
 
-                </Flex>
-                <Flex mt={2} justifyContent='space-around' w='100%'>
-                <GiGrainBundle fontSize='25px'/>
-                <GiFruitBowl fontSize='25px'/>
-                <GiMeatCleaver fontSize='25px'/>
-                <BiCookie fontSize='25px'/>
-                <ImMug fontSize='25px'/>
-                </Flex>
-                <Flex mt={2} alignItems='center'>
-                    <Text ms={1} fontWeight='600'>Reviews:</Text>
-                    <AiFillStar color='green' fontSize='25px'/>
-                    <AiFillStar color='green' fontSize='25px'/>
-                    <AiFillStar color='green' fontSize='25px'/>
-                    <AiFillStar color='green' fontSize='25px'/>
-                    <AiOutlineStar color='green' fontSize='25px'/>
-                    <Text fontWeight='600'>(5)</Text>
-                </Flex>
-                <Link><Button mt={3} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
             </Flex>
+            <Flex mt={2} justifyContent='space-around' w='100%'>
+                <GiGrainBundle fontSize='25px' />
+                <GiFruitBowl fontSize='25px' />
+                <GiMeatCleaver fontSize='25px' />
+                <BiCookie fontSize='25px' />
+                <ImMug fontSize='25px' />
+            </Flex>
+            <Flex mt={2} alignItems='center'>
+                <Text ms={1} fontWeight='600'>Reviews:</Text>
+                <AiFillStar color='green' fontSize='25px' />
+                <AiFillStar color='green' fontSize='25px' />
+                <AiFillStar color='green' fontSize='25px' />
+                <AiFillStar color='green' fontSize='25px' />
+                <AiOutlineStar color='green' fontSize='25px' />
+                <Text fontWeight='600'>(5)</Text>
+            </Flex>
+            <Link><Button mt={3} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
+        </Flex>
 
     )
 }

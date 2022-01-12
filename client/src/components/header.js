@@ -12,7 +12,7 @@ const Header = () => {
 
         Auth.logout()
     }
-    useEffect(()=> {
+    useEffect(() => {
         console.log()
 
     }, [])

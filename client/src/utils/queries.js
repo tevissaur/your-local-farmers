@@ -11,6 +11,20 @@ export const QUERY_FARM = gql`
         rating
       }
       products {
+
+        _id
+        image
+        name
+        price
+        quantity
+        reviews {
+          author {
+            firstName
+          }
+          rating
+          content
+        }
+
         categories {
           name
         }
@@ -57,7 +71,7 @@ export const QUERY_PRODUCT = gql`
 
 `
 
-export const QUERY_CATEGORIES =gql`
+export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {
       name

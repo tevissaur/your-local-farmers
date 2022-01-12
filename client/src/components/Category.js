@@ -36,6 +36,11 @@ const Category = () => {
         <Box m={4} flex="1">
           <Header />
 
+          {/* {foundProducts.map((product, idx) => (
+        <Product key={idx} product={product} />
+      ))} */}
+
+
           <Flex
             borderRadius="25px"
             border="green 2px solid"
@@ -55,7 +60,10 @@ const Category = () => {
         </Box >
       </Flex >
     </>
+
   );
 };
+
+
 
 export default Category;

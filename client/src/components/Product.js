@@ -1,33 +1,84 @@
-import { Flex, Box, Spacer, Grid, GridItem } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { imageSeeds } from "../imageSeeds";
+import customeTheme from "../extendedTheme";
+import {
+  Button,
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+  Center,
+  Text,
+  Container,
+  List,
+  ListItem,
+  OrderedList,
+  UnorderedList,
+  ListIcon,
+  Image,
+} from "@chakra-ui/react";
+import { CgShoppingCart } from "react-icons/cg";
 
 const Product = ({ product }) => {
-  console.log(product)
+  console.log(product);
+  const cardArr = imageSeeds.map((card) => card);
+
+  const foundProductCard = cardArr.filter((arr) => arr.name === product.name);
+
+  const foundProductImage = foundProductCard.map((card) => card.img);
+  console.log(foundProductImage);
   return (
     <>
-      <h1>{product.name} ----{product.price}--- {product.quantity}</h1>
-      <h1>{product.farm.name}</h1>
-      {product.reviews.map((review,idx) =>(
-        
-        <h1 key={idx}>{review.content}-----{review.rating} -----{review.author.firstName}</h1>
-       
-      
-        
-      ))}
-      {/* <p>Price: {product.price}</p>
-      <h1>Quantity : {product.quantity}</h1>
-      Reviews:{" "}
-      {product.reviews.map((review, idx) => (
-        <h1 key={idx}>
-          {review.content} {review.rating}
-        </h1>
-      ))}
-      {product.farms.map((farm, idx) => (
-        <h1 key={idx}>Farm that has it {farm.name} </h1>
-      ))}
-      <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-        <GridItem w="100%" h="10" bg="blue.500" />
-        
-      </Grid> */}
+      <Box p="10px" flex="50%">
+        <Box border="green 2px solid" borderRadius="25px" height="100%">
+          <Box>
+            <img
+              src={foundProductImage}
+              style={{ borderRadius: "25px" }}
+            />
+            <Link to={`/products/:${product._id}`}>
+              <Flex justifyContent="space-between">
+                <Text
+                  fontSize="2xl"
+                  px="4px"
+                  px="10px"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  {product.name}
+                </Text>
+                <Flex alignItems="center" justifyContent="end" padding="4px">
+                  <Text fontSize="2xl">${product.price}</Text>
+
+                  <CgShoppingCart fontSize="20px" />
+                </Flex>
+              </Flex>
+            </Link>
+            {/* <Box>
+            {product.reviews.map((review, idx) => (
+              <h1 key={idx}>
+                {review.content}-----{review.rating} -----
+                {review.author.firstName}
+              </h1>
+            ))}
+          </Box> */}
+            <Box p="10px">
+              <Text>
+                Available :{" "}
+                <span style={{ fontWeight: "bolder" }}>
+                  {product.quantity}{" "}
+                </span>
+                from{" "}
+              </Text>
+
+              <Link to={`/farm/${product.farm.name.toLowerCase()}`}>
+                <Text fontSize="2xl" color="primary.darkGreen">
+                  {product.farm.name}
+                </Text>
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };

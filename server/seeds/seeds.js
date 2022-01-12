@@ -1,4 +1,6 @@
+
 // const BlueberryMuffins = require('../../client/assets/bakedGoods/')
+
 
 const {
     User,
@@ -297,7 +299,7 @@ const productData = [
         _id: productIds[4],
         name: 'Pain au Chocolat',
         price: 5,
-        quantity:2,
+        quantity: 2,
         reviews: [reviewIds[4], reviewIds[1], reviewIds[2]],
         inSeason: true,
         categories: categoryIds[0],
@@ -544,7 +546,7 @@ const farmData = [
         name: 'Cypress Farms',
         address: '90 Star Lane',
         reviews: [reviewIds[5], reviewIds[6]],
-        products:[productIds[1],productIds[0],productIds[6],productIds[16],productIds[20],],
+        products:[productIds[1],productIds[6],productIds[16],productIds[20],],
         owners: [userIds[0]],
         purchaseOrders: [],
         story: 'Little farm under a cypress tree'
@@ -564,7 +566,7 @@ const farmData = [
         name: 'Oakenshield Livestock',
         address: 'Down the street',
         reviews: [reviewIds[5], reviewIds[8]],
-        products: [productIds[2],productIds[7],productIds[21],productIds[25],productIds[4],productIds[8],productIds[12],productIds[18],],
+        products: [productIds[2],productIds[7],productIds[21],productIds[25],productIds[4],productIds[8],productIds[12],productIds[18],productIds[15]],
         purchaseOrders: [],
         owners: [userIds[1]],
         story: 'Oaktrees line this beautiful lot where pigs, and cows roam'
@@ -574,7 +576,7 @@ const farmData = [
         name: 'Martha\'s Vineyard',
         address: 'You know where it is',
         reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
-        products: [productIds[22],productIds[26],productIds[5],productIds[9],productIds[13],productIds[19],],
+        products: [productIds[22],productIds[26],productIds[5],productIds[9],productIds[19],],
         purchaseOrders: [],
         owners: [userIds[2]],
         story: 'Elite, upperclass, better than you.'
@@ -584,7 +586,7 @@ const farmData = [
         name: 'Lenny\'s House',
         address: '34 Gumption Lane',
         reviews: [reviewIds[5], reviewIds[8]],
-        products:[productIds[23],productIds[27],productIds[10],productIds[14],productIds[15]],
+        products:[productIds[13],productIds[23],productIds[27],productIds[10],productIds[14]],
         purchaseOrders: [],
         owners: [userIds[3]],
         story: 'Just a simple homestead that provides food to their local neighborhood.'

@@ -177,6 +177,7 @@ const resolvers = {
                     
                 }
             ])
+
         },
         oneProduct: async (parent, { _id }) => {
             return Product.findById(_id).populate(
@@ -199,6 +200,7 @@ const resolvers = {
                     }
                 ]
             )
+
         }
     },
     Mutation: {

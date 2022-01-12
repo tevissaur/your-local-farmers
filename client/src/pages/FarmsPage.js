@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import {QUERY_FARM} from '../utils/queries';
@@ -23,13 +25,17 @@ function FarmsPage() {
     const farmList = data ? data.farms : []
     const [checkedItems, setCheckedItems] = useState([true, true])
     // console.log(farmList[0].reviews[0].rating)
-
     return (
     <>
     <Flex>
         <SideNavBar />
         <Box m={4} flex='1'>
         <Header/>
+
+            <Container maxW='100%'>
+                <Flex justifyContent='space-evenly' flexWrap='wrap'>
+                    <FarmCard />
+
 
     <Flex justifyContent='center'>
         <Container 
@@ -76,6 +82,7 @@ function FarmsPage() {
                             
                         })}/>
                     })}
+
                 </Flex>
         <Container 
             maxW='container.xl' 
@@ -142,7 +149,9 @@ function FarmsPage() {
             <Footer />
         </Flex>
             </Container>
-        </Box>
+      
+        </Container>
+        <Box/>
     </Flex>
 
 

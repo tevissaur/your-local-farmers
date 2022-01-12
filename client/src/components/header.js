@@ -11,7 +11,6 @@ import { useEffect } from "react";
 
 
 
-
 const Header = () => {
 
     const handleLogOut = () => {
@@ -43,6 +42,7 @@ const Header = () => {
                     <>
                         <Signup></Signup>
                         <LoginForm></LoginForm>
+                        <CgShoppingCart fontSize='35px'/>
                     </>)}
 
 
@@ -54,4 +54,4 @@ const Header = () => {
         </>
     )
 }
-export default Header;
+export default Header

@@ -43,6 +43,7 @@ export const QUERY_PRODUCT = gql`
       products {
         _id
         name
+        image
         price
         quantity
         reviews {
@@ -59,7 +60,7 @@ export const QUERY_PRODUCT = gql`
 
 `
 
-export const QUERY_CATEGORIES = gql`
+export const QUERY_CATEGORIES =gql`
   query Categories {
     categories {
       name

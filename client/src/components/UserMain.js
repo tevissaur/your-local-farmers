@@ -18,7 +18,7 @@ const UserMain = ({ userData }) => {
                         <Divider />
                     </Text>
                     <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' >
-                        
+
                         {userData.firstName ? (
                             <Flex>
                                 <FormLabel width='145px' fontSize={22}>
@@ -82,14 +82,21 @@ const UserMain = ({ userData }) => {
                                     Add Address
                                 </Button>
                             </Flex>)}
-                        {userData.reviews ? (<>{userData.reviews.length === 0 ? (
-                            <Flex w="100%">
-                                No Reviews
-                            </Flex>
-                        ) : (
+                        {userData.reviews ? (
                             <>
-                                Reviews
-                            </>)}</>) : (<></>)}
+                                {userData.reviews.length === 0 ? (
+                                    <Flex w="100%">
+                                        No Reviews
+                                    </Flex>
+                                ) : (
+                                    <>
+                                        Reviews
+                                    </>
+                                )}</>) : (
+                            <>
+
+                            </>
+                        )}
 
                     </FormControl>
                 </Flex>

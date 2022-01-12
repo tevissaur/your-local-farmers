@@ -1,26 +1,3 @@
-import React from 'react'
-import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
-import localFarm from '../assets/localFarm.jpg'
-import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
-
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-
-import { BiCookie } from 'react-icons/bi'
-import { ImMug } from 'react-icons/im'
-import customTheme from '../extendedTheme'
-
-
-function FarmCard() {
-    return (
-            <Flex 
-            flexDir='column'
-            alignItems='center'
-            border='2px solid black'
-            padding={2} 
-            borderRadius='25px'
-            backgroundColor='lightyellow'
-            mt={4}
-=======
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'

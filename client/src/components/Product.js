@@ -28,7 +28,6 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const Product = ({ review }) => {
   const { id } = useParams();
-  console.log(id);
   const {
     loading: productLoading,
     data: productData,
@@ -48,7 +47,6 @@ const Product = ({ review }) => {
   const foundProduct = productList.find((product) => product._id === id);
   console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
-  console.log(farmList);
   const farm = farmList.find((farm) => {
     const foundFarmProduct = farm.products.find(
       (product) => product._id === id
@@ -64,7 +62,6 @@ const Product = ({ review }) => {
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
-  console.log(foundProductImage);
 
   return (
     <>

@@ -7,6 +7,7 @@ import Product from "./components/Product";
 import Profile from "./pages/Profile"
 import Category from "./components/Category";
 import Farm from "./pages/Farm";
+import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({

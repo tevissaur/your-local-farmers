@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_PRODUCT, QUERY_FARM } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { Flex, Box } from '@chakra-ui/react'
 import Product from "./Product"
 import customeTheme from "../extendedTheme";
@@ -10,7 +10,7 @@ import Header from "./Header";
 const Category = () => {
   const { name } = useParams();
   console.log(name);
-  const { loading: productLoading, data: productData, error: productError } = useQuery(QUERY_PRODUCT)
+  const { loading: productLoading, data: productData, error: productError } = useQuery(QUERY_PRODUCTS)
   const { loading: farmLoading, data: farmData, error: farmError } = useQuery(QUERY_FARM)
 
 

@@ -49,7 +49,7 @@ export const GET_ME = gql`
     }
   }
 `
-export const QUERY_PRODUCT = gql`
+export const QUERY_PRODUCTS = gql`
     query Product {
       products {
         _id
@@ -64,6 +64,9 @@ export const QUERY_PRODUCT = gql`
         categories {
           name
           imgUrl
+        }
+        farm {
+          name
         }
       }
     }

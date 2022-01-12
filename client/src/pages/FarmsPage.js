@@ -27,7 +27,6 @@ function FarmsPage() {
 
                     <Container maxW='100%'>
                         <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                            <FarmCard />
 
 
                             <Flex justifyContent='center'>

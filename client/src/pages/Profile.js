@@ -6,6 +6,7 @@ import { GET_ME } from '../utils/queries'
 import SideNavBar from '../components/SideNavBar'
 import UserMain from '../components/UserMain.js'
 import Header from '../components/Header'
+
 import MyFarmForm from '../components/MyFarmForm'
 import MyFarmTabs from '../components/MyFarmTabs'
 import Auth from '../utils/auth';
@@ -14,6 +15,7 @@ import Footer from '../components/Footer'
 const Profile = () => {
     const [userData, setUserData] = useState({})
     const { data: { _id } } = Auth.getProfile()
+
     console.log(_id)
     const { data, loading, error } = useQuery(GET_ME, {
         variables: { id: _id }
@@ -29,12 +31,12 @@ const Profile = () => {
         }
 
         // setUserData(data)
+
     }, [loading, data, error, userData])
 
     return (
         <>
             <Flex>
-
                 <SideNavBar />
                 <Box m={4} flex="1">
                     <Header />
@@ -61,6 +63,7 @@ const Profile = () => {
                     </Flex>
                 </Box>
             </Flex>
+
             <Footer />
         </>
     )

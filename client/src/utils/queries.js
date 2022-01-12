@@ -58,6 +58,9 @@ export const QUERY_PRODUCTS = gql`
         price
         quantity
         reviews {
+          author {
+            firstName
+          }
           content
           rating
         }
@@ -68,6 +71,7 @@ export const QUERY_PRODUCTS = gql`
         farm {
           name
         }
+
       }
     }
 

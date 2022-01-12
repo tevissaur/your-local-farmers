@@ -20,13 +20,16 @@ function App() {
       <ChakraProvider theme={customTheme}>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Homepage />}></Route>
+            <Route exact path="/" element={<Homepage />}>
+
+            </Route>
             <Route
               path="/farm/:name" element={<Farm />}
             ></Route>
             <Route
               path="/profile" element={<Profile />}>
             </Route>
+
             <Route
               path="/category/:name" element={<Category />}
             ></Route>
@@ -35,6 +38,16 @@ function App() {
             ></Route>
             
             <Route path='/farms' element={<FarmsPage />}>
+            </Route>
+
+            {/* <Route
+              path="/category/:name" element={<Category />}
+            ></Route> */}
+            <Route path='/farms' element={<FarmsPage />}>
+              
+            </Route>
+
+            <Route path='/myfarm' element={<MyFarm />}>
             </Route>
           </Routes>
         </Router>

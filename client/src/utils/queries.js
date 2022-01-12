@@ -11,6 +11,7 @@ export const QUERY_FARM = gql`
         rating
       }
       products {
+
         _id
         image
         name
@@ -23,6 +24,7 @@ export const QUERY_FARM = gql`
           rating
           content
         }
+
         categories {
           name
         }
@@ -40,8 +42,8 @@ export const GET_ME = gql`
       firstName
       lastName
       fullName
+      username
       email
-      password
       address
       reviews {
       _id
@@ -50,7 +52,7 @@ export const GET_ME = gql`
     }
   }
 `
-export const QUERY_PRODUCT =gql `
+export const QUERY_PRODUCT = gql`
     query Product {
       products {
         _id
@@ -76,7 +78,7 @@ export const QUERY_PRODUCT =gql `
 
 `
 
-export const QUERY_CATEGORIES =gql`
+export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {
       name

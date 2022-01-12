@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_FARM } from "../utils/queries";
 import { useParams } from "react-router-dom";
+import '@chakra-ui/icons'
 
 const Farm = () => {
-  const { name } = useParams(); 
+  const { name } = useParams();
   const { loading, data, error } = useQuery(QUERY_FARM);
 
   if (loading) {

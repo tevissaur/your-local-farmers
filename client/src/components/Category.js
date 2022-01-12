@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+
 import { QUERY_FARM } from "../utils/queries";
 import {
   Box,
@@ -15,8 +16,19 @@ const Category = () => {
   console.log(name);
   const { loading, data, error } = useQuery(QUERY_FARM);
 
-  const farmList = data ? data.farms : [];
-  const allProducts = farmList
+import { QUERY_PRODUCT, QUERY_FARM } from "../utils/queries";
+import Product from "./Product"
+
+const Category = () => {
+  const { name } = useParams()
+  //  const foundCategory = data.find(category => category.title.toLowerCase() === title)
+  const { loading: productLoading, data: productData, error: productError } = useQuery(QUERY_PRODUCT)
+  const { loading: farmLoading, data: farmData, error: farmError } = useQuery(QUERY_FARM)
+
+
+
+  const farmList = farmData ? farmData.farms : [];
+  const allProducts = productData ? productData.products : []
     .map((farm) => {
       const productWithFarm = farm.products.map((product) => {
         return { ...product, farm };
@@ -32,10 +44,16 @@ const Category = () => {
 
   return (
     <>
-      <Flex >
+
+      <Flex>
         <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
           <Header />
+
+      {/* {foundProducts.map((product, idx) => (
+        <Product key={idx} product={product} />
+      ))} */}
+
 
           <Flex
             borderRadius="25px"
@@ -48,9 +66,7 @@ const Category = () => {
             margin={20}
             flex="50%"
             flexWrap="wrap"
-          
-          
-    
+              
           >
             {foundProducts.map((product, idx) => (
               <ProductCard key={idx} product={product} />
@@ -59,7 +75,12 @@ const Category = () => {
         </Box>
       </Flex>
     </>
+
   );
 };
+
+  
+}
+
 
 export default Category;

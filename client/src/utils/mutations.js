@@ -29,4 +29,18 @@ mutation CreateFarm($name: String!, $address: String!, $story: String!, $owners:
     }
 }`
 
+export const UPDATE_USER = gql`
+    mutation UpdateUser($user: UpdatedUser) {
+        updateUser(user: $user) {
+            _id
+            firstName
+            lastName
+            username
+            email
+            password
+            isFarmer
+            address
+    }
+}
+`
 

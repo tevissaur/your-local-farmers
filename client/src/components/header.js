@@ -4,24 +4,19 @@ import farmerLogo from "../assets/farmerLogo.png";
 import LoginForm from './LoginForm'
 import SearchBar from './SearchBar'
 import { CgShoppingCart } from 'react-icons/cg'
+
 import Auth from '../utils/auth';
 import { useEffect } from "react";
 
-
-
-
-
 const Header = () => {
-
     const handleLogOut = () => {
 
         Auth.logout()
     }
-    useEffect(()=> {
+    useEffect(() => {
         console.log()
 
     }, [])
-
     return (
         <>
             <Flex alignItems='center'>

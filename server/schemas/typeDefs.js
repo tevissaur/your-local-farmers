@@ -61,10 +61,15 @@ const typeDefs = gql`
         user: User
     }
 
-    input NewUser {
-        username: String!
-        email: String!
-        password: String!
+    input UpdatedUser {
+        _id: ID!
+        firstName: String
+        lastName: String
+        address: String
+        username: String
+        email: String
+        password: String
+        isFarmer: Boolean
     }
     
     input NewReview {
@@ -117,6 +122,7 @@ const typeDefs = gql`
         createCategory(category: NewCategory!): Category
         createFarm(farm: NewFarm): Farm
         createPO(PO: NewPurchaseOrder): PurchaseOrder
+        updateUser(user: UpdatedUser): User
     }
 `
 

@@ -17,8 +17,7 @@ function SideNavBar({ theme }) {
             marginTop="1"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
             borderRadius={navSize == "small" ? "15px" : "30px"}
-
-            w={navSize == "small" ? "75px" : "191px"}
+            w={navSize == "small" ? "75px" : "270px"}
             flexDir="column"
             height="100%"
             justifyContent="space-between"

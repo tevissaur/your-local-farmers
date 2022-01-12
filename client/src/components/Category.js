@@ -1,7 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useQuery} from "@apollo/client";
 import {QUERY_PRODUCT,QUERY_FARM} from "../utils/queries";
-import Product from "./Product"
+import Product from "./Product";
+import {imageSeeds} from '../imageSeeds'
 
 const Category= () => {
  const {name} = useParams()
@@ -22,13 +23,13 @@ const { loading, data, error } = useQuery(QUERY_FARM);
       (category) => category.name.toLowerCase() === name
     );
   });
-  console.log(foundProducts)
+
 
 
   return (
     <>
     {foundProducts.map((product,idx) => (
-      <Product key={idx} product={product} />
+      <Product key={idx} product={product}/>
     ))}
 
     </>

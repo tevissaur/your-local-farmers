@@ -32,7 +32,10 @@ const resolvers = {
                     path: 'categories',
                     model: 'Category'
                 },
-                
+                {
+                    path: 'farm',
+                    model: 'Farm',
+                }
             ])
             // console.log(prod[0].getAvgReviewScore())
             return prod
@@ -146,7 +149,7 @@ const resolvers = {
             )
         },
         categories: async (parent, args) => {
-            const productCategory=  await Category.find().populate([
+            const productCategory = await Category.find().populate([
                 {
                     path: 'products',
                     model: 'Product'
@@ -154,13 +157,59 @@ const resolvers = {
             ])
             console.log(productCategory)
             return productCategory
+        },
+        farmStore: async (parent, { _id }) => {
+            return await Farm.findById(_id).populate([
+                {
+                    path: 'products',
+                    model: 'Product',
+                    populate: {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
+                    }
+                },
+                {
+                    path: 'reviews',
+                    
+                }
+            ])
         }
     },
     Mutation: {
-        createUser: async (parent, { user }) => {
-            const newUser = await User.create(user)
-            const token = signToken(newUser)
-            return { newUser, token }
+        createUser: async (parent, args) => {
+            try {
+
+                const user = await User.create(args)
+                const token = signToken(user)
+                return { user, token }
+
+            } catch (err) {
+                console.log(err)
+                return err
+            }
+        },
+        login: async (parent, { email, password }) => {
+            try {
+                const user = await User.findOne({ email })
+
+                if (!user) {
+                    throw new AuthenticationError('No Profile with that email')
+                }
+
+                const correctPw = await user.isCorrectPassword(password)
+
+                if (!correctPw) {
+                    throw new AuthenticationError('Incorrect password!');
+                }
+                const token = signToken(user)
+                return { token, user }
+            } catch (err) {
+                console.log(err)
+            }
         },
         postReview: async (parent, { review, product, user, farm }) => {
 

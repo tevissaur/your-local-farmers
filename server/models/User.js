@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       required: true
     },
@@ -46,6 +46,7 @@ const userSchema = new Schema(
 
 // hash user password
 userSchema.pre('save', async function (next) {
+  console.log(this)
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);

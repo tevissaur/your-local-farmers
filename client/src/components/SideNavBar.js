@@ -17,7 +17,7 @@ function SideNavBar({ theme }) {
             marginTop="1"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
             borderRadius={navSize == "small" ? "15px" : "30px"}
-            w={navSize == "small" ? "75px" : "280px"}
+            w={navSize == "small" ? "75px" : "191px"}
             flexDir="column"
             height="100%"
             justifyContent="space-between"
@@ -39,7 +39,7 @@ function SideNavBar({ theme }) {
                             : changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} pageUrl="/home" icon={GiBarn} title="Home" active description="Home" />
+                <NavItem navSize={navSize} pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
                 <NavItem navSize={navSize} pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
                 <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
                 <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />

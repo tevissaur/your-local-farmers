@@ -13,17 +13,18 @@ const typeDefs = gql`
     type Product {
         _id: ID! 
         name: String!
+        image: String
         price: Float!
         quantity: Int!
         reviews: [Review]
         avgScore: Int
         inSeason: Boolean
         categories: [Category]
+        farm: Farm
     }
     type Category {
         name: String!
         imgUrl: String
-        products: [Product]
     }
     type Review {
         _id: ID!
@@ -44,7 +45,7 @@ const typeDefs = gql`
         _id: ID!
         firstName: String
         lastName: String
-        userName: String!
+        username: String!
         email: String!
         password: String!
         isFarmer: Boolean!
@@ -59,12 +60,9 @@ const typeDefs = gql`
     }
 
     input NewUser {
-        firstName: String!
-        lastName: String!
+        username: String!
         email: String!
         password: String!
-        isFarmer: Boolean
-        address: String!
     }
     
     input NewReview {
@@ -105,10 +103,12 @@ const typeDefs = gql`
         farms: [Farm]
         categories: [Category]
         farmDashboard(_id: ID!): Farm
+        farmStore(_id: ID!): Farm
     }
 
     type Mutation {
-        createUser(user: NewUser!): Auth
+        createUser(username: String!, password: String!, email: String!): Auth
+        login(email: String!, password: String!): Auth
         postReview(review: NewReview!, product: ID, user: ID, farm: ID): Review
         createProduct(product: NewProduct!, farm: ID!, category: ID!): Product
         createCategory(category: NewCategory!): Category

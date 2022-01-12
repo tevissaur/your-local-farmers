@@ -9,7 +9,6 @@ function SmartSmallIcon() {
     <>
       {
         categoryData.map((card, index) => {
-          console.log(card)
           return (<SmallCategoryIcon key={index} card={card} />)
 
         })

@@ -6,6 +6,10 @@ const productSchema = new Schema(
             type: String,
             required: true
         },
+        image: {
+            type: String,
+            required: false
+        },
         price: {
             type: Number,
             required: true
@@ -32,11 +36,14 @@ const productSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Category'
         }],
-       
+        farm: {
+            type: Schema.Types.ObjectId,
+            ref: 'Farm'
+        }
     }
 )
 
-productSchema.post('save', async function(next) {
+productSchema.pre('save', async function(next) {
     let total = 0
     await this.reviews.forEach((review) => {
         console.log(review.rating)

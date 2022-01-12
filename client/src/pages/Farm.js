@@ -10,20 +10,20 @@ const Farm = () => {
     return "<h2>Loading</h2>";
   }
 
-  console.log(data);
+
   const farmList = data ? data.farms : [];
-  const foundFarm = farmList.find((farm) => farm.name === name);
+  const foundFarm = farmList.find((farm) => farm.name.toLowerCase() === name);
   console.log(foundFarm);
 
   return (
     <div>
-      <h1>{foundFarm.name}</h1>
-      <h1>{foundFarm.address}</h1>
-      {foundFarm.owners.map((owner, idx) => (
-        <h1 key={idx}>
-          {owner.firstName} {owner.lastName}
-        </h1>
+      hello from farm {name}
+      {  <h1>{foundFarm.name} ---{foundFarm.address} </h1>}
+      {foundFarm.owners.map((owner,idx) => (
+        <h1 key={idx}>{owner.fullName}</h1>
       ))}
+      
+      
       {foundFarm.products.map((product, idx) => (
         <div key={idx}>
           <span>{product.name} </span>
@@ -38,10 +38,10 @@ const Farm = () => {
             ))}
           </span>
         </div>
-      ))}
+      ))} 
       <h1>Farm's review
         {foundFarm.reviews.map((review, idx) => (
-          <p key={idx}>{review.rating} {review.author.firstName} {review.content}</p>
+          <p key={idx}>{review.rating}</p>
         ))}
 
       </h1>

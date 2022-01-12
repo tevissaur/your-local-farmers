@@ -1,5 +1,5 @@
 import { Flex, Box, Spacer, Grid, GridItem } from "@chakra-ui/react";
-
+import { Link } from 'react-router-dom';
 import { imageSeeds } from "../imageSeeds";
 
 const Product = ({ product }) => {
@@ -17,8 +17,8 @@ const Product = ({ product }) => {
       </h1>
       <img src={foundProductImage} style={{width:"150px", height:"100px"}} />
 
-      
-      <h1>{product.farm.name}</h1>
+    
+      <Link to={`/farm/${product.farm.name.toLowerCase()}`}>{product.farm.name}</Link>
       {product.reviews.map((review, idx) => (
         <h1 key={idx}>
           {review.content}-----{review.rating} -----{review.author.firstName}

@@ -544,7 +544,7 @@ const farmData = [
         name: 'Martha\'s Vineyard',
         address: 'You know where it is',
         reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
-        products: [productIds[3],productIds[22],productIds[26],productIds[5],productIds[9],productIds[19],],
+        products: [productIds[22],productIds[26],productIds[5],productIds[9],productIds[19],],
         purchaseOrders: [],
         owners: [userIds[2]],
         story: 'Elite, upperclass, better than you.'

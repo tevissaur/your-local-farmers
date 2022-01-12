@@ -8,6 +8,7 @@ import Profile from "./pages/Profile"
 import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import FarmsPage from "./pages/FarmsPage";
+import MyFarm from './pages/myFarm';
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
   uri: "/graphql",
@@ -20,7 +21,9 @@ function App() {
       <ChakraProvider theme={customTheme}>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Homepage />}></Route>
+            <Route exact path="/" element={<Homepage />}>
+
+            </Route>
             <Route
               path="/category/:name"
               element={<Category data={categoryData} />}
@@ -31,10 +34,12 @@ function App() {
             <Route
               path="/profile" element={<Profile />}>
             </Route>
-            <Route
+            {/* <Route
               path="/category/:name" element={<Category />}
-            ></Route>
+            ></Route> */}
             <Route path='/farms' element={<FarmsPage />}>
+            </Route>
+            <Route path='/myfarm' element={<MyFarm />}>
             </Route>
           </Routes>
         </Router>

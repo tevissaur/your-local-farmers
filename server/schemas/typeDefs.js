@@ -13,6 +13,7 @@ const typeDefs = gql`
     type Product {
         _id: ID! 
         name: String!
+        image: String
         price: Float!
         quantity: Int!
         reviews: [Review]

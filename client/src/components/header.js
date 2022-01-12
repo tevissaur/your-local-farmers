@@ -36,6 +36,7 @@ const Header = () => {
                     <>
                         <Signup></Signup>
                         <LoginForm></LoginForm>
+                        <CgShoppingCart fontSize='35px'/>
                     </>)}
 
 

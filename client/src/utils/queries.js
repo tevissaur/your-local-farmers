@@ -59,6 +59,9 @@ export const QUERY_PRODUCT =gql `
         price
         quantity
         reviews {
+          author {
+            firstName
+          }
           content
           rating
         }
@@ -66,6 +69,7 @@ export const QUERY_PRODUCT =gql `
           name
           imgUrl
         }
+
       }
     }
 

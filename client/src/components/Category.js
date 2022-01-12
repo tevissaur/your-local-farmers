@@ -5,7 +5,7 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import Product from "./Product";
+import ProductCard from "./ProductCard";
 import customeTheme from "../extendedTheme";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
@@ -32,17 +32,20 @@ const Category = () => {
 
   return (
     <>
-      <Flex>
+      <Flex >
         <SideNavBar />
-        <Box m={4} flex="1">
+        <Box m={4} flex="1" alignItems="center">
           <Header />
 
           <Flex
             borderRadius="25px"
+  
             border="green 2px solid"
             alignItems="stretch"
+            justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
+            margin={20}
             flex="50%"
             flexWrap="wrap"
           
@@ -50,7 +53,7 @@ const Category = () => {
     
           >
             {foundProducts.map((product, idx) => (
-              <Product key={idx} product={product} />
+              <ProductCard key={idx} product={product} />
             ))}
           </Flex>
         </Box>

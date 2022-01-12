@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { imageSeeds } from "../imageSeeds";
-import customeTheme from "../extendedTheme";
+
 import {
   Button,
   Box,
@@ -18,67 +19,131 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
+import { QUERY_PRODUCT, QUERY_FARM } from "../utils/queries";
+import { imageSeeds } from "../imageSeeds";
+import ProductCard from "./ProductCard";
+import SideNavBar from "./SideNavBar";
+import Header from "./Header";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-const Product = ({ product }) => {
-  console.log(product);
+const Product = ({ review }) => {
+  const { id } = useParams();
+  console.log(id);
+  const {
+    loading: productLoading,
+    data: productData,
+    error: productError,
+  } = useQuery(QUERY_PRODUCT);
+  const {
+    loading: farmLoading,
+    data: farmData,
+    error: farmError,
+  } = useQuery(QUERY_FARM);
+
+  if (productLoading || farmLoading) {
+    return "loading";
+  }
+
+  const productList = productData ? productData.products : [];
+  const foundProduct = productList.find((product) => product._id === id);
+  console.log(foundProduct);
+  const farmList = farmData ? farmData.farms : [];
+  console.log(farmList);
+  const farm = farmList.find((farm) => {
+    const foundFarmProduct = farm.products.find(
+      (product) => product._id === id
+    );
+    return foundFarmProduct ? farm : {};
+  });
+  // const foundProductWithFarm = {
+  //   ...foundProduct, farm
+  // }
+
+  // finding image matched product from seed
   const cardArr = imageSeeds.map((card) => card);
-
-  const foundProductCard = cardArr.filter((arr) => arr.name === product.name);
-
-  const foundProductImage = foundProductCard.map((card) => card.img);
+  const foundProductImage = cardArr
+    .filter((arr) => arr.name === foundProduct.name)
+    .map((card) => card.img);
   console.log(foundProductImage);
+
   return (
     <>
-      <Box p="10px" flex="50%">
-        <Box border="green 2px solid" borderRadius="25px" height="100%">
-          <Box>
-            <img
-              src={foundProductImage}
-              style={{ borderRadius: "25px" }}
-            />
-            <Link to={`/products/:${product._id}`}>
-              <Flex justifyContent="space-between">
+      <Flex>
+        <SideNavBar />
+        <Box m={4} flex="1" alignItems="center">
+          <Header />
+          <Box
+            border="green 2px solid"
+            alignItems="stretch"
+            justifyItems="center"
+            backgroundColor="lightyellow"
+            padding={5}
+            margin={20}
+          >
+            <Flex>
+              <Box>
+                <img src={foundProductImage} style={{ width: "300px" }} />
                 <Text
                   fontSize="2xl"
                   px="4px"
                   px="10px"
                   style={{ fontWeight: "bolder" }}
                 >
-                  {product.name}
+                  {foundProduct.name}
                 </Text>
                 <Flex alignItems="center" justifyContent="end" padding="4px">
-                  <Text fontSize="2xl">${product.price}</Text>
+                  <Text fontSize="2xl">$ {foundProduct.price}</Text>
 
                   <CgShoppingCart fontSize="20px" />
                 </Flex>
-              </Flex>
-            </Link>
-            {/* <Box>
-            {product.reviews.map((review, idx) => (
-              <h1 key={idx}>
-                {review.content}-----{review.rating} -----
-                {review.author.firstName}
-              </h1>
-            ))}
-          </Box> */}
-            <Box p="10px">
-              <Text>
-                Available :{" "}
-                <span style={{ fontWeight: "bolder" }}>
-                  {product.quantity}{" "}
-                </span>
-                from{" "}
-              </Text>
+                <Box
+                  px="10px"
+                  backgroundColor="darkGreen"
+                  color="yellowGreen"
+                  alignItems="center"
+                >
+                  <Flex>
+                    <AiFillStar />
+                    <AiFillStar />
+                    <AiFillStar />
+                    <AiFillStar />
+                  </Flex>
+                  <small>Based on {foundProduct.reviews.length} reviews</small>
+                  <Text color="black">Leave a review</Text>
+                </Box>
+              </Box>
 
-              <Link to={`/farm/${product.farm.name.toLowerCase()}`}>
+              <Box m="20px">
+              <Link to={`/farm/${farm.name.toLowerCase()}`}>
                 <Text fontSize="2xl" color="primary.darkGreen">
-                  {product.farm.name}
+                  {farm.name}
                 </Text>
               </Link>
-            </Box>
+              <Text> {foundProduct.quantity} available</Text>
+              [product's description]
+               
+              
+              </Box>
+            </Flex>
+
+          </Box>
+          <Box
+            border="green 2px solid"
+            alignItems="stretch"
+            justifyItems="center"
+            backgroundColor="lightyellow"
+            padding={5}
+            margin={20}
+          >
+            Customer review
+            {foundProduct.reviews.map((review, idx) => (
+              <h1 key={idx}>
+                {review.content}---{review.rating}---{review.author.firstName}
+              </h1>
+            ))}
           </Box>
         </Box>
-      </Box>
+      </Flex>
     </>
   );
 };

@@ -1,10 +1,10 @@
-import { Flex, Center, Heading, Box, Button, Link } from "@chakra-ui/react";
+import { Flex, Center, Heading, Box, Button } from "@chakra-ui/react";
 import Signup from "./Signup";
 import farmerLogo from "../assets/farmerLogo.png";
 import LoginForm from './LoginForm'
 import SearchBar from './SearchBar'
 import { CgShoppingCart } from 'react-icons/cg'
-
+import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
 import { useEffect } from "react";
 

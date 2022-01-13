@@ -251,7 +251,7 @@ const resolvers = {
             return newReview
         },
         createProduct: async (parent, { product, farmId, categoryId }) => {
-            console.log(product, farmId, categoryId)
+            console.log(product)
             const newProduct = await Product.create(product)
             return newProduct
         },

@@ -8,10 +8,10 @@ import {
     Button
 } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import Auth from "../utils/auth"
 import { QUERY_CATEGORIES } from "../utils/queries"
-// import { CREATE}
+import { CREATE_PRODUCT } from '../utils/mutations'
 
 
 
@@ -22,14 +22,54 @@ import { QUERY_CATEGORIES } from "../utils/queries"
 const AddProductForm = (props) => {
     const { data: { _id } } = Auth.getProfile()
     const [productName, setProductName] = useState('')
+    const [productDescription, setProductDescription] = useState('')
     const [productPrice, setProductPrice] = useState(0)
     const [productQuant, setProductQuant] = useState(0)
     const [productCategories, setProductCategories] = useState([])
     const { data, loading, error } = useQuery(QUERY_CATEGORIES)
+    const [createProduct] = useMutation(CREATE_PRODUCT)
 
     useEffect(() => {
+        console.log(productCategories)
+    }, [data, loading, error, productCategories])
 
-    }, [data, loading, error])
+
+
+    const handleChecked = (e) => {
+
+        const removeCategory = (e) => {
+            setProductCategories(productCategories => {
+                return productCategories.filter((category) => {
+                    return category !== e.target.id
+                })
+            })
+        }
+        const addCategory = (e) => {
+            console.log(e.target.id)
+            setProductCategories(productCategories => {
+                productCategories.push(e.target.id)
+                return productCategories
+            })
+        }
+
+        e.target.checked ? addCategory(e) : removeCategory(e)
+    }
+
+    const handleSubmit = async (e) => {
+
+        const data = await createProduct({
+            variables: {
+                product: {
+                    name: productName,
+                    price: parseInt(productPrice),
+                    quantity: parseInt(productQuant),
+                    categories: productCategories,
+                    description: productDescription
+                }
+            }
+        })
+        console.log(data)
+    }
 
     return (
         <Container>
@@ -70,13 +110,13 @@ const AddProductForm = (props) => {
                 <FormLabel>
                     Categories
                 </FormLabel>
-                <CheckboxGroup onChange={( event ) => console.log(event)} >
+                <CheckboxGroup onClick={(event) => console.log(event)} >
                     {loading ? (
                         console.log(data)
                     ) : (
                         data.categories.map((category) => {
                             return (
-                                <Checkbox onChange={(e) => console.log(e)} margin={3}>
+                                <Checkbox onChange={(e) => handleChecked(e)} margin={3} key={category._id} id={category._id}>
                                     {category.name}
                                 </Checkbox>
 
@@ -91,9 +131,9 @@ const AddProductForm = (props) => {
                 <FormLabel>
                     Description
                 </FormLabel>
-                <Textarea />
+                <Textarea value={productDescription} onChange={({ target }) => setProductDescription(target.value)} />
             </FormControl>
-            <Button margin={3}>
+            <Button margin={3} onClick={(e) => handleSubmit(e)}>
                 Add Product
             </Button>
         </Container>

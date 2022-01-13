@@ -39,6 +39,9 @@ const productSchema = new Schema(
         farm: {
             type: Schema.Types.ObjectId,
             ref: 'Farm'
+        },
+        description: {
+            type: String,
         }
     }
 )

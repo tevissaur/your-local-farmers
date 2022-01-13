@@ -81,9 +81,10 @@ const typeDefs = gql`
     }
     input NewProduct {
         name: String!
-        price: Float!
+        price: Int!
         quantity: Int!
-        inSeason: Boolean
+        categories: [ID]!
+        description: String!
     }
     input NewCategory {
         name: String!
@@ -121,8 +122,8 @@ const typeDefs = gql`
         createUser(username: String!, password: String!, email: String!): Auth
         login(email: String!, password: String!): Auth
         postReview(review: NewReview!, product: ID, user: ID, farm: ID): Review
-        createProduct(product: NewProduct!, farmId: ID!, categoryIds: [ID!]): Product
-        createCategory(category: NewCategory!): Category
+        createProduct(product: NewProduct): Product
+        createCategory(category: NewCategory): Category
         createFarm(farm: NewFarm): Farm
         createPO(PO: NewPurchaseOrder): PurchaseOrder
         updateUser(user: UpdatedUser): User

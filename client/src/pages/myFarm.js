@@ -3,6 +3,7 @@ import { Container, Flex, Box } from '@chakra-ui/react'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import MyFarmForm from '../components/MyFarmForm'
+import MyFarmDash from '../components/MyFarmDash'
 import auth from '../utils/auth'
 
 function MyFarm() {
@@ -15,7 +16,7 @@ function MyFarm() {
         //change this to actual farm view
     }
     else{
-        myFarmDisplay = <MyFarmForm />
+        myFarmDisplay = <MyFarmDash />
     }
     return (
         <Flex>

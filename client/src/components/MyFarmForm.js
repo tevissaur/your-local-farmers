@@ -11,7 +11,8 @@ import {
     Container,
     Textarea
 } from '@chakra-ui/react'
-
+import { useMutation } from '@apollo/client';
+import { CREATE_FARM } from '../utils/mutations';
 
 function MyFarm() {
     const initialRef = useRef()
@@ -20,9 +21,30 @@ function MyFarm() {
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
+    const [createFarm] = useMutation(CREATE_FARM)
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
+
+        const farmData = {
+            name: farmName,
+            address: address,
+            owner: 'quigg',
+            story: story
+        }
+        try {
+            const { data: { farm } } = await createFarm({
+                variables: {
+                    ...farmData
+                }
+            })
+        }
+        catch (err) {
+            console.log(err)
+        }
+
+        console.log('bruh')
+
 
     }
 
@@ -30,6 +52,7 @@ function MyFarm() {
     return (
         <>
             <Container maxW='100%'>
+                <form onSubmit={handleFormSubmit}>
                 <FormControl onSubmit={handleFormSubmit}>
                     <FormLabel>Enter your farm name</FormLabel>
                     <Input
@@ -68,6 +91,7 @@ function MyFarm() {
                         Add Farm
                     </Button>
                 </FormControl>
+                </form>
             </Container>
         </>
     )

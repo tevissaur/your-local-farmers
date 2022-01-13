@@ -17,8 +17,9 @@ function MyFarm() {
         myFarmDisplay = <MyFarmDash />
     }
     else{
-        myFarmDisplay = <MyFarmForm userId={userDetails.data._id} />
+        myFarmDisplay = <MyFarmForm />
     }
+    
     return (
         <Flex>
         <SideNavBar />

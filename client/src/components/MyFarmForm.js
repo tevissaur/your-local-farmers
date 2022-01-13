@@ -19,54 +19,30 @@ import Auth from "../utils/auth";
 function MyFarm({ isFarmer, setIsFarmer }) {
     const initialRef = useRef()
     const finalRef = useRef()
-    const { data: { userId }} = Auth.getProfile()
+    const { data: { _id }} = Auth.getProfile()
     const [farmName, setFarmName] = useState('');
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
 
-    // const handleFormSubmit = async (e) => {
-    //     e.preventDefault()
-    //     const newFarm = await createFarm({
-    //         variables: {
-    //             farm: {
-    //                 name: farmName,
-    //                 address,
-    //                 owners: [_id],
-    //                 story
-    //             }
-    //         }
-    //     })
-    //     setFarmName('')
-    //     setAddress('')
-    //     setStory('')
-    //     setIsFarmer(true)
-    //     console.log(newFarm)
-  
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        console.log(farmName, address, story, userId)
-        const farmData = {
-            
-        }
-        try {
-            const response = await createFarm({
-                variables: {
-                    farm: {
-                        name: farmName,
-                        address: address,
-                        story: story,
-                        owner: [userId]
-                    }
+        const newFarm = await createFarm({
+            variables: {
+                farm: {
+                    name: farmName,
+                    address,
+                    owners: [_id],
+                    story
                 }
-            })
-
-            console.log(response)
-        }
-        catch (err) {
-            console.log(err)
-        }
+            }
+        })
+        setFarmName('')
+        setAddress('')
+        setStory('')
+        setIsFarmer(true)
+        console.log(newFarm)
     }
 
 

@@ -40,7 +40,6 @@ const typeDefs = gql`
         story: String!
         reviews: [Review]
         products: [Product]
-        story: String
         avgScore: Int
         categories: [Category]
         purchaseOrders: [PurchaseOrder]
@@ -93,7 +92,6 @@ const typeDefs = gql`
     input NewFarm {
         name: String!
         address: String!
-        story: String!
         owners: [ID]!
         story: String
     }

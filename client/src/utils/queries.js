@@ -19,7 +19,7 @@ export const QUERY_FARM = gql`
         quantity
         reviews {
           author {
-            firstName
+            username
           }
           rating
           content
@@ -49,6 +49,31 @@ export const GET_ME = gql`
     }
   }
 `
+export const QUERY_PRODUCT = gql`
+    query Product($id: ID!) {
+      oneProduct(_id: $id) {
+        name
+        image
+        price
+        quantity
+        inSeason
+        farm {
+          name
+        }
+        categories {
+          name
+        }
+        reviews {
+          author {
+            username
+          }
+          content
+          rating
+        }
+      }
+    }
+`
+
 export const QUERY_PRODUCTS = gql`
     query Product {
       products {

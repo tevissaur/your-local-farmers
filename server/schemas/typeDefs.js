@@ -37,6 +37,7 @@ const typeDefs = gql`
         _id: ID!
         name: String!
         address: String!
+        story: String!
         reviews: [Review]
         products: [Product]
         story: String
@@ -92,6 +93,7 @@ const typeDefs = gql`
     input NewFarm {
         name: String!
         address: String!
+        story: String!
         owners: [ID]!
         story: String
     }

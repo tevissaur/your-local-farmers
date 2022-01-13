@@ -51,3 +51,14 @@ export const UPDATE_USER = gql`
 }
 `
 
+export const UPDATE_FARM = gql`
+    mutation UpdateFarm($farm: UpdatedFarm){
+        updateFarm(farm: $farm){
+            _id
+            name
+            address
+            story
+        }
+    }
+`
+

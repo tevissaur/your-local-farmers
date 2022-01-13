@@ -11,6 +11,7 @@ import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
 import ProductCard from './components/ProductCard'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import Cart from "./components/Cart";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -46,6 +47,10 @@ function App() {
 
             <Route path='/myfarm' element={<MyFarm />}>
             </Route>
+
+            <Route
+              path="/cart" element={<Cart />}
+            ></Route>
           </Routes>
         </Router>
       </ChakraProvider>

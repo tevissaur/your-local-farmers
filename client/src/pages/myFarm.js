@@ -3,19 +3,21 @@ import { Container, Flex, Box } from '@chakra-ui/react'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import MyFarmForm from '../components/MyFarmForm'
+import MyFarmDash from '../components/MyFarmDash'
 import auth from '../utils/auth'
 
 function MyFarm() {
     let userDetails = auth.getProfile()
     let myFarmDisplay
 
+    console.log(userDetails)
+
     
     if (userDetails.data.isFarmer === true){
-        myFarmDisplay = null
-        //change this to actual farm view
+        myFarmDisplay = <MyFarmDash />
     }
     else{
-        myFarmDisplay = <MyFarmForm />
+        myFarmDisplay = <MyFarmForm userId={userDetails.data._id} />
     }
     return (
         <Flex>

@@ -19,36 +19,61 @@ import Auth from "../utils/auth";
 function MyFarm({ isFarmer, setIsFarmer }) {
     const initialRef = useRef()
     const finalRef = useRef()
-    const { data: { _id }} = Auth.getProfile()
+    const { data: { userId }} = Auth.getProfile()
     const [farmName, setFarmName] = useState('');
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
 
+    // const handleFormSubmit = async (e) => {
+    //     e.preventDefault()
+    //     const newFarm = await createFarm({
+    //         variables: {
+    //             farm: {
+    //                 name: farmName,
+    //                 address,
+    //                 owners: [_id],
+    //                 story
+    //             }
+    //         }
+    //     })
+    //     setFarmName('')
+    //     setAddress('')
+    //     setStory('')
+    //     setIsFarmer(true)
+    //     console.log(newFarm)
+  
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        const newFarm = await createFarm({
-            variables: {
-                farm: {
-                    name: farmName,
-                    address,
-                    owners: [_id],
-                    story
+        console.log(farmName, address, story, userId)
+        const farmData = {
+            
+        }
+        try {
+            const response = await createFarm({
+                variables: {
+                    farm: {
+                        name: farmName,
+                        address: address,
+                        story: story,
+                        owner: [userId]
+                    }
                 }
-            }
-        })
-        setFarmName('')
-        setAddress('')
-        setStory('')
-        setIsFarmer(true)
-        console.log(newFarm)
+            })
+
+            console.log(response)
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 
 
     return (
         <>
             <Container maxW='100%'>
+                <form onSubmit={handleFormSubmit}>
                 <FormControl onSubmit={handleFormSubmit}>
                     <FormLabel>Enter your farm name</FormLabel>
                     <Input
@@ -87,6 +112,7 @@ function MyFarm({ isFarmer, setIsFarmer }) {
                         Add Farm
                     </Button>
                 </FormControl>
+                </form>
             </Container>
         </>
     )

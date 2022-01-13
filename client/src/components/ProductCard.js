@@ -50,8 +50,6 @@ const ProductCard = ({ product }) => {
                 </Text>
                 <Flex alignItems="center" justifyContent="end" padding="4px">
                   <Text fontSize="2xl">${product.price}</Text>
-
-                  <CgShoppingCart fontSize="20px" />
                 </Flex>
               </Flex>
             </Link>

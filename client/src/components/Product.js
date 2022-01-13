@@ -27,6 +27,7 @@ import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import customTheme from "../extendedTheme";
 
 const Product = () => {
   const { id } = useParams();
@@ -77,7 +78,7 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
+            margin={10}
           >
             <Flex>
               <Box>
@@ -88,23 +89,31 @@ const Product = () => {
                   backgroundColor="darkGreen"
                   color="yellowGreen"
                   justifyContent="center"
+                  mt="10px"
                 >
-                  <Box>
+                  <Flex flexDirection="column" alignItems="center">
                     <Flex>
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
                     </Flex>
-                    <small>
+                    <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
-                    </small>
-                    <Text color="black">Leave a review</Text>
-                  </Box>
+                    </Text>
+                    <Button
+                      color="black"
+                      backgroundColor="primary.yellowGreen"
+                      fontSize="sm"
+                      size="sm"
+                    >
+                      Leave a review
+                    </Button>
+                  </Flex>
                 </Flex>
               </Box>
 
-              <Box m="20px">
+              <Box m="30px">
                 <Link to={`/farm/${farm.name.toLowerCase()}`}>
                   <Flex>
                     <Text fontSize="2xl" color="primary.darkGreen">
@@ -135,13 +144,22 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <Box>
-                    <Flex>
-                      <Text> + -</Text>
+                  <Button
+                    leftIcon={<CgShoppingCart fontSize="20px" />}
+                    backgroundColor="primary.lightGreen"
+                    variant="solid"
+                    fontSize="sm"
+                  >
+                    Add To Cart
+                  </Button>
+
+                  {/* <Box>
+                    <Flex background="">
+                      <CgShoppingCart />
                       <Text>Add To Cart</Text>
-                      <CgShoppingCart fontSize="20px" />
+                      
                     </Flex>
-                  </Box>
+                  </Box> */}
                 </Box>
               </Box>
             </Flex>
@@ -152,7 +170,7 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
+            mx={10}
           >
             <Text
               fontSize="2xl"
@@ -164,16 +182,18 @@ const Product = () => {
             </Text>
             {reviews.map((review, idx) => (
               <Box m="15px">
-                <AiFillStar />
-                <Flex>
-                  <RiDoubleQuotesL />
-                  <Text key={idx}>{review.content}...</Text>
-                  <RiDoubleQuotesR />
-                </Flex>
+                <AiFillStar color="green" />
+                <Flex gap={6}>
+                  <Flex>
+                    <RiDoubleQuotesL />
+                    <Text key={idx}>{review.content}...</Text>
+                    <RiDoubleQuotesR />
+                  </Flex>
 
-                <Flex alignItems="center">
-                  <BsPersonFill />
-                  <Text>{review.author.firstName}</Text>
+                  <Flex alignItems="center">
+                    <BsPersonFill />
+                    <Text>{review.author.firstName}</Text>
+                  </Flex>
                 </Flex>
               </Box>
             ))}

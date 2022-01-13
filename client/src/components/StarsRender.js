@@ -3,9 +3,10 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { Text } from '@chakra-ui/react'
 import customTheme from '../extendedTheme'
 
-function StarsRender({numericReview}) {
+function StarsRender({numericReview, averageReview}) {
     return (
         <>
+     
         <Text ms={2} fontWeight='600'>Reviews:</Text>
         <AiFillStar fontSize='25px' color='green'/>
         <AiFillStar fontSize='25px' color='green'/>

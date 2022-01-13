@@ -24,7 +24,7 @@ const Header = () => {
                 <SearchBar />
                 {Auth.loggedIn() ? (
                     <>
-                        <Link to="/cart">
+                        <Link to={"/cart"}>
                             <CgShoppingCart fontSize='40px' />
 
                         </Link>
@@ -38,7 +38,9 @@ const Header = () => {
                     <>
                         <Signup></Signup>
                         <LoginForm></LoginForm>
-                        <CgShoppingCart fontSize='35px'/>
+                        <Link to={"/cart"}>
+                            <CgShoppingCart fontSize='40px' />
+                        </Link>
                     </>)}
 
 

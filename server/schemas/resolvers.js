@@ -264,6 +264,8 @@ const resolvers = {
             console.log(farm.owners)
             const user = await User.findByIdAndUpdate(farm.owners[0], {
                 $set: { isFarmer: true }
+            },{
+                new: true
             })
             console.log(user)
             const newFarm = await Farm.create(farm)

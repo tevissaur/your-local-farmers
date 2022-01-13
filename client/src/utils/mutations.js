@@ -23,11 +23,17 @@ export const LOG_IN = gql`
 `
 
 export const CREATE_FARM = gql`
-mutation CreateFarm($name: String!, $address: String!, $story: String!, $owners: String!) {
-    createFarm(name: $name, address: $address, owners: $owners, story: $story){
+mutation CreateFarm($farm: NewFarm) {
+    createFarm(farm: $farm) {
+      _id
+      name
+      address
+      owners {
         _id
+      }
     }
-}`
+  }
+`
 
 export const UPDATE_USER = gql`
     mutation UpdateUser($user: UpdatedUser) {

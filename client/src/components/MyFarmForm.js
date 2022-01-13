@@ -11,19 +11,36 @@ import {
     Container,
     Textarea
 } from '@chakra-ui/react'
+import { CREATE_FARM } from '../utils/mutations'
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 
 
 function MyFarm() {
     const initialRef = useRef()
     const finalRef = useRef()
+    const { data: { _id }} = Auth.getProfile()
     const [farmName, setFarmName] = useState('');
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
+    const [createFarm] = useMutation(CREATE_FARM)
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-
+        const newFarm = await createFarm({
+            variables: {
+                farm: {
+                    name: farmName,
+                    address,
+                    owners: [_id]
+                }
+            }
+        })
+        setFarmName('')
+        setAddress('')
+        setStory('')
+        console.log(newFarm)
     }
 
 
@@ -64,7 +81,7 @@ function MyFarm() {
                     />
                 </FormControl>
                 <FormControl mt={4}>
-                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid}>
+                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid} onClick={handleFormSubmit}>
                         Add Farm
                     </Button>
                 </FormControl>

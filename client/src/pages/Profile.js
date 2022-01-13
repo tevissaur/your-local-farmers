@@ -14,6 +14,7 @@ import Footer from '../components/Footer'
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
+    const [isFarmer, setIsFarmer] = useState(userData.isFarmer)
     const { data: { _id } } = Auth.getProfile()
 
     console.log(_id)
@@ -33,6 +34,8 @@ const Profile = () => {
         // setUserData(data)
 
     }, [loading, data, error, userData])
+
+
 
     return (
         <>
@@ -54,7 +57,7 @@ const Profile = () => {
                                     <UserMain userData={userData} />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmTabs userData={userData.isFarmer} />
+                                    <MyFarmTabs isFarmer={userData.isFarmer} />
                                 </TabPanel>
                                 <TabPanel>
                                 </TabPanel>

@@ -2,19 +2,25 @@ import { Box, Flex, Container, Button, Tabs, TabList, TabPanels, Tab, TabPanel }
 import UserMain from '../components/UserMain.js'
 
 import MyFarmForm from '../components/MyFarmForm'
+import { useEffect, useState } from 'react'
 
 
 const MyFarmTabs = ({ isFarmer }) => {
+    // console.log(isFarmer)
+    const [farmer, setFarmer] = useState(isFarmer)
 
-    const handleAddFarm = () => {
-        console.log('farmers')
-    }
+    useEffect(() => {
+        setFarmer(isFarmer)
+        console.log(farmer)
+    })
+
 
     return (
         <Tabs isFitted variant='soft-rounded' colorScheme='green' w='100%' p={0}>
             <TabList >
                 <Tab>Farm Profile</Tab>
-                {isFarmer ? (<>
+                {
+                    isFarmer ? (<>
                     <Tab>Add Product</Tab>
                     <Tab>Orders</Tab>
 

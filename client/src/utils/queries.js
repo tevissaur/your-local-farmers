@@ -68,10 +68,7 @@ export const QUERY_PRODUCTS = gql`
           name
           imgUrl
         }
-        farm {
-          name
-        }
-
+     
       }
     }
 

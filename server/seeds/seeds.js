@@ -1,7 +1,3 @@
-
-// const BlueberryMuffins = require('../../client/assets/bakedGoods/')
-
-
 const {
     User,
     Review,

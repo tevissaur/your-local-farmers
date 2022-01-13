@@ -25,6 +25,7 @@ const Profile = () => {
             loading ? console.log(loading) : setUserData(data.me)
             console.log(data, loading, error)
             console.log(userData)
+
         } catch (err) {
             console.log(err)
         }
@@ -39,54 +40,28 @@ const Profile = () => {
                 <SideNavBar />
                 <Box m={4} flex="1">
                     <Header />
+                    <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
+                        <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
+                            <TabList >
+                                <Tab>Home</Tab>
+                                <Tab>My Farm</Tab>
+                                <Tab>My Orders</Tab>
+                            </TabList>
 
-                    <Flex w="100%">
-                        <Flex justifyContent='center' w="100%">
-                            <Tabs isFitted variant='soft-rounded' colorScheme='green'>
-                                <TabList>
-                                    <Tab>Home</Tab>
-                                    <Tab>My Farm</Tab>
-                                    <Tab>My Orders</Tab>
-                                </TabList>
-
-                                <TabPanels>
-                                    {/* Tab for the main profile page */}
-                                    <TabPanel>
-                                        <p>one!</p>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <p>two!</p>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <p>three!</p>
-                                    </TabPanel>
-                                </TabPanels>
-                            </Tabs>
-                        </Flex>
+                            <TabPanels>
+                                {/* Tab for the main profile page */}
+                                <TabPanel>
+                                    <UserMain userData={userData} />
+                                </TabPanel>
+                                <TabPanel p={1}>
+                                    <MyFarmTabs userData={userData.isFarmer} />
+                                </TabPanel>
+                                <TabPanel>
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
                     </Flex>
                 </Box>
-            </Flex>
-
-            <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
-                <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
-                    <TabList >
-                        <Tab>Home</Tab>
-                        <Tab>My Farm</Tab>
-                        <Tab>My Orders</Tab>
-                    </TabList>
-
-                    <TabPanels>
-                        {/* Tab for the main profile page */}
-                        <TabPanel>
-                            <UserMain userData={userData} />
-                        </TabPanel>
-                        <TabPanel p={1}>
-                            <MyFarmTabs userData={userData.isFarmer} />
-                        </TabPanel>
-                        <TabPanel>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
             </Flex>
 
             <Footer />

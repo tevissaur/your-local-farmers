@@ -19,7 +19,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
-import { QUERY_PRODUCT, QUERY_FARM } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
 import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
@@ -32,7 +32,7 @@ const Product = () => {
     loading: productLoading,
     data: productData,
     error: productError,
-  } = useQuery(QUERY_PRODUCT);
+  } = useQuery(QUERY_PRODUCTS);
   const {
     loading: farmLoading,
     data: farmData,

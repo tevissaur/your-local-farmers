@@ -39,20 +39,17 @@ export const QUERY_FARM = gql`
 export const GET_ME = gql`
   query GetMe($id: ID!) {
     me(_id: $id) {
+      _id
       firstName
       lastName
-      fullName
       username
       email
       address
-      reviews {
-      _id
-      }
       isFarmer
     }
   }
 `
-export const QUERY_PRODUCT = gql`
+export const QUERY_PRODUCTS = gql`
     query Product {
       products {
         _id
@@ -70,6 +67,9 @@ export const QUERY_PRODUCT = gql`
         categories {
           name
           imgUrl
+        }
+        farm {
+          name
         }
 
       }

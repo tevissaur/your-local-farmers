@@ -106,6 +106,7 @@ export const QUERY_PRODUCTS = gql`
 export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {
+      _id
       name
       imgUrl
       products {

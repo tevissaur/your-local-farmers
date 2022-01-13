@@ -57,7 +57,7 @@ const Profile = () => {
                                     <UserMain userData={userData} />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmTabs isFarmer={userData.isFarmer} />
+                                    <MyFarmTabs isFarmer={userData.isFarmer} setIsFarmer={setIsFarmer} />
                                 </TabPanel>
                                 <TabPanel>
                                 </TabPanel>

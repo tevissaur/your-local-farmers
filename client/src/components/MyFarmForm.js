@@ -16,7 +16,7 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 
 
-function MyFarm() {
+function MyFarm({ isFarmer, setIsFarmer }) {
     const initialRef = useRef()
     const finalRef = useRef()
     const { data: { _id }} = Auth.getProfile()
@@ -40,6 +40,7 @@ function MyFarm() {
         setFarmName('')
         setAddress('')
         setStory('')
+        setIsFarmer(true)
         console.log(newFarm)
     }
 

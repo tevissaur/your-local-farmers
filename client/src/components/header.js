@@ -6,17 +6,18 @@ import SearchBar from './SearchBar'
 import { CgShoppingCart } from 'react-icons/cg'
 
 import Auth from '../utils/auth';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn())
     const handleLogOut = () => {
 
         Auth.logout()
     }
     useEffect(() => {
-        console.log()
+        console.log(isLoggedIn)
 
-    }, [])
+    })
     return (
         <>
             <Flex alignItems='center'>

@@ -23,6 +23,7 @@ const typeDefs = gql`
         farm: Farm
     }
     type Category {
+        _id: ID!
         name: String!
         imgUrl: String
     }
@@ -118,7 +119,7 @@ const typeDefs = gql`
         createUser(username: String!, password: String!, email: String!): Auth
         login(email: String!, password: String!): Auth
         postReview(review: NewReview!, product: ID, user: ID, farm: ID): Review
-        createProduct(product: NewProduct!, farm: ID!, category: ID!): Product
+        createProduct(product: NewProduct!, farmId: ID!, categoryIds: [ID!]): Product
         createCategory(category: NewCategory!): Category
         createFarm(farm: NewFarm): Farm
         createPO(PO: NewPurchaseOrder): PurchaseOrder

@@ -28,6 +28,7 @@ mutation CreateFarm($farm: NewFarm) {
       _id
       name
       address
+      story
       owners {
         _id
       }

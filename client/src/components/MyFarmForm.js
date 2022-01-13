@@ -33,7 +33,8 @@ function MyFarm({ isFarmer, setIsFarmer }) {
                 farm: {
                     name: farmName,
                     address,
-                    owners: [_id]
+                    owners: [_id],
+                    story
                 }
             }
         })

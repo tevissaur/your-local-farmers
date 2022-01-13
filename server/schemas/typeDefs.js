@@ -36,6 +36,7 @@ const typeDefs = gql`
         _id: ID!
         name: String!
         address: String!
+        story: String!
         reviews: [Review]
         products: [Product]
         avgScore: Int
@@ -90,6 +91,7 @@ const typeDefs = gql`
     input NewFarm {
         name: String!
         address: String!
+        story: String!
         owners: [ID]!
     }
     input NewPurchaseOrder {

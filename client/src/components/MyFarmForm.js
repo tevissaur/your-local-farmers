@@ -14,7 +14,7 @@ import {
 import { useMutation } from '@apollo/client';
 import { CREATE_FARM } from '../utils/mutations';
 
-function MyFarm() {
+function MyFarm({userId}) {
     const initialRef = useRef()
     const finalRef = useRef()
     const [farmName, setFarmName] = useState('');
@@ -22,30 +22,30 @@ function MyFarm() {
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
-
+  
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-
+        console.log(farmName, address, story, userId)
         const farmData = {
-            name: farmName,
-            address: address,
-            owner: 'quigg',
-            story: story
+            
         }
         try {
-            const { data: { farm } } = await createFarm({
+            const response = await createFarm({
                 variables: {
-                    ...farmData
+                    farm: {
+                        name: farmName,
+                        address: address,
+                        story: story,
+                        owner: [userId]
+                    }
                 }
             })
+
+            console.log(response)
         }
         catch (err) {
             console.log(err)
         }
-
-        console.log('bruh')
-
-
     }
 
 

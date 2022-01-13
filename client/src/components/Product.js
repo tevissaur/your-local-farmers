@@ -19,20 +19,20 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
-import { QUERY_PRODUCT, QUERY_FARM } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
 import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-const Product = ({ review }) => {
+const Product = () => {
   const { id } = useParams();
   const {
     loading: productLoading,
     data: productData,
     error: productError,
-  } = useQuery(QUERY_PRODUCT);
+  } = useQuery(QUERY_PRODUCTS);
   const {
     loading: farmLoading,
     data: farmData,
@@ -45,7 +45,7 @@ const Product = ({ review }) => {
 
   const productList = productData ? productData.products : [];
   const foundProduct = productList.find((product) => product._id === id);
-  console.log(foundProduct);
+  // console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
   const farm = farmList.find((farm) => {
     const foundFarmProduct = farm.products.find(
@@ -62,7 +62,8 @@ const Product = ({ review }) => {
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
-
+  const review = foundProduct.reviews.map((review) => review);
+  console.log(review);
   return (
     <>
       <Flex>
@@ -93,36 +94,37 @@ const Product = ({ review }) => {
 
                   <CgShoppingCart fontSize="20px" />
                 </Flex>
-                <Box
-                  px="10px"
+                <Flex
+                  p="10px"
                   backgroundColor="darkGreen"
                   color="yellowGreen"
-                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Flex>
-                    <AiFillStar />
-                    <AiFillStar />
-                    <AiFillStar />
-                    <AiFillStar />
-                  </Flex>
-                  <small>Based on {foundProduct.reviews.length} reviews</small>
-                  <Text color="black">Leave a review</Text>
-                </Box>
+                  <Box>
+                    <Flex>
+                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="25px" />
+                    </Flex>
+                    <small>
+                      Based on {foundProduct.reviews.length} reviews
+                    </small>
+                    <Text color="black">Leave a review</Text>
+                  </Box>
+                </Flex>
               </Box>
 
               <Box m="20px">
-              <Link to={`/farm/${farm.name.toLowerCase()}`}>
-                <Text fontSize="2xl" color="primary.darkGreen">
-                  {farm.name}
-                </Text>
-              </Link>
-              <Text> {foundProduct.quantity} available</Text>
-              [product's description]
-               
-              
+                <Link to={`/farm/${farm.name.toLowerCase()}`}>
+                  <Text fontSize="2xl" color="primary.darkGreen">
+                    {farm.name}
+                  </Text>
+                </Link>
+                <Text> {foundProduct.quantity} available</Text>
+                [product's description]
               </Box>
             </Flex>
-
           </Box>
           <Box
             border="green 2px solid"
@@ -132,12 +134,15 @@ const Product = ({ review }) => {
             padding={5}
             margin={20}
           >
-            Customer review
-            {foundProduct.reviews.map((review, idx) => (
-              <h1 key={idx}>
-                {review.content}---{review.rating}---{review.author.firstName}
-              </h1>
-            ))}
+            <Text
+              fontSize="2xl"
+              px="4px"
+              px="10px"
+              style={{ fontWeight: "bolder" }}
+            >
+              Customer Review
+            </Text>
+            <Text>{review.content}</Text>
           </Box>
         </Box>
       </Flex>

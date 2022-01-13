@@ -9,7 +9,7 @@ import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
-import MyFarm from './pages/myFarm';
+
 import ProductCard from './components/ProductCard'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 

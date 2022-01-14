@@ -1,5 +1,10 @@
 import {
-    Container, FormControl, FormLabel, Input, CheckboxGroup, Checkbox, NumberInput,
+    Container, 
+    FormControl, 
+    FormLabel, 
+    Input, 
+    CheckboxGroup, 
+    Checkbox, NumberInput,
     NumberInputField,
     NumberInputStepper,
     NumberIncrementStepper,
@@ -39,7 +44,9 @@ const AddProductForm = (props) => {
 
         const removeCategory = (e) => {
             setProductCategories(productCategories => {
+
                 return productCategories.filter((category) => {
+
                     return category !== e.target.id
                 })
             })
@@ -47,6 +54,7 @@ const AddProductForm = (props) => {
         const addCategory = (e) => {
             console.log(e.target.id)
             setProductCategories(productCategories => {
+
                 productCategories.push(e.target.id)
                 return productCategories
             })

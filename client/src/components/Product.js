@@ -1,37 +1,42 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
+import { BsFillHouseFill } from "react-icons/bs";
+import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
+import { BsPersonFill } from "react-icons/bs";
 
 import {
   Button,
   Box,
   Flex,
-  Heading,
-  Spacer,
-  Center,
   Text,
-  Container,
-  List,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-  ListIcon,
-  Image,
+  FormControl,
+  Select,
+  Input,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
-
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
-import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import customTheme from "../extendedTheme";
+import Auth from "../utils/auth";
+import { useEffect, useState, useRef } from "react";
+import ReviewButton from "./ReviewButton";
 
 const Product = () => {
+  const [inputText, setInputText] = useState("");
+
+  // const [reviews, setReviews] = useState("");
+  const [dataReviews, setDataReviews] = useState([])
+
+  const handleLogOut = () => {
+    Auth.logout();
+  };
+
   const { id } = useParams();
   const {
-
     loading: productLoading,
     data: productData,
     error: productError,
@@ -42,12 +47,19 @@ const Product = () => {
     error: farmError,
   } = useQuery(QUERY_FARM);
 
+  const productList = productData ? productData.products : [];
+  const foundProduct = productList.find((product) => product._id === id);
+
+  useEffect(() => {
+    if (foundProduct) {
+      setDataReviews(foundProduct.reviews)
+    }
+  }, [foundProduct])
+
   if (productLoading || farmLoading) {
     return "loading";
   }
-
-  const productList = productData ? productData.products : [];
-  const foundProduct = productList.find((product) => product._id === id);
+ 
   // console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
   const farm = farmList.find((farm) => {
@@ -55,196 +67,104 @@ const Product = () => {
       (product) => product._id === id
     );
     return foundFarmProduct ? farm : {};
-
   });
-  const [foundProduct, setFoundProduct] = useState()
-  useEffect(() => {
-    console.log(data)
-    setFoundProduct(data)
-  })
-
-  // console.log(foundProduct);
-  // const foundProductWithFarm = {
-  //   ...foundProduct, farm
-  // }
 
   // finding image matched product from seed
-
   const cardArr = imageSeeds.map((card) => card);
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
-  const review = foundProduct.reviews.map((review) => review);
-  console.log(review);
+
   return (
     <>
+      <Flex>
+        <SideNavBar />
+        <Box m={4} flex="1" alignItems="center">
+          <Header />
+          <Box
+            border="green 2px solid"
+            alignItems="stretch"
+            justifyItems="center"
+            backgroundColor="lightyellow"
+            padding={5}
+            margin={10}
+          >
+            <Flex>
+              <Box>
+                <img src={foundProductImage} style={{ width: "300px" }} />
 
-      {loading ? (
-        <>
-          <Flex>
-            <SideNavBar />
-            <Box m={4} flex="1" alignItems="center">
-              <Header />
-              <Box
-                border="green 2px solid"
-                alignItems="stretch"
-                justifyItems="center"
-                backgroundColor="lightyellow"
-                padding={5}
-                margin={20}
-              >
-                <Flex>
-                  <Box>
-                    <img style={{ width: "300px" }} />
-                    <Text
-                      fontSize="2xl"
-                      px="4px"
-                      px="10px"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      
-                    </Text>
-                    <Flex alignItems="center" justifyContent="end" padding="4px">
-                      <Text fontSize="2xl">$ </Text>
-
-                      <CgShoppingCart fontSize="20px" />
-                    </Flex>
-                    <Box
-                      px="10px"
-                      backgroundColor="darkGreen"
-                      color="yellowGreen"
-                      alignItems="center"
-                    >
-                      <Flex>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                      </Flex>
-                      <small>Based on  reviews</small>
-                      <Text color="black">Leave a review</Text>
-                    </Box>
-                  </Box>
-
-                  <Box m="20px">
-                    {/* <Link to={`/farm/${foundProduct.oneProduct.farm.name.toLowerCase()}`}>
-                      <Text fontSize="2xl" color="primary.darkGreen">
-                        {foundProduct.oneProduct.farm.name}
-                      </Text>
-                    </Link> */}
-                    {/* <Text> {foundProduct.oneProduct.quantity} available</Text> */}
-                    [product's description]
-
-
-                  </Box>
-                </Flex>
                 <Flex
                   p="10px"
                   backgroundColor="darkGreen"
                   color="yellowGreen"
                   justifyContent="center"
+                  mt="10px"
                 >
-                  <Box>
+                  <Flex flexDirection="column" alignItems="center">
                     <Flex>
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
                     </Flex>
-                    <small>
+                    <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
-                    </small>
-                    <Text color="black">Leave a review</Text>
-                  </Box>
-                </Flex>
-              </Box>
-              <Box
-                border="green 2px solid"
-                alignItems="stretch"
-                justifyItems="center"
-                backgroundColor="lightyellow"
-                padding={5}
-                margin={20}
-              >
-                Customer review
-                {/* {foundProduct.reviews.map((review, idx) => (
-                  <h1 key={idx}>
-                    {review.content}---{review.rating}---{review.author.firstName}
-                  </h1>
-                ))} */}
-              </Box>
-            </Box>
-          </Flex>
-        </>
-      ) : (
-        <>
-          <Flex>
-            <SideNavBar />
-            <Box m={4} flex="1" alignItems="center">
-              <Header />
-              <Box
-                border="green 2px solid"
-                alignItems="stretch"
-                justifyItems="center"
-                backgroundColor="lightyellow"
-                padding={5}
-                margin={20}
-              >
-                <Flex>
-                  <Box>
-                    <img src={foundProductImage} style={{ width: "300px" }} />
-                    <Text
-                      fontSize="2xl"
-                      px="4px"
-                      px="10px"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      {foundProduct.name}
                     </Text>
-                    <Flex alignItems="center" justifyContent="end" padding="4px">
-                      <Text fontSize="2xl">$ {foundProduct.price}</Text>
-
-                      <CgShoppingCart fontSize="20px" />
-                    </Flex>
-                    <Box
-                      px="10px"
-                      backgroundColor="darkGreen"
-                      color="yellowGreen"
-                      alignItems="center"
-                    >
-                      <Flex>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                      </Flex>
-                      <small>Based on {foundProduct.reviews.length} reviews</small>
-                      <Text color="black">Leave a review</Text>
-                    </Box>
-                  </Box>
-
-                  <Box m="20px">
-                    <Link to={`/farm/${foundProduct.farm.name.toLowerCase()}`}>
-                      <Text fontSize="2xl" color="primary.darkGreen">
-                        {foundProduct.farm.name}
-                      </Text>
-                    </Link>
-                    <Text> {foundProduct.quantity} available</Text>
-                    [product's description]
-
-
-                  </Box>
+                    {Auth.loggedIn() ? (
+                      <ReviewButton
+                        inputText={inputText}
+                        setInputText={setInputText}
+                        reviews={dataReviews}
+                        setReviews={setDataReviews}
+                        product={foundProduct}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </Flex>
                 </Flex>
+              </Box>
 
-
-              <Box m="20px">
+              <Box m="30px">
                 <Link to={`/farm/${farm.name.toLowerCase()}`}>
-                  <Text fontSize="2xl" color="primary.darkGreen">
-                    {farm.name}
-                  </Text>
+                  <Flex>
+                    <Text fontSize="2xl" color="primary.darkGreen">
+                      {farm.name}
+                    </Text>
+                    {<BsFillHouseFill />}
+                  </Flex>
                 </Link>
-                <Text> {foundProduct.quantity} available</Text>
+                <Text
+                  fontSize="2xl"
+                  px="4px"
+                  px="10px"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  {foundProduct.name}
+                </Text>
                 [product's description]
+                <Flex>
+                  <Text>Available :</Text>
+                  <Text
+                    color="primary.darkGreen"
+                    style={{ fontWeight: "bolder" }}
+                  >
+                    {foundProduct.quantity}
+                  </Text>
+                </Flex>
+                <Box>
+                  <Box>
+                    <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
+                  </Box>
+                  <Button
+                    leftIcon={<CgShoppingCart fontSize="20px" />}
+                    backgroundColor="primary.lightGreen"
+                    variant="solid"
+                    fontSize="sm"
+                  >
+                    Add To Cart
+                  </Button>
+                </Box>
               </Box>
             </Flex>
           </Box>
@@ -254,17 +174,38 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
+            mx={10}
           >
             <Text
               fontSize="2xl"
               px="4px"
               px="10px"
               style={{ fontWeight: "bolder" }}
+              mb={5}
             >
               Customer Review
             </Text>
-            <Text>{review.content}</Text>
+            {/* {reviews.map((review,idx) => (
+              <h1 key={idx}>{review.content}</h1>
+            ))} */}
+
+            {dataReviews.map((review, idx) => (
+              <Box m="15px">
+                <AiFillStar color="green" />
+                <Flex gap={6}>
+                  <Flex>
+                    <RiDoubleQuotesL />
+                    <Text key={idx}>{review.content}...</Text>
+                    <RiDoubleQuotesR />
+                  </Flex>
+
+                  <Flex alignItems="center">
+                    <BsPersonFill />
+                    <Text>{review.author.firstName}</Text>
+                  </Flex>
+                </Flex>
+              </Box>
+            ))}
           </Box>
         </Box>
       </Flex>

@@ -230,16 +230,26 @@ const resolvers = {
                 console.log(err)
             }
         },
-        postReview: async (parent, { review, product, user, farm }) => {
+        postReview: async (parent, { review, product_id, user, farm }) => {
+            console.log(review)
+            const newReview = await (await Review.create(review))
+            const newReviewWithAuthor = await Review.findById(newReview._id).populate([
+                {
+                    path:"author",
+                    model:"User"
+                },
+            ])
 
-
-
-            const newReview = await Review.create(review)
-
-            product ? console.log('yes product') : console.log('no product')
-            user ? console.log('yes user') : console.log('no user')
-            farm ? console.log('yes farm') : console.log('no farm')
-
+            const reviewedProduct = await Product.findByIdAndUpdate(
+               product_id,
+                {$push : {reviews : newReviewWithAuthor}},
+                {new: true}
+            )
+            console.log(newReviewWithAuthor)
+   
+            return newReviewWithAuthor
+            //     return reviewdProduct
+            //     console.log(reviewdProduct)
             // const reviewedFarm = await Farm.findByIdAndUpdate(
             //     farm,
             //     {
@@ -248,7 +258,7 @@ const resolvers = {
             //         }
             //     }
             // )
-            return newReview
+       
         },
         createProduct: async (parent, { product, farmId, categoryId }) => {
             console.log(product)

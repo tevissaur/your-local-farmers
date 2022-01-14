@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-
 import {
   Button,
   Box,
@@ -75,6 +74,9 @@ const Product = () => {
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
 
+  const reviews = foundProduct.reviews.map((review) => review);
+  console.log(reviews);
+
   return (
     <>
       <Flex>
@@ -87,7 +89,8 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={10}
+            margin={20}
+
           >
             <Flex>
               <Box>
@@ -109,6 +112,7 @@ const Product = () => {
                     </Flex>
                     <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
+
                     </Text>
                     {Auth.loggedIn() ? (
                       <ReviewButton
@@ -156,6 +160,7 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
+
                   <Button
                     leftIcon={<CgShoppingCart fontSize="20px" />}
                     backgroundColor="primary.lightGreen"
@@ -185,6 +190,7 @@ const Product = () => {
             >
               Customer Review
             </Text>
+
             {/* {reviews.map((review,idx) => (
               <h1 key={idx}>{review.content}</h1>
             ))} */}

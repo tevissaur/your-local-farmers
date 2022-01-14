@@ -27,9 +27,10 @@ import ReviewButton from "./ReviewButton";
 
 const Product = () => {
   const [inputText, setInputText] = useState("");
+  const [rating, setRating] = useState("");
 
   // const [reviews, setReviews] = useState("");
-  const [dataReviews, setDataReviews] = useState([])
+  const [dataReviews, setDataReviews] = useState([]);
 
   const handleLogOut = () => {
     Auth.logout();
@@ -52,14 +53,14 @@ const Product = () => {
 
   useEffect(() => {
     if (foundProduct) {
-      setDataReviews(foundProduct.reviews)
+      setDataReviews([...foundProduct.reviews].reverse());
     }
-  }, [foundProduct])
+  }, [foundProduct]);
 
   if (productLoading || farmLoading) {
     return "loading";
   }
- 
+
   // console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
   const farm = farmList.find((farm) => {
@@ -117,6 +118,8 @@ const Product = () => {
                         reviews={dataReviews}
                         setReviews={setDataReviews}
                         product={foundProduct}
+                        rating={rating}
+                        setRating={setRating}
                       />
                     ) : (
                       ""
@@ -190,12 +193,19 @@ const Product = () => {
             ))} */}
 
             {dataReviews.map((review, idx) => (
-              <Box m="15px">
-                <AiFillStar color="green" />
+              <Box m="15px" key={idx}>
+                <Flex>
+                  {Array(review.rating)
+                    .fill(0)
+                    .map(() => (
+                      <AiFillStar color="green" />
+                    ))}
+                </Flex>
+
                 <Flex gap={6}>
                   <Flex>
                     <RiDoubleQuotesL />
-                    <Text key={idx}>{review.content}...</Text>
+                    <Text>{review.content}...</Text>
                     <RiDoubleQuotesR />
                   </Flex>
 

@@ -31,6 +31,7 @@ function Signup() {
     const [emailAddress, setEmailAdress] = useState('');
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const isInvalid = password === '' || emailAddress === '' || userName === '';
 
     const [createUser] = useMutation(CREATE_USER);
@@ -45,7 +46,8 @@ function Signup() {
         const userData = {
             username: userName,
             email: emailAddress,
-            password: password
+            password: password,
+            firstName: firstName
         }
 
         try {
@@ -103,6 +105,16 @@ function Signup() {
                                 ) : (
                                     <FormErrorMessage>username is required.</FormErrorMessage>
                                 )}
+                            </FormControl>
+                            
+                            <FormControl>
+                                <FormLabel>First Name</FormLabel>
+                                <Input ref={initialRef}
+                                    placeholder='First name'
+                                    type='text'
+                                    id='firstName'
+                                    onChange={({ target }) => setFirstName(target.value)}
+                                />
                             </FormControl>
 
                             <FormControl mt={4}>

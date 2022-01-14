@@ -1,35 +1,40 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
+
 import {
   Button,
   Box,
   Flex,
-  Heading,
-  Spacer,
-  Center,
   Text,
-  Container,
-  List,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-  ListIcon,
-  Image,
+  FormControl,
+  Select,
+  Input,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
-import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import customTheme from "../extendedTheme";
+import Auth from "../utils/auth";
+import { useEffect, useState, useRef } from "react";
+import ReviewButton from "./ReviewButton";
 
 const Product = () => {
+  const [inputText, setInputText] = useState("");
+
+  // const [reviews, setReviews] = useState("");
+  const [dataReviews, setDataReviews] = useState([])
+
+  const handleLogOut = () => {
+    Auth.logout();
+  };
+
   const { id } = useParams();
   const {
     loading: productLoading,
@@ -42,12 +47,19 @@ const Product = () => {
     error: farmError,
   } = useQuery(QUERY_FARM);
 
+  const productList = productData ? productData.products : [];
+  const foundProduct = productList.find((product) => product._id === id);
+
+  useEffect(() => {
+    if (foundProduct) {
+      setDataReviews(foundProduct.reviews)
+    }
+  }, [foundProduct])
+
   if (productLoading || farmLoading) {
     return "loading";
   }
-
-  const productList = productData ? productData.products : [];
-  const foundProduct = productList.find((product) => product._id === id);
+ 
   // console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
   const farm = farmList.find((farm) => {
@@ -62,9 +74,6 @@ const Product = () => {
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
-
-  const reviews = foundProduct.reviews.map((review) => review);
-  console.log(reviews);
 
   return (
     <>
@@ -101,14 +110,17 @@ const Product = () => {
                     <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
                     </Text>
-                    <Button
-                      color="black"
-                      backgroundColor="primary.yellowGreen"
-                      fontSize="sm"
-                      size="sm"
-                    >
-                      Leave a review
-                    </Button>
+                    {Auth.loggedIn() ? (
+                      <ReviewButton
+                        inputText={inputText}
+                        setInputText={setInputText}
+                        reviews={dataReviews}
+                        setReviews={setDataReviews}
+                        product={foundProduct}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </Flex>
                 </Flex>
               </Box>
@@ -152,14 +164,6 @@ const Product = () => {
                   >
                     Add To Cart
                   </Button>
-
-                  {/* <Box>
-                    <Flex background="">
-                      <CgShoppingCart />
-                      <Text>Add To Cart</Text>
-                      
-                    </Flex>
-                  </Box> */}
                 </Box>
               </Box>
             </Flex>
@@ -177,10 +181,15 @@ const Product = () => {
               px="4px"
               px="10px"
               style={{ fontWeight: "bolder" }}
+              mb={5}
             >
               Customer Review
             </Text>
-            {reviews.map((review, idx) => (
+            {/* {reviews.map((review,idx) => (
+              <h1 key={idx}>{review.content}</h1>
+            ))} */}
+
+            {dataReviews.map((review, idx) => (
               <Box m="15px">
                 <AiFillStar color="green" />
                 <Flex gap={6}>

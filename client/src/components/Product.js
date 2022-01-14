@@ -1,34 +1,40 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
+
 import {
   Button,
   Box,
   Flex,
-  Heading,
-  Spacer,
-  Center,
   Text,
-  Container,
-  List,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-  ListIcon,
-  Image,
+  FormControl,
+  Select,
+  Input,
 } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
-import ProductCard from "./ProductCard";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import customTheme from "../extendedTheme";
+import Auth from "../utils/auth";
+import { useEffect, useState, useRef } from "react";
+import ReviewButton from "./ReviewButton";
 
 const Product = () => {
+  const [inputText, setInputText] = useState("");
+
+  // const [reviews, setReviews] = useState("");
+  const [dataReviews, setDataReviews] = useState([])
+
+  const handleLogOut = () => {
+    Auth.logout();
+  };
+
   const { id } = useParams();
   const {
     loading: productLoading,
@@ -41,12 +47,19 @@ const Product = () => {
     error: farmError,
   } = useQuery(QUERY_FARM);
 
+  const productList = productData ? productData.products : [];
+  const foundProduct = productList.find((product) => product._id === id);
+
+  useEffect(() => {
+    if (foundProduct) {
+      setDataReviews(foundProduct.reviews)
+    }
+  }, [foundProduct])
+
   if (productLoading || farmLoading) {
     return "loading";
   }
-
-  const productList = productData ? productData.products : [];
-  const foundProduct = productList.find((product) => product._id === id);
+ 
   // console.log(foundProduct);
   const farmList = farmData ? farmData.farms : [];
   const farm = farmList.find((farm) => {
@@ -62,9 +75,6 @@ const Product = () => {
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
 
-  const reviews = foundProduct.reviews.map((review) => review);
-  console.log(reviews);
-
   return (
     <>
       <Flex>
@@ -77,7 +87,7 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
+            margin={10}
           >
             <Flex>
               <Box>
@@ -88,23 +98,34 @@ const Product = () => {
                   backgroundColor="darkGreen"
                   color="yellowGreen"
                   justifyContent="center"
+                  mt="10px"
                 >
-                  <Box>
+                  <Flex flexDirection="column" alignItems="center">
                     <Flex>
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
-                      <AiFillStar fontSize="25px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
+                      <AiFillStar fontSize="15px" />
                     </Flex>
-                    <small>
+                    <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
-                    </small>
-                    <Text color="black">Leave a review</Text>
-                  </Box>
+                    </Text>
+                    {Auth.loggedIn() ? (
+                      <ReviewButton
+                        inputText={inputText}
+                        setInputText={setInputText}
+                        reviews={dataReviews}
+                        setReviews={setDataReviews}
+                        product={foundProduct}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </Flex>
                 </Flex>
               </Box>
 
-              <Box m="20px">
+              <Box m="30px">
                 <Link to={`/farm/${farm.name.toLowerCase()}`}>
                   <Flex>
                     <Text fontSize="2xl" color="primary.darkGreen">
@@ -135,13 +156,14 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <Box>
-                    <Flex>
-                      <Text> + -</Text>
-                      <Text>Add To Cart</Text>
-                      <CgShoppingCart fontSize="20px" />
-                    </Flex>
-                  </Box>
+                  <Button
+                    leftIcon={<CgShoppingCart fontSize="20px" />}
+                    backgroundColor="primary.lightGreen"
+                    variant="solid"
+                    fontSize="sm"
+                  >
+                    Add To Cart
+                  </Button>
                 </Box>
               </Box>
             </Flex>
@@ -152,28 +174,35 @@ const Product = () => {
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
+            mx={10}
           >
             <Text
               fontSize="2xl"
               px="4px"
               px="10px"
               style={{ fontWeight: "bolder" }}
+              mb={5}
             >
               Customer Review
             </Text>
-            {reviews.map((review, idx) => (
-              <Box m="15px">
-                <AiFillStar />
-                <Flex>
-                  <RiDoubleQuotesL />
-                  <Text key={idx}>{review.content}...</Text>
-                  <RiDoubleQuotesR />
-                </Flex>
+            {/* {reviews.map((review,idx) => (
+              <h1 key={idx}>{review.content}</h1>
+            ))} */}
 
-                <Flex alignItems="center">
-                  <BsPersonFill />
-                  <Text>{review.author.firstName}</Text>
+            {dataReviews.map((review, idx) => (
+              <Box m="15px">
+                <AiFillStar color="green" />
+                <Flex gap={6}>
+                  <Flex>
+                    <RiDoubleQuotesL />
+                    <Text key={idx}>{review.content}...</Text>
+                    <RiDoubleQuotesR />
+                  </Flex>
+
+                  <Flex alignItems="center">
+                    <BsPersonFill />
+                    <Text>{review.author.firstName}</Text>
+                  </Flex>
                 </Flex>
               </Box>
             ))}

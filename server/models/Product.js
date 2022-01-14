@@ -46,25 +46,25 @@ const productSchema = new Schema(
     }
 )
 
-productSchema.pre('save', async function(next) {
-    let total = 0
-    await this.reviews.forEach((review) => {
-        console.log(review.rating)
-        total += review.rating
-    })
-    this.avgScore = total / this.reviews.length
-    console.log(this, this.avgScore)
-})
+// productSchema.pre('save', async function(next) {
+//     let total = 0
+//     await this.reviews.forEach((review) => {
+//         console.log(review.rating)
+//         total += review.rating
+//     })
+//     this.avgScore = total / this.reviews.length
+//     console.log(this, this.avgScore)
+// })
 
-productSchema.pre('findOneAndUpdate', async function(next) {
-    let avg = 0
-    await this.reviews.forEach((review) => {
-        console.log(review.rating)
-        avg += review.rating
-    })
-    this.avgScore = avg
-    console.log(this, this.avgScore)
-})
+// productSchema.pre('findOneAndUpdate', async function(next) {
+//     let avg = 0
+//     await this.reviews.forEach((review) => {
+//         console.log(review.rating)
+//         avg += review.rating
+//     })
+//     this.avgScore = avg
+//     console.log(this, this.avgScore)
+// })
 
 // productSchema.methods.getAvgReviewScore = async function(reviews) {
 //     let avg = 0

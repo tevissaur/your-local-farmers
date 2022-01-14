@@ -134,7 +134,7 @@ function FarmsPage() {
                                     <Link to='/myFarm'>
                                         <Flex justifyContent='center'>
                                             <Button mb={3} mt={3} textAlign='center' backgroundColor='white'>Register to become a farmer today!</Button>
-
+                                    
                                         </Flex>
                                     </Link>
                                 </Container>

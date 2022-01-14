@@ -13,10 +13,6 @@ const Header = () => {
 
         Auth.logout()
     }
-    useEffect(() => {
-        console.log()
-
-    }, [])
     return (
         <>
             <Flex alignItems='center'>

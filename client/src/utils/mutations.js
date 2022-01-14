@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_USER = gql`
-    mutation CreateUser($username: String!, $email: String!, $password: String!) {
-        createUser(username: $username, email: $email, password: $password) {
+    mutation CreateUser($username: String!, $email: String!, $password: String!, $firstName: String!) {
+        createUser(username: $username, email: $email, password: $password, firstName: $firstName) {
         token
         user {
             _id
@@ -23,11 +23,30 @@ export const LOG_IN = gql`
 `
 
 export const CREATE_FARM = gql`
-mutation CreateFarm($name: String!, $address: String!, $story: String!, $owners: String!) {
-    createFarm(name: $name, address: $address, owners: $owners, story: $story){
+mutation CreateFarm($farm: NewFarm) {
+    createFarm(farm: $farm) {
+      _id
+      name
+      address
+      story
+      owners {
         _id
+      }
     }
-}`
+  }
+`
+
+export const CREATE_PRODUCT = gql`
+        mutation CreateProduct($product: NewProduct) {
+            createProduct(product: $product) {
+                _id
+                name
+                categories {
+                    _id
+                }
+            }
+        }
+        `
 
 export const UPDATE_USER = gql`
     mutation UpdateUser($user: UpdatedUser) {
@@ -42,5 +61,29 @@ export const UPDATE_USER = gql`
             address
     }
 }
+`
+export const POST_REVIEW = gql`
+mutation PostReview ($review: NewReview!, $product_id: ID, $user: ID, $farm: ID) {
+    postReview(review: $review, product_id: $product_id, user: $user, farm: $farm) {
+        author {
+            firstName
+        }
+        content
+        rating
+    }
+}
+
+
+`
+
+export const UPDATE_FARM = gql`
+    mutation UpdateFarm($farm: UpdatedFarm){
+        updateFarm(farm: $farm){
+            _id
+            name
+            address
+            story
+        }
+    }
 `
 

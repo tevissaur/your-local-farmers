@@ -6,6 +6,7 @@ import NavItem from './NavItem'
 import { GiBarn, GiFarmer, GiFarmTractor } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { extendTheme } from '@chakra-ui/react'
+import auth from '../utils/auth';
 
 function SideNavBar({ theme }) {
     const [navSize, changeNavSize] = useState("large")
@@ -41,8 +42,18 @@ function SideNavBar({ theme }) {
                 />
                 <NavItem navSize={navSize} pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
                 <NavItem navSize={navSize} pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
-                <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
-                <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />
+
+                {auth.loggedIn() ? (
+                    <>
+                        <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
+                        <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />
+                    </>
+                ) : (
+                    <>
+
+                    </>
+                )}
+
             </Flex>
 
             <Flex

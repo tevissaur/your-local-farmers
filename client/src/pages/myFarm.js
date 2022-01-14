@@ -10,14 +10,16 @@ function MyFarm() {
     let userDetails = auth.getProfile()
     let myFarmDisplay
 
+    console.log(userDetails)
+
     
     if (userDetails.data.isFarmer === true){
-        myFarmDisplay = null
-        //change this to actual farm view
-    }
-    else{
         myFarmDisplay = <MyFarmDash />
     }
+    else{
+        myFarmDisplay = <MyFarmForm />
+    }
+    
     return (
         <Flex>
         <SideNavBar />

@@ -1,23 +1,51 @@
 import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input,
-    useDisclosure,
     Box,
-    Button,
     Container,
-    Textarea
+    Tab,
+    Flex,
+    Tabs,
+    TabList,
+    TabPanel,
+    TabPanels
 } from '@chakra-ui/react'
-import FarmDashNav from './FarmDashNav';
+import MyOrders from './FarmOrders';
 
 function MyFarmDash() {
 
 
     return(
         <Container maxW='100%'>
-            <FarmDashNav />
+            <Flex>
+                <Box m={4} flex="1">
+                    <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
+                        <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
+                            <TabList >
+                                <Tab>Orders</Tab>
+                                <Tab>View Products</Tab>
+                                <Tab>Add Product</Tab>
+                                <Tab>Edit Farm</Tab>
+                            </TabList>
+
+                            <TabPanels>
+                                {/* Tab for the main farm page */}
+                                <TabPanel>
+                                    <MyOrders />
+                                </TabPanel>
+                                <TabPanel p={1}>
+                                    
+                                </TabPanel>
+                                <TabPanel>
+                                    
+                                </TabPanel>
+
+                                <TabPanel>
+                                    
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                    </Flex>
+                </Box>
+            </Flex>
         </Container>
     )
 }

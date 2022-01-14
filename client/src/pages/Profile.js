@@ -11,9 +11,11 @@ import MyFarmForm from '../components/MyFarmForm'
 import MyFarmTabs from '../components/MyFarmTabs'
 import Auth from '../utils/auth';
 import Footer from '../components/Footer'
+import Signup from '../components/Signup'
 
 const Profile = () => {
     const [userData, setUserData] = useState({})
+    const [isFarmer, setIsFarmer] = useState(userData.isFarmer)
     const { data: { _id } } = Auth.getProfile()
 
     console.log(_id)
@@ -34,6 +36,8 @@ const Profile = () => {
 
     }, [loading, data, error, userData])
 
+
+
     return (
         <>
             <Flex>
@@ -41,7 +45,9 @@ const Profile = () => {
                 <Box m={4} flex="1">
                     <Header />
                     <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
-                        <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
+                        {Auth.loggedIn() ? (
+                            <>
+                            <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
                             <TabList >
                                 <Tab>Home</Tab>
                                 <Tab>My Farm</Tab>
@@ -54,12 +60,18 @@ const Profile = () => {
                                     <UserMain userData={userData} />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmTabs userData={userData.isFarmer} />
+                                    <MyFarmTabs isFarmer={userData.isFarmer} setIsFarmer={setIsFarmer} />
                                 </TabPanel>
                                 <TabPanel>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>
+                            </>
+                        ) : (
+                            <>
+                                <Signup />
+                            </>)}
+                        
                     </Flex>
                 </Box>
             </Flex>

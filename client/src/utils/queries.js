@@ -103,18 +103,8 @@ export const QUERY_PRODUCTS = gql`
 export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {
+      _id
       name
-      imgUrl
-      products {
-        _id
-        name
-        price
-        quantity
-        reviews {
-          content
-          rating
-        }
-      }
     }
   }
 

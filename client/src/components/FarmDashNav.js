@@ -19,7 +19,7 @@ function FarmDashNav(){
                 <Button minW='20%' colorScheme='green'></Button>
                 <Button minW='20%' colorScheme='blue'></Button>
                 <Button minW='20%' colorScheme='blue'></Button>
-                <Button minW='20%' colorScheme='blue'></Button>
+
             </Flex>
         </Container>
     )

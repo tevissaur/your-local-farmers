@@ -42,7 +42,7 @@ function Cart({ }) {
                 border='1px solid grey'
                 boxShadow='1px 1px black'
                 backgroundColor='primary.lightGreen'
-
+                
                 >
                     Checkout
             </Button>

@@ -32,7 +32,7 @@ const resolvers = {
                     path: 'categories',
                     model: 'Category'
                 },
-                
+
             ])
             // console.log(prod[0].getAvgReviewScore())
             return prod
@@ -102,7 +102,7 @@ const resolvers = {
             )
         },
         farmDashboard: async (parent, { _id }) => {
-            return await Farm.findById(_id).populate(
+            const farm = await Farm.findOne({ owners: [_id] }).populate(
                 [
                     {
                         path: 'reviews',
@@ -144,6 +144,8 @@ const resolvers = {
                     }
                 ]
             )
+            console.log(farm)
+            return farm
         },
         categories: async (parent, args) => {
             const productCategory = await Category.find().populate([
@@ -230,23 +232,29 @@ const resolvers = {
                 console.log(err)
             }
         },
-        postReview: async (parent, { review, product_id, user, farm }) => {
+        postReview: async (parent, { review, product_id, user, farm_id }) => {
             console.log(review)
             const newReview = await (await Review.create(review))
             const newReviewWithAuthor = await Review.findById(newReview._id).populate([
                 {
-                    path:"author",
-                    model:"User"
+                    path: "author",
+                    model: "User"
                 },
             ])
 
             const reviewedProduct = await Product.findByIdAndUpdate(
-               product_id,
-                {$push : {reviews : newReviewWithAuthor}},
-                {new: true}
+                product_id,
+                { $push: { reviews: newReviewWithAuthor } },
+                { new: true }
             )
             console.log(newReviewWithAuthor)
-   
+            const reviewedFarm = await Farm.findByIdAndUpdate(
+                farm_id,
+                { $push: { reviews: newReviewWithAuthor } },
+                { new: true }
+
+            )
+
             return newReviewWithAuthor
             //     return reviewdProduct
             //     console.log(reviewdProduct)
@@ -258,10 +266,9 @@ const resolvers = {
             //         }
             //     }
             // )
-       
+
         },
-        createProduct: async (parent, { product, farmId, categoryId }) => {
-            console.log(product)
+        createProduct: async (parent, { product }) => {
             const newProduct = await Product.create(product)
             return newProduct
         },

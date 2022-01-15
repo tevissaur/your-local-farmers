@@ -19,6 +19,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 
+
 const ProductCard = ({ product }) => {
   console.log(product);
 
@@ -29,9 +30,8 @@ const ProductCard = ({ product }) => {
 
   const foundProductImage = foundProduct.map((card) => card.img);
   console.log(foundProductImage);
-  
+
   return (
-      
     <>
       <Box p="10px" flex="50%">
         <Box border="green 2px solid" borderRadius="25px" height="100%">
@@ -54,14 +54,14 @@ const ProductCard = ({ product }) => {
             </Link>
             <Box px="10px">
               <Flex>
-                < AiFillStar />
-                < AiFillStar />
-                < AiFillStar />
-                < AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
               </Flex>
-             <small>Based on {product.reviews.length} reviews</small>
+              <small>Based on {product.reviews.length} reviews</small>
             </Box>
-            
+
             <Box p="10px">
               <Text>
                 Available :{" "}

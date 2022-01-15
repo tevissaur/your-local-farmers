@@ -142,14 +142,13 @@ function FarmsPage() {
                         </Flex>
                     </Container>
                 </Box>
+
             </Flex>
-
-
-
-
-
-        </>
-    )
+          </Container>
+        </Box>
+      </Flex>
+    </>
+  );
 }
 
-export default FarmsPage
+export default FarmsPage;

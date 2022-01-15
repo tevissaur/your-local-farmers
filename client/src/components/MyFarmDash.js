@@ -9,8 +9,9 @@ import {
     TabPanels
 } from '@chakra-ui/react'
 import MyOrders from './FarmOrders';
+import EditFarm from './EditFarm'
 
-function MyFarmDash() {
+function MyFarmDash({farmData}) {
 
 
     return(
@@ -39,7 +40,7 @@ function MyFarmDash() {
                                 </TabPanel>
 
                                 <TabPanel>
-                                    
+                                    <EditFarm farmData={farmData.me}/>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

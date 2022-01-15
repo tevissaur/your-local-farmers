@@ -17,7 +17,7 @@ function MyFarm() {
         variables: { id: userDetails.data._id }
     }
     ) 
-    
+    console.log(data)
     const [isFarmer, setIsFarmer] = useState()
     
 
@@ -35,7 +35,7 @@ function MyFarm() {
         <Header/>
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                    {isFarmer? (<MyFarmDash/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}
+                    {isFarmer? (<MyFarmDash farmData={data}/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}
                 </Flex>
             </Container>
         </Box>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
+import Footer from "./Footer";
 import {
   Button,
   Box,
@@ -18,7 +19,7 @@ import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { AiFillStar} from "react-icons/ai";
 import customTheme from "../extendedTheme";
 import Auth from "../utils/auth";
 import { useEffect, useState, useRef } from "react";
@@ -86,6 +87,7 @@ const Product = () => {
           <Header />
           <Box
             border="green 2px solid"
+            borderRadius="25px"
             alignItems="stretch"
             justifyItems="center"
             backgroundColor="lightyellow"
@@ -95,11 +97,12 @@ const Product = () => {
           >
             <Flex>
               <Box>
-                <img src={foundProductImage} style={{ width: "300px" }} />
+                <img src={foundProductImage} style={{ width: "300px" , borderRadius:"25px"}}/>
 
                 <Flex
                   p="10px"
                   backgroundColor="darkGreen"
+                  borderRadius="25px"
                   color="yellowGreen"
                   justifyContent="center"
                   mt="10px"
@@ -178,11 +181,12 @@ const Product = () => {
           </Box>
           <Box
             border="green 2px solid"
+            borderRadius="25px"
             alignItems="stretch"
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            mx={10}
+            mx={20}
           >
             <Text
               fontSize="2xl"
@@ -223,6 +227,7 @@ const Product = () => {
               </Box>
             ))}
           </Box>
+          <Footer />
         </Box>
       </Flex>
     </>

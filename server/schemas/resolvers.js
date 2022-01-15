@@ -260,8 +260,7 @@ const resolvers = {
             // )
        
         },
-        createProduct: async (parent, { product, farmId, categoryId }) => {
-            console.log(product)
+        createProduct: async (parent, { product }) => {
             const newProduct = await Product.create(product)
             return newProduct
         },
@@ -271,13 +270,7 @@ const resolvers = {
             return newCategory
         },
         createFarm: async (parent, { farm }) => {
-            console.log(farm.owners)
-            const user = await User.findByIdAndUpdate(farm.owners[0], {
-                $set: { isFarmer: true }
-            },{
-                new: true
-            })
-            console.log(user)
+            console.log(farm)
             const newFarm = await Farm.create(farm)
             return newFarm
         },

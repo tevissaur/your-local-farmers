@@ -48,7 +48,7 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
       }
     })
     console.log(newReview)
-    setReviews([newReview.data.postReview, ...reviews])
+    setReviews([newReview.data.postReview, ...reviews ])
     setInputText("")
     onClose()
 

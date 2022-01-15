@@ -1,24 +1,10 @@
 import { Link } from "react-router-dom";
 import { imageSeeds } from "../imageSeeds";
 import customeTheme from "../extendedTheme";
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import {
-  Button,
-  Box,
-  Flex,
-  Heading,
-  Spacer,
-  Center,
-  Text,
-  Container,
-  List,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-  ListIcon,
-  Image,
-} from "@chakra-ui/react";
-import { CgShoppingCart } from "react-icons/cg";
+
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { Box, Flex, Text } from "@chakra-ui/react";
+
 
 const ProductCard = ({ product }) => {
   console.log(product);
@@ -30,9 +16,8 @@ const ProductCard = ({ product }) => {
 
   const foundProductImage = foundProduct.map((card) => card.img);
   console.log(foundProductImage);
-  
+
   return (
-      
     <>
       <Box p="10px" flex="50%">
         <Box border="green 2px solid" borderRadius="25px" height="100%">
@@ -55,14 +40,14 @@ const ProductCard = ({ product }) => {
             </Link>
             <Box px="10px">
               <Flex>
-                < AiFillStar />
-                < AiFillStar />
-                < AiFillStar />
-                < AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
               </Flex>
-             <small>Based on {product.reviews.length} reviews</small>
+              <small>Based on {product.reviews.length} reviews</small>
             </Box>
-            
+
             <Box p="10px">
               <Text>
                 Available :{" "}

@@ -12,19 +12,38 @@ function Cart({ }) {
             <Box m={4} flex='1'>
                 <Header />
         <Container maxW='container.md'>
-            <Flex justifyContent='center' alignItems='center' mt={6} fontWeight='600' backgroundColor='lightyellow' flexDir='column'>
-              <Heading>Your Basket</Heading>
+            <Flex 
+                justifyContent='center'
+                alignItems='center' 
+                mt={6} 
+                fontWeight='600'
+                backgroundColor='white'
+                flexDir='column'
+                border='grey 2px solid'
+                borderRadius='25px'
+                boxShadow='1px 1px black'
+            >
+              <Heading>Your Cart</Heading>
               <Container maxW='100%'>
         <Flex flexDir='column'>
         </Flex>
             <ProductCardCart name='Flowers' quantity={2} price={2}  />
-            
-        <Flex mt={3}justifyContent='flex-end'>
-            <Box>Total:</Box>
-            <Box ms={2}>$200</Box>
+            <ProductCardCart name='Flowers' quantity={2} price={2}  />
+            <ProductCardCart name='Flowers' quantity={2} price={2}  />
+        <Flex mt={3}  mb={2} justifyContent='flex-end' alignItems='center'>
+            <Text fontSize='35px'>Total:</Text>
+            <Text ms={2} fontSize='35px'>$200</Text>
         </Flex>
         <Center>
-            <Button backgroundColor='primary.lightGreen'mb={3}>Checkout</Button>
+            <Button 
+                backgroundColor='primary.lightGreen'
+                mb={3} 
+                fontSize='25px'
+                border='1px solid grey'
+                boxShadow='1px 1px black'
+            >
+                Checkout
+            </Button>
 
         </Center>
 

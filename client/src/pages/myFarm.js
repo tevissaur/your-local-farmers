@@ -12,19 +12,20 @@ function MyFarm() {
     let userDetails = auth.getProfile()
     let myFarmDisplay
     const [userData, setUserData] = useState({})
-    const { data, loading, error } = useQuery(GET_ME, {
+    
+    const {data, error, loading} = useQuery(GET_ME, {
         variables: { id: userDetails.data._id }
-    })
-    console.log(data)
-    const [isFarmer, setIsFarmer] = useState(userDetails.data.isFarmer)
+    }
+    ) 
+    
+    const [isFarmer, setIsFarmer] = useState()
     
 
     useEffect(() => {
-        data == null? console.log("Bro"):setIsFarmer(data.me.isFarmer)
+        loading? setIsFarmer():setIsFarmer(data.me.isFarmer)
         
         
-    }, [isFarmer])
-    
+    }, [isFarmer, loading, data])
     
 
     return (

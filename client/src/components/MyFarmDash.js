@@ -11,9 +11,10 @@ import {
 import AddProductForm from './AddProductForm';
 import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
+import MyFarmProducts from './MyFarmProducts';
 
-function MyFarmDash({farmData}) {
-
+function MyFarmDash({ farmData: { farmDashboard: { products } } }) {
+    // console.log(farmData)
 
     return (
         <Container maxW='100%'>
@@ -34,11 +35,16 @@ function MyFarmDash({farmData}) {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
+                                    <MyFarmProducts products={products}/>
+                                </TabPanel>
+
+                                <TabPanel>
+                                    <AddProductForm />
 
                                 </TabPanel>
 
                                 <TabPanel>
-                                    <EditFarm farmData={farmData.me}/>
+
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

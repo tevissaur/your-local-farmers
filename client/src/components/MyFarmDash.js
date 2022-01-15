@@ -6,14 +6,31 @@ import {
     Tabs,
     TabList,
     TabPanel,
-    TabPanels
+    TabPanels,
+    useQuery
 } from '@chakra-ui/react'
+import AddProductForm from './AddProductForm';
+import {GET_MY_FARM} from '../utils/queries'
 import MyOrders from './FarmOrders';
+import EditFarm from './EditFarm'
+import { useState, useEffect } from 'react'
 
-function MyFarmDash() {
+function MyFarmDash({userData}) {
+    const [farmData, setFarmData] = useState({})
 
+    const {data, loading, error} = useQuery(GET_MY_FARM,{
+        variables: {id: userData.me._id}
+    })
+    useEffect(() => {
+        try {
+            loading? console.log(loading) : console.log(data)
+        }
+        catch (err){
+            console.log(err)
+        }
+    }, [loading, data, error, farmData])
 
-    return(
+    return (
         <Container maxW='100%'>
             <Flex>
                 <Box m={4} flex="1">
@@ -32,14 +49,11 @@ function MyFarmDash() {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    
-                                </TabPanel>
-                                <TabPanel>
-                                    
+
                                 </TabPanel>
 
                                 <TabPanel>
-                                    
+                                    <EditFarm farmData={farmData}/>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

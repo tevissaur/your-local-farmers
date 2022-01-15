@@ -32,7 +32,7 @@ const resolvers = {
                     path: 'categories',
                     model: 'Category'
                 },
-                
+
             ])
             // console.log(prod[0].getAvgReviewScore())
             return prod
@@ -102,7 +102,7 @@ const resolvers = {
             )
         },
         farmDashboard: async (parent, { _id }) => {
-            return await Farm.findById(_id).populate(
+            const farm = await Farm.findOne({ owners: [_id] }).populate(
                 [
                     {
                         path: 'reviews',
@@ -144,6 +144,8 @@ const resolvers = {
                     }
                 ]
             )
+            console.log(farm)
+            return farm
         },
         categories: async (parent, args) => {
             const productCategory = await Category.find().populate([
@@ -235,24 +237,24 @@ const resolvers = {
             const newReview = await (await Review.create(review))
             const newReviewWithAuthor = await Review.findById(newReview._id).populate([
                 {
-                    path:"author",
-                    model:"User"
+                    path: "author",
+                    model: "User"
                 },
             ])
 
             const reviewedProduct = await Product.findByIdAndUpdate(
-               product_id,
-                {$push : {reviews : newReviewWithAuthor}},
-                {new: true}
+                product_id,
+                { $push: { reviews: newReviewWithAuthor } },
+                { new: true }
             )
             console.log(newReviewWithAuthor)
             const reviewedFarm = await Farm.findByIdAndUpdate(
                 farm_id,
-                {$push : {reviews : newReviewWithAuthor}},
-                {new: true}
+                { $push: { reviews: newReviewWithAuthor } },
+                { new: true }
 
             )
-   
+
             return newReviewWithAuthor
             //     return reviewdProduct
             //     console.log(reviewdProduct)
@@ -264,7 +266,7 @@ const resolvers = {
             //         }
             //     }
             // )
-       
+
         },
         createProduct: async (parent, { product }) => {
             const newProduct = await Product.create(product)
@@ -276,7 +278,13 @@ const resolvers = {
             return newCategory
         },
         createFarm: async (parent, { farm }) => {
-            console.log(farm)
+            console.log(farm.owners)
+            const user = await User.findByIdAndUpdate(farm.owners[0], {
+                $set: { isFarmer: true }
+            },{
+                new: true
+            })
+            console.log(user)
             const newFarm = await Farm.create(farm)
             return newFarm
         },

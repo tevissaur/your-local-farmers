@@ -229,5 +229,4 @@ function FarmsPage() {
     </>
   );
 }
-
 export default FarmsPage;

@@ -104,7 +104,13 @@ const typeDefs = gql`
         pickUpTime: String!
         orderTotal: Int
     }
+    input UpdatedFarm {
+        _id: ID
+        name: String
+        address: String 
+        story: String
 
+    }
 
     type Query {
         me(_id: ID!): User
@@ -127,6 +133,7 @@ const typeDefs = gql`
         createFarm(farm: NewFarm): Farm
         createPO(PO: NewPurchaseOrder): PurchaseOrder
         updateUser(user: UpdatedUser): User
+        updateFarm(farm: UpdatedFarm): Farm
     }
 `
 

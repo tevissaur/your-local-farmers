@@ -6,14 +6,16 @@ import {
     Tabs,
     TabList,
     TabPanel,
-    TabPanels
+    TabPanels,
+    useQuery
 } from '@chakra-ui/react'
 import AddProductForm from './AddProductForm';
+import {GET_MY_FARM} from '../utils/queries'
 import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
 import MyFarmProducts from './MyFarmProducts';
 
-function MyFarmDash({ farmData: { farmDashboard: { products } } }) {
+function MyFarmDash({ farmData }) {
     // console.log(farmData)
 
     return (
@@ -35,7 +37,7 @@ function MyFarmDash({ farmData: { farmDashboard: { products } } }) {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmProducts products={products}/>
+                                    <MyFarmProducts products={farmData}/>
                                 </TabPanel>
 
                                 <TabPanel>
@@ -44,7 +46,6 @@ function MyFarmDash({ farmData: { farmDashboard: { products } } }) {
                                 </TabPanel>
 
                                 <TabPanel>
-
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

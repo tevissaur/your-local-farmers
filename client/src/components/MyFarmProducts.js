@@ -1,10 +1,16 @@
 import { Text } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 
 
-const MyFarmProducts = ({ products }) => {
+const MyFarmProducts = ({ farmData }) => {
+    const [products, setProducts] = useState(farmData?.farmDashboard?.products)
+    useEffect(() => {
+        setProducts(farmData?.farmDashboard?.products)
+    }, [farmData])
+    console.log(products)
     return (
         <>
-            {products.length === 0 ? (
+            {products?.length === 0 ? (
                 <Text>
                     No products
                 </Text>

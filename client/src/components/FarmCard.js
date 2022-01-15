@@ -8,7 +8,7 @@ import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'
 import customTheme from '../extendedTheme'
 import StarsRender from './StarsRender'
-
+import { useQuery } from "@apollo/client";
 
 function FarmCard({title, reviews, numericReview, categories}) {
     let filteredCategories = new Set([...categories])

@@ -46,6 +46,7 @@ function MyFarmDash({ farmData }) {
                                 </TabPanel>
 
                                 <TabPanel>
+                                    <EditFarm thisFarm={farmData}/>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

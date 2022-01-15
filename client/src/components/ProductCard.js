@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
 import { imageSeeds } from "../imageSeeds";
 import customeTheme from "../extendedTheme";
-
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import {
+  Button,
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+  Center,
+  Text,
+  Container,
+  List,
+  ListItem,
+  OrderedList,
+  UnorderedList,
+  ListIcon,
+  Image,
+} from "@chakra-ui/react";
 
 
 const ProductCard = ({ product }) => {

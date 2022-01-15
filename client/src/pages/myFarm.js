@@ -12,8 +12,10 @@ function MyFarm() {
     const [isLoggedIn, setIsLoggedIn] = useState(auth.loggedIn())
     let userDetails = auth.getProfile()
     const [userData, setUserData] = useState({})
-    const { data, loading, error } = useQuery(GET_ME, {
+    
+    const {data, error, loading} = useQuery(GET_ME, {
         variables: { id: userDetails.data._id }
+<<<<<<< HEAD
     })
     const { data: farmData } = useQuery(GET_MY_FARM, {
         variables: {
@@ -49,6 +51,33 @@ function MyFarm() {
                 </Container>
             </Box>
         </Flex>
+=======
+    }
+    ) 
+    console.log(data)
+    const [isFarmer, setIsFarmer] = useState()
+    
+
+    useEffect(() => {
+        loading? setIsFarmer():setIsFarmer(data.me.isFarmer)
+        
+        
+    }, [isFarmer, loading, data])
+    
+
+    return (
+        <Flex>
+        <SideNavBar />
+        <Box m={4} flex='1'>
+        <Header/>
+            <Container maxW='100%'>
+                <Flex justifyContent='space-evenly' flexWrap='wrap'>
+                    {isFarmer? (<MyFarmDash farmData={data}/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}
+                </Flex>
+            </Container>
+        </Box>
+    </Flex>
+>>>>>>> 4434b67920c3926376b87a3da73f6a59909b2a83
     )
 }
 

@@ -5,17 +5,31 @@ import { useMutation } from '@apollo/client'
 import { UPDATE_FARM } from '../utils/mutations'
 
 
-function EditFarm({farmData}){
-    const [farm, setFarm] = useState(farmData)
+function EditFarm({thisFarm}){
+    const [farm, setFarm] = useState(thisFarm)
+    useEffect(() => {
+        setFarm(thisFarm?.farmDashboard)
+        
+    }, [thisFarm])
     const [editingFarmName, setEditFarmName] = useState(false)
     const [editingFarmAddress, setEditFarmAddress] = useState(false)
     const [editingFarmStory, setEditFarmStory] = useState(false)
     const [updateFarm] = useMutation(UPDATE_FARM)
 
-    console.log(farmData)
+    console.log(farm)
     const handleSubmit = async (e) => {
-
-
+        const {data: UpdatedFarm } = await updateFarm({
+            variables: {
+                farm: {
+                    _id: farm._id,
+                    name: farm.name,
+                    address: farm.address,
+                    story: farm.story
+                }
+            }
+        })
+        console.log(UpdatedFarm)
+        thisFarm = UpdatedFarm
     }
 
 
@@ -29,26 +43,26 @@ function EditFarm({farmData}){
                     {editingFarmName ? (
                         <Flex w="100%" justifyContent='start' alignItems='center'>
                             <FormLabel width='145px' fontSize={22}>
-                                Add First Name:
+                                New Farm Name:
                             </FormLabel>
-                            <Input w="50%" value={farm.firstName} onChange={({ target }) => setFarm({
+                            <Input w="50%" value={farm.name} onChange={({ target }) => setFarm({
                                 ...farm,
-                                firstName: target.value,
+                                name: target.value,
                             })} />
                             <Button type="submit" m={3} id="first-name" onClick={(e) => {
                                 setEditFarmName(false)
                                 handleSubmit(e)
                             }}>
-                                Add Name
+                                Edit Name
                             </Button>
                         </Flex>) : (
                         <Flex>
                             <FormLabel width='145px' fontSize={22}>
-                                First Name:
+                                Farm Name:
                             </FormLabel>
                             <Text marginEnd={4} fontSize={20}>
 
-                                {farm.firstName}
+                                {farm? farm.name: '...'}
                             </Text>
                             <Button size='sm' onClick={() => setEditFarmName(true)}>
                                 <EditIcon />

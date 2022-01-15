@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Flex, Container, Image, Heading, Text, Box, Button } from '@chakra-ui/react'
+import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
 import localFarm from '../assets/localFarm.jpg'
 import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'

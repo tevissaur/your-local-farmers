@@ -24,7 +24,8 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
 
   console.log(rating)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+  const [ratingInput, setRatingInput] = useState(0)
+  const [content, setContent] = useState('')
   const [postReview, {data,loading,error}] = useMutation(POST_REVIEW)
  
 
@@ -34,14 +35,14 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
     e.preventDefault()
     if(!inputText) return
     const profile = auth.getProfile()
-    console.log(profile.data._id)
+    console.log(profile.data._id, inputText, parseInt(rating))
 
     const newReview = await postReview({
       variables: {
         review: {
             author: profile.data._id,
             content: inputText,
-            rating :parseInt(rating)
+            rating : parseInt(rating)
         },
         product_id: product._id
 

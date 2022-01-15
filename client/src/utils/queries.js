@@ -7,8 +7,13 @@ export const QUERY_FARM = gql`
       _id
       name
       address
+      story
       reviews {
-        rating
+       author{
+         firstName
+       }
+       content
+       rating
       }
       products {
 

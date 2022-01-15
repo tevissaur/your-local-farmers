@@ -230,7 +230,7 @@ const resolvers = {
                 console.log(err)
             }
         },
-        postReview: async (parent, { review, product_id, user, farm }) => {
+        postReview: async (parent, { review, product_id, user, farm_id }) => {
             console.log(review)
             const newReview = await (await Review.create(review))
             const newReviewWithAuthor = await Review.findById(newReview._id).populate([
@@ -246,6 +246,12 @@ const resolvers = {
                 {new: true}
             )
             console.log(newReviewWithAuthor)
+            const reviewedFarm = await Farm.findByIdAndUpdate(
+                farm_id,
+                {$push : {reviews : newReviewWithAuthor}},
+                {new: true}
+
+            )
    
             return newReviewWithAuthor
             //     return reviewdProduct
@@ -260,8 +266,7 @@ const resolvers = {
             // )
        
         },
-        createProduct: async (parent, { product, farmId, categoryId }) => {
-            console.log(product)
+        createProduct: async (parent, { product }) => {
             const newProduct = await Product.create(product)
             return newProduct
         },
@@ -271,13 +276,7 @@ const resolvers = {
             return newCategory
         },
         createFarm: async (parent, { farm }) => {
-            console.log(farm.owners)
-            const user = await User.findByIdAndUpdate(farm.owners[0], {
-                $set: { isFarmer: true }
-            },{
-                new: true
-            })
-            console.log(user)
+            console.log(farm)
             const newFarm = await Farm.create(farm)
             return newFarm
         },

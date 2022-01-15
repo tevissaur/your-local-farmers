@@ -63,8 +63,8 @@ export const UPDATE_USER = gql`
 }
 `
 export const POST_REVIEW = gql`
-mutation PostReview ($review: NewReview!, $product_id: ID, $user: ID, $farm: ID) {
-    postReview(review: $review, product_id: $product_id, user: $user, farm: $farm) {
+mutation PostReview ($review: NewReview!, $product_id: ID, $user: ID, $farm_id: ID) {
+    postReview(review: $review, product_id: $product_id, user: $user, farm_id: $farm_id) {
         author {
             firstName
         }

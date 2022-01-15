@@ -6,24 +6,25 @@ import SearchBar from './SearchBar'
 import { CgShoppingCart } from 'react-icons/cg'
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn())
     const handleLogOut = () => {
 
         Auth.logout()
     }
     useEffect(() => {
-        console.log()
+        console.log(isLoggedIn)
 
-    }, [])
+    })
     return (
         <>
             <Flex alignItems='center'>
                 <SearchBar />
                 {Auth.loggedIn() ? (
                     <>
-                        <Link to="/cart">
+                        <Link to={"/cart"}>
                             <CgShoppingCart fontSize='40px' />
 
                         </Link>
@@ -37,7 +38,9 @@ const Header = () => {
                     <>
                         <Signup></Signup>
                         <LoginForm></LoginForm>
-                        <CgShoppingCart fontSize='35px'/>
+                        <Link to={"/cart"}>
+                            <CgShoppingCart fontSize='40px' />
+                        </Link>
                     </>)}
 
 

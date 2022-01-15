@@ -26,7 +26,6 @@ function MyFarm({setIsFarmer}) {
     const user = Auth.getProfile()
     
 
-    console.log(user)
     const handleFormSubmit = async (e) => {
         e.preventDefault()
         const newFarm = await createFarm({

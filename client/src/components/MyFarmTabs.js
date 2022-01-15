@@ -2,27 +2,29 @@ import { Box, Flex, Container, Button, Tabs, TabList, TabPanels, Tab, TabPanel }
 import UserMain from '../components/UserMain.js'
 
 import MyFarmForm from '../components/MyFarmForm'
+import { useEffect, useState } from 'react'
+import AddProductForm from './AddProductForm.js'
 
 
-const MyFarmTabs = ({ isFarmer }) => {
+const MyFarmTabs = ({ isFarmer, setIsFarmer }) => {
 
-    const handleAddFarm = () => {
-        console.log('farmers')
-    }
 
     return (
-        <Tabs isFitted variant='soft-rounded' colorScheme='green' w='100%' p={0}>
+        <Tabs isFitted variant='soft-rounded' colorScheme='green' w='100%' p={1}>
             <TabList >
                 <Tab>Farm Profile</Tab>
-                {isFarmer ? (<>
-                    <Tab>Add Product</Tab>
-                    <Tab>Orders</Tab>
+                {
+                    isFarmer ? (<>
+                        <Tab>Add Product</Tab>
+                        <Tab>My Products</Tab>
+                        <Tab>Farm Orders</Tab>
 
-                </>) : (<>
-                    <Tab isDisabled>Add Product</Tab>
-                    <Tab isDisabled>Orders</Tab>
+                    </>) : (<>
+                        <Tab isDisabled>Add Product</Tab>
+                        <Tab isDisabled>My Products</Tab>
+                        <Tab isDisabled>Farm Orders</Tab>
 
-                </>)}
+                    </>)}
             </TabList>
 
             <TabPanels>
@@ -32,13 +34,18 @@ const MyFarmTabs = ({ isFarmer }) => {
                     {isFarmer ? (<>
                         <h1>We are farmers</h1>
                     </>) : (<>
-                        <MyFarmForm />
+                        <MyFarmForm isFarmer={isFarmer} setIsFarmer={setIsFarmer} />
                     </>)}
                 </TabPanel>
                 <TabPanel>
+                    <AddProductForm />
                 </TabPanel>
                 <TabPanel>
-                    <p>three!</p>
+                    My Products
+                </TabPanel>
+                <TabPanel>
+                    
+                    {/* <FarmOrders /> */}
                 </TabPanel>
             </TabPanels>
         </Tabs>

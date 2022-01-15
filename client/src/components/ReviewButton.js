@@ -20,9 +20,9 @@ import {
 } from "@chakra-ui/react";
 import auth from '../utils/auth'
 
-const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating}) => {
+const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating,farm}) => {
 
-  console.log(rating)
+  console.log(farm)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ratingInput, setRatingInput] = useState(0)
   const [content, setContent] = useState('')
@@ -44,12 +44,13 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
             content: inputText,
             rating : parseInt(rating)
         },
-        product_id: product._id
+        product_id: product._id,
+    
 
       }
     })
     console.log(newReview)
-    setReviews([newReview.data.postReview, ...reviews])
+    setReviews([newReview.data.postReview, ...reviews ])
     setInputText("")
     onClose()
 

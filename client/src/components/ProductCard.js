@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { imageSeeds } from "../imageSeeds";
 import customeTheme from "../extendedTheme";
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+
+
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+
+
+
 import {
   Button,
   Box,
@@ -18,6 +23,7 @@ import {
   ListIcon,
   Image,
 } from "@chakra-ui/react";
+
 
 
 const ProductCard = ({ product }) => {

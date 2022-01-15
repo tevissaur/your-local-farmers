@@ -242,19 +242,29 @@ const resolvers = {
                 },
             ])
 
-            const reviewedProduct = await Product.findByIdAndUpdate(
-                product_id,
-                { $push: { reviews: newReviewWithAuthor } },
-                { new: true }
-            )
-            console.log(newReviewWithAuthor)
-            const reviewedFarm = await Farm.findByIdAndUpdate(
-                farm_id,
-                { $push: { reviews: newReviewWithAuthor } },
-                { new: true }
+            if(product_id) {
+                const reviewedProduct = await Product.findByIdAndUpdate(
+                    product_id,
+                     {$push : {reviews : newReviewWithAuthor}},
+                     {new: true}
+                 )
 
-            )
+            }
 
+            if(farm_id) {
+                console.log(newReviewWithAuthor)
+                const reviewedFarm = await Farm.findByIdAndUpdate(
+                    farm_id,
+                    {$push : {reviews : newReviewWithAuthor}},
+                    {new: true}
+                    
+    
+                )
+                    console.log(reviewedFarm)
+            }
+            
+           
+   
             return newReviewWithAuthor
             //     return reviewdProduct
             //     console.log(reviewdProduct)

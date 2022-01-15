@@ -10,7 +10,7 @@ import {
     useQuery
 } from '@chakra-ui/react'
 import AddProductForm from './AddProductForm';
-import {GET_MY_FARM} from '../utils/queries'
+import { GET_MY_FARM } from '../utils/queries'
 import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
 import MyFarmProducts from './MyFarmProducts';
@@ -37,15 +37,15 @@ function MyFarmDash({ farmData }) {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmProducts products={farmData}/>
+                                    <MyFarmProducts products={farmData} />
                                 </TabPanel>
 
                                 <TabPanel>
                                     <AddProductForm />
 
                                 </TabPanel>
-
                                 <TabPanel>
+                                    <EditFarm farmData={farmData} />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

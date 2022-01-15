@@ -37,15 +37,16 @@ function MyFarmDash({ farmData }) {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    <MyFarmProducts products={farmData} />
+                                    <MyFarmProducts products={farmData}/>
                                 </TabPanel>
 
                                 <TabPanel>
                                     <AddProductForm />
 
                                 </TabPanel>
+
                                 <TabPanel>
-                                    <EditFarm farmData={farmData} />
+                                    <EditFarm thisFarm={farmData}/>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

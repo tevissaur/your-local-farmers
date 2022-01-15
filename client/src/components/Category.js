@@ -9,7 +9,7 @@ import ProductCard from "./ProductCard";
 import customeTheme from "../extendedTheme";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
-
+import Footer from "./Footer";
 const Category = () => {
   const { name } = useParams();
   console.log(name);
@@ -46,7 +46,7 @@ const Category = () => {
             backgroundColor="lightyellow"
             padding={5}
             margin={20}
-            flex="50%"
+        
             flexWrap="wrap"
 
 
@@ -56,6 +56,7 @@ const Category = () => {
               <ProductCard key={idx} product={product} />
             ))}
           </Flex>
+          <Footer />
         </Box>
       </Flex>
     </>

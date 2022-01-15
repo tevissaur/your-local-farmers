@@ -2,50 +2,60 @@ import { useState, useRef } from "react";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
-    useDisclosure,
-    Box,
     Button,
     Container,
     Textarea
 } from '@chakra-ui/react'
-import { useMutation } from '@apollo/client';
-import { CREATE_FARM } from '../utils/mutations';
+import { CREATE_FARM } from '../utils/mutations'
+import { UPDATE_USER } from '../utils/mutations'
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 
-function MyFarm({userId}) {
+
+function MyFarm({setIsFarmer}) {
     const initialRef = useRef()
     const finalRef = useRef()
+    const { data: { _id }} = Auth.getProfile()
     const [farmName, setFarmName] = useState('');
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
-  
+    const [updateUser] = useMutation(UPDATE_USER)
+    const user = Auth.getProfile()
+    
+
+    console.log(user)
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        console.log(farmName, address, story, userId)
-        const farmData = {
-            
-        }
-        try {
-            const response = await createFarm({
-                variables: {
-                    farm: {
-                        name: farmName,
-                        address: address,
-                        story: story,
-                        owner: [userId]
-                    }
+        const newFarm = await createFarm({
+            variables: {
+                farm: {
+                    name: farmName,
+                    address,
+                    owners: [_id],
+                    story
                 }
-            })
+            }
+        })
 
-            console.log(response)
-        }
-        catch (err) {
-            console.log(err)
-        }
+        const { data: updatedUser } = await updateUser({
+            variables: {
+                user: {
+                    _id: user.data._id,
+                    isFarmer: true
+                }
+            }
+        })
+
+        setFarmName('')
+        setAddress('')
+        setStory('')
+        setIsFarmer(true)
+        //document.reload()
+
+        
     }
 
 
@@ -87,7 +97,7 @@ function MyFarm({userId}) {
                     />
                 </FormControl>
                 <FormControl mt={4}>
-                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid}>
+                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid} onClick={handleFormSubmit}>
                         Add Farm
                     </Button>
                 </FormControl>

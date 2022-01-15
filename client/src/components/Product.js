@@ -109,7 +109,11 @@ const Product = () => {
                       <AiFillStar fontSize="15px" />
                     </Flex>
                     <Text fontSize="sm">
+
                       Based on {dataReviews.length} reviews
+  
+                   
+
                     </Text>
                     {Auth.loggedIn() ? (
                       <ReviewButton

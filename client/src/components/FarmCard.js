@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+import { Flex, Container, Image, Heading, Text, Box, Button } from '@chakra-ui/react'
 import localFarm from '../assets/localFarm.jpg'
 import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
@@ -10,13 +11,8 @@ import StarsRender from './StarsRender'
 import { useQuery } from "@apollo/client";
 
 function FarmCard({title, reviews, numericReview, categories}) {
-    
     let filteredCategories = new Set([...categories])
-
-    const averageReview = [5]
     
-    
-
     return (
         
             <Flex 
@@ -39,7 +35,6 @@ function FarmCard({title, reviews, numericReview, categories}) {
                     >{title}
                 </Heading>
                 <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image>
-                <Box fontWeight='600' mt={1}>Distance:100 Miles</Box>
                 <Flex>
                 <Text fontWeight='600' mt={1}>Goods Most Likely Available</Text>
 
@@ -52,10 +47,10 @@ function FarmCard({title, reviews, numericReview, categories}) {
                 </Flex>
                 <Flex mt={2} alignItems='center'>
 
-                    <StarsRender numericReview={numericReview} averageReview={averageReview}/>
+                    <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]}/>
 
                 </Flex>
-                <Link><Button mt={3}  mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
+                <Link to={`/farm/${title.toLowerCase()}`}><Button mt={3}  mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
             </Flex>
 
     )

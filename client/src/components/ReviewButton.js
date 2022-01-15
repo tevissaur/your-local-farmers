@@ -25,7 +25,8 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+  const [ratingInput, setRatingInput] = useState(0)
+  const [content, setContent] = useState('')
   const [postReview, {data,loading,error}] = useMutation(POST_REVIEW)
  
 
@@ -42,7 +43,7 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
         review: {
             author: profile.data._id,
             content: inputText,
-            rating :parseInt(rating)
+            rating : parseInt(rating)
         },
         product_id: product ? product._id : null,
         farm_id: farm ? farm._id : null,

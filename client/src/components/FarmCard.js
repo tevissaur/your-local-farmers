@@ -12,6 +12,8 @@ import StarsRender from './StarsRender'
 function FarmCard({title, reviews, numericReview, categories}) {
     
     let filteredCategories = new Set([...categories])
+
+    const averageReview = [5]
     
     
 
@@ -50,7 +52,7 @@ function FarmCard({title, reviews, numericReview, categories}) {
                 </Flex>
                 <Flex mt={2} alignItems='center'>
 
-                    <StarsRender numericReview={numericReview}/>
+                    <StarsRender numericReview={numericReview} averageReview={averageReview}/>
 
                 </Flex>
                 <Link><Button mt={3}  mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>

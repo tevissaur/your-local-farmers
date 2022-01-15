@@ -39,14 +39,14 @@ function MyFarm({setIsFarmer}) {
             }
         })
 
-        const { data: updatedUser } = await updateUser({
-            variables: {
-                user: {
-                    _id: user.data._id,
-                    isFarmer: true
-                }
-            }
-        })
+        // const { data: updatedUser } = await updateUser({
+        //     variables: {
+        //         user: {
+        //             _id: user.data._id,
+        //             isFarmer: true
+        //         }
+        //     }
+        // })
 
         setFarmName('')
         setAddress('')

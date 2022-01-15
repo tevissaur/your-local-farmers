@@ -8,12 +8,13 @@ import {
     TabPanel,
     TabPanels
 } from '@chakra-ui/react'
+import AddProductForm from './AddProductForm';
 import MyOrders from './FarmOrders';
 
 function MyFarmDash() {
 
 
-    return(
+    return (
         <Container maxW='100%'>
             <Flex>
                 <Box m={4} flex="1">
@@ -32,14 +33,16 @@ function MyFarmDash() {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
-                                    
-                                </TabPanel>
-                                <TabPanel>
-                                    
+
                                 </TabPanel>
 
                                 <TabPanel>
-                                    
+                                    <AddProductForm />
+
+                                </TabPanel>
+
+                                <TabPanel>
+
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

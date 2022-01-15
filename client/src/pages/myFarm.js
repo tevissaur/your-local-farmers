@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Flex, Box } from '@chakra-ui/react'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
@@ -7,18 +7,20 @@ import MyFarmDash from '../components/MyFarmDash'
 import auth from '../utils/auth'
 
 function MyFarm() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(auth.loggedIn())
     let userDetails = auth.getProfile()
     let myFarmDisplay
 
     console.log(userDetails)
 
     
-    if (userDetails.data.isFarmer === true){
-        myFarmDisplay = <MyFarmDash />
-    }
-    else{
-        myFarmDisplay = <MyFarmForm />
-    }
+    // if (userDetails.data.isFarmer === true){
+    //     myFarmDisplay = 
+    // }
+    // else{
+    //     myFarmDisplay = 
+    // }
     
     return (
         <Flex>
@@ -27,7 +29,7 @@ function MyFarm() {
         <Header/>
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                    {myFarmDisplay}
+                {isLoggedIn ? (<MyFarmDash />) : (<MyFarmForm />)}
                 </Flex>
             </Container>
         </Box>

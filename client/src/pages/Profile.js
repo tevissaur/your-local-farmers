@@ -47,31 +47,28 @@ const Profile = () => {
                     <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
                         {Auth.loggedIn() ? (
                             <>
-                            <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
-                            <TabList >
-                                <Tab>Home</Tab>
-                                <Tab>My Farm</Tab>
-                                <Tab>My Orders</Tab>
-                            </TabList>
+                                <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
+                                    <TabList >
+                                        <Tab>Home</Tab>
+                                        <Tab>My Orders</Tab>
+                                    </TabList>
 
-                            <TabPanels>
-                                {/* Tab for the main profile page */}
-                                <TabPanel>
-                                    <UserMain userData={userData} />
-                                </TabPanel>
-                                <TabPanel p={1}>
-                                    <MyFarmTabs isFarmer={userData.isFarmer} setIsFarmer={setIsFarmer} />
-                                </TabPanel>
-                                <TabPanel>
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
+                                    <TabPanels>
+                                        {/* Tab for the main profile page */}
+                                        <TabPanel>
+                                            <UserMain userData={userData} />
+                                        </TabPanel>
+
+                                        <TabPanel>
+                                        </TabPanel>
+                                    </TabPanels>
+                                </Tabs>
                             </>
                         ) : (
                             <>
                                 <Signup />
                             </>)}
-                        
+
                     </Flex>
                 </Box>
             </Flex>

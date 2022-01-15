@@ -18,7 +18,6 @@ import {
   ListIcon,
   Image,
 } from "@chakra-ui/react";
-import { CgShoppingCart } from "react-icons/cg";
 
 const ProductCard = ({ product }) => {
   console.log(product);

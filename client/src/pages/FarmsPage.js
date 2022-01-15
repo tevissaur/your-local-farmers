@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { QUERY_FARM } from '../utils/queries';
-import { Container, Flex, Box, Checkbox, CheckboxGroup, useCheckboxGroup, Button, Heading, Image, Text, List, ListItem, ListIcon, UnorderedList } from '@chakra-ui/react'
+import { Container, Flex, Box, Checkbox, CheckboxGroup, useCheckboxGroup, Button, Heading, Image, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import FarmCard from '../components/FarmCard'
-import { CloseIcon } from '@chakra-ui/icons'
 import customTheme from '../extendedTheme';
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
-
-import { SiTheconversation } from 'react-icons/si'
-import { VscDebugStackframeDot } from 'react-icons/vsc'
 
 
 
@@ -23,8 +19,9 @@ function FarmsPage() {
     const { loading, data, error } = useQuery(QUERY_FARM)
 
     const farmList = data ? data.farms : []
+    
     const [checkedItems, setCheckedItems] = useState([true, true])
-    // console.log(farmList[0].reviews[0].rating)
+
 
     return (
         <>
@@ -72,7 +69,7 @@ function FarmsPage() {
                     <Container maxW='100%'>
                         <Flex justifyContent='space-evenly' flexWrap='wrap'>
                             {farmList.map(farm => {
-                                return <FarmCard key={farm._id} title={farm.name} numericReview={farm.reviews.length} categories={farm.products.map(product => {
+                                return <FarmCard key={farm._id} title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length} categories={farm.products.map(product => {
                                     return product.categories[0].name
                                     // return product.categories
 

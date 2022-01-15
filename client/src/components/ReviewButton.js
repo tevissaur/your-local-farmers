@@ -20,9 +20,12 @@ import {
 } from "@chakra-ui/react";
 import auth from '../utils/auth'
 
-const ReviewButton = ({inputText, setInputText,reviews,setReviews,product}) => {
+const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating,farm}) => {
+
+  console.log(farm)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+  const [ratingInput, setRatingInput] = useState(0)
+  const [content, setContent] = useState('')
   const [postReview, {data,loading,error}] = useMutation(POST_REVIEW)
  
 
@@ -32,21 +35,22 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product}) => {
     e.preventDefault()
     if(!inputText) return
     const profile = auth.getProfile()
-    console.log(profile.data._id)
+    console.log(profile.data._id, inputText, parseInt(rating))
 
     const newReview = await postReview({
       variables: {
         review: {
             author: profile.data._id,
             content: inputText,
-            rating :5
+            rating : parseInt(rating)
         },
-        product_id: product._id
+        product_id: product._id,
+    
 
       }
     })
     console.log(newReview)
-    setReviews([...reviews, newReview.data.postReview])
+    setReviews([newReview.data.postReview, ...reviews ])
     setInputText("")
     onClose()
 
@@ -84,12 +88,14 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product}) => {
                 id="country"
                 placeholder="EXCELLENT"
                 backgroundColor="primary.yellowGreen"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
               >
-                <option>5- EXCELLENT</option>
-                <option>4-GOOD</option>
-                <option>3-AVERAGE</option>
-                <option>2-POOR</option>
-                <option>1-BAD</option>
+                <option value="5">5- EXCELLENT</option>
+                <option value="4">4-GOOD</option>
+                <option value="3">3-AVERAGE</option>
+                <option value="2">2-POOR</option>
+                <option value="1">1-BAD</option>
               </Select>
             </FormControl>
           </ModalBody>

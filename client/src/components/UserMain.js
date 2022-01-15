@@ -55,14 +55,14 @@ const UserMain = ({ userData }) => {
 
     return (
         <>
-            <Flex>
+            <Flex h="60vh">
                 <Avatar src='https://bit.ly/sage-adebayo' w='250px' h='250px' />
-                <Flex ml='3' flexWrap='wrap'>
-                    <Heading fontWeight='bold' w="100%" marginBottom={3}>
+                <Flex ml='3' flexWrap='wrap' flexDirection='column' justifyContent='flex-start'>
+                    <Heading fontWeight='bold' w="100%" h="min-content" marginBottom={3}>
                         Hello, {user.username}
                         <Divider />
                     </Heading>
-                    <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
+                    <FormControl fontSize='sm' display='flex' flexDirection='column' flexWrap="wrap" justifyContent='space-around' h="50%"  onSubmit={handleSubmit}>
                         <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
 
                             {editingFirstName ? (
@@ -131,7 +131,7 @@ const UserMain = ({ userData }) => {
                             {editingEmail ? (
                                 <Flex w="100%" justifyContent='start' alignItems='center'>
                                     <FormLabel width='145px' fontSize={22}>
-                                        Add Last Name:
+                                        Change Email:
                                     </FormLabel>
                                     <Input w="50%" value={user.email} onChange={({ target }) => setUser({
                                         ...user,
@@ -141,7 +141,7 @@ const UserMain = ({ userData }) => {
                                         setEditingEmail(false)
                                         handleSubmit(e)
                                     }}>
-                                        Add Name
+                                        Change Email
                                     </Button>
                                 </Flex>
                             ) : (

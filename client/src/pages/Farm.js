@@ -12,35 +12,35 @@ import ProductCard from "../components/ProductCard";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import {
-  Flex,
-  Container,
-  Image,
-  Heading,
-  Text,
-  Box,
-  Button,
-} from "@chakra-ui/react";
+import { Flex, Center, Image, Heading, Text, Box } from "@chakra-ui/react";
 import { AiFillStar } from "react-icons/ai";
 const Farm = () => {
   const [inputText, setInputText] = useState("");
   const [rating, setRating] = useState("");
+  const [farmReviews, setFarmReviews] = useState([])
   const { name } = useParams();
   const { loading, data, error } = useQuery(QUERY_FARM);
+
+  const farmList = data ? data.farms : [];
+  const foundFarm = farmList.find((farm) => farm.name.toLowerCase() === name);
+  
+  useEffect(() => {
+    if (foundFarm) {
+      setFarmReviews([...foundFarm.reviews].reverse());
+    }
+  }, [foundFarm]);
 
   if (loading) {
     return "<h2>Loading</h2>";
   }
-
-  const farmList = data ? data.farms : [];
-  const foundFarm = farmList.find((farm) => farm.name.toLowerCase() === name);
+  
   console.log(foundFarm);
 
   return (
     <>
       <Flex>
         <SideNavBar />
-        <Box m={4} flex="1">
+        <Box flex="1">
           <Header />
           <Box>
             <Flex
@@ -50,7 +50,7 @@ const Farm = () => {
               boxShadow="1px 1px black"
               p="10px"
               px="20px"
-              margin={20}
+              margin={15}
               justifyContent="space-evenly"
             >
               <Box>
@@ -73,7 +73,15 @@ const Farm = () => {
                   <Text fontWeight="600" mt={1}>
                     {foundFarm.address}
                   </Text>
-                  <Text fontWeight="600" mt={1} color="green" fontSize="xl">
+
+                  <Text
+                    as="samp"
+                    fontWeight="600"
+                    mt={1}
+                    color="green"
+                    fontSize="xl"
+                    textAlign="center"
+                  >
                     {foundFarm.story}
                   </Text>
                 </Flex>
@@ -93,7 +101,7 @@ const Farm = () => {
                       <AiFillStar fontSize="15px" />
                     </Flex>
                     <Text fontSize="sm">
-                      Based on {foundFarm.reviews.length} reviews
+                      Based on {farmReviews.length} reviews
                     </Text>
                     {Auth.loggedIn() ? (
                       <ReviewButton
@@ -102,22 +110,16 @@ const Farm = () => {
                         rating={rating}
                         setRating={setRating}
                         farm={foundFarm}
+                        reviews={farmReviews}
+                        setReviews={setFarmReviews}
                       />
                     ) : (
                       ""
                     )}
                   </Flex>
                 </Flex>
-              </Box>
-              <Box>
-                <Flex marginTop={15} justifyContent="center" flexWrap="wrap">
-                  {foundFarm.products.map((product, idx) => (
-                    <FarmProductCard key={idx} product={product} />
-                  ))}
-                </Flex>
-
                 <Box>
-                  {foundFarm.reviews.map((review, idx) => (
+                  {farmReviews.map((review, idx) => (
                     <Box m="15px" key={idx}>
                       <Flex>
                         {Array(review.rating)
@@ -130,13 +132,13 @@ const Farm = () => {
                       <Flex gap={6}>
                         <Flex>
                           <RiDoubleQuotesL />
-                          <Text>{review.content}...</Text>
+                          <Text fontSize="sm">{review.content}...</Text>
                           <RiDoubleQuotesR />
                         </Flex>
 
                         <Flex alignItems="center">
                           <BsPersonFill />
-                          <Text>{review.author.firstName}</Text>
+                          <Text fontSize="sm">{review.author.firstName}</Text>
                         </Flex>
                       </Flex>
                     </Box>
@@ -145,6 +147,13 @@ const Farm = () => {
                     <p key={idx}>{review.rating}</p>
                   ))} */}
                 </Box>
+              </Box>
+              <Box>
+                <Flex marginTop={15} justifyContent="center" flexWrap="wrap">
+                  {foundFarm.products.map((product, idx) => (
+                    <FarmProductCard key={idx} product={product} />
+                  ))}
+                </Flex>
               </Box>
             </Flex>
           </Box>

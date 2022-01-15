@@ -15,43 +15,6 @@ function MyFarm() {
     
     const {data, error, loading} = useQuery(GET_ME, {
         variables: { id: userDetails.data._id }
-<<<<<<< HEAD
-    })
-    const { data: farmData } = useQuery(GET_MY_FARM, {
-        variables: {
-            id: userDetails.data._id
-        }
-    })
-    console.log(data)
-    const [isFarmer, setIsFarmer] = useState(userDetails.data.isFarmer)
-
-
-    useEffect(() => {
-        data == null ? console.log("Bro") : setIsFarmer(data.me.isFarmer)
-        console.log(farmData)
-
-    }, [isFarmer, data, farmData])
-
-
-
-    return (
-        <Flex>
-            <SideNavBar />
-            <Box m={4} flex='1'>
-                <Header />
-                <Container maxW='100%'>
-                    <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                        {isFarmer ? (
-
-                            <MyFarmDash />
-                        ) : (
-                            <MyFarmForm setIsFarmer={setIsFarmer} />
-                        )}
-                    </Flex>
-                </Container>
-            </Box>
-        </Flex>
-=======
     }
     ) 
     console.log(data)
@@ -72,12 +35,11 @@ function MyFarm() {
         <Header/>
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                    {isFarmer? (<MyFarmDash farmData={data}/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}
+                    {isFarmer? (<MyFarmDash userData={data}/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}
                 </Flex>
             </Container>
         </Box>
     </Flex>
->>>>>>> 4434b67920c3926376b87a3da73f6a59909b2a83
     )
 }
 

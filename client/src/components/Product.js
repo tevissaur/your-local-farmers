@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-import Footer from "./Footer";
+
 import {
   Button,
   Box,
@@ -19,7 +19,7 @@ import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
 import SideNavBar from "./SideNavBar";
 import Header from "./Header";
-import { AiFillStar} from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import customTheme from "../extendedTheme";
 import Auth from "../utils/auth";
 import { useEffect, useState, useRef } from "react";
@@ -76,9 +76,6 @@ const Product = () => {
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
 
-  const reviews = foundProduct.reviews.map((review) => review);
-  console.log(reviews);
-
   return (
     <>
       <Flex>
@@ -87,22 +84,19 @@ const Product = () => {
           <Header />
           <Box
             border="green 2px solid"
-            borderRadius="25px"
             alignItems="stretch"
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            margin={20}
-
+            margin={10}
           >
             <Flex>
               <Box>
-                <img src={foundProductImage} style={{ width: "300px" , borderRadius:"25px"}}/>
+                <img src={foundProductImage} style={{ width: "300px" }} />
 
                 <Flex
                   p="10px"
                   backgroundColor="darkGreen"
-                  borderRadius="25px"
                   color="yellowGreen"
                   justifyContent="center"
                   mt="10px"
@@ -116,7 +110,6 @@ const Product = () => {
                     </Flex>
                     <Text fontSize="sm">
                       Based on {foundProduct.reviews.length} reviews
-
                     </Text>
                     {Auth.loggedIn() ? (
                       <ReviewButton
@@ -166,7 +159,6 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-
                   <Button
                     leftIcon={<CgShoppingCart fontSize="20px" />}
                     backgroundColor="primary.lightGreen"
@@ -181,12 +173,11 @@ const Product = () => {
           </Box>
           <Box
             border="green 2px solid"
-            borderRadius="25px"
             alignItems="stretch"
             justifyItems="center"
             backgroundColor="lightyellow"
             padding={5}
-            mx={20}
+            mx={10}
           >
             <Text
               fontSize="2xl"
@@ -197,7 +188,6 @@ const Product = () => {
             >
               Customer Review
             </Text>
-
             {/* {reviews.map((review,idx) => (
               <h1 key={idx}>{review.content}</h1>
             ))} */}
@@ -227,7 +217,6 @@ const Product = () => {
               </Box>
             ))}
           </Box>
-          <Footer />
         </Box>
       </Flex>
     </>

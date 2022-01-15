@@ -20,9 +20,9 @@ import {
 } from "@chakra-ui/react";
 import auth from '../utils/auth'
 
-const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating}) => {
+const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating,farm}) => {
 
-  console.log(rating)
+  console.log(farm)
   const { isOpen, onOpen, onClose } = useDisclosure();
   
   const [postReview, {data,loading,error}] = useMutation(POST_REVIEW)
@@ -43,7 +43,8 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
             content: inputText,
             rating :parseInt(rating)
         },
-        product_id: product._id
+        product_id: product._id,
+    
 
       }
     })

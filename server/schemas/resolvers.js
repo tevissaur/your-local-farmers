@@ -230,7 +230,7 @@ const resolvers = {
                 console.log(err)
             }
         },
-        postReview: async (parent, { review, product_id, user, farm }) => {
+        postReview: async (parent, { review, product_id, user, farm_id }) => {
             console.log(review)
             const newReview = await (await Review.create(review))
             const newReviewWithAuthor = await Review.findById(newReview._id).populate([
@@ -246,6 +246,12 @@ const resolvers = {
                 {new: true}
             )
             console.log(newReviewWithAuthor)
+            const reviewedFarm = await Farm.findByIdAndUpdate(
+                farm_id,
+                {$push : {reviews : newReviewWithAuthor}},
+                {new: true}
+
+            )
    
             return newReviewWithAuthor
             //     return reviewdProduct

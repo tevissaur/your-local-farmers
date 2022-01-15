@@ -15,7 +15,7 @@ function Cart({ }) {
             <Flex 
                 justifyContent='center'
                 alignItems='center' 
-                mt={6} 
+                mt={5} 
                 fontWeight='600'
                 backgroundColor='white'
                 flexDir='column'
@@ -30,20 +30,24 @@ function Cart({ }) {
             <ProductCardCart name='Flowers' quantity={2} price={2}  />
             <ProductCardCart name='Flowers' quantity={2} price={2}  />
             <ProductCardCart name='Flowers' quantity={2} price={2}  />
-        <Flex mt={3}  mb={2} justifyContent='flex-end' alignItems='center'>
-            <Text fontSize='35px'>Total:</Text>
-            <Text ms={2} fontSize='35px'>$200</Text>
-        </Flex>
-        <Center>
+
+        <Flex mt={3}  mb={2} justifyContent='center' alignItems='center' flexDir='column'>
+            
+            <Flex>
+                <Text fontSize='35px'>Total:</Text>
+                <Text ms={2} fontSize='35px'>$200</Text>
+            </Flex> 
             <Button 
-                backgroundColor='primary.lightGreen'
-                mb={3} 
                 fontSize='25px'
                 border='1px solid grey'
                 boxShadow='1px 1px black'
-            >
-                Checkout
+                backgroundColor='primary.lightGreen'
+
+                >
+                    Checkout
             </Button>
+        </Flex>
+        <Center>
 
         </Center>
 

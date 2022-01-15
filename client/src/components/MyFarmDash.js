@@ -13,22 +13,10 @@ import AddProductForm from './AddProductForm';
 import {GET_MY_FARM} from '../utils/queries'
 import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
-import { useState, useEffect } from 'react'
+import MyFarmProducts from './MyFarmProducts';
 
-function MyFarmDash({userData}) {
-    const [farmData, setFarmData] = useState({})
-
-    const {data, loading, error} = useQuery(GET_MY_FARM,{
-        variables: {id: userData.me._id}
-    })
-    useEffect(() => {
-        try {
-            loading? console.log(loading) : console.log(data)
-        }
-        catch (err){
-            console.log(err)
-        }
-    }, [loading, data, error, farmData])
+function MyFarmDash({ farmData }) {
+    // console.log(farmData)
 
     return (
         <Container maxW='100%'>
@@ -49,11 +37,15 @@ function MyFarmDash({userData}) {
                                     <MyOrders />
                                 </TabPanel>
                                 <TabPanel p={1}>
+                                    <MyFarmProducts products={farmData}/>
+                                </TabPanel>
+
+                                <TabPanel>
+                                    <AddProductForm />
 
                                 </TabPanel>
 
                                 <TabPanel>
-                                    <EditFarm farmData={farmData}/>
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

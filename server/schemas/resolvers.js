@@ -144,7 +144,7 @@ const resolvers = {
                     }
                 ]
             )
-            console.log(farm)
+            console.log(farm, 'farmdash')
             return farm
         },
         categories: async (parent, args) => {
@@ -154,7 +154,7 @@ const resolvers = {
                     model: 'Product'
                 }
             ])
-            console.log(productCategory)
+            console.log(productCategory, 'categories')
             return productCategory
         },
         farmStore: async (parent, { _id }) => {

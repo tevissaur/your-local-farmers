@@ -35,7 +35,7 @@ const Category = () => {
       <Flex >
         <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
-          <Header />
+       
 
           <Flex
             borderRadius="25px"

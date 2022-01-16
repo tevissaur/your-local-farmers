@@ -28,7 +28,7 @@ function FarmsPage() {
             <Flex>
                 <SideNavBar />
                 <Box m={4} flex='1'>
-                    <Header  />
+                 
 
                     <Flex justifyContent='center'>
                         <Container

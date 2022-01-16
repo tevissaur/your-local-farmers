@@ -41,7 +41,7 @@ const Farm = () => {
       <Flex>
         <SideNavBar />
         <Box flex="1">
-          <Header />
+      
           <Box>
             <Flex
               border="black 2px solid"

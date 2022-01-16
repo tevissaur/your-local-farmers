@@ -22,7 +22,7 @@ function Cart({cartItems, setCartItems}) {
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1">
-          <Header />
+     
           <Container maxW="container.md">
             <Flex
               justifyContent="center"

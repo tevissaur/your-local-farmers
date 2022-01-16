@@ -94,7 +94,7 @@ const Product = ({cartItems,setCartItems}) => {
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
-          <Header cartItems={cartItems} />
+       
           <Box
             border="green 2px solid"
             alignItems="stretch"

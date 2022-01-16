@@ -32,7 +32,7 @@ function MyFarm() {
         <Flex>
         <SideNavBar />
         <Box m={4} flex='1'>
-        <Header/>
+      
             <Container maxW='100%'>
                 <Flex justifyContent='space-evenly' flexWrap='wrap'>
                     {isFarmer? (<MyFarmDash userData={data}/>): (<MyFarmForm setIsFarmer={setIsFarmer} />)}

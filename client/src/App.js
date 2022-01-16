@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState,useEffect } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider,Box,Flex } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
 import Header from './components/Header'
@@ -37,8 +37,12 @@ function App() {
     <ApolloProvider client={client}>
       <ChakraProvider theme={customTheme}>
         <Router>
+          <Flex ml={20} flexDirection="column"alignItems="center" flex="1">
+          <Header cartItems={cartItems}/>
+          </Flex>
+        
           <Routes>
-            <Route exact path="/" element={<Homepage  cartItems={cartItems}/>}>
+            <Route exact path="/" element={<Homepage />}>
 
             </Route>
             <Route

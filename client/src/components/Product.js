@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-
+import AddToCardBtn from "./AddToCardBtn";
 import {
   Button,
   Box,
@@ -159,14 +159,7 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <Button
-                    leftIcon={<CgShoppingCart fontSize="20px" />}
-                    backgroundColor="primary.lightGreen"
-                    variant="solid"
-                    fontSize="sm"
-                  >
-                    Add To Cart
-                  </Button>
+                  <AddToCardBtn />
                 </Box>
               </Box>
             </Flex>

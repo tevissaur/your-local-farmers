@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
-import { QUERY_FARM } from '../utils/queries';
+import { QUERY_FARM, QUERY_CATEGORIES } from '../utils/queries';
 import { Container, Flex, Box, Checkbox, CheckboxGroup, useCheckboxGroup, Button, Heading, Image, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
@@ -14,15 +14,37 @@ import { BsQuestionLg } from 'react-icons/bs'
 
 
 
+
 function FarmsPage() {
 
     const { loading, data, error } = useQuery(QUERY_FARM)
-
+    
     const farmList = data ? data.farms : []
     
-    const [checkedItems, setCheckedItems] = useState([true, true])
+    const [visibleFarms, setVisibleFarms] = useState()
 
+    const categoryList = data ? data.categories : []
+   
+    const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
+    
+    
+    useEffect(() => {
+        setSelectedCategoryNames(categoryList.map( category => category.name))
+    },[loading])
+    console.log(selectedCategoryNames)
 
+    useEffect(()=> {
+        setVisibleFarms(farmList)
+    },[categoryList])
+
+    const handleCheckBoxChange = (e) => {
+        const name = e.target.value
+        const updatedSelectedCategoriesNames = selectedCategoryNames.includes(name)
+            ? selectedCategoryNames.filter( categoryId => categoryId !== name)
+            : [...selectedCategoryNames, name] 
+        setSelectedCategoryNames(updatedSelectedCategoriesNames)
+        console.log(selectedCategoryNames)
+    }
     return (
         <>
             <Flex>
@@ -40,29 +62,21 @@ function FarmsPage() {
                             boxShadow='2px 2px black'
                         >
 
-                            <CheckboxGroup
-                                colorScheme='green'
-                                defaultValue={['baked', 'dairy', 'fruits', 'flowers', 'beverages', 'seasonal']}
-                            >
-                                <Flex mt={3} justifyContent='space-evenly' alignItems='center' flexWrap='wrap'>
-                                    <Checkbox fontWeight='600' value="baked">Baked Goods</Checkbox>
-                                    <Checkbox fontWeight='600' value="dairy">Dairy, Meat & Eggs</Checkbox>
-                                    <Checkbox fontWeight='600' value="fruits">Fruits & Vegetables</Checkbox>
-                                    <Checkbox fontWeight='600' value="flowers">Flowers & Plants</Checkbox>
-                                    <Checkbox fontWeight='600' value="beverages">Beverages</Checkbox>
-                                    <Checkbox fontWeight='600' value="seasonal">Seasonal Products</Checkbox>
+                        <Flex mt={3} justifyContent='space-evenly' alignItems='center' flexWrap='wrap'>
+                            {categoryList.map(category => {
+                                const checked = selectedCategoryNames.includes(category.name)
+                                return <Checkbox
+                                        colorScheme="green"
+                                        fontWeight='600' 
+                                        onChange={handleCheckBoxChange} 
+                                        value={category.name}
+                                        key={category.name}
+                                        isChecked={checked}
+                                        >
+                                            {category.name}
+                                        </Checkbox>
+                            })}     
                                 </Flex>
-                            </CheckboxGroup>
-
-                            <Flex justifyContent='center' mb={3}>
-                                <Button
-                                    mt={2}
-                                    size='sm'
-                                    backgroundColor={customTheme.colors.primary.lightGreen}
-                                >
-                                    Submit Filtered Selection
-                                </Button>
-                            </Flex>
                         </Container>
                     </Flex>
 

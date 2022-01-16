@@ -25,7 +25,7 @@ function MyFarm() {
         loading? setIsFarmer():setIsFarmer(data.me.isFarmer)
         
         
-    }, [isFarmer, loading, data])
+    }, [isFarmer, loading, data, data?.me?.isFarmer])
     
 
     return (

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState,useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
@@ -9,7 +10,7 @@ import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
-import ProductCard from './components/ProductCard'
+
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Cart from "./components/Cart";
 
@@ -21,6 +22,17 @@ const client = new ApolloClient({
 
 
 function App() {
+  const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem('cartItems')) || [])
+
+  useEffect(() => {
+    localStorage.setItem("cartItems",JSON.stringify(cartItems))
+    
+    
+  }, [cartItems])
+
+
+
+
   return (
     <ApolloProvider client={client}>
       <ChakraProvider theme={customTheme}>
@@ -39,7 +51,7 @@ function App() {
               path="/category/:name" element={<Category />}
             ></Route>
             <Route
-              path="/products/:id" element={<Product />}
+              path="/products/:id" element={<Product cartItems={cartItems} setCartItems={setCartItems}/>}
             ></Route>
             
             <Route path='/farms' element={<FarmsPage />}>
@@ -49,7 +61,7 @@ function App() {
             </Route>
 
             <Route
-              path="/cart" element={<Cart />}
+              path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems}/>}
             ></Route>
           </Routes>
         </Router>

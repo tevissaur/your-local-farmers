@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-import AddToCardBtn from "./AddToCardBtn";
+import Cart from "./Cart";
 import {
   Button,
   Box,
@@ -25,12 +25,13 @@ import Auth from "../utils/auth";
 import { useEffect, useState, useRef } from "react";
 import ReviewButton from "./ReviewButton";
 
-const Product = () => {
+const Product = ({cartItems,setCartItems}) => {
   const [inputText, setInputText] = useState("");
   const [rating, setRating] = useState("");
 
   // const [reviews, setReviews] = useState("");
   const [dataReviews, setDataReviews] = useState([]);
+  
 
   const handleLogOut = () => {
     Auth.logout();
@@ -75,6 +76,18 @@ const Product = () => {
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
+
+  const handleAddToCart = (product)=>{
+  
+    console.log('test')
+    const productExist = cartItems.find((item) => item._id === product._id)
+    if(productExist){
+      setCartItems(cartItems.map((item) => item._id === product._id ? {...productExist, quantity: productExist.quantity + 1} : item))
+    } else {
+      setCartItems([...cartItems,{...product, quantity: 1} ])
+    }
+  }
+  
 
   return (
     <>
@@ -159,7 +172,15 @@ const Product = () => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <AddToCardBtn />
+                  <Button
+                    leftIcon={<CgShoppingCart fontSize="20px" />}
+                    backgroundColor="primary.lightGreen"
+                    variant="solid"
+                    fontSize="sm"
+                    onClick={() => handleAddToCart(foundProduct)}
+                  >
+                    Add To Cart
+                  </Button>
                 </Box>
               </Box>
             </Flex>

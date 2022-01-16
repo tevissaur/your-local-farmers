@@ -27,13 +27,11 @@ function MyFarm() {
 
 
     useEffect(() => {
-        data == null ? console.log("Bro") : setIsFarmer(data.me.isFarmer)
-        console.log(farmData, farmError)
-        console.log(data)
-
-    }, [isFarmer, data, farmData, data?.me?.isFarmer])
-
-
+        loading? setIsFarmer():setIsFarmer(data.me.isFarmer)
+        
+        
+    }, [isFarmer, loading, data, data?.me?.isFarmer])
+    
 
     return (
         <Flex>

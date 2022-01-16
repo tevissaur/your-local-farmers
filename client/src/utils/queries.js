@@ -22,6 +22,10 @@ export const GET_MY_FARM = gql`
 
 export const QUERY_FARM = gql`
   query Farms {
+    categories {
+      _id
+      name
+    }
     farms {
       _id
       name

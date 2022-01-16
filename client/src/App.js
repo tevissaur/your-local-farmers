@@ -3,14 +3,14 @@ import { useState,useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
-import { categoryData } from "./categoryData";
+import Header from './components/Header'
 import Product from "./components/Product";
 import Profile from "./pages/Profile"
 import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
-
+import { CgShoppingCart } from 'react-icons/cg'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Cart from "./components/Cart";
 
@@ -38,7 +38,7 @@ function App() {
       <ChakraProvider theme={customTheme}>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Homepage />}>
+            <Route exact path="/" element={<Homepage  cartItems={cartItems}/>}>
 
             </Route>
             <Route

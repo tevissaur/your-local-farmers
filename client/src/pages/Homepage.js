@@ -8,13 +8,14 @@ import { BsFillHeartFill } from 'react-icons/bs'
 import customTheme from "../extendedTheme";
 import wheat from '../assets/wheat.jpg'
 
-const Homepage = () => {
+const Homepage = ({cartItems}) => {
+  console.log(cartItems)
   return (
     <>
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1">
-          <Header />
+          {/* <Header cartItems={cartItems}/> */}
           <Container maxW='container.lg' mt={2}>
             <Box
               borderRadius='25px'

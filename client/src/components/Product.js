@@ -94,7 +94,7 @@ const Product = ({cartItems,setCartItems}) => {
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
-          <Header />
+          <Header cartItems={cartItems} />
           <Box
             border="green 2px solid"
             alignItems="stretch"
@@ -172,7 +172,8 @@ const Product = ({cartItems,setCartItems}) => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <Button
+                  {Auth.loggedIn() ? (
+                    <Button
                     leftIcon={<CgShoppingCart fontSize="20px" />}
                     backgroundColor="primary.lightGreen"
                     variant="solid"
@@ -181,6 +182,8 @@ const Product = ({cartItems,setCartItems}) => {
                   >
                     Add To Cart
                   </Button>
+                  ) : ("")}
+                  
                 </Box>
               </Box>
             </Flex>

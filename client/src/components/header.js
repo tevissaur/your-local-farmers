@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
 import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({cartItems}) => {
+    console.log('test')
+    console.log(cartItems)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn())
     const handleLogOut = () => {
 
@@ -26,6 +28,10 @@ const Header = () => {
                     <>
                         <Link to={"/cart"}>
                             <CgShoppingCart fontSize='40px' />
+                            <span>
+                               
+
+                            </span>
 
                         </Link>
                         <Button onClick={handleLogOut} m="1">

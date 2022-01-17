@@ -15,7 +15,7 @@ function SideNavBar({ theme }) {
 
     const profile = loggedIn ? auth.getProfile() : []
     
-    const userName = profile.data?.firstName
+    const userName = profile.data?.username
 
     return (
         <Flex

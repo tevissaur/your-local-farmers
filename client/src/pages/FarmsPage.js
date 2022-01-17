@@ -15,9 +15,9 @@ function FarmsPage() {
     const { loading, data, error } = useQuery(QUERY_FARM)
     
     const farmList = data ? data.farms : []
+    console.log(farmList)
     
     const [visibleFarms, setVisibleFarms] = useState(farmList)
-    console.log(visibleFarms)
     const categoryList = data ? data.categories : []
    
     const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
@@ -26,7 +26,6 @@ function FarmsPage() {
     useEffect(() => {
         setSelectedCategoryNames(categoryList.map( category => category.name))
     },[loading])
-    console.log(selectedCategoryNames)
     
     
     useEffect(()=> {
@@ -41,17 +40,29 @@ selectedCategoryNames.includes(name)
             ? selectedCategoryNames.filter( categoryId => categoryId !== name)
             : [...selectedCategoryNames, name] 
         setSelectedCategoryNames(updatedSelectedCategoriesNames)
-        let filteredFarms = visibleFarms.filter(farm => {
-          farm.products.map( product => {
-               product.categories.map( category=> {
-                category.name.includes(selectedCategoryNames) 
 
-              })
-            })
-          })
-          console.log(filteredFarms)
-          setVisibleFarms(filteredFarms)
+    let displayFarms = []
+        for (let i = 0; i < farmList.length; i++) {
+            for (let p = 0; p < farmList[i].products.length; p++){
+                for(let c = 0; c < farmList[i].products[p].categories.length; c++){
+                    for (let f = 0; f < selectedCategoryNames.length; f++){
+                        console.log('F Quienten')
+                        // if(farmList[i].products[p].categories[c].includes(selectedCategoryNames[f])){
+                        //     displayFarms.push(farmList[i])
+                        // } else {
+                        //   if(displayFarms.length > 0 ) {
+                        //    displayFarms = displayFarms.slice(farmList[i], farmList[i])
+                        //    return 
+                        //   } else {
+                        //       return 
+                        //   }
+                        // }
+                    }
+                }
         }
+        }
+        setVisibleFarms(displayFarms)
+    }
     return (
         <>
             <Flex>
@@ -142,16 +153,16 @@ as={BsQuestionLg} color='red' />
 be a farmer?
                                             </ListItem>
                                             <ListItem ms={8} fontSize='22px' 
-color='primary.yellowGreen'>
+                                              color='primary.yellowGreen'>
                                                 Absolutely not! It certainly 
-helps if you are looking to make a living off of the goods you are selling but 
-if you are looking for that next side hustle or as a hobbyist there is no better
-way to get involved in your community!
+                                                helps if you are looking to make a living off of the goods you are selling but 
+                                                if you are looking for that next side hustle or as a hobbyist there is no better
+                                                way to get involved in your community!
                                             </ListItem>
                                             <ListItem> <ListIcon color='red' 
-as={BsQuestionLg} />
+                                                as={BsQuestionLg} />
                                                 Is there a monthly quota you 
-need to meet to continue being a farmer?
+                                                need to meet to continue being a farmer?
                                             </ListItem>
                                             <ListItem ms={8} fontSize='22px' 
 color='primary.yellowGreen'>

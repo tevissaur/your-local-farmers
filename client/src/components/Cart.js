@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import SideNavBar from "./SideNavBar";
-
+import CheckOutBtn from "./CheckOutBtn";
 import {
   Flex,
   Box,
@@ -68,14 +68,7 @@ function Cart({cartItems, setCartItems}) {
                       ${totalPrice}
                     </Text>
                   </Flex>
-                  <Button
-                    fontSize="25px"
-                    border="1px solid grey"
-                    boxShadow="1px 1px black"
-                    backgroundColor="primary.lightGreen"
-                  >
-                    Checkout
-                  </Button>
+                  {cartItems.length === 0 ? "" : <CheckOutBtn />}
                 </Flex>
                 <Center></Center>
               </Container>

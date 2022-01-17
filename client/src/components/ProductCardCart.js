@@ -31,7 +31,9 @@ function ProductCardCart({ item, cartItems, setCartItems }) {
 
   const handleReduceItem = (product) => {
     const productExist = cartItems.find((item) => item._id === product._id);
-    if (productExist === 0) {
+   
+    if (productExist.quantity === 1) {
+      
       setCartItems(cartItems.filter((item) => item._id !== product._id));
     } else {
       setCartItems(
@@ -47,7 +49,7 @@ function ProductCardCart({ item, cartItems, setCartItems }) {
     setCartItems(cartItems.filter((el) => el._id !== item._id));
   };
 
-  console.log(item);
+
   const cardArr = imageSeeds.map((card) => card);
   const foundProductImage = cardArr
     .filter((arr) => arr.name === item.name)

@@ -300,7 +300,18 @@ const resolvers = {
         },
         createPO: async (parent, { PO }) => {
             const newPO = await PurchaseOrder.create(PO)
-            return newPO.populate()
+            const POWithFarm = await PurchaseOrder.findById(newPO._id).populate([
+                {
+                    path:"seller",
+                    model:"Farm"
+                },
+                {
+                    path:"buyer",
+                    model:"User"
+                },
+
+            ])
+            return POWithFarm
         },
         updateUser: async (parent, { user }) => {
             console.log(user)

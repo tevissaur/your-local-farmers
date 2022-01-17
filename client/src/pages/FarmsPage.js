@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { QUERY_FARM, QUERY_CATEGORIES } from '../utils/queries';
 import { Container, Flex, Box, Checkbox, CheckboxGroup, useCheckboxGroup, 
-Button, Heading, Image, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
+Button, Heading, Image, Text, List, ListItem, ListIcon, filter } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
@@ -16,7 +16,8 @@ function FarmsPage() {
     
     const farmList = data ? data.farms : []
     
-    const [visibleFarms, setVisibleFarms] = useState()
+    const [visibleFarms, setVisibleFarms] = useState(farmList)
+    console.log(visibleFarms)
     const categoryList = data ? data.categories : []
    
     const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
@@ -26,9 +27,13 @@ function FarmsPage() {
         setSelectedCategoryNames(categoryList.map( category => category.name))
     },[loading])
     console.log(selectedCategoryNames)
+    
+    
     useEffect(()=> {
         setVisibleFarms(farmList)
     },[categoryList])
+
+
     const handleCheckBoxChange = (e) => {
         const name = e.target.value
         const updatedSelectedCategoriesNames = 
@@ -36,8 +41,17 @@ selectedCategoryNames.includes(name)
             ? selectedCategoryNames.filter( categoryId => categoryId !== name)
             : [...selectedCategoryNames, name] 
         setSelectedCategoryNames(updatedSelectedCategoriesNames)
-        console.log(selectedCategoryNames)
-    }
+        let filteredFarms = visibleFarms.filter(farm => {
+          farm.products.map( product => {
+               product.categories.map( category=> {
+                category.name.includes(selectedCategoryNames) 
+
+              })
+            })
+          })
+          console.log(filteredFarms)
+          setVisibleFarms(filteredFarms)
+        }
     return (
         <>
             <Flex>
@@ -57,7 +71,7 @@ selectedCategoryNames.includes(name)
 alignItems='center' flexWrap='wrap'>
                             {categoryList.map(category => {
                                 const checked = 
-selectedCategoryNames.includes(category.name)
+                                  selectedCategoryNames.includes(category.name)
                                 return <Checkbox
                                         colorScheme="green"
                                         fontWeight='600' 
@@ -76,10 +90,9 @@ selectedCategoryNames.includes(category.name)
                         <Flex justifyContent='space-evenly' flexWrap='wrap'>
                             {farmList.map(farm => {
                                 return <FarmCard key={farm._id} 
-title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length} 
-categories={farm.products.map(product => {
+                                                  title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length} 
+                                                  categories={farm.products.map(product => {
                                     return product.categories[0].name
-                                    // return product.categories
                                 })} />
                             })}
                         </Flex>
@@ -91,10 +104,15 @@ categories={farm.products.map(product => {
                             boxShadow='3px 3px black'
                         >
                             <Flex justifyContent='center' flexDir='column' >
-                                <Heading as='h2' color='primary.yellowGreen' 
-textAlign='center' fontSize='35px'>Are You A Farmer or Want To Be One?</Heading>
-                                <Heading textAlign='center' color='White' 
-fontSize='30px'>FAQs</Heading>
+                                <Heading as='h2'
+                                        color='primary.yellowGreen' 
+                                        textAlign='center' fontSize='35px'>
+                                  Are You A Farmer or Want To Be One?    
+                                </Heading>
+                                <Heading 
+                                  textAlign='center' 
+                                  color='White' 
+                                  fontSize='30px'>FAQs</Heading>
                                 <Container maxW='100%'>
                                     <Flex
                                         flexDir='row'
@@ -110,13 +128,13 @@ fontSize='30px'>FAQs</Heading>
                                             fontSize='25px'
                                         >
                                             <ListItem > <ListIcon 
-as={BsQuestionLg} color='red' />
+                                              as={BsQuestionLg} color='red' />
                                                 What if I am are not tech savy?
                                             </ListItem>
                                             <ListItem ms={8} fontSize='22px' 
-color='primary.yellowGreen'>
+                                              color='primary.yellowGreen'>
                                                 Dont worry we make it as stress 
-free as possible with an accessible managment system.
+                                                free as possible with an accessible managment system.
                                             </ListItem>
                                             <ListItem> <ListIcon 
 as={BsQuestionLg} color='red' />

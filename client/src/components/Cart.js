@@ -68,7 +68,7 @@ function Cart({cartItems, setCartItems}) {
                       ${totalPrice}
                     </Text>
                   </Flex>
-                  {cartItems.length === 0 ? "" : <CheckOutBtn />}
+                  {cartItems.length === 0 ? "" : <CheckOutBtn cartItems={cartItems} totalPrice={totalPrice}/>}
                 </Flex>
                 <Center></Center>
               </Container>

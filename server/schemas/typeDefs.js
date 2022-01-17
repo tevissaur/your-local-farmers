@@ -97,7 +97,7 @@ const typeDefs = gql`
         story: String
     }
     input NewPurchaseOrder {
-        seller: ID!
+        seller: ID
         buyer: ID!
         dateCreated: String
         items: [ID]!

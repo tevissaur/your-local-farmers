@@ -51,6 +51,7 @@ const Product = ({cartItems,setCartItems}) => {
 
   const productList = productData ? productData.products : [];
   const foundProduct = productList.find((product) => product._id === id);
+  console.log(foundProduct)
 
   useEffect(() => {
     if (foundProduct) {

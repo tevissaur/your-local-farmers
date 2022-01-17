@@ -127,7 +127,7 @@ const CheckoutBtn = ({ cartItems, totalPrice }) => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <PlaceOrderBtn cartItems={cartItems} />
+            <PlaceOrderBtn cartItems={cartItems} pickUpDate={pickUpDate} pickUpTime={pickUpTime} totalPrice={totalPrice}/>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>

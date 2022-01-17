@@ -14,24 +14,32 @@ import customTheme from "../extendedTheme";
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 
-const PlaceOrderBtn = ({cartItems}) => {
- 
+const PlaceOrderBtn = ({cartItems,pickUpDate, pickUpTime, totalPrice}) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   
  
 
   const redirectHome = () => {
     onClose();
-    // window.location.href="/"
-    // localStorage.removeItem("cartItems")
+    window.location.href="/"
+    localStorage.removeItem("cartItems")
   };
-  const handlePlaceOrder = () => {
   
-    console.log(cartItems);
-    console.log(localStorage.getItem("purchasedOrders"))
+  const handlePlaceOrder = () => {
+    
+    const purchasedOrder ={
+    products: cartItems,
+    pickUpTime,
+    pickUpDate,
+    totalPrice
+
+    }
+ 
+ 
     const purchasedOrders = JSON.parse(localStorage.getItem("purchasedOrders")) || []
    
-    purchasedOrders.push(cartItems)
+    purchasedOrders.push(purchasedOrder)
     localStorage.setItem("purchasedOrders", JSON.stringify(purchasedOrders) )
 
  

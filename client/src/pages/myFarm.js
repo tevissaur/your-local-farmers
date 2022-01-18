@@ -28,7 +28,6 @@ function MyFarm() {
     }, [isFarmer, data,  data?.me?.isFarmer])
 
 
-
     return (
         <Flex>
             <SideNavBar />

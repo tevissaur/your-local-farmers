@@ -10,6 +10,13 @@ import auth from '../utils/auth';
 
 function SideNavBar({ theme }) {
     const [navSize, changeNavSize] = useState("large")
+
+    const loggedIn = auth.loggedIn()
+
+    const profile = loggedIn ? auth.getProfile() : []
+    
+    const userName = profile.data?.username
+
     return (
         <Flex
             pos='sticky'
@@ -67,8 +74,7 @@ function SideNavBar({ theme }) {
                 <Flex mt={4} align='center'>
                     <Avatar size="sm" p='0' src={lightLogo} />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as='h3' size="sm">Alexander Leino</Heading>
-                        <Text>UI Designer</Text>
+                        <Heading as='h3' size="sm">{loggedIn ? userName : 'Sign In'}</Heading>
                     </Flex>
                 </Flex>
             </Flex>

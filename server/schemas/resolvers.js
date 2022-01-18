@@ -302,6 +302,7 @@ const resolvers = {
             return newFarm
         },
         createPO: async (parent, { PO }) => {
+            
             const newPO = await PurchaseOrder.create(PO)
             const POWithFarm = await PurchaseOrder.findById(newPO._id).populate([
                 {
@@ -312,8 +313,13 @@ const resolvers = {
                     path:"buyer",
                     model:"User"
                 },
+                {
+                    path:"items",
+                    model:"Product"
+                },
 
             ])
+            console.log(POWithFarm)
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {

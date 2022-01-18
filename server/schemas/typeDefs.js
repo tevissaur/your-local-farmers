@@ -101,7 +101,7 @@ const typeDefs = gql`
         buyer: ID!
         dateCreated: String
         items: [ID]!
-        pickUpTime: String!
+        pickUpTime: String
         orderTotal: Int
     }
 

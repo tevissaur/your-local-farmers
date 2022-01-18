@@ -22,12 +22,12 @@ import {
 } from "@chakra-ui/react";
 import auth from "../utils/auth";
 
-const CheckoutBtn = ({ cartItems, totalPrice }) => {
+const CheckOutBtn = ({ cartItems, totalPrice }) => {
  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [pickUpDate, setPickUpDate] = useState("");
   const [pickUpTime, setPickUpTime] = useState("");
-  const [createPO, { loading, data, error }] = useMutation(CREATE_PO);
+ 
   const firstField = useRef();
   const profile = auth.getProfile();
 
@@ -127,7 +127,7 @@ const CheckoutBtn = ({ cartItems, totalPrice }) => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <PlaceOrderBtn cartItems={cartItems} pickUpDate={pickUpDate} pickUpTime={pickUpTime} totalPrice={totalPrice}/>
+            <PlaceOrderBtn cartItems={cartItems} pickUpDate={pickUpDate} pickUpTime={pickUpTime} totalPrice={totalPrice} buyer={profile.data._id}/>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
@@ -138,4 +138,4 @@ const CheckoutBtn = ({ cartItems, totalPrice }) => {
   );
 };
 
-export default CheckoutBtn;
+export default CheckOutBtn;

@@ -20,7 +20,7 @@ const typeDefs = gql`
         avgScore: Int
         inSeason: Boolean
         categories: [Category]
-        farm: Farm
+        farm :String!
     }
     type Category {
         _id: ID!
@@ -97,7 +97,7 @@ const typeDefs = gql`
         story: String
     }
     input NewPurchaseOrder {
-        seller: ID
+        seller: ID!
         buyer: ID!
         dateCreated: String
         items: [ID]!

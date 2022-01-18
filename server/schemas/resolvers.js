@@ -13,7 +13,14 @@ const { signToken } = require('../utils/auth')
 const resolvers = {
     Query: {
         me: async (parent, { _id }) => {
-            return await User.findById(_id)
+            return await User.findById(_id).populate([
+                
+                    {
+                        path: 'purchasedOrders',
+                        model: 'PurchaseOrder'
+                    }
+                
+            ])
         },
         reviews: async (parent, args) => {
             return await Review.find().populate('author')
@@ -40,6 +47,13 @@ const resolvers = {
             // console.log(prod[0].getAvgReviewScore())
             return prod
         },
+    
+
+
+
+
+
+
         getPO: async (parent, { _id }) => {
             return await PurchaseOrder.findById(_id).populate([
                 {
@@ -319,7 +333,7 @@ const resolvers = {
                 },
 
             ])
-            console.log(POWithFarm)
+        
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {

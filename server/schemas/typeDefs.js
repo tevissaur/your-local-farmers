@@ -57,6 +57,7 @@ const typeDefs = gql`
         reviews: [Review]
         fullName: String
         profilePic: String 
+        purchasedOrders :[PurchaseOrder]
     }
     type Auth {
         token: ID!

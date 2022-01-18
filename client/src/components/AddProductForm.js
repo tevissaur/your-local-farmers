@@ -72,7 +72,13 @@ const AddProductForm = ({ farmId, setFarm }) => {
                 }
             })
             console.log(data)
-
+            setProductName('')
+            setProductCategories([])
+            setProductDescription('')
+            setProductPrice(0)
+            setProductQuant(0)
+        } else {
+            alert('Add all necessary fields')
         }
     }
 
@@ -117,11 +123,13 @@ const AddProductForm = ({ farmId, setFarm }) => {
                 </FormLabel>
                 <CheckboxGroup onClick={(event) => console.log(event)} >
                     {loading ? (
-                        console.log(data)
+                        <>
+
+                        </>
                     ) : (
                         data.categories.map((category) => {
                             return (
-                                <Checkbox onChange={(e) => handleChecked(e)} margin={3} key={category._id} id={category._id}>
+                                <Checkbox onChange={(e) => handleChecked(e)} margin={3} key={category._id} checked={false} id={category._id}>
                                     {category.name}
                                 </Checkbox>
 

@@ -28,7 +28,7 @@ const Header = ({ cartItems }) => {
                 <Link to={"/cart"}>
                   <CgShoppingCart fontSize="40px" />
                 </Link>
-                <span>{cartItems.reduce((total,item) =>  total+=item.quantity,0)}</span>
+                <span>{cartItems === undefined ? (<></>) : cartItems.reduce((total,item) =>  total+=item.quantity,0)}</span>
               </Flex>
 
               <Button onClick={handleLogOut} m="1">

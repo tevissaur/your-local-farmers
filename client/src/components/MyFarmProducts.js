@@ -1,27 +1,29 @@
-import { Text } from '@chakra-ui/react'
+import { Text, Flex } from '@chakra-ui/react'
+import FarmProductCard from './FarmProductCard'
 import { useEffect, useState } from 'react'
 
 
-const MyFarmProducts = ({ farmData }) => {
-    const [products, setProducts] = useState(farmData?.farmDashboard?.products)
-    useEffect(() => {
-        setProducts(farmData?.farmDashboard?.products)
-    }, [farmData])
+const MyFarmProducts = ({ products }) => {
+    
     console.log(products)
+
     return (
-        <>
-            {products?.length === 0 ? (
+        <Flex h="60vh" flexWrap="wrap" overflow="scroll" >
+            {(products?.length === 0) || (!products) ? (
                 <Text>
                     No products
                 </Text>
 
             ) : (
                 <>
-                    Some products
+                    
+                    {products.map((product) => {
+                        return <FarmProductCard product={product} key={product._id} />
+                    })}
                 </>
             )}
 
-        </>
+        </Flex>
     )
 }
 

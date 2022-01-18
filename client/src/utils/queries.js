@@ -9,6 +9,7 @@ export const GET_MY_FARM = gql`
       address
       story
       products {
+        _id
         name
         price
         quantity

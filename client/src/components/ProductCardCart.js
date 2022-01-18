@@ -1,9 +1,40 @@
 import React from 'react'
-import {Flex, Container, Text, Heading, Image, Box} from '@chakra-ui/react'
+import {Flex, Container, Text, Heading, Image, Box, Button} from '@chakra-ui/react'
 import asters from '../assets/flowersPlants/asters.jpg'
-import { ImCross } from 'react-icons/im'
-function ProductCardCart({image, name, quantity, price}) {
-    let total = price * quantity
+import { ImCross } from 'react-icons/im';
+import { imageSeeds } from "../imageSeeds";
+import AddProductBtn from './AddProductBtn';
+import RemoveProductBtn from './RemoveProductBtn';
+function ProductCardCart({item, cartItems, setCartItems}) {
+    const handleAddToCart = (product)=>{
+  
+        console.log('test')
+        const productExist = cartItems.find((item) => item._id === product._id)
+        if(productExist){
+          setCartItems(cartItems.map((item) => item._id === product._id ? {...productExist, quantity: productExist.quantity +1} : item))
+        } else {
+          setCartItems([...cartItems,{...product, quantity: 1} ])
+        }
+      }
+
+      const handleRemoveProduct =(product) =>{
+        const productExist = cartItems.find((item) => item._id === product._id)
+        if(productExist === 0){
+          setCartItems(cartItems.filter((item) => item._id !== product._id ))
+        } else {
+          setCartItems(
+            cartItems.map((item) => item._id === product._id ? {...productExist, quantity: productExist.quantity -1 } : item)
+          )
+          
+        }
+      
+      }
+    console.log(item)
+    const cardArr = imageSeeds.map((card) => card);
+  const foundProductImage = cardArr
+    .filter((arr) => arr.name === item.name)
+    .map((card) => card.img);
+ 
     
     return (
         <>
@@ -29,12 +60,12 @@ function ProductCardCart({image, name, quantity, price}) {
                 <Box 
                     me={2} 
                     fontSize='25px' 
-                    >{name}
+                    >{item.name}
                 </Box>
                     <Image  
                         ms={2} 
                         me={5} 
-                        src={asters} 
+                        src={foundProductImage} 
                         boxSize='60px' 
                         mb={2} 
                     >
@@ -47,12 +78,16 @@ function ProductCardCart({image, name, quantity, price}) {
                     justifyContent='space-between' 
                     fontSize='25px'
                 >
-                    <Box>${price}</Box>
-                    <Box>x{quantity}</Box>
+                    
+                    ${item.price} {item.quantity}
+                    <Button onClick={() => handleAddToCart(item)}>+</Button>
+                   <Button onClick={() => handleRemoveProduct(item)}>-</Button>
+                    
+                   
                 </Flex>
 
                     <Flex alignItems='center'>
-                        <Box fontSize='25px'>${total}</Box>
+                        <Box fontSize='25px'>$</Box>
                     </Flex>  
                 <Flex>
                         <ImCross color='red' fontSize='25px' />

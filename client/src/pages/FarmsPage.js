@@ -106,10 +106,12 @@ function FarmsPage() {
           <Container maxW="100%">
             <Flex justifyContent="space-evenly" flexWrap="wrap">
               {farmList.map((farm) => {
+                console.log(farm)
                 return (
                   <FarmCard
                     key={farm._id}
                     title={farm.name}
+                    reviews={farm.reviews}
                     numericReview={farm.reviews.length}
                     categories={farm.products.map((product) => {
                       return product.categories[0].name;

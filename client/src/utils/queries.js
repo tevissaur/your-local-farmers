@@ -1,14 +1,43 @@
 import { gql } from '@apollo/client';
 
 
+export const GET_MY_FARM = gql`
+  query FarmDashboard($id: ID!) {
+    farmDashboard(_id: $id) {
+      _id
+      name
+      address
+      story
+      products {
+        _id
+        name
+        price
+        quantity
+        categories { 
+          name
+        }
+      }
+    }
+  }
+`
+
 export const QUERY_FARM = gql`
   query Farms {
+    categories {
+      _id
+      name
+    }
     farms {
       _id
       name
       address
+      story
       reviews {
-        rating
+       author{
+         firstName
+       }
+       content
+       rating
       }
       products {
 
@@ -103,18 +132,8 @@ export const QUERY_PRODUCTS = gql`
 export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {
+      _id
       name
-      imgUrl
-      products {
-        _id
-        name
-        price
-        quantity
-        reviews {
-          content
-          rating
-        }
-      }
     }
   }
 

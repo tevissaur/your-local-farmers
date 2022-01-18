@@ -6,9 +6,17 @@ import NavItem from './NavItem'
 import { GiBarn, GiFarmer, GiFarmTractor } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { extendTheme } from '@chakra-ui/react'
+import auth from '../utils/auth';
 
 function SideNavBar({ theme }) {
     const [navSize, changeNavSize] = useState("large")
+
+    const loggedIn = auth.loggedIn()
+
+    const profile = loggedIn ? auth.getProfile() : []
+    
+    const userName = profile.data?.username
+
     return (
         <Flex
             pos='sticky'
@@ -41,8 +49,18 @@ function SideNavBar({ theme }) {
                 />
                 <NavItem navSize={navSize} pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
                 <NavItem navSize={navSize} pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
-                <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
-                <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />
+
+                {auth.loggedIn() ? (
+                    <>
+                        <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
+                        <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />
+                    </>
+                ) : (
+                    <>
+
+                    </>
+                )}
+
             </Flex>
 
             <Flex
@@ -56,8 +74,7 @@ function SideNavBar({ theme }) {
                 <Flex mt={4} align='center'>
                     <Avatar size="sm" p='0' src={lightLogo} />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as='h3' size="sm">Alexander Leino</Heading>
-                        <Text>UI Designer</Text>
+                        <Heading as='h3' size="sm">{loggedIn ? userName : 'Sign In'}</Heading>
                     </Flex>
                 </Flex>
             </Flex>

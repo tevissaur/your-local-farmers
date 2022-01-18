@@ -2,34 +2,57 @@ import { useState, useRef } from "react";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
-    useDisclosure,
-    Box,
     Button,
     Container,
     Textarea
 } from '@chakra-ui/react'
+import { CREATE_FARM } from '../utils/mutations'
+import { UPDATE_USER } from '../utils/mutations'
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 
 
-function MyFarm() {
+function MyFarm({ setIsFarmer, setFarmId }) {
     const initialRef = useRef()
     const finalRef = useRef()
+    const { data: { _id }} = Auth.getProfile()
     const [farmName, setFarmName] = useState('');
     const [address, setAddress] = useState('');
     const [story, setStory] = useState('');
     const isInvalid = farmName === '' || address === '' || story === '';
+    const [createFarm] = useMutation(CREATE_FARM)
+    const [updateUser] = useMutation(UPDATE_USER)
+    const user = Auth.getProfile()
+    
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
+        const newFarm = await createFarm({
+            variables: {
+                farm: {
+                    name: farmName,
+                    address,
+                    owners: [_id],
+                    story
+                }
+            }
+        })
 
+        setFarmName('')
+        setAddress('')
+        setStory('')
+        setIsFarmer(true)
+        window.location.reload()
+
+        
     }
 
 
     return (
         <>
             <Container maxW='100%'>
+                <form onSubmit={handleFormSubmit}>
                 <FormControl onSubmit={handleFormSubmit}>
                     <FormLabel>Enter your farm name</FormLabel>
                     <Input
@@ -64,10 +87,11 @@ function MyFarm() {
                     />
                 </FormControl>
                 <FormControl mt={4}>
-                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid}>
+                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid} onClick={handleFormSubmit}>
                         Add Farm
                     </Button>
                 </FormControl>
+                </form>
             </Container>
         </>
     )

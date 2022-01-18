@@ -21,8 +21,9 @@ import {
 import auth from '../utils/auth'
 
 const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating,farm}) => {
-
   console.log(farm)
+
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ratingInput, setRatingInput] = useState(0)
   const [content, setContent] = useState('')
@@ -35,8 +36,8 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
     e.preventDefault()
     if(!inputText) return
     const profile = auth.getProfile()
-    console.log(profile.data._id, inputText, parseInt(rating))
-
+    console.log(profile.data._id)
+                                                                                                                    
     const newReview = await postReview({
       variables: {
         review: {
@@ -44,9 +45,8 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
             content: inputText,
             rating : parseInt(rating)
         },
-        product_id: product._id,
-    
-
+        product_id: product ? product._id : null,
+        farm_id: farm ? farm._id : null,
       }
     })
     console.log(newReview)

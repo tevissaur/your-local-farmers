@@ -144,7 +144,7 @@ const resolvers = {
                     }
                 ]
             )
-            console.log(farm)
+            console.log(farm, 'farmdash')
             return farm
         },
         categories: async (parent, args) => {
@@ -154,7 +154,7 @@ const resolvers = {
                     model: 'Product'
                 }
             ])
-            console.log(productCategory)
+            console.log(productCategory, 'categories')
             return productCategory
         },
         farmStore: async (parent, { _id }) => {
@@ -242,18 +242,28 @@ const resolvers = {
                 },
             ])
 
-            const reviewedProduct = await Product.findByIdAndUpdate(
-                product_id,
-                { $push: { reviews: newReviewWithAuthor } },
-                { new: true }
-            )
-            console.log(newReviewWithAuthor)
-            const reviewedFarm = await Farm.findByIdAndUpdate(
-                farm_id,
-                { $push: { reviews: newReviewWithAuthor } },
-                { new: true }
+            if (product_id) {
+                const reviewedProduct = await Product.findByIdAndUpdate(
+                    product_id,
+                    { $push: { reviews: newReviewWithAuthor } },
+                    { new: true }
+                )
 
-            )
+            }
+
+            if (farm_id) {
+                console.log(newReviewWithAuthor)
+                const reviewedFarm = await Farm.findByIdAndUpdate(
+                    farm_id,
+                    { $push: { reviews: newReviewWithAuthor } },
+                    { new: true }
+
+
+                )
+                console.log(reviewedFarm)
+            }
+
+
 
             return newReviewWithAuthor
             //     return reviewdProduct
@@ -281,7 +291,7 @@ const resolvers = {
             console.log(farm.owners)
             const user = await User.findByIdAndUpdate(farm.owners[0], {
                 $set: { isFarmer: true }
-            },{
+            }, {
                 new: true
             })
             console.log(user)
@@ -311,6 +321,56 @@ const resolvers = {
                     }
                 }
             ])
+        },
+        updateFarm: async (parent, { farm }) => {
+            const updatedFarm = await Farm.findByIdAndUpdate(farm._id, {
+                $set: {
+                    ...farm
+                }
+            }, {
+                new: true
+            })
+            return updatedFarm.populate(
+                [
+                    {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
+                    },
+                    {
+                        path: 'owners',
+                        model: 'User',
+                        populate: {
+                            path: 'reviews',
+                            model: 'Review'
+                        }
+                    },
+                    {
+                        path: 'products',
+                        model: 'Product',
+                        populate: [
+                            {
+                                path: 'categories',
+                                model: 'Category'
+                            },
+                            {
+                                path: 'reviews',
+                                model: 'Review',
+                                populate: {
+                                    path: 'author',
+                                    model: 'User'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        path: 'purchaseOrders',
+                        model: 'PurchaseOrder'
+                    }
+                ])
         }
     }
 }

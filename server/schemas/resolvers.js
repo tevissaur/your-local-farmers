@@ -137,10 +137,6 @@ const resolvers = {
                                 }
                             }
                         ]
-                    },
-                    {
-                        path: 'purchaseOrders',
-                        model: 'PurchaseOrder'
                     }
                 ]
             )
@@ -278,9 +274,54 @@ const resolvers = {
             // )
 
         },
-        createProduct: async (parent, { product }) => {
+        createProduct: async (parent, { product, farmId }) => {
             const newProduct = await Product.create(product)
-            return newProduct
+            console.log(farmId)
+            const farm = await Farm.findByIdAndUpdate(farmId, {
+                $push: { products: newProduct }
+            },
+                {
+                    new: true
+                }).populate(
+                    [
+                        {
+                            path: 'reviews',
+                            model: 'Review',
+                            populate: {
+                                path: 'author',
+                                model: 'User'
+                            }
+                        },
+                        {
+                            path: 'owners',
+                            model: 'User',
+                            populate: {
+                                path: 'reviews',
+                                model: 'Review'
+                            }
+                        },
+                        {
+                            path: 'products',
+                            model: 'Product',
+                            populate: [
+                                {
+                                    path: 'categories',
+                                    model: 'Category'
+                                },
+                                {
+                                    path: 'reviews',
+                                    model: 'Review',
+                                    populate: {
+                                        path: 'author',
+                                        model: 'User'
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                )
+            console.log(farm)
+            return farm
         },
         createCategory: async (parent, { category }) => {
             console.log(category)

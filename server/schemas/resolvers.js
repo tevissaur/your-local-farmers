@@ -140,14 +140,10 @@ const resolvers = {
                                 }
                             }
                         ]
-                    },
-                    {
-                        path: 'purchaseOrders',
-                        model: 'PurchaseOrder'
                     }
                 ]
             )
-            console.log(farm)
+            console.log(farm, 'farmdash')
             return farm
         },
         categories: async (parent, args) => {
@@ -157,7 +153,7 @@ const resolvers = {
                     model: 'Product'
                 }
             ])
-            console.log(productCategory)
+            console.log(productCategory, 'categories')
             return productCategory
         },
         farmStore: async (parent, { _id }) => {
@@ -245,29 +241,29 @@ const resolvers = {
                 },
             ])
 
-            if(product_id) {
+            if (product_id) {
                 const reviewedProduct = await Product.findByIdAndUpdate(
                     product_id,
-                     {$push : {reviews : newReviewWithAuthor}},
-                     {new: true}
-                 )
+                    { $push: { reviews: newReviewWithAuthor } },
+                    { new: true }
+                )
 
             }
 
-            if(farm_id) {
+            if (farm_id) {
                 console.log(newReviewWithAuthor)
                 const reviewedFarm = await Farm.findByIdAndUpdate(
                     farm_id,
-                    {$push : {reviews : newReviewWithAuthor}},
-                    {new: true}
-                    
-    
+                    { $push: { reviews: newReviewWithAuthor } },
+                    { new: true }
+
+
                 )
-                    console.log(reviewedFarm)
+                console.log(reviewedFarm)
             }
-            
-           
-   
+
+
+
             return newReviewWithAuthor
             //     return reviewdProduct
             //     console.log(reviewdProduct)
@@ -281,9 +277,54 @@ const resolvers = {
             // )
 
         },
-        createProduct: async (parent, { product }) => {
+        createProduct: async (parent, { product, farmId }) => {
             const newProduct = await Product.create(product)
-            return newProduct
+            console.log(farmId)
+            const farm = await Farm.findByIdAndUpdate(farmId, {
+                $push: { products: newProduct }
+            },
+                {
+                    new: true
+                }).populate(
+                    [
+                        {
+                            path: 'reviews',
+                            model: 'Review',
+                            populate: {
+                                path: 'author',
+                                model: 'User'
+                            }
+                        },
+                        {
+                            path: 'owners',
+                            model: 'User',
+                            populate: {
+                                path: 'reviews',
+                                model: 'Review'
+                            }
+                        },
+                        {
+                            path: 'products',
+                            model: 'Product',
+                            populate: [
+                                {
+                                    path: 'categories',
+                                    model: 'Category'
+                                },
+                                {
+                                    path: 'reviews',
+                                    model: 'Review',
+                                    populate: {
+                                        path: 'author',
+                                        model: 'User'
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                )
+            console.log(farm)
+            return farm
         },
         createCategory: async (parent, { category }) => {
             console.log(category)
@@ -294,7 +335,7 @@ const resolvers = {
             console.log(farm.owners)
             const user = await User.findByIdAndUpdate(farm.owners[0], {
                 $set: { isFarmer: true }
-            },{
+            }, {
                 new: true
             })
             console.log(user)
@@ -341,6 +382,56 @@ const resolvers = {
                     }
                 }
             ])
+        },
+        updateFarm: async (parent, { farm }) => {
+            const updatedFarm = await Farm.findByIdAndUpdate(farm._id, {
+                $set: {
+                    ...farm
+                }
+            }, {
+                new: true
+            })
+            return updatedFarm.populate(
+                [
+                    {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
+                        }
+                    },
+                    {
+                        path: 'owners',
+                        model: 'User',
+                        populate: {
+                            path: 'reviews',
+                            model: 'Review'
+                        }
+                    },
+                    {
+                        path: 'products',
+                        model: 'Product',
+                        populate: [
+                            {
+                                path: 'categories',
+                                model: 'Category'
+                            },
+                            {
+                                path: 'reviews',
+                                model: 'Review',
+                                populate: {
+                                    path: 'author',
+                                    model: 'User'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        path: 'purchaseOrders',
+                        model: 'PurchaseOrder'
+                    }
+                ])
         }
     }
 }

@@ -37,16 +37,23 @@ mutation CreateFarm($farm: NewFarm) {
 `
 
 export const CREATE_PRODUCT = gql`
-        mutation CreateProduct($product: NewProduct) {
-            createProduct(product: $product) {
-                _id
+    mutation CreateProduct($product: NewProduct, $farmId: ID) {
+        createProduct(product: $product, farmId: $farmId) {
+            _id
+            name
+            address
+            story
+            products {
                 name
-                categories {
-                    _id
-                }
+                price
+                quantity
+            categories { 
+                name
             }
         }
-        `
+    }
+}
+`
 
 export const UPDATE_USER = gql`
     mutation UpdateUser($user: UpdatedUser) {

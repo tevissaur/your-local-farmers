@@ -14,12 +14,14 @@ const FarmProduct = ({ product }) => {
 
   return (
     <Flex flex="50%" flexDirection="column" alignItems="center">
-      <Image
-        boxSize="200px"
-        objectFit="cover"
-        src={foundProductImage}
-        alt="Dan Abramov"
-      />
+      {foundProductImage ? (<></>) : (
+        <Image
+          boxSize="200px"
+          objectFit="cover"
+          src={foundProductImage}
+          alt="Dan Abramov"
+        />)}
+
       <Link to={`/products/${product._id}`}>
         <Flex flexDirection="column" alignItems="center">
           <Text fontSize="2xl">{product.name}</Text>

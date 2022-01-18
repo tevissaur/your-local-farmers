@@ -11,17 +11,17 @@ import customTheme from '../extendedTheme';
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 function FarmsPage() {
     const { loading, data, error } = useQuery(QUERY_FARM)
     
     const farmList = data ? data.farms : []
-    console.log(farmList)
     
     const [visibleFarms, setVisibleFarms] = useState(farmList)
     const categoryList = data ? data.categories : []
-   
-    const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
     
+    const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
+   
     
     useEffect(() => {
         setSelectedCategoryNames(categoryList.map( category => category.name))
@@ -32,6 +32,48 @@ function FarmsPage() {
         setVisibleFarms(farmList)
     },[categoryList])
 
+    useEffect(() => {
+
+    let unselectedArray = []
+    
+    for(let i = 0; i < categoryList.length; i++) {
+        if(!selectedCategoryNames.includes(categoryList[i].name)){
+            unselectedArray.push(categoryList[i])
+        }
+
+    }
+    let displayFarms = []
+    let destroyFarms = []
+        for (let i = 0; i < farmList.length; i++) {
+
+            for (let p = 0; p < farmList[i].products.length; p++){
+
+                for (let f = 0; f < unselectedArray.length; f++){
+                    
+                    if(farmList[i].products[p].categories[0].name === unselectedArray[f].name){
+                      
+                          
+                          if(!destroyFarms.includes(farmList[i])){
+                            destroyFarms.push(farmList[i])
+                          }
+                
+                     } 
+                     
+                }
+                
+            }
+        }
+        let finalArray = []
+        for(let q = 0; q < farmList.length; q++){
+            if(!destroyFarms.includes(farmList[q])){
+              finalArray.push(farmList[q]) 
+                
+              
+            }
+        }
+        setVisibleFarms(finalArray)
+
+    },[selectedCategoryNames])
 
     const handleCheckBoxChange = (e) => {
         const name = e.target.value
@@ -40,28 +82,7 @@ selectedCategoryNames.includes(name)
             ? selectedCategoryNames.filter( categoryId => categoryId !== name)
             : [...selectedCategoryNames, name] 
         setSelectedCategoryNames(updatedSelectedCategoriesNames)
-
-    let displayFarms = []
-        for (let i = 0; i < farmList.length; i++) {
-            for (let p = 0; p < farmList[i].products.length; p++){
-                for(let c = 0; c < farmList[i].products[p].categories.length; c++){
-                    for (let f = 0; f < selectedCategoryNames.length; f++){
-                        console.log('F Quienten')
-                        // if(farmList[i].products[p].categories[c].includes(selectedCategoryNames[f])){
-                        //     displayFarms.push(farmList[i])
-                        // } else {
-                        //   if(displayFarms.length > 0 ) {
-                        //    displayFarms = displayFarms.slice(farmList[i], farmList[i])
-                        //    return 
-                        //   } else {
-                        //       return 
-                        //   }
-                        // }
-                    }
-                }
-        }
-        }
-        setVisibleFarms(displayFarms)
+ 
     }
     return (
         <>
@@ -99,7 +120,7 @@ alignItems='center' flexWrap='wrap'>
                     </Flex>
                     <Container maxW='100%'>
                         <Flex justifyContent='space-evenly' flexWrap='wrap'>
-                            {farmList.map(farm => {
+                            {visibleFarms.map(farm => {
                                 return <FarmCard key={farm._id} 
                                                   title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length} 
                                                   categories={farm.products.map(product => {
@@ -167,8 +188,8 @@ be a farmer?
                                             <ListItem ms={8} fontSize='22px' 
                                                         color='primary.yellowGreen'>
                                                 There are no monthly quotas. We 
-just ensure customers are getting what they order and as long as that continues 
-you can continue being a farmer as long as you desire!
+                                                just ensure customers are getting what they order and as long as that continues 
+                                                you can continue being a farmer as long as you desire!
                                             </ListItem>
                                         </List>
                                         <Image src={farmerPic}></Image>

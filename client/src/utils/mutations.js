@@ -93,4 +93,23 @@ export const UPDATE_FARM = gql`
         }
     }
 `
+export const CREATE_PO = gql`
+    mutation createPO($PO: NewPurchaseOrder) {
+        createPO(PO: $PO) {
+            seller{
+                name
+            }
+            buyer {
+                firstName
+            }
+            dateCreated
+            items {
+                name
+            }
+            pickUpTime
+            orderTotal
+        }
+    }
 
+
+`

@@ -51,6 +51,7 @@ const Product = ({cartItems,setCartItems}) => {
 
   const productList = productData ? productData.products : [];
   const foundProduct = productList.find((product) => product._id === id);
+  console.log(foundProduct)
 
   useEffect(() => {
     if (foundProduct) {
@@ -94,7 +95,7 @@ const Product = ({cartItems,setCartItems}) => {
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
-          <Header />
+       
           <Box
             border="green 2px solid"
             alignItems="stretch"
@@ -176,7 +177,8 @@ const Product = ({cartItems,setCartItems}) => {
                   <Box>
                     <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
                   </Box>
-                  <Button
+                  {Auth.loggedIn() ? (
+                    <Button
                     leftIcon={<CgShoppingCart fontSize="20px" />}
                     backgroundColor="primary.lightGreen"
                     variant="solid"
@@ -185,6 +187,8 @@ const Product = ({cartItems,setCartItems}) => {
                   >
                     Add To Cart
                   </Button>
+                  ) : ("")}
+                  
                 </Box>
               </Box>
             </Flex>

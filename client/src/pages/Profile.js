@@ -43,7 +43,7 @@ const Profile = () => {
             <Flex>
                 <SideNavBar />
                 <Box m={4} flex="1">
-                    <Header />
+                 
                     <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
                         {Auth.loggedIn() ? (
                             <>

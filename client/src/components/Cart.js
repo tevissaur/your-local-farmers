@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import SideNavBar from "./SideNavBar";
+import CheckOutBtn from "./CheckOutBtn";
 import {
   Flex,
   Box,
@@ -11,17 +12,17 @@ import {
   Center,
 } from "@chakra-ui/react";
 import ProductCardCart from "./ProductCardCart";
-import { imageSeeds } from "../imageSeeds";
+
 
 function Cart({cartItems, setCartItems}) {
 
-   
+   const totalPrice = cartItems.reduce((price,item) => price+ item.quantity*item.price,0)
   return (
     <>
       <Flex>
         <SideNavBar />
         <Box m={4} flex="1">
-          <Header />
+     
           <Container maxW="container.md">
             <Flex
               justifyContent="center"
@@ -42,10 +43,10 @@ function Cart({cartItems, setCartItems}) {
               (<Text>No items are added</Text>)}
 
               {cartItems.map((item,idx) => (
-                  <>
+                  
                   <ProductCardCart key={idx} item={item} cartItems={cartItems} setCartItems={setCartItems} />
                    
-                  </>
+                  
                    
                    
                  
@@ -64,17 +65,10 @@ function Cart({cartItems, setCartItems}) {
                   <Flex>
                     <Text fontSize="35px">Total:</Text>
                     <Text ms={2} fontSize="35px">
-                      $200
+                      ${totalPrice}
                     </Text>
                   </Flex>
-                  <Button
-                    fontSize="25px"
-                    border="1px solid grey"
-                    boxShadow="1px 1px black"
-                    backgroundColor="primary.lightGreen"
-                  >
-                    Checkout
-                  </Button>
+                  {cartItems.length === 0 ? "" : <CheckOutBtn cartItems={cartItems} totalPrice={totalPrice}/>}
                 </Flex>
                 <Center></Center>
               </Container>

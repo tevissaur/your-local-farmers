@@ -100,7 +100,7 @@ selectedCategoryNames.includes(name)
                             boxShadow='2px 2px black'
                         >
                         <Flex mt={3} justifyContent='space-evenly' 
-alignItems='center' flexWrap='wrap'>
+                        alignItems='center' flexWrap='wrap'>
                             {categoryList.map(category => {
                                 const checked = 
                                   selectedCategoryNames.includes(category.name)
@@ -169,9 +169,9 @@ alignItems='center' flexWrap='wrap'>
                                                 free as possible with an accessible managment system.
                                             </ListItem>
                                             <ListItem> <ListIcon 
-as={BsQuestionLg} color='red' />
+                                            as={BsQuestionLg} color='red' />
                                                 Dont you need a lot of land to 
-be a farmer?
+                                                be a farmer?
                                             </ListItem>
                                             <ListItem ms={8} fontSize='22px' 
                                               color='primary.yellowGreen'>

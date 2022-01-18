@@ -1,63 +1,62 @@
 import { useEffect, useState, useRef } from "react";
-import {useMutation } from "@apollo/client";
-import {POST_REVIEW } from "../utils/mutations"
+import { useMutation } from "@apollo/client";
+import { POST_REVIEW } from "../utils/mutations";
 import {
   Button,
-  Box,
-  Flex,
-  Text,
   FormControl,
   Select,
   Input,
   useDisclosure,
   Modal,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
 } from "@chakra-ui/react";
-import auth from '../utils/auth'
+import auth from "../utils/auth";
 
-const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating, setRating,farm}) => {
-  console.log(farm)
-
+const ReviewButton = ({
+  inputText,
+  setInputText,
+  reviews,
+  setReviews,
+  product,
+  rating,
+  setRating,
+  farm,
+}) => {
+  console.log(farm);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [ratingInput, setRatingInput] = useState(0)
-  const [content, setContent] = useState('')
-  const [postReview, {data,loading,error}] = useMutation(POST_REVIEW)
- 
+  const [ratingInput, setRatingInput] = useState(0);
+  const [content, setContent] = useState("");
+  const [postReview, { data, loading, error }] = useMutation(POST_REVIEW);
 
   const initialRef = useRef();
   const finalRef = useRef();
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
-    if(!inputText) return
-    const profile = auth.getProfile()
-    console.log(profile.data._id)
-                                                                                                                    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!inputText) return;
+    const profile = auth.getProfile();
+    console.log(profile.data._id);
+
     const newReview = await postReview({
       variables: {
         review: {
-            author: profile.data._id,
-            content: inputText,
-            rating : parseInt(rating)
+          author: profile.data._id,
+          content: inputText,
+          rating: parseInt(rating),
         },
         product_id: product ? product._id : null,
         farm_id: farm ? farm._id : null,
-      }
-    })
-    console.log(newReview)
-    setReviews([newReview.data.postReview, ...reviews ])
-    setInputText("")
-    onClose()
-
-  }
+      },
+    });
+    console.log(newReview);
+    setReviews([newReview.data.postReview, ...reviews]);
+    setInputText("");
+    onClose();
+  };
 
   return (
- 
     <div>
       <Button
         color="black"
@@ -91,7 +90,7 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
               >
-                <option value="5">5- EXCELLENT</option>
+                <option value="5">5-EXCELLENT</option>
                 <option value="4">4-GOOD</option>
                 <option value="3">3-AVERAGE</option>
                 <option value="2">2-POOR</option>
@@ -101,10 +100,11 @@ const ReviewButton = ({inputText, setInputText,reviews,setReviews,product,rating
           </ModalBody>
 
           <ModalFooter>
-            <Button 
-            colorScheme="green" mr={3}
-            type="submit"
-            onClick={handleSubmit}
+            <Button
+              colorScheme="green"
+              mr={3}
+              type="submit"
+              onClick={handleSubmit}
             >
               Save
             </Button>

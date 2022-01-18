@@ -32,7 +32,10 @@ const resolvers = {
                     path: 'categories',
                     model: 'Category'
                 },
-
+                {
+                    path: 'farm',
+                    model: 'Farm'
+                }
             ])
             // console.log(prod[0].getAvgReviewScore())
             return prod
@@ -340,8 +343,25 @@ const resolvers = {
             return newFarm
         },
         createPO: async (parent, { PO }) => {
+            
             const newPO = await PurchaseOrder.create(PO)
-            return newPO.populate()
+            const POWithFarm = await PurchaseOrder.findById(newPO._id).populate([
+                {
+                    path:"seller",
+                    model:"Farm"
+                },
+                {
+                    path:"buyer",
+                    model:"User"
+                },
+                {
+                    path:"items",
+                    model:"Product"
+                },
+
+            ])
+            console.log(POWithFarm)
+            return POWithFarm
         },
         updateUser: async (parent, { user }) => {
             console.log(user)

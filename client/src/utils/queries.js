@@ -73,6 +73,19 @@ export const GET_ME = gql`
       email
       address
       isFarmer
+      purchasedOrders {
+        _id
+        seller {
+          _id
+          name
+        }
+        items {
+          _id
+          name
+        }
+        dateCreated
+        orderTotal
+      }
     }
   }
 `

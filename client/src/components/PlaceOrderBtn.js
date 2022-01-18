@@ -31,8 +31,8 @@ const PlaceOrderBtn = ({
 
   const redirectHome = () => {
     onClose();
-    // window.location.href="/"
-    // localStorage.removeItem("cartItems")
+   window.location.href="/"
+   localStorage.removeItem("cartItems")
   };
 
   const handlePlaceOrder = () => {

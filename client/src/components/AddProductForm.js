@@ -1,9 +1,9 @@
 import {
-    Container, 
-    FormControl, 
-    FormLabel, 
-    Input, 
-    CheckboxGroup, 
+    Container,
+    FormControl,
+    FormLabel,
+    Input,
+    CheckboxGroup,
     Checkbox, NumberInput,
     NumberInputField,
     NumberInputStepper,
@@ -24,7 +24,7 @@ import { CREATE_PRODUCT } from '../utils/mutations'
 
 
 
-const AddProductForm = (props) => {
+const AddProductForm = ({ farmId, setFarm }) => {
     const { data: { _id } } = Auth.getProfile()
     const [productName, setProductName] = useState('')
     const [productDescription, setProductDescription] = useState('')
@@ -33,12 +33,6 @@ const AddProductForm = (props) => {
     const [productCategories, setProductCategories] = useState([])
     const { data, loading, error } = useQuery(QUERY_CATEGORIES)
     const [createProduct] = useMutation(CREATE_PRODUCT)
-
-    useEffect(() => {
-        console.log(productCategories)
-    }, [data, loading, error, productCategories])
-
-
 
     const handleChecked = (e) => {
 
@@ -64,19 +58,22 @@ const AddProductForm = (props) => {
     }
 
     const handleSubmit = async (e) => {
-
-        const data = await createProduct({
-            variables: {
-                product: {
-                    name: productName,
-                    price: parseInt(productPrice),
-                    quantity: parseInt(productQuant),
-                    categories: productCategories,
-                    description: productDescription
+        if (productCategories !== []) {
+            const data = await createProduct({
+                variables: {
+                    product: {
+                        name: productName,
+                        price: parseInt(productPrice),
+                        quantity: parseInt(productQuant),
+                        categories: productCategories,
+                        description: productDescription,
+                    },
+                    farmId: farmId
                 }
-            }
-        })
-        console.log(data)
+            })
+            console.log(data)
+
+        }
     }
 
     return (

@@ -43,7 +43,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
         setAddress('')
         setStory('')
         setIsFarmer(true)
-        //document.reload()
+        window.location.reload()
 
         
     }

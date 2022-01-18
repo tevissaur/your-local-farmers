@@ -5,7 +5,7 @@ import SideNavBar from '../components/SideNavBar'
 import MyFarmForm from '../components/MyFarmForm'
 import MyFarmDash from '../components/MyFarmDash'
 import auth from '../utils/auth'
-import { GET_ME, GET_MY_FARM } from '../utils/queries'
+import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client'
 
 function MyFarm() {
@@ -17,21 +17,16 @@ function MyFarm() {
             id: userDetails.data._id
         }
     })
-    const {data: farmData, loading: farmLoading, error: farmError} = useQuery(GET_MY_FARM, {
-        variables: {
-            id: userDetails.data._id
-        }
-    })
-    console.log()
+
     const [isFarmer, setIsFarmer] = useState(userDetails.data.isFarmer)
 
 
     useEffect(() => {
-        loading? setIsFarmer():setIsFarmer(data.me.isFarmer)
-        
-        
-    }, [isFarmer, loading, data, data?.me?.isFarmer])
-    
+        data == null ? console.log("Bro") : setIsFarmer(data.me.isFarmer)
+
+
+    }, [isFarmer, data,  data?.me?.isFarmer])
+
 
     return (
         <Flex>
@@ -42,7 +37,7 @@ function MyFarm() {
                     <Flex justifyContent='space-evenly' flexWrap='wrap'>
                         {isFarmer ? (
 
-                            <MyFarmDash farmData={farmData} />
+                            <MyFarmDash userId={userDetails.data._id} />
                         ) : (
                             <MyFarmForm setIsFarmer={setIsFarmer} />
                         )}

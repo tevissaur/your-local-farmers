@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
 import localFarm from '../assets/localFarm.jpg'
 import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
@@ -50,7 +51,7 @@ function FarmCard({ title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Flex>
-            <Link to={`/farm/${title.toLowerCase()}`}><Button mt={3} mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
+            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button mt={3} mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
         </Flex>
 
     )

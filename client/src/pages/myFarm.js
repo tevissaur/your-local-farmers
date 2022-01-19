@@ -22,18 +22,16 @@ function MyFarm() {
 
 
     useEffect(() => {
-        data == null ? console.log("Bro") : setIsFarmer(data.me.isFarmer)
+        loading? console.log("Bro") : setIsFarmer(data.me?.isFarmer)
 
 
-    }, [isFarmer, data,  data?.me?.isFarmer])
-
-
+    }, [isFarmer, data,  loading])
 
     return (
         <Flex>
             <SideNavBar />
             <Box m={4} flex='1'>
-                <Header />
+        
                 <Container maxW='100%'>
                     <Flex justifyContent='space-evenly' flexWrap='wrap'>
                         {isFarmer ? (

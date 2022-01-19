@@ -74,7 +74,7 @@ const Homepage = () => {
             boxShadow="5px 5px 1px 1px #3A7D44"
           >
             <Heading as='h2' fontSize='3.5rem' textAlign='center' color={customTheme.colors.primary.emeraldGreen}>The Whys Behind The Whats</Heading>
-            <Flex flexDir='row' w='100%' mb={3}>
+            <Flex flexDir='column' w='100%' mb={3} alignItems='center' flexWrap='wrap'>
               <Text fontWeight='600' padding={3}>"The U.S. food and farming system contributes
                 nearly $1 trillion to the national economy—
                 or more than 13 percent of the gross domes-
@@ -113,7 +113,7 @@ const Homepage = () => {
                 borderRadius='25px'
                 padding={1}
                 src={wheat}
-                boxSize='xs'
+                boxSize='sm'
               />
             </Flex>
           </Container>

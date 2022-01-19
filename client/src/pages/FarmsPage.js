@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { QUERY_FARM } from '../utils/queries';
-import { Container, Flex, Box, Checkbox, CheckboxGroup, useCheckboxGroup, 
-Button, Heading, Image, List, ListItem, ListIcon, filter } from '@chakra-ui/react'
+import {Container,
+        Flex, 
+        Box, 
+        Checkbox,
+        Button,
+        Heading, 
+        Image, 
+        List, 
+        ListItem, 
+        ListIcon, 
+     } from '@chakra-ui/react'
+
 import { Link } from 'react-router-dom'
-import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import FarmCard from '../components/FarmCard'
 import customTheme from '../extendedTheme';
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 function FarmsPage() {
     const { loading, data, error } = useQuery(QUERY_FARM)
     
@@ -134,7 +142,7 @@ selectedCategoryNames.includes(name)
                             backgroundColor='primary.emeraldGreen'
                             boxShadow='3px 3px black'
                         >
-                            <Flex justifyContent='center' flexDir='column' >
+                            <Flex justifyContent='center' flexDir='column' flexWrap='wrap'>
                                 <Heading as='h2'
                                         color='primary.yellowGreen' 
                                         textAlign='center' fontSize='35px'>
@@ -146,11 +154,12 @@ selectedCategoryNames.includes(name)
                                   fontSize='30px'>FAQs</Heading>
                                 <Container maxW='100%'>
                                     <Flex
-                                        flexDir='row'
+                                        flexDir='column'
                                         justifyContent='space-between'
-                                        alignItems='flex-start'
+                                        alignItems='center'
                                         mt={1}
                                         maxH='min-content'
+                                        flexWrap='wrap'
                                     >
                                         <List
                                             textAlign='Left'

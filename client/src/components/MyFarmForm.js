@@ -5,7 +5,8 @@ import {
     Input,
     Button,
     Container,
-    Textarea
+    Textarea,
+    Center
 } from '@chakra-ui/react'
 import { CREATE_FARM } from '../utils/mutations'
 import { UPDATE_USER } from '../utils/mutations'
@@ -51,10 +52,16 @@ function MyFarm({ setIsFarmer, setFarmId }) {
 
     return (
         <>
-            <Container maxW='100%'>
-                <form onSubmit={handleFormSubmit}>
-                <FormControl onSubmit={handleFormSubmit}>
-                    <FormLabel>Enter your farm name</FormLabel>
+            <Container 
+                maxW='container.md'
+                border='lightgrey 2px solid'  
+                padding={2} boxShadow='1px 1px black'
+                borderRadius='25px'
+                mt={3}
+            >
+                <form onSubmit={handleFormSubmit} >
+                <FormControl onSubmit={handleFormSubmit}  >
+                    <FormLabel fontSize='20px' fontWeight='600'>Enter your farm name</FormLabel>
                     <Input
                         ref={initialRef}
                         placeholder='Farm Name'
@@ -66,7 +73,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                 </FormControl>
 
                 <FormControl mt={4}>
-                    <FormLabel>Enter your farms address</FormLabel>
+                    <FormLabel fontSize='20px' fontWeight='600'>Enter your farms address</FormLabel>
                     <Input
                         placeholder='Enter address'
                         type='text'
@@ -77,7 +84,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                 </FormControl>
 
                 <FormControl mt={4}>
-                    <FormLabel>Your Farms Story</FormLabel>
+                    <FormLabel fontSize='20px' fontWeight='600'>Your Farms Story</FormLabel>
                     <Textarea
                         placeholder='Tell us about your farm'
                         type='text'
@@ -86,10 +93,18 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                         onChange={({ target }) => setStory(target.value)}
                     />
                 </FormControl>
-                <FormControl mt={4}>
-                    <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid} onClick={handleFormSubmit}>
-                        Add Farm
+                <FormControl mt={4} >
+                <Center>
+                    <Button 
+                        type="submit" 
+                        mr={3}  
+                        onClick={handleFormSubmit}
+                        border="1px solid grey"
+                        boxShadow="1px 1px black"
+                        backgroundColor="primary.lightGreen">
+                    Add Farm
                     </Button>
+                </Center>
                 </FormControl>
                 </form>
             </Container>

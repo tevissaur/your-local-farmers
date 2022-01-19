@@ -11,7 +11,7 @@ const {
 const { signToken } = require('../utils/auth')
 
 const resolvers = {
-    
+
     Query: {
         me: async (parent, { _id }) => {
             console.log(_id)
@@ -354,7 +354,7 @@ const resolvers = {
                  {$push : {purchasedOrders : newPO}},
                  {new: true}
              )
-              
+              console.log(newPO)
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {

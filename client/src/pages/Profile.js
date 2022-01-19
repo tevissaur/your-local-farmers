@@ -73,11 +73,10 @@ const Profile = () => {
       console.log(err);
     }
 
-    // setUserData(data)
-  }, [loading, data, error, userData]);
 
-  // const dateCreated = userData? userData.purchasedOrders.map((order) =>order.dateCreated) : []
-  // console.log(dateCreated)
+  }, [loading, data, error, userData]);
+  console.log(purchasedOrder.map((order) => order.dateCreated))
+  
 
   if (loading) return "loading";
   return (
@@ -108,9 +107,10 @@ const Profile = () => {
 
                     <TabPanel>
                       {purchasedOrder.map((order, idx) => (
-                        <Box key={idx} m="10px">
-                          <Box>
-                            <Text>Order Date : {order.dateCreated.toLocaleDate()}</Text>
+                        <Box key={idx} m="10px" border="green 2px solid"  borderRadius="25px"
+                        boxShadow="2px 2px green" p="10px">
+                          <Box >
+                            <Text>Order Date : {new Date(parseInt(order.dateCreated)).toISOString().slice(0, 10).split('-').reverse().join('/')}</Text>
                             <Text> Order Total : ${order.orderTotal}.00</Text>
                           </Box>
                           <Flex>

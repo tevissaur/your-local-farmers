@@ -24,7 +24,7 @@ const ReviewButton = ({
   setRating,
   farm,
 }) => {
-  console.log(farm);
+ 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ratingInput, setRatingInput] = useState(0);

@@ -37,7 +37,11 @@ const userSchema = new Schema(
     profilePic: {
       type: Buffer,
       ref: 'Image'
-    }
+    },
+    purchasedOrders :[{
+      type: Schema.Types.ObjectId,
+      ref: 'PurchaseOrder'
+    }]
   },
   {
     

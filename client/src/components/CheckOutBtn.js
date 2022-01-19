@@ -5,7 +5,6 @@ import PlaceOrderBtn from "./PlaceOrderBtn";
 import {
   useDisclosure,
   Box,
-
   Stack,
   Select,
   Flex,
@@ -88,7 +87,7 @@ const CheckOutBtn = ({ cartItems, totalPrice }) => {
                 <FormLabel htmlFor="time">Select Pickup Time</FormLabel>
                 <Select
                   id="time"
-                  placeholder="8AM"
+                  placeholder="Select Pickup Time"
                   backgroundColor="primary.yellowGreen"
                   onChange={(e) => setPickUpTime(e.target.value)}
                 >
@@ -118,7 +117,7 @@ const CheckOutBtn = ({ cartItems, totalPrice }) => {
                   Pickup on <span  style={{fontWeight:"bolder"}}>{pickUpDate} </span>at <span  style={{fontWeight:"bolder"}}>{pickUpTime}</span>
                 </Text>
            
-                <Text>Order Total : <span style={{fontWeight:"bolder", color:"green"}} > ${totalPrice}</span></Text>
+                <Text>Order Total : <span style={{fontWeight:"bolder", color:"green"}} > ${totalPrice}.00</span></Text>
                
               
               

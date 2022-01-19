@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 const Header = ({ cartItems }) => {
   // console.log(cartItems.length)
+  console.log(cartItems.length)
   const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
   const handleLogOut = () => {
     Auth.logout();

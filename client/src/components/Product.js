@@ -242,7 +242,6 @@ const Product = ({cartItems,setCartItems}) => {
         </Box>
       </Flex>
     </>
-  );
-};
-
+  )
+}
 export default Product;

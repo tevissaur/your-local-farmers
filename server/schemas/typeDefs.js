@@ -105,7 +105,13 @@ const typeDefs = gql`
         pickUpTime: String
         orderTotal: Int
     }
+    input UpdatedFarm {
+        _id: ID
+        name: String
+        address: String 
+        story: String
 
+    }
 
     type Query {
         me(_id: ID!): User
@@ -123,11 +129,12 @@ const typeDefs = gql`
         createUser(username: String!, password: String!, email: String!, firstName: String!): Auth
         login(email: String!, password: String!): Auth
         postReview(review: NewReview!, product_id: ID, user: ID, farm_id: ID): Review
-        createProduct(product: NewProduct): Product
+        createProduct(product: NewProduct, farmId: ID): Farm
         createCategory(category: NewCategory): Category
         createFarm(farm: NewFarm): Farm
         createPO(PO: NewPurchaseOrder): PurchaseOrder
         updateUser(user: UpdatedUser): User
+        updateFarm(farm: UpdatedFarm): Farm
     }
 `
 

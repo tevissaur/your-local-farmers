@@ -77,10 +77,6 @@ const Product = ({cartItems,setCartItems}) => {
   const foundProductImage = cardArr
     .filter((arr) => arr.name === foundProduct.name)
     .map((card) => card.img);
-<<<<<<< HEAD
-  const review = foundProduct.reviews.map((review) => review);
-  console.log(review);
-=======
 
   const handleAddToCart = (product)=>{
   
@@ -94,7 +90,6 @@ const Product = ({cartItems,setCartItems}) => {
   }
   
 
->>>>>>> 90667e66227b9cd3d773752e9074d692c33411d3
   return (
     <>
       <Flex>
@@ -113,101 +108,6 @@ const Product = ({cartItems,setCartItems}) => {
               <Box>
                 <img src={foundProductImage} style={{ width: "300px" }} />
 
-<<<<<<< HEAD
-      {loading ? (
-        <>
-          <Flex>
-            <SideNavBar />
-            <Box m={4} flex="1" alignItems="center">
-              <Header />
-              <Box
-                border="green 2px solid"
-                alignItems="stretch"
-                justifyItems="center"
-                backgroundColor="lightyellow"
-                padding={5}
-                margin={20}
-              >
-                <Flex>
-                  <Box>
-                    <img style={{ width: "300px" }} />
-                    <Text
-                      fontSize="2xl"
-                      px="4px"
-                      px="10px"
-                      style={{ fontWeight: "bolder" }}
-                    >
-
-                    </Text>
-                    <Flex alignItems="center" justifyContent="end" padding="4px">
-                      <Text fontSize="2xl">$ </Text>
-
-                      <CgShoppingCart fontSize="20px" />
-                    </Flex>
-                    <Box
-                      px="10px"
-                      backgroundColor="darkGreen"
-                      color="yellowGreen"
-                      alignItems="center"
-                    >
-
-                      <Flex
-                        p="10px"
-                        backgroundColor="darkGreen"
-                        color="yellowGreen"
-                        justifyContent="center"
-                      >
-                        <Box>
-                          <Flex>
-                            <AiFillStar fontSize="25px" />
-                            <AiFillStar fontSize="25px" />
-                            <AiFillStar fontSize="25px" />
-                            <AiFillStar fontSize="25px" />
-                          </Flex>
-                          <small>
-                            Based on {foundProduct.reviews.length} reviews
-                          </small>
-                          <Text color="black">Leave a review</Text>
-                        </Box>
-                      </Flex>
-                    </Box>
-
-                    <Box m="20px">
-                      <Link to={`/farm/${farm.name.toLowerCase()}`}>
-                        <Text fontSize="2xl" color="primary.darkGreen">
-                          {farm.name}
-                        </Text>
-                      </Link>
-                      <Text> {foundProduct.quantity} available</Text>
-                      [product's description]
-                    </Box>
-                  </Box>
-                </Flex>
-              </Box>
-              <Box
-                border="green 2px solid"
-                alignItems="stretch"
-                justifyItems="center"
-                backgroundColor="lightyellow"
-                padding={5}
-                margin={20}
-              >
-                <Text
-                  fontSize="2xl"
-                  px="4px"
-                  px="10px"
-                  style={{ fontWeight: "bolder" }}
-                >
-                  Customer Review
-                </Text>
-                <Text>{review.content}</Text>
-              </Box>
-            </Box>
-          </Flex>
-        </>
-      ) : (<> </>)
-      };
-=======
                 <Flex
                   p="10px"
                   backgroundColor="darkGreen"
@@ -341,7 +241,6 @@ const Product = ({cartItems,setCartItems}) => {
           </Box>
         </Box>
       </Flex>
->>>>>>> 90667e66227b9cd3d773752e9074d692c33411d3
     </>
   )
 }

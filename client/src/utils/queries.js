@@ -17,6 +17,23 @@ export const GET_MY_FARM = gql`
           name
         }
       }
+
+      purchaseOrders {
+        _id
+        seller {
+          _id
+        }
+        items {
+          _id
+          name
+        }
+        buyer{
+          _id
+          firstName
+        }
+        dateCreated
+        orderTotal
+      }
     }
   }
 `
@@ -75,6 +92,19 @@ export const GET_ME = gql`
       email
       address
       isFarmer
+      purchasedOrders {
+        _id
+        seller {
+          _id
+          name
+        }
+        items {
+          _id
+          name
+        }
+        dateCreated
+        orderTotal
+      }
     }
   }
 `
@@ -137,4 +167,15 @@ export const QUERY_CATEGORIES = gql`
     }
   }
 
+`
+export const GET_PO = gql`
+  query getPO($id: ID!){
+    po(_id: $id){
+      dateCreated
+      items
+      orderTotal
+      seller
+    }
+
+  }
 `

@@ -10,6 +10,7 @@ import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
+import ProductCard from './components/ProductCard'
 import { CgShoppingCart } from 'react-icons/cg'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Cart from "./components/Cart";

@@ -22,21 +22,17 @@ const PlaceOrderBtn = ({
   totalPrice,
   buyer,
 }) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, data, error } = useQuery(QUERY_FARM);
   const [createPO] = useMutation(CREATE_PO);
   const farmList = data ? data.farms : [];
 
-  //  const farm = farmList.filter((farm ) => {
-  //    const foundFarmProduct = farm.products.filter((product) => product._id === cartItemId)
-  //   console.log(foundFarmProduct)
-
-  //  })
 
   const redirectHome = () => {
     onClose();
-    // window.location.href="/"
-    // localStorage.removeItem("cartItems")
+   window.location.href="/"
+   localStorage.removeItem("cartItems")
   };
 
   const handlePlaceOrder = () => {
@@ -44,6 +40,7 @@ const PlaceOrderBtn = ({
       const foundFarm = farmList.find((farm) => {
         return farm.products.find((product) => product._id === cartItem._id);
       });
+    
 
       const foundFarmPO = POByFarm.findIndex(
         (farmOrder) => farmOrder._id === foundFarm._id
@@ -57,12 +54,13 @@ const PlaceOrderBtn = ({
           productIds: [cartItem._id],
           pickUpTime,
           pickUpDate,
-          totalPrice,
+          totalPrice: cartItem.price * cartItem.quantity
         });
       }
 
       return POByFarm;
     }, []);
+    console.log(PO)
 
     PO.map(async (farmPO) => {
       const newPO = await createPO({
@@ -73,28 +71,19 @@ const PlaceOrderBtn = ({
             dateCreated: Date(),
             items: farmPO.productIds,
             pickUpTime: `${pickUpDate} ${pickUpTime}`,
-            orderTotal: totalPrice,
+            orderTotal: farmPO.totalPrice
           },
         },
       });
       console.log(newPO);
     });
 
-    const purchasedOrder = {
-      products: cartItems,
-      pickUpTime,
-      pickUpDate,
-      totalPrice,
-    };
+    
 
     if (loading) {
       return "loading";
     }
-    const purchasedOrders =
-      JSON.parse(localStorage.getItem("purchasedOrders")) || [];
-
-    purchasedOrders.push(purchasedOrder);
-    localStorage.setItem("purchasedOrders", JSON.stringify(purchasedOrders));
+    
 
     onOpen();
   };

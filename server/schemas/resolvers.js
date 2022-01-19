@@ -11,9 +11,31 @@ const {
 const { signToken } = require('../utils/auth')
 
 const resolvers = {
+
     Query: {
         me: async (parent, { _id }) => {
-            return await User.findById(_id)
+            console.log(_id)
+            const user =  await User.findById(_id).populate([
+                
+                    {
+                        path: 'purchasedOrders',
+                        model: 'PurchaseOrder',
+                        populate :[
+                            {
+                            path:"seller",
+                            model:"Farm"
+                        },
+                        {
+                            path: "items",
+                            model:"Product"
+                        }
+                    ]
+                    },
+
+                
+            ])
+            console.log(user)
+            return user
         },
         reviews: async (parent, args) => {
             return await Review.find().populate('author')
@@ -40,6 +62,13 @@ const resolvers = {
             // console.log(prod[0].getAvgReviewScore())
             return prod
         },
+    
+
+
+
+
+
+
         getPO: async (parent, { _id }) => {
             return await PurchaseOrder.findById(_id).populate([
                 {
@@ -140,6 +169,24 @@ const resolvers = {
                                 }
                             }
                         ]
+                    },
+                    {
+                        path: 'purchaseOrders',
+                        model: 'PurchaseOrder',
+                        populate: [{
+                            
+                            path: 'sellers',
+                            model: 'Farm'
+                        },
+                        {
+                            path: 'items',
+                            model: 'Product'
+                        },
+                        {
+                            path: 'buyer',
+                            model: 'User'
+                        }
+                    ]
                     }
                 ]
             )
@@ -343,6 +390,7 @@ const resolvers = {
             return newFarm
         },
         createPO: async (parent, { PO }) => {
+          
             
             const newPO = await PurchaseOrder.create(PO)
             const POWithFarm = await PurchaseOrder.findById(newPO._id).populate([
@@ -360,7 +408,17 @@ const resolvers = {
                 },
 
             ])
-            console.log(POWithFarm)
+            const userWithPO =   await User.findByIdAndUpdate(
+                PO.buyer,
+                 {$push : {purchasedOrders : newPO}},
+                 {new: true}
+             )
+             const farmWithPO = await Farm.findByIdAndUpdate(
+                 PO.seller,
+                 {$push: {purchaseOrders : newPO}},
+                 {new: true}
+             )
+              console.log(newPO)
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {

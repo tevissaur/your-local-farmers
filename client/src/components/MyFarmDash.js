@@ -19,6 +19,9 @@ import { useEffect, useState } from 'react';
 function MyFarmDash({ userId }) {
     console.log(userId)
     const [farm, setFarm] = useState({})
+    const [purchasedOrder, setPurchasedOrder] = useState([]);
+    const [itemNameArr, setItemNameArr] = useState([]);
+    const [sumTotal, setSumTotal] = useState("");
 
     const { data, loading, error } = useQuery(GET_MY_FARM, {
         variables: {
@@ -29,10 +32,43 @@ function MyFarmDash({ userId }) {
         loading ? console.log('loading') : setFarm(data?.farmDashboard)
         // setFarm(data?.farmDashboard)
         console.log(data, loading, error)
+
+        if (!loading && farm && farm.purchaseOrders){
+            // const purchasedOrder = farm.purchaseOrders.map((order) => order);
+            // setPurchasedOrder(purchasedOrder);
+    
+            // const orderTotalArr = farm.purchaseOrders.map(
+            //   (order) => order.orderTotal
+            // );
+            // console.log(orderTotalArr);
+            // let sumOrderTotal = orderTotalArr.reduce(function (
+            //   previousValue,
+            //   currentValue
+            // ) {
+            //   return previousValue + currentValue;
+            // });
+            // setSumTotal(sumOrderTotal);
+    
+            // const items = farm.purchaseOrders.map((order) => order.items);
+            // console.log(items);
+            // const seller = farm.purchaseOrders.map(
+            //   (order) => order.seller.name
+            // );
+            // console.log(seller);
+            // const itemName = items.map((item) => item[0].name);
+            // setItemNameArr(itemName);
+
+            
+          
+        }
     }, [data, loading, error])
     useEffect(() => {
         console.log(farm)
     }, [farm])
+
+    
+    
+
 
     return (
         <Container maxW='100%'>
@@ -63,15 +99,15 @@ function MyFarmDash({ userId }) {
                                 <TabPanels>
                                     {/* Tab for the main farm page */}
                                     <TabPanel>
-                                        <MyOrders />
+                                         <MyOrders thisFarm={farm}/>
                                     </TabPanel>
 
                                     <TabPanel p={1}>
-                                        <MyFarmProducts products={farm.products} />
+                                        <MyFarmProducts products={farm?.products} />
                                     </TabPanel>
 
                                     <TabPanel>
-                                        <AddProductForm farmId={farm._id} setFarm={setFarm} />
+                                        <AddProductForm farmId={farm?._id} setFarm={setFarm} />
 
                                     </TabPanel>
 

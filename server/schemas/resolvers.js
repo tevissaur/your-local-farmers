@@ -169,6 +169,24 @@ const resolvers = {
                                 }
                             }
                         ]
+                    },
+                    {
+                        path: 'purchaseOrders',
+                        model: 'PurchaseOrder',
+                        populate: [{
+                            
+                            path: 'sellers',
+                            model: 'Farm'
+                        },
+                        {
+                            path: 'items',
+                            model: 'Product'
+                        },
+                        {
+                            path: 'buyer',
+                            model: 'User'
+                        }
+                    ]
                     }
                 ]
             )
@@ -393,6 +411,11 @@ const resolvers = {
             const userWithPO =   await User.findByIdAndUpdate(
                 PO.buyer,
                  {$push : {purchasedOrders : newPO}},
+                 {new: true}
+             )
+             const farmWithPO = await Farm.findByIdAndUpdate(
+                 PO.seller,
+                 {$push: {purchaseOrders : newPO}},
                  {new: true}
              )
               console.log(newPO)

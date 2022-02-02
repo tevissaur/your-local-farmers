@@ -15,12 +15,20 @@
   - HTML
   - NodeJS
   - Express.js
+  - React.js
+  - Redux (Coming Soon)
+  - MongoDb
+  - Mongoose ODM
+  - Chakra UI
 
   ## <a id="installation"></a> Installation 
   - Clone to machine
-  - Run `` to run script.
+  - Run `npm i` and `npm run develop` to run script.
   ## <a id="usage"></a> Usage
-
+  - Browse local farms and their products
+  - Create an account to purchase products you like
+  - Leave reviews of farms and products
+  - Create a farm and start selling your own homegrown goods
 
 ## <a id="contributing"></a> Contributing 
   ### Bug Reports
@@ -61,8 +69,11 @@
   products will be ignored. The request will have its content redacted and will
   be locked to prevent further discussion.
   
-  ## <a id="tests"></a> Tests
-  Coming soon...
+  ## <a id="tests"></a> Future Development Plans
+  - UI refactor
+  - Implement Stripe
+  - Manage state globally with Redux
+
   ## <a id="contact-me"></a> Contact Me
   If you have any questions. You can reach me at [my Github](https://www.github.com/tevissaur) or you can email me at: tevisreilly1@gmail.com.
   

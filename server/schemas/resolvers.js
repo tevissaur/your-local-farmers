@@ -62,13 +62,6 @@ const resolvers = {
             // console.log(prod[0].getAvgReviewScore())
             return prod
         },
-    
-
-
-
-
-
-
         getPO: async (parent, { _id }) => {
             return await PurchaseOrder.findById(_id).populate([
                 {

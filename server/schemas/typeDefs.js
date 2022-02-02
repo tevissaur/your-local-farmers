@@ -20,7 +20,7 @@ const typeDefs = gql`
         avgScore: Int
         inSeason: Boolean
         categories: [Category]
-        farm :String!
+        farm: String!
     }
     type Category {
         _id: ID!
@@ -57,7 +57,7 @@ const typeDefs = gql`
         reviews: [Review]
         fullName: String
         profilePic: String 
-        purchasedOrders :[PurchaseOrder]
+        purchasedOrders: [PurchaseOrder]
     }
     type Auth {
         token: ID!

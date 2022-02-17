@@ -12,17 +12,19 @@ import {
   Center,
 } from "@chakra-ui/react";
 import ProductCardCart from "./ProductCardCart";
+import store from "../utils/store";
+import { setCartItems } from "../utils/actions";
 
 
-function Cart({cartItems, setCartItems}) {
+function Cart() {
+  const { cart: { cartItems } } = store.getState()
 
-   const totalPrice = cartItems.reduce((price,item) => price+ item.quantity*item.price,0)
+  const totalPrice = cartItems.reduce((price, item) => price + item.quantity * item.price, 0)
   return (
     <>
       <Flex>
-        <SideNavBar />
         <Box m={4} flex="1">
-     
+
           <Container maxW="container.md">
             <Flex
               justifyContent="center"
@@ -36,24 +38,24 @@ function Cart({cartItems, setCartItems}) {
               boxShadow="1px 1px black"
             >
               <Heading>Your Cart</Heading>
-              
+
               <Container maxW="100%">
                 <Flex flexDir="column"></Flex>
-                {cartItems.length === 0 && 
-              (<Text>No items are added</Text>)}
+                {cartItems.length === 0 &&
+                  (<Text>No items are added</Text>)}
 
-              {cartItems.map((item,idx) => (
-                  
+                {cartItems.map((item, idx) => (
+
                   <ProductCardCart key={idx} item={item} cartItems={cartItems} setCartItems={setCartItems} />
-                   
-                  
-                   
-                   
-                 
-              ))}
-          
-                 
-                
+
+
+
+
+
+                ))}
+
+
+
 
                 <Flex
                   mt={3}
@@ -68,12 +70,12 @@ function Cart({cartItems, setCartItems}) {
                       ${totalPrice}
                     </Text>
                   </Flex>
-                  {cartItems.length === 0 ? "" : <CheckOutBtn cartItems={cartItems} totalPrice={totalPrice}/>}
+                  {cartItems.length === 0 ? "" : <CheckOutBtn cartItems={cartItems} totalPrice={totalPrice} />}
                 </Flex>
                 <Center></Center>
               </Container>
             </Flex>
-            
+
           </Container>
         </Box>
       </Flex>

@@ -29,7 +29,6 @@ function MyFarm() {
 
     return (
         <Flex>
-            <SideNavBar />
             <Box m={4} flex='1'>
         
                 <Container maxW='100%'>

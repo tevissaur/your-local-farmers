@@ -39,7 +39,6 @@ const Farm = () => {
   return (
     <>
       <Flex>
-        <SideNavBar />
         <Box flex="1">
       
           <Box>
@@ -157,8 +156,6 @@ const Farm = () => {
               </Box>
             </Flex>
           </Box>
-
-          <Footer />
         </Box>
       </Flex>
     </>

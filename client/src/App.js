@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState,useEffect } from "react";
-import { ChakraProvider,Box,Flex } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
 import customTheme from "./extendedTheme";
 import Header from './components/Header'
@@ -13,7 +13,10 @@ import FarmsPage from "./pages/FarmsPage";
 import ProductCard from './components/ProductCard'
 import { CgShoppingCart } from 'react-icons/cg'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { useSelector, useDispatch } from 'react-redux'
 import Cart from "./components/Cart";
+import MainLayout from "./pages/MainLayout";
+import store from "./utils/store";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -23,54 +26,28 @@ const client = new ApolloClient({
 
 
 function App() {
-  const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem('cartItems')) || [])
-
-  useEffect(() => {
-    localStorage.setItem("cartItems",JSON.stringify(cartItems))
-    
-    
-  }, [cartItems])
-
+  useDispatch()
+  useSelector((state) => state)
 
 
 
   return (
     <ApolloProvider client={client}>
-      <ChakraProvider theme={customTheme}>
         <Router>
-          <Flex ml={20} flexDirection="column"alignItems="center" flex="1">
-          <Header cartItems={cartItems}/>
-          </Flex>
-        
+
           <Routes>
-            <Route exact path="/" element={<Homepage />}>
-
+            <Route exact path="/" element={<MainLayout />}>
+              <Route index element={<Homepage />} />
+              <Route path="farm/:name" element={<Farm />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="category/:name" element={<Category />} />
+              <Route path="products/:id" element={<Product />} />
+              <Route path='farms' element={<FarmsPage />} />
+              <Route path='myfarm' element={<MyFarm />} />
+              <Route path="cart" element={<Cart />} />
             </Route>
-            <Route
-              path="/farm/:name" element={<Farm />}
-            ></Route>
-            <Route
-              path="/profile" element={<Profile />}>
-            </Route>
-            <Route
-              path="/category/:name" element={<Category />}
-            ></Route>
-            <Route
-              path="/products/:id" element={<Product cartItems={cartItems} setCartItems={setCartItems}/>}
-            ></Route>
-            
-            <Route path='/farms' element={<FarmsPage />}>
-            </Route>
-
-            <Route path='/myfarm' element={<MyFarm />}>
-            </Route>
-
-            <Route
-              path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems}/>}
-            ></Route>
           </Routes>
         </Router>
-      </ChakraProvider>
     </ApolloProvider>
   );
 }

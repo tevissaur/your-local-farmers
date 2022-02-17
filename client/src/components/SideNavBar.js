@@ -7,11 +7,11 @@ import { GiBarn, GiFarmer, GiFarmTractor } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { extendTheme } from '@chakra-ui/react'
 import auth from '../utils/auth';
+import store from '../utils/store';
+import { setDrawerOpen } from '../utils/actions';
 
 function SideNavBar({ theme }) {
-    const [navSize, changeNavSize] = useState("large")
-
-    const loggedIn = auth.loggedIn()
+    const { ui: { drawerOpen }, profile: { loggedIn } } = store.getState()
 
     const profile = loggedIn ? auth.getProfile() : []
     
@@ -24,17 +24,18 @@ function SideNavBar({ theme }) {
             marginLeft="1"
             marginTop="1"
             boxShadow="0 4px 12px 0 rgb(0, 0, 0, 0.05)"
-            borderRadius={navSize == "small" ? "15px" : "30px"}
-            w={navSize == "small" ? "75px" : "270px"}
+            w={drawerOpen ? "75px" : "270px"}
+            border='1px solid black'
+            borderRadius='lg'
             flexDir="column"
             height="100%"
             justifyContent="space-between"
         >
             <Flex
-                p='5%'
+                p='2%'
                 flexDir="column"
                 w='100%'
-                alignItems={navSize == "small" ? "center" : "flex-start"}
+                alignItems={drawerOpen ? "center" : "flex-start"}
             >
                 <IconButton
                     background="none"
@@ -42,38 +43,33 @@ function SideNavBar({ theme }) {
                     fontSize="20px"
                     _hover={{ background: 'none' }}
                     icon={<FiMenu />}
-                    onClick={() => {
-                        navSize == "small" ? changeNavSize("large")
-                            : changeNavSize("small")
-                    }}
+                    onClick={() => { store.dispatch(setDrawerOpen(!drawerOpen)) }}
                 />
-                <NavItem navSize={navSize} pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
-                <NavItem navSize={navSize} pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
+                <NavItem pageUrl="/" icon={GiBarn} title="Home" active description="Home" />
+                <NavItem pageUrl="/farms" icon={GiFarmer} title="Find A Local Farmer Near You" />
 
                 {auth.loggedIn() ? (
                     <>
-                        <NavItem navSize={navSize} pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
-                        <NavItem navSize={navSize} pageUrl="/profile" icon={CgProfile} title="Profile" />
+                        <NavItem pageUrl="/myfarm" icon={GiFarmTractor} title="Your Farm" />
+                        <NavItem pageUrl="/profile" icon={CgProfile} title="Profile" />
                     </>
                 ) : (
                     <>
 
                     </>
                 )}
-
             </Flex>
-
             <Flex
                 p="5%"
                 flexDir="column"
                 w="100%"
-                alignItems={navSize == 'small' ? "center" : "flex-start"}
+                alignItems={drawerOpen ? "center" : "flex-start"}
                 mb={4}
             >
-                <Divider display={navSize == 'small' ? "none" : "flex"} />
+                <Divider display={drawerOpen ? "none" : "flex"} />
                 <Flex mt={4} align='center'>
                     <Avatar size="sm" p='0' src={lightLogo} />
-                    <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
+                    <Flex flexDir="column" ml={4} display={drawerOpen ? "none" : "flex"}>
                         <Heading as='h3' size="sm">{loggedIn ? userName : 'Sign In'}</Heading>
                     </Flex>
                 </Flex>

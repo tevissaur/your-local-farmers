@@ -1,6 +1,13 @@
-export const increaseCount = (payload) => {
+export const setCartItems = (payload) => {
     return {
-        type: 'increase',
+        type: 'cart/items',
+        payload
+    }
+}
+
+export const setDrawerOpen = (payload) => {
+    return {
+        type: 'ui/drawer',
         payload
     }
 }

@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
-import { testReducer } from './reducers'
+import reducer from './reducers'
 
 
-const store = createStore(testReducer)
+const store = createStore(reducer)
 
 export default store

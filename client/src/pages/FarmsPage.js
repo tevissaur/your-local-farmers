@@ -95,7 +95,6 @@ selectedCategoryNames.includes(name)
     return (
         <>
             <Flex>
-                <SideNavBar />
                 <Box m={4} flex='1'>
                     <Flex justifyContent='center'>
                         <Container

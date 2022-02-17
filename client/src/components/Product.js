@@ -93,7 +93,6 @@ const Product = ({cartItems,setCartItems}) => {
   return (
     <>
       <Flex>
-        <SideNavBar />
         <Box m={4} flex="1" alignItems="center">
        
           <Box

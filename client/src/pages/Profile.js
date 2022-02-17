@@ -82,7 +82,6 @@ const Profile = () => {
   return (
     <>
       <Flex>
-        <SideNavBar />
         <Box m={4} flex="1">
           <Flex
             justifyContent="center"
@@ -143,8 +142,6 @@ const Profile = () => {
           </Flex>
         </Box>
       </Flex>
-
-      <Footer />
     </>
   );
 };

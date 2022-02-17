@@ -1,20 +1,18 @@
-const initialState = {
-    test1: 0
-}
+import { combineReducers } from 'redux';
+import auth from './auth'
+import cartReducer from './slices/cartSlice';
+import profileReducer from './slices/profileSlice';
+import uiReducer from './slices/uiSlice';
 
 
 
-const testReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'increase':
-            
-            return { ...state, test1: state.test1++ };
-    
-        default:
-            break;
-    }
-}
 
-export {
-    testReducer
-}
+
+const reducer = combineReducers({
+    cart: cartReducer,
+    ui: uiReducer,
+    profile: profileReducer
+})
+
+
+export default reducer

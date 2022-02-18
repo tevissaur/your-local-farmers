@@ -1,14 +1,9 @@
+import { Box, Typography, Link, Button } from '@mui/material'
 import React from 'react'
-import { Flex, Container, Image, Link, Heading, Text, Box, Button } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
 import localFarm from '../assets/localFarm.jpg'
-import { GiGrainBundle, GiFruitBowl, GiMeatCleaver } from 'react-icons/gi'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
-import { BiCookie } from 'react-icons/bi'
-import { ImMug } from 'react-icons/im'
-import customTheme from '../extendedTheme'
 import StarsRender from './StarsRender'
-import { useQuery } from "@apollo/client";
 
 function FarmCard({ title, reviews, numericReview, categories }) {
 
@@ -16,7 +11,7 @@ function FarmCard({ title, reviews, numericReview, categories }) {
 
     return (
 
-        <Flex
+        <Box
             flexDir='column'
             alignItems='center'
             border='2px solid black'
@@ -28,31 +23,31 @@ function FarmCard({ title, reviews, numericReview, categories }) {
             alignSelf='flex-start'
             boxShadow='1px 1px black'
         >
-            <Heading
+            <Typography
                 as='h6'
                 size='lg'
                 pb={2}
                 textAlign='center'
             >{title}
-            </Heading>
-            <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image>
-            <Flex>
-                <Text fontWeight='600' mt={1}>Goods Most Likely Available</Text>
+            </Typography>
+            {/* <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image> */}
+            <Box>
+                <Typography fontWeight='600' mt={1}>Goods Most Likely Available</Typography>
 
-            </Flex>
-            <Flex mt={2} justifyContent='space-around' w='100%'>
+            </Box>
+            <Box mt={2} justifyContent='space-around' w='100%'>
                 {/* //for each project I want to run it through a swtich statement and if a product has x category append it if it hasnt already been appeneded */}
 
                 <FarmCardAvailableGoods categories={[...filteredCategories].sort()} />
 
-            </Flex>
-            <Flex mt={2} alignItems='center'>
+            </Box>
+            <Box mt={2} alignItems='center'>
 
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
-            </Flex>
-            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button mt={3} mb={0} backgroundColor={customTheme.colors.primary.lightGreen}>Visit Farm</Button></Link>
-        </Flex>
+            </Box>
+            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button mt={3} mb={0} backgroundColor={'white'}>Visit Farm</Button></Link>
+        </Box>
 
     )
 }

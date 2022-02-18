@@ -2,28 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PO } from "../utils/mutations";
 import PlaceOrderBtn from "./PlaceOrderBtn";
-import {
-  useDisclosure,
-  Box,
-  Stack,
-  Select,
-  Flex,
-  FormLabel,
-  Text,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from "@chakra-ui/react";
 import auth from "../utils/auth";
+import { Button, Drawer } from "@mui/material";
 
 const CheckOutBtn = ({ cartItems, totalPrice }) => {
  
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const [pickUpDate, setPickUpDate] = useState("");
   const [pickUpTime, setPickUpTime] = useState("");
  
@@ -37,11 +21,10 @@ const CheckOutBtn = ({ cartItems, totalPrice }) => {
         border="1px solid grey"
         boxShadow="1px 1px black"
         backgroundColor="primary.lightGreen"
-        onClick={onOpen}
       >
         Checkout
       </Button>
-      <Drawer
+      {/* <Drawer
         isOpen={isOpen}
         placement="right"
         initialFocusRef={firstField}
@@ -132,7 +115,7 @@ const CheckOutBtn = ({ cartItems, totalPrice }) => {
             </Button>
           </DrawerFooter>
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };

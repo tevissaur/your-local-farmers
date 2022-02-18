@@ -1,13 +1,4 @@
-import {
-    Box,
-    Container,
-    Tab,
-    Flex,
-    Tabs,
-    TabList,
-    TabPanel,
-    TabPanels
-} from '@chakra-ui/react'
+
 import AddProductForm from './AddProductForm';
 import { GET_MY_FARM } from '../utils/queries'
 import { useQuery } from '@apollo/client'
@@ -15,6 +6,7 @@ import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
 import MyFarmProducts from './MyFarmProducts';
 import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 
 function MyFarmDash({ userId }) {
     console.log(userId)
@@ -71,10 +63,10 @@ function MyFarmDash({ userId }) {
 
 
     return (
-        <Container maxW='100%'>
-            <Flex>
+        <Box maxW='100%'>
+            <Box>
                 <Box m={4} flex="1">
-                    <Flex justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
+                    {/* <Box justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
                         {loading ? (
                             <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
                                 {console.log(farm)}
@@ -97,7 +89,7 @@ function MyFarmDash({ userId }) {
                                 </TabList>
 
                                 <TabPanels>
-                                    {/* Tab for the main farm page */}
+                                    Tab for the main farm page
                                     <TabPanel>
                                          <MyOrders thisFarm={farm}/>
                                     </TabPanel>
@@ -118,10 +110,10 @@ function MyFarmDash({ userId }) {
                             </Tabs>
                         )}
 
-                    </Flex>
+                    </Box> */}
                 </Box>
-            </Flex>
-        </Container>
+            </Box>
+        </Box>
     )
 }
 

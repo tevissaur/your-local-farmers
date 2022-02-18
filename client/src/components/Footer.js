@@ -1,19 +1,18 @@
-
-import{Flex, Text, Box, Link} from '@chakra-ui/react'
+import { Box, Link, Typography } from '@mui/material'
 import { BsGithub } from 'react-icons/bs'
 
 
 const Footer = () => {
     return (
         <>
-            <Flex justifyContent='center' alignItems='center'>
-                <Text>Made by Tevis, Alex, Linh and Quentin</Text>
+            <Box justifyContent='center' alignItems='center'>
+                <Typography>Made by Tevis, Alex, Linh and Quentin</Typography>
                 <Box ms={3}>
-                    <Link href='https://github.com/tevissaur/your-local-farmers' target='_blank'>
+                    {/* <Link href='https://github.com/tevissaur/your-local-farmers' target='_blank'>
                         <BsGithub/>
-                    </Link>
+                    </Link> */}
                 </Box>
-            </Flex>
+            </Box>
 
 
         </>

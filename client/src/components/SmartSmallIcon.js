@@ -1,5 +1,4 @@
 import React from 'react'
-import { Flex } from '@chakra-ui/react'
 import { categoryData } from '../categoryData'
 import SmallCategoryIcon from './SmallCategoryIcon'
 import css from '../pages/Homepage.css'

@@ -1,7 +1,6 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { Text } from '@chakra-ui/react'
-import customTheme from '../extendedTheme'
 
 function StarsRender({ reviews ,numericReview, averageReview}) {
     let total = 0
@@ -14,7 +13,7 @@ function StarsRender({ reviews ,numericReview, averageReview}) {
     
     return (
         <>
-        <Text ms={2} fontWeight='600'>Reviews:</Text>
+        <Typography ms={2} fontWeight='600'>Reviews:</Typography>
         {averageReviewArray.map( review => {
             switch(review){
                 case 5:
@@ -60,7 +59,7 @@ function StarsRender({ reviews ,numericReview, averageReview}) {
             }
         })}
         
-        <Text fontWeight='600'>({numericReview})</Text>
+        <Typography fontWeight='600'>({numericReview})</Typography>
         </>
     )
 }

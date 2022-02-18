@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Flex, Box } from '@chakra-ui/react'
 import Header from '../components/Header'
 import SideNavBar from '../components/SideNavBar'
 import MyFarmForm from '../components/MyFarmForm'

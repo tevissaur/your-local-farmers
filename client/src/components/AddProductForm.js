@@ -1,19 +1,6 @@
-import {
-    Container,
-    FormControl,
-    FormLabel,
-    Input,
-    CheckboxGroup,
-    Checkbox, NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-    Textarea,
-    Button
-} from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import { useMutation, useQuery } from '@apollo/client'
+import { Box, Button, Checkbox, FormControl, FormGroup, FormLabel, Input, TextField } from '@mui/material'
 import Auth from "../utils/auth"
 import { QUERY_CATEGORIES } from "../utils/queries"
 import { CREATE_PRODUCT } from '../utils/mutations'
@@ -83,7 +70,7 @@ const AddProductForm = ({ farmId, setFarm }) => {
     }
 
     return (
-        <Container>
+        <Box>
             <FormControl>
                 <FormLabel>
                     Product Name
@@ -95,33 +82,37 @@ const AddProductForm = ({ farmId, setFarm }) => {
                 <FormLabel>
                     Price
                 </FormLabel>
-                <NumberInput defaultValue={0} min={0} max={99} value={productPrice} onChange={(price) => setProductPrice(price)}>
-                    <NumberInputField />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
+                <TextField
+                    id="standard-number"
+                    label="Number"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
             </FormControl>
 
             <FormControl>
                 <FormLabel>
                     Quantity
                 </FormLabel>
-                <NumberInput defaultValue={0} min={0} max={99} value={productQuant} onChange={(quantity) => setProductQuant(quantity)}>
-                    <NumberInputField />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
+                <TextField
+                    id="standard-number"
+                    label="Number"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
             </FormControl>
 
             <FormControl>
                 <FormLabel>
                     Categories
                 </FormLabel>
-                <CheckboxGroup onClick={(event) => console.log(event)} >
+                <FormGroup onClick={(event) => console.log(event)} >
                     {loading ? (
                         <>
 
@@ -137,19 +128,19 @@ const AddProductForm = ({ farmId, setFarm }) => {
                         })
                     )}
 
-                </CheckboxGroup>
+                </FormGroup>
             </FormControl>
 
             <FormControl>
                 <FormLabel>
                     Description
                 </FormLabel>
-                <Textarea value={productDescription} onChange={({ target }) => setProductDescription(target.value)} />
+                <TextField value={productDescription} onChange={({ target }) => setProductDescription(target.value)} />
             </FormControl>
             <Button margin={3} onClick={(e) => handleSubmit(e)}>
                 Add Product
             </Button>
-        </Container>
+        </Box>
     )
 }
 

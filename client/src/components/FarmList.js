@@ -1,4 +1,4 @@
-import {Flex, Box} from '@chakra-ui/react';
+
 import {useQuery} from '@apollo/client';
 import {QUERY_FARM} from '../utils/queries';
 import Farm from "../pages/Farm";
@@ -10,11 +10,11 @@ const FarmList = () => {
  console.log(farmList)
   return (
     
-    <div>
+    <>
       {farmList.map((farm,index) =>(
        <Farm key ={index} farm={farm}/>
       ))}
-    </div>
+    </>
   )
 }
 

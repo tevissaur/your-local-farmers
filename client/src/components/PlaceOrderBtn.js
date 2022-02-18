@@ -1,36 +1,19 @@
-import {
-  useDisclosure,
-  Text,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import customTheme from "../extendedTheme";
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
+import { Button, Modal, Typography } from "@mui/material";
 import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_PO } from "../utils/mutations";
+import { Box } from "@mui/system";
 
-const PlaceOrderBtn = ({
-  cartItems,
-  pickUpDate,
-  pickUpTime,
-  totalPrice,
-  buyer,
-}) => {
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+const PlaceOrderBtn = ({ cartItems, pickUpDate, pickUpTime, totalPrice, buyer, }) => {
+  
   const { loading, data, error } = useQuery(QUERY_FARM);
   const [createPO] = useMutation(CREATE_PO);
   const farmList = data ? data.farms : [];
 
 
   const redirectHome = () => {
-    onClose();
    window.location.href="/"
    localStorage.removeItem("cartItems")
   };
@@ -85,7 +68,6 @@ const PlaceOrderBtn = ({
     }
     
 
-    onOpen();
   };
 
   return (
@@ -93,19 +75,19 @@ const PlaceOrderBtn = ({
       <Button backgroundColor="primary.yellowGreen" onClick={handlePlaceOrder}>
         Place Your Order
       </Button>
-      <Modal isOpen={isOpen} onClose={redirectHome}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Your Local Farmer</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>
+      <Modal open={false} onClose={redirectHome}>
+        {/* <ModalOverlay /> */}
+        <Box>
+          <Typography>Your Local Farmer</Typography>
+          {/* <ModalCloseButton /> */}
+          <Box>
+            <Typography>
               Your order has been submitted.Thank you for shopping with us! See
               you soon!
-            </Text>
-          </ModalBody>
+            </Typography>
+          </Box>
 
-          <ModalFooter>
+          <Typography>
             <Button
               backgroundColor="primary.yellowGreen"
               mr={3}
@@ -113,8 +95,8 @@ const PlaceOrderBtn = ({
             >
               Close
             </Button>
-          </ModalFooter>
-        </ModalContent>
+          </Typography>
+        </Box>
       </Modal>
     </div>
   );

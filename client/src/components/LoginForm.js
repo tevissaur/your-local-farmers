@@ -1,28 +1,10 @@
 import { useState, useRef } from "react";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  Input,
-  useDisclosure,
-  Box,
-} from "@chakra-ui/react";
-
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { LOG_IN } from "../utils/mutations";
+import { Box, Button, Modal, FormControl, FormLabel, Input } from "@mui/material";
 
 function LoginForm() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = useRef();
   const finalRef = useRef();
@@ -60,16 +42,14 @@ function LoginForm() {
   return (
     <>
       <Box>
-        <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
+        <Button bg="primary.lightGreen" mr="4">
           Login
         </Button>
       </Box>
 
-      <Modal
+      {/* <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
       >
         <ModalOverlay />
         <form onSubmit={handleFormSubmit}>
@@ -110,11 +90,11 @@ function LoginForm() {
               >
                 Login
               </Button>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button>Cancel</Button>
             </ModalFooter>
           </ModalContent>
         </form>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

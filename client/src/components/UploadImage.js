@@ -1,4 +1,3 @@
-import { Box, Flex, Container, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
 const UploadImage = (props) => {

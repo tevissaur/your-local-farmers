@@ -1,15 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_FARM } from "../utils/queries";
-import {
-  Box,
-  Flex,
-} from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
-import customeTheme from "../extendedTheme";
-import SideNavBar from "./SideNavBar";
-import Header from "./Header";
 import Footer from "./Footer";
+import { Box } from "@mui/material";
+
+
 const Category = () => {
   const { name } = useParams();
   console.log(name);
@@ -32,12 +28,11 @@ const Category = () => {
 
   return (
     <>
-      <Flex >
-        <SideNavBar />
+      <Box>
         <Box m={4} flex="1" alignItems="center">
        
 
-          <Flex
+          <Box
             borderRadius="25px"
 
             border="green 2px solid"
@@ -46,19 +41,14 @@ const Category = () => {
             backgroundColor="lightyellow"
             padding={5}
             margin={20}
-        
-            flexWrap="wrap"
-
-
-
-          >
+            flexWrap="wrap" >
             {foundProducts.map((product, idx) => (
               <ProductCard key={idx} product={product} />
             ))}
-          </Flex>
+          </Box>
           <Footer />
         </Box>
-      </Flex>
+      </Box>
     </>
   );
 };

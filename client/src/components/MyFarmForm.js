@@ -1,17 +1,9 @@
 import { useState, useRef } from "react";
-import {
-    FormControl,
-    FormLabel,
-    Input,
-    Button,
-    Container,
-    Textarea,
-    Center
-} from '@chakra-ui/react'
 import { CREATE_FARM } from '../utils/mutations'
 import { UPDATE_USER } from '../utils/mutations'
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
+import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
 
 
 function MyFarm({ setIsFarmer, setFarmId }) {
@@ -52,7 +44,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
 
     return (
         <>
-            <Container 
+            <Box 
                 maxW='container.md'
                 border='lightgrey 2px solid'  
                 padding={2} boxShadow='1px 1px black'
@@ -85,7 +77,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
 
                 <FormControl mt={4}>
                     <FormLabel fontSize='20px' fontWeight='600'>Your Farms Story</FormLabel>
-                    <Textarea
+                    <TextField
                         placeholder='Tell us about your farm'
                         type='text'
                         id='story'
@@ -94,7 +86,6 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                     />
                 </FormControl>
                 <FormControl mt={4} >
-                <Center>
                     <Button 
                         type="submit" 
                         mr={3}  
@@ -104,10 +95,9 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                         backgroundColor="primary.lightGreen">
                     Add Farm
                     </Button>
-                </Center>
                 </FormControl>
                 </form>
-            </Container>
+            </Box>
         </>
     )
 }

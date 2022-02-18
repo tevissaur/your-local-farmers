@@ -12,8 +12,8 @@ import ProductCard from "../components/ProductCard";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { Flex, Center, Image, Heading, Text, Box } from "@chakra-ui/react";
 import { AiFillStar } from "react-icons/ai";
+import { Box, Typography } from "@mui/material";
 const Farm = () => {
   const [inputText, setInputText] = useState("");
   const [rating, setRating] = useState("");
@@ -38,11 +38,11 @@ const Farm = () => {
 
   return (
     <>
-      <Flex>
+      <Box>
         <Box flex="1">
       
           <Box>
-            <Flex
+            <Box
               border="black 2px solid"
               borderRadius={25}
               backgroundColor="lightyellow"
@@ -53,27 +53,27 @@ const Farm = () => {
               justifyContent="space-evenly"
             >
               <Box>
-                <Flex flexDirection="column" alignItems="center">
-                  <Heading as="h6" size="lg" pb={2} textAlign="center">
+                <Box flexDirection="column" alignItems="center">
+                  <Typography as="h6" size="lg" pb={2} textAlign="center">
                     {foundFarm.name}
-                  </Heading>
-                  <Image
+                  </Typography>
+                  {/* <Image
                     boxSize="300px"
                     src={localFarm}
                     borderRadius="25px"
-                  ></Image>
+                  ></Image> */}
 
                   {foundFarm.owners.map((owner, idx) => (
-                    <Text key={idx} fontWeight="600" mt={1}>
+                    <Typography key={idx} fontWeight="600" mt={1}>
                       {owner.fullName}
-                    </Text>
+                    </Typography>
                   ))}
 
-                  <Text fontWeight="600" mt={1}>
+                  <Typography fontWeight="600" mt={1}>
                     {foundFarm.address}
-                  </Text>
+                  </Typography>
 
-                  <Text
+                  <Typography
                     as="samp"
                     fontWeight="600"
                     mt={1}
@@ -82,9 +82,9 @@ const Farm = () => {
                     textAlign="center"
                   >
                     {foundFarm.story}
-                  </Text>
-                </Flex>
-                <Flex
+                  </Typography>
+                </Box>
+                <Box
                   p="10px"
                   backgroundColor="darkGreen"
                   borderRadius="25px"
@@ -92,16 +92,16 @@ const Farm = () => {
                   justifyContent="center"
                   mt="10px"
                 >
-                  <Flex flexDirection="column" alignItems="center">
-                    <Flex>
+                  <Box flexDirection="column" alignItems="center">
+                    <Box>
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
-                    </Flex>
-                    <Text fontSize="sm">
+                    </Box>
+                    <Typography fontSize="sm">
                       Based on {farmReviews.length} reviews
-                    </Text>
+                    </Typography>
                     {Auth.loggedIn() ? (
                       <ReviewButton
                         inputText={inputText}
@@ -115,31 +115,31 @@ const Farm = () => {
                     ) : (
                       ""
                     )}
-                  </Flex>
-                </Flex>
+                  </Box>
+                </Box>
                 <Box>
                   {farmReviews.map((review, idx) => (
                     <Box m="15px" key={idx}>
-                      <Flex>
+                      <Box>
                         {Array(review.rating)
                           .fill(0)
                           .map(() => (
                             <AiFillStar color="green" />
                           ))}
-                      </Flex>
+                      </Box>
 
-                      <Flex gap={6}>
-                        <Flex>
+                      <Box gap={6}>
+                        <Box>
                           <RiDoubleQuotesL />
-                          <Text fontSize="sm">{review.content}...</Text>
+                          <Typography fontSize="sm">{review.content}...</Typography>
                           <RiDoubleQuotesR />
-                        </Flex>
+                        </Box>
 
-                        <Flex alignItems="center">
+                        <Box alignItems="center">
                           <BsPersonFill />
-                          <Text fontSize="sm">{review.author.firstName}</Text>
-                        </Flex>
-                      </Flex>
+                          <Typography fontSize="sm">{review.author.firstName}</Typography>
+                        </Box>
+                      </Box>
                     </Box>
                   ))}
                   {/* {foundFarm.reviews.map((review, idx) => (
@@ -148,16 +148,16 @@ const Farm = () => {
                 </Box>
               </Box>
               <Box>
-                <Flex marginTop={15} justifyContent="center" flexWrap="wrap">
+                <Box marginTop={15} justifyContent="center" flexWrap="wrap">
                   {foundFarm.products.map((product, idx) => (
                     <FarmProductCard key={idx} product={product} />
                   ))}
-                </Flex>
+                </Box>
               </Box>
-            </Flex>
+            </Box>
           </Box>
         </Box>
-      </Flex>
+      </Box>
     </>
   );
 };

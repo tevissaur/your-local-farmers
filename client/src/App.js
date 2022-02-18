@@ -1,22 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import Homepage from "./pages/Homepage";
-import customTheme from "./extendedTheme";
-import Header from './components/Header'
 import Product from "./components/Product";
 import Profile from "./pages/Profile"
 import Category from "./components/Category";
 import Farm from "./pages/Farm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
-import ProductCard from './components/ProductCard'
-import { CgShoppingCart } from 'react-icons/cg'
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useSelector, useDispatch } from 'react-redux'
 import Cart from "./components/Cart";
 import MainLayout from "./pages/MainLayout";
-import store from "./utils/store";
 
 const client = new ApolloClient({
   uri: "/graphql",

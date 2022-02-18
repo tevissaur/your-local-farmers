@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  Flex,
-  Container,
-  Text,
-  Heading,
-  Image,
-  Box,
-  Button,
-} from "@chakra-ui/react";
 import asters from "../assets/flowersPlants/asters.jpg";
 import { ImCross } from "react-icons/im";
 import { imageSeeds } from "../imageSeeds";
+import { Box, Typography, Button } from "@mui/material";
 
 function ProductCardCart({ item, cartItems, setCartItems }) {
   const handleAddToCart = (product) => {
@@ -58,7 +50,7 @@ function ProductCardCart({ item, cartItems, setCartItems }) {
   return (
     <>
       <Box mt={5}>
-        <Flex
+        <Box
           flexDirection="row"
       
        
@@ -70,20 +62,20 @@ function ProductCardCart({ item, cartItems, setCartItems }) {
           boxShadow="2px 2px grey"
           backgroundColor="white"
         >
-          <Flex width="40%" flexDir="column" justifyContent="center" alignItems="flex-start" px="20px" py="10px">
-            <Text me={2} fontSize="25px">
+          <Box width="40%" flexDir="column" justifyContent="center" alignItems="flex-start" px="20px" py="10px">
+            <Typography me={2} fontSize="25px">
               {item.name}
-            </Text>
-            <Image
+            </Typography>
+            {/* <Image
               ms={2}
               me={5}
               src={foundProductImage}
               boxSize="80px"
               mb={2}
-            ></Image>
-          </Flex>
+            ></Image> */}
+          </Box>
 
-          <Flex
+          <Box
           width="30%"
            justifyContent="flex-start"
            justifyContent="space-between"
@@ -94,17 +86,17 @@ function ProductCardCart({ item, cartItems, setCartItems }) {
             <Button onClick={() => handleAddToCart(item)}>+</Button>
             {item.quantity}
             <Button onClick={() => handleReduceItem(item)}>-</Button>
-          </Flex>
+          </Box>
 
-          {/* <Flex width ="20%" alignItems="center" justifyContent="center">
+          {/* <Box width ="20%" alignItems="center" justifyContent="center">
             <Box fontSize="25px">${item.price} * {item.quantity}</Box>
-          </Flex> */}
-          <Flex alignItems="center"  width ="30%" justifyContent="center">
+          </Box> */}
+          <Box alignItems="center"  width ="30%" justifyContent="center">
             <Button onClick={handleRemoveItem}>
               <ImCross color="red" fontSize="25px" />
             </Button>
-          </Flex>
-        </Flex>
+          </Box>
+        </Box>
       </Box>
     </>
   );

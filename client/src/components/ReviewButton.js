@@ -1,17 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useMutation } from "@apollo/client";
 import { POST_REVIEW } from "../utils/mutations";
-import {
-  Button,
-  FormControl,
-  Select,
-  Input,
-  useDisclosure,
-  Modal,
-  ModalContent,
-  ModalFooter,
-  ModalBody,
-} from "@chakra-ui/react";
 import auth from "../utils/auth";
 
 const ReviewButton = ({

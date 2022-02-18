@@ -1,8 +1,7 @@
-import { Flex, Center, Heading, Box, Button, Link, Avatar, Badge, Text, FormControl, Input, FormLabel, Divider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { EditIcon } from '@chakra-ui/icons'
 import { useMutation } from '@apollo/client'
 import { UPDATE_FARM } from '../utils/mutations'
+import { Box, FormControl, FormLabel, Input, Button, Typography } from "@mui/material";
 
 
 function EditFarm({ thisFarm }) {
@@ -35,12 +34,12 @@ function EditFarm({ thisFarm }) {
 
     return (
         <Box>
-            <Flex ml='3' flexWrap='wrap'>
+            <Box ml='3' flexWrap='wrap'>
                 <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
                     <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
 
                         {editingFarmName ? (
-                            <Flex w="100%" justifyContent='start' alignItems='center'>
+                            <Box w="100%" justifyContent='start' alignItems='center'>
                                 <FormLabel width='145px' fontSize={22}>
                                     New Farm Name:
                                 </FormLabel>
@@ -55,19 +54,20 @@ function EditFarm({ thisFarm }) {
                                 }}>
                                     Edit Name
                                 </Button>
-                            </Flex>) : (
-                            <Flex>
+                            </Box>) : (
+                            <Box>
                                 <FormLabel width='145px' fontSize={22}>
                                     Farm Name:
                                 </FormLabel>
-                                <Text marginEnd={4} fontSize={20}>
+                                <Typography marginEnd={4} fontSize={20}>
+
 
                                     {farm ? farm.name : '...'}
-                                </Text>
+                                </Typography>
                                 <Button size='sm' onClick={() => setEditFarmName(true)}>
-                                    <EditIcon />
+                                    
                                 </Button>
-                            </Flex>)}
+                            </Box>)}
                     </FormControl>
                 </FormControl>
 
@@ -75,7 +75,7 @@ function EditFarm({ thisFarm }) {
                     <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
 
                         {editingFarmAddress ? (
-                            <Flex w="100%" justifyContent='start' alignItems='center'>
+                            <Box w="100%" justifyContent='start' alignItems='center'>
                                 <FormLabel width='145px' fontSize={22}>
                                     New Address:
                                 </FormLabel>
@@ -89,19 +89,20 @@ function EditFarm({ thisFarm }) {
                                 }}>
                                     Edit Address
                                 </Button>
-                            </Flex>) : (
-                            <Flex>
+                            </Box>) : (
+                            <Box>
                                 <FormLabel width='145px' fontSize={22}>
                                     Farm Address:
                                 </FormLabel>
-                                <Text marginEnd={4} fontSize={20}>
+                                <Typography marginEnd={4} fontSize={20}>
+
 
                                     {farm ? farm.address : '...'}
-                                </Text>
+                                </Typography>
                                 <Button size='sm' onClick={() => setEditFarmAddress(true)}>
-                                    <EditIcon />
+                                    
                                 </Button>
-                            </Flex>)}
+                            </Box>)}
                     </FormControl>
                 </FormControl>
 
@@ -111,7 +112,7 @@ function EditFarm({ thisFarm }) {
                     <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
 
                         {editingFarmStory ? (
-                            <Flex w="100%" justifyContent='start' alignItems='center'>
+                            <Box w="100%" justifyContent='start' alignItems='center'>
                                 <FormLabel width='145px' fontSize={22}>
                                     New Farm Story:
                                 </FormLabel>
@@ -125,22 +126,23 @@ function EditFarm({ thisFarm }) {
                                 }}>
                                     Edit Story
                                 </Button>
-                            </Flex>) : (
-                            <Flex>
+                            </Box>) : (
+                            <Box>
                                 <FormLabel width='145px' fontSize={22}>
                                     Farm Story:
                                 </FormLabel>
-                                <Text marginEnd={4} fontSize={20}>
+                                <Typography marginEnd={4} fontSize={20}>
+
 
                                     {farm ? farm.story : '...'}
-                                </Text>
+                                </Typography>
                                 <Button size='sm' onClick={() => setEditFarmStory(true)}>
-                                    <EditIcon />
+                                    
                                 </Button>
-                            </Flex>)}
+                            </Box>)}
                     </FormControl>
                 </FormControl>
-            </Flex>
+            </Box>
         </Box>
     )
 }

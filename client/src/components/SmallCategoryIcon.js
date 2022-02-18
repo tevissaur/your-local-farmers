@@ -1,26 +1,25 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Flex, Box, Text, color } from '@chakra-ui/react'
 import bakedGoods from '../assets/beverages2.jpg'
 import DairyMeatEggs from '../assets/DairyMeatEggs.jpg'
-import { border } from '@chakra-ui/react'
 import SmallIcon from '../components/SmallIcon.css'
 
 
 const SmallCategoryIcon = ({ card }) => {
     return (
-        <Flex justifyContent='space-evenly'className="icon-basket">
+        <Box justifyContent='space-evenly'className="icon-basket">
             <Link to={`/category/${card.title.toLowerCase()}`}> 
                 <Box>
-                    <Flex flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
+                    <Box flexDir="column" alignItems='center' fontSize='15px' fontWeight='Bold'>
                         <Box className='smallCategoryIcon' ms={5}>
-                            <Image src={card.image} boxSize='145px' height='125px' width='125px'borderRadius='50%'/>
-                            <Text textAlign="center">{card.title}</Text>
+                            {/* <Image src={card.image} boxSize='145px' height='125px' width='125px'borderRadius='50%'/> */}
+                            <Typography textAlign="center">{card.title}</Typography>
                         </Box>
-                    </Flex>
+                    </Box>
                 </Box>
             </Link>
-        </Flex>
+        </Box>
     )
 }
 

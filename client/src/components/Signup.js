@@ -1,31 +1,12 @@
 import { useState, useRef } from "react";
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    Input,
-    useDisclosure,
-    Box
-} from '@chakra-ui/react';
-import customTheme from "../extendedTheme";
 
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { Box, Button, Modal, FormLabel, FormControl, Input, FormHelperText, Typography } from "@mui/material";
 
 
 function Signup() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [input, setInput] = useState('')
     const initialRef = useRef()
     const finalRef = useRef()
     const [emailAddress, setEmailAdress] = useState('');
@@ -72,24 +53,24 @@ function Signup() {
         <>
 
             <Box>
-                <Button onClick={onOpen} bg="primary.lightGreen" mr="4">
+                <Button  bg="primary.lightGreen" mr="4">
                     Sign Up
                 </Button>
 
             </Box>
 
-            <Modal
+            {/* <Modal
                 initialFocusRef={initialRef}
                 finalFocusRef={finalRef}
-                isOpen={isOpen}
-                onClose={onClose}
+                open={false}
             >
                 <ModalOverlay />
                 <form onSubmit={handleFormSubmit}>
-                    <ModalContent>
-                        <ModalHeader>Create your account</ModalHeader>
+                    <Box>
+
+                        <Typography>Create your account</Typography>
                         <ModalCloseButton />
-                        <ModalBody pb={6}>
+                        <Box pb={6}>
                             <FormControl>
                                 <FormLabel>Username</FormLabel>
                                 <Input ref={initialRef}
@@ -99,11 +80,11 @@ function Signup() {
                                     onChange={({ target }) => setUserName(target.value)}
                                 />
                                 {isInvalid ? (
-                                    <FormHelperText>
+                                    <Typography>
                                         Enter a unique username
-                                    </FormHelperText>
+                                    </Typography>
                                 ) : (
-                                    <FormErrorMessage>username is required.</FormErrorMessage>
+                                    <Typography>username is required.</Typography>
                                 )}
                             </FormControl>
                             
@@ -127,11 +108,11 @@ function Signup() {
                                     onChange={({ target }) => setEmailAdress(target.value)}
                                 />
                                 {isInvalid ? (
-                                    <FormHelperText>
+                                    <Typography>
                                         Enter your email address
-                                    </FormHelperText>
+                                    </Typography>
                                 ) : (
-                                    <FormErrorMessage>Email is required.</FormErrorMessage>
+                                    <Typography>Email is required.</Typography>
                                 )}
                             </FormControl>
 
@@ -145,27 +126,27 @@ function Signup() {
                                     onChange={({ target }) => setPassword(target.value)}
                                 />
                                 {isInvalid ? (
-                                    <FormHelperText>
+                                    <Typography>
                                         Enter a unique password
-                                    </FormHelperText>
+                                    </Typography>
                                 ) : (
-                                    <FormErrorMessage>Password is required.</FormErrorMessage>
+                                    <Typography>Password is required.</Typography>
                                 )}
                             </FormControl>
-                        </ModalBody>
+                        </Box>
 
-                        <ModalFooter>
+                        <Box>
 
                             <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid}>
                                 Submit
                             </Button>
-                            <Button onClick={onClose}>Cancel</Button>
+                            <Button>Cancel</Button>
 
-                        </ModalFooter>
+                        </Box>
 
-                    </ModalContent>
+                    </Box>
                 </form>
-            </Modal>
+            </Modal> */}
 
         </>
     )

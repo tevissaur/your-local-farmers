@@ -1,28 +1,11 @@
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
-import { imageSeeds } from "../imageSeeds";
-import {
-  Box,
-  Flex,
-  Container,
-  Button,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-} from "@chakra-ui/react";
 import {} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { GET_ME } from "../utils/queries";
-import SideNavBar from "../components/SideNavBar";
 import UserMain from "../components/UserMain.js";
-import customTheme from "../extendedTheme";
-import MyFarmForm from "../components/MyFarmForm";
-import MyFarmTabs from "../components/MyFarmTabs";
 import Auth from "../utils/auth";
-import Footer from "../components/Footer";
 import Signup from "../components/Signup";
+import { Box, Tab, Tabs } from "@mui/material";
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -81,9 +64,9 @@ const Profile = () => {
   if (loading) return "loading";
   return (
     <>
-      <Flex>
+      <Box>
         <Box m={4} flex="1">
-          <Flex
+          <Box
             justifyContent="center"
             w="100%"
             borderRadius="10px"
@@ -92,14 +75,12 @@ const Profile = () => {
           >
             {Auth.loggedIn() ? (
               <>
-                <Tabs isFitted variant="enclosed" color="black" w="100%" p={3}>
-                  <TabList backgroundColor="primary.lightGreen">
+                {/* <Tabs isFitted variant="enclosed" color="black" w="100%" p={3}>
                     <Tab color="black">Home</Tab>
                     <Tab color="black">My Orders</Tab>
-                  </TabList>
 
                   <TabPanels>
-                    {/* Tab for the main profile page */}
+                    Tab for the main profile page
                     <TabPanel>
                       <UserMain userData={userData} />
                     </TabPanel>
@@ -129,19 +110,19 @@ const Profile = () => {
                         </Box>
                       ))}
 
-                      {/* Order Total : ${sumTotal} */}
+                      Order Total : ${sumTotal}
                     </TabPanel>
                   </TabPanels>
-                </Tabs>
+                </Tabs> */}
               </>
             ) : (
               <>
                 <Signup />
               </>
             )}
-          </Flex>
+          </Box>
         </Box>
-      </Flex>
+      </Box>
     </>
   );
 };

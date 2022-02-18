@@ -1,6 +1,6 @@
-import { Text, Flex } from '@chakra-ui/react'
 import FarmProductCard from './FarmProductCard'
 import { useEffect, useState } from 'react'
+import { Box, Typography } from '@mui/material'
 
 
 const MyFarmProducts = ({ products }) => {
@@ -8,11 +8,11 @@ const MyFarmProducts = ({ products }) => {
     console.log(products)
 
     return (
-        <Flex h="60vh" flexWrap="wrap" overflow="scroll" >
+        <Box h="60vh" flexWrap="wrap" overflow="scroll" >
             {(products?.length === 0) || (!products) ? (
-                <Text>
+                <Typography>
                     No products
-                </Text>
+                </Typography>
 
             ) : (
                 <>
@@ -23,7 +23,7 @@ const MyFarmProducts = ({ products }) => {
                 </>
             )}
 
-        </Flex>
+        </Box>
     )
 }
 

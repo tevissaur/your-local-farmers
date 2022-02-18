@@ -1,14 +1,14 @@
 import React from 'react'
-import { Flex } from '@chakra-ui/react'
 import { BiCookie } from 'react-icons/bi'
 import { ImMug } from 'react-icons/im'
 import { GiGrainBundle, GiFruitBowl, GiMeatCleaver, GiFlowerPot } from 'react-icons/gi'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { BsFillCloudSunFill } from 'react-icons/bs'
+import { Box } from '@mui/material'
 
 function FarmCardAvailableGoods({categories}) {
     return (
-        <Flex  mt={1} justifyContent='space-around' w='100%' id='work'>
+        <Box  mt={1} justifyContent='space-around' w='100%' id='work'>
             {categories.map(category => {
                 switch(category){
                     case 'Baked Goods':
@@ -33,7 +33,7 @@ function FarmCardAvailableGoods({categories}) {
                     }
                 )
             }
-        </Flex>
+        </Box>
     )
 }
 

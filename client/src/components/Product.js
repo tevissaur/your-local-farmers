@@ -4,26 +4,14 @@ import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-import Cart from "./Cart";
-import {
-  Button,
-  Box,
-  Flex,
-  Text,
-  FormControl,
-  Select,
-  Input,
-} from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
 import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
 import { imageSeeds } from "../imageSeeds";
-import SideNavBar from "./SideNavBar";
-import Header from "./Header";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import customTheme from "../extendedTheme";
 import Auth from "../utils/auth";
 import { useEffect, useState, useRef } from "react";
 import ReviewButton from "./ReviewButton";
+import { Box, Typography, Button } from "@mui/material";
 
 const Product = ({cartItems,setCartItems}) => {
   const [inputText, setInputText] = useState("");
@@ -92,7 +80,7 @@ const Product = ({cartItems,setCartItems}) => {
 
   return (
     <>
-      <Flex>
+      <Box>
         <Box m={4} flex="1" alignItems="center">
        
           <Box
@@ -103,31 +91,31 @@ const Product = ({cartItems,setCartItems}) => {
             padding={5}
             margin={10}
           >
-            <Flex>
+            <Box>
               <Box>
                 <img src={foundProductImage} style={{ width: "300px" }} />
 
-                <Flex
+                <Box
                   p="10px"
                   backgroundColor="darkGreen"
                   color="yellowGreen"
                   justifyContent="center"
                   mt="10px"
                 >
-                  <Flex flexDirection="column" alignItems="center">
-                    <Flex>
+                  <Box flexDirection="column" alignItems="center">
+                    <Box>
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
                       <AiFillStar fontSize="15px" />
-                    </Flex>
-                    <Text fontSize="sm">
+                    </Box>
+                    <Typography fontSize="sm">
 
                       Based on {dataReviews.length} reviews
   
                    
 
-                    </Text>
+                    </Typography>
                     {Auth.loggedIn() ? (
                       <ReviewButton
                         inputText={inputText}
@@ -141,40 +129,40 @@ const Product = ({cartItems,setCartItems}) => {
                     ) : (
                       ""
                     )}
-                  </Flex>
-                </Flex>
+                  </Box>
+                </Box>
               </Box>
 
               <Box m="30px">
                 <Link to={`/farm/${farm.name.toLowerCase()}`}>
-                  <Flex>
-                    <Text fontSize="2xl" color="primary.darkGreen">
+                  <Box>
+                    <Typography fontSize="2xl" color="primary.darkGreen">
                       {farm.name}
-                    </Text>
+                    </Typography>
                     {<BsFillHouseFill />}
-                  </Flex>
+                  </Box>
                 </Link>
-                <Text
+                <Typography
                   fontSize="2xl"
                   px="4px"
                   px="10px"
                   style={{ fontWeight: "bolder" }}
                 >
                   {foundProduct.name}
-                </Text>
+                </Typography>
                 [product's description]
-                <Flex>
-                  <Text>Available :</Text>
-                  <Text
+                <Box>
+                  <Typography>Available :</Typography>
+                  <Typography
                     color="primary.darkGreen"
                     style={{ fontWeight: "bolder" }}
                   >
                     {foundProduct.quantity}
-                  </Text>
-                </Flex>
+                  </Typography>
+                </Box>
                 <Box>
                   <Box>
-                    <Text fontSize="2xl">$ {foundProduct.price}.00</Text>
+                    <Typography fontSize="2xl">$ {foundProduct.price}.00</Typography>
                   </Box>
                   {Auth.loggedIn() ? (
                     <Button
@@ -190,7 +178,7 @@ const Product = ({cartItems,setCartItems}) => {
                   
                 </Box>
               </Box>
-            </Flex>
+            </Box>
           </Box>
           <Box
             border="green 2px solid"
@@ -200,7 +188,7 @@ const Product = ({cartItems,setCartItems}) => {
             padding={5}
             mx={10}
           >
-            <Text
+            <Typography
               fontSize="2xl"
               px="4px"
               px="10px"
@@ -208,38 +196,38 @@ const Product = ({cartItems,setCartItems}) => {
               mb={5}
             >
               Customer Review
-            </Text>
+            </Typography>
             {/* {reviews.map((review,idx) => (
               <h1 key={idx}>{review.content}</h1>
             ))} */}
 
             {dataReviews.map((review, idx) => (
               <Box m="15px" key={idx}>
-                <Flex>
+                <Box>
                   {Array(review.rating)
                     .fill(0)
                     .map(() => (
                       <AiFillStar color="green" />
                     ))}
-                </Flex>
+                </Box>
 
-                <Flex gap={6}>
-                  <Flex>
+                <Box gap={6}>
+                  <Box>
                     <RiDoubleQuotesL />
-                    <Text>{review.content}...</Text>
+                    <Typography>{review.content}...</Typography>
                     <RiDoubleQuotesR />
-                  </Flex>
+                  </Box>
 
-                  <Flex alignItems="center">
+                  <Box alignItems="center">
                     <BsPersonFill />
-                    <Text>{review.author.firstName}</Text>
-                  </Flex>
-                </Flex>
+                    <Typography>{review.author.firstName}</Typography>
+                  </Box>
+                </Box>
               </Box>
             ))}
           </Box>
         </Box>
-      </Flex>
+      </Box>
     </>
   )
 }

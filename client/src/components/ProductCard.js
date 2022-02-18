@@ -1,28 +1,10 @@
 import { Link } from "react-router-dom";
 import { imageSeeds } from "../imageSeeds";
-import customeTheme from "../extendedTheme";
 
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { Box, Typography } from "@mui/material";
 
-
-
-import {
-  Button,
-  Box,
-  Flex,
-  Heading,
-  Spacer,
-  Center,
-  Text,
-  Container,
-  List,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-  ListIcon,
-  Image,
-} from "@chakra-ui/react";
 
 
 
@@ -44,43 +26,43 @@ const ProductCard = ({ product }) => {
           <Box>
             <img src={foundProductImage} style={{ borderRadius: "25px" }} />
             <Link to={`/products/${product._id}`}>
-              <Flex justifyContent="space-between">
-                <Text
+              <Box justifyContent="space-between">
+                <Typography
                   fontSize="2xl"
                   px="4px"
                   px="10px"
                   style={{ fontWeight: "bolder" }}
                 >
                   {product.name}
-                </Text>
-                <Flex alignItems="center" justifyContent="end" padding="4px">
-                  <Text fontSize="2xl">${product.price}</Text>
-                </Flex>
-              </Flex>
+                </Typography>
+                <Box alignItems="center" justifyContent="end" padding="4px">
+                  <Typography fontSize="2xl">${product.price}</Typography>
+                </Box>
+              </Box>
             </Link>
             <Box px="10px">
-              <Flex>
+              <Box>
                 <AiFillStar />
                 <AiFillStar />
                 <AiFillStar />
                 <AiFillStar />
-              </Flex>
+              </Box>
               <small>Based on {product.reviews.length} reviews</small>
             </Box>
 
             <Box p="10px">
-              <Text>
+              <Typography>
                 Available :{" "}
                 <span style={{ fontWeight: "bolder" }}>
                   {product.quantity}{" "}
                 </span>
                 from{" "}
-              </Text>
+              </Typography>
 
               <Link to={`/farm/${product.farm.name.toLowerCase()}`}>
-                <Text fontSize="2xl" color="primary.darkGreen">
+                <Typography fontSize="2xl" color="primary.darkGreen">
                   {product.farm.name}
-                </Text>
+                </Typography>
               </Link>
             </Box>
           </Box>

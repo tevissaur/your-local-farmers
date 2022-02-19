@@ -9,7 +9,6 @@ import { Box, Typography } from "@mui/material";
 
 
 const ProductCard = ({ product }) => {
-  console.log(product);
 
   //finding image matched product from seed
   const cardArr = imageSeeds.map((card) => card);

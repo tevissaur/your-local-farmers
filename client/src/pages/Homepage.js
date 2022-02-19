@@ -1,36 +1,44 @@
-import SmartSmallIcon from "../components/SmartSmallIcon";
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import List from '@mui/material/List'
-import { Link } from "react-router-dom";
+import CategoryHeader from '../components/Homepage/CategoryHeader'
 
 const Homepage = () => {
 
 
   return (
     <>
-      <Box display='flex' flexDirection='column' flexWrap='wrap'>
-        <Box>
-          <Box>
-            <Typography>
-              Explore Our Most Popular Categories
-            </Typography>
-          </Box>
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='flex-start'
+        flexGrow={1}
+      >
+        <CategoryHeader />
 
-          <Box>
-            <SmartSmallIcon />
-          </Box>
-        </Box>
-
-        <Box>
-          <Box>
-            <Typography>
+        <Box sx={{
+          margin: '10px'
+        }}>
+          <Box sx={{
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '20px',
+            width: '60%',
+            backgroundColor: 'green',
+            borderRadius: '10px'
+          }}>
+            <Typography variant='h5' sx={{
+              textAlign: 'center'
+            }}>
               Our Mission Statement!
             </Typography>
-            <List>
+            <List sx={{
+              
+              margin: 'auto'
+            }}>
               <ListItem>
                 <ListItemIcon />
                 Support local farming communities
@@ -48,7 +56,7 @@ const Homepage = () => {
             </List>
           </Box>
         </Box>
-        <Container>
+        {/* <Box>
           <Typography as='h2' fontSize='3.5rem' textAlign='center' color={'green'}>
             The Whys Behind The Whats
           </Typography>
@@ -83,13 +91,13 @@ const Homepage = () => {
               next 50 years. Many developing nations
               already are concerned about food security."
               <Link
-              to='https://sustainable-farming.rutgers.edu/wp-content/uploads/2017/10/Why-Save-Farmland.pdf'
-              target='_blank' fontWeight='bold' color={'green'}>
-              To read more from this article Click Here!
-            </Link>
+                to='https://sustainable-farming.rutgers.edu/wp-content/uploads/2017/10/Why-Save-Farmland.pdf'
+                target='_blank' fontWeight='bold' color={'green'}>
+                To read more from this article Click Here!
+              </Link>
             </Typography>
           </Box>
-        </Container>
+        </Box> */}
       </Box>
 
     </>

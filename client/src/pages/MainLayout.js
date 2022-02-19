@@ -1,6 +1,5 @@
-import SideNavBar from "../components/SideNavBar";
-import Box from '@mui/material/Box'
-import Header from '../components/Header'
+
+import Header from '../components/NavComponents/Header'
 import Footer from '../components/Footer'
 import { Outlet } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
@@ -11,16 +10,13 @@ const MainLayout = () => {
 
   return (
     <>
-      <Box display='flex' flexDirection='column'>
-        <Header />
-        <SideNavBar />
-        <MainContainer
-          open={drawerOpen}
-        >
-          <Outlet />
-          <Footer />
-        </MainContainer>
-      </Box>
+      <Header />
+      <MainContainer
+        open={drawerOpen}
+      >
+        <Outlet />
+        <Footer />
+      </MainContainer>
     </>
   );
 };

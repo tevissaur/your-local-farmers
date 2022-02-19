@@ -1,21 +1,25 @@
 import * as React from 'react';
-import Box from '@mui/material/Box' 
+import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
+import Link from '@mui/material/Link'
+// import { ShoppingCart } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import PersonAdd from '@mui/icons-material/PersonAdd'
 import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
-import auth from '../utils/auth';
+import auth from '../../utils/auth';
 import { Link as ReactLink } from 'react-router-dom';
 import { NavLink } from './Header';
+import store from '../../utils/store';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const { cart: { cartItems } } = store.getState()
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -25,10 +29,7 @@ export default function AccountMenu() {
     };
     return (
         <>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <NavLink component={ReactLink} to="/dashboard">
-                    Profile
-                </NavLink>
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', marginX: 2 }}>
                 <Tooltip title="Account settings">
                     <IconButton
                         onClick={handleClick}
@@ -41,8 +42,12 @@ export default function AccountMenu() {
                         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
+                <Link component={ReactLink} to={"/cart"}>
+                    {/* <ShoppingCart fontSize="40px" /> */}
+                </Link>
+                <span>{cartItems === undefined ? (<></>) : cartItems.reduce((total, item) => total += item.quantity, 0)}</span>
             </Box>
-            {/* <Menu
+            <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -77,9 +82,12 @@ export default function AccountMenu() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
-                    <Avatar /> Profile
-                </MenuItem>
+                <Link component={ReactLink} to='/profile' underline='none'>
+                    <MenuItem>
+                        <Avatar /> Profile
+
+                    </MenuItem>
+                </Link>
                 <MenuItem>
                     <Avatar /> My account
                 </MenuItem>
@@ -103,7 +111,7 @@ export default function AccountMenu() {
                     </ListItemIcon>
                     Logout
                 </MenuItem>
-            </Menu> */}
+            </Menu>
         </>
     );
 }

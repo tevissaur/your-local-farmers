@@ -1,34 +1,33 @@
-import { useState, useRef } from "react";
-
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { Box, Button, Modal, FormLabel, FormControl, Input, FormHelperText, Typography } from "@mui/material";
+import { Box, Button, Modal, FormLabel, FormControl, Input, FormHelperText, Typography, Fade } from "@mui/material";
+import store from "../utils/store";
+import { setSignupEmail, setSignupFirstName, setSignupModal, setSignupPass, setSignupUsername } from "../utils/actions";
 
 
 function Signup() {
-    const initialRef = useRef()
-    const finalRef = useRef()
-    const [emailAddress, setEmailAdress] = useState('');
-    const [password, setPassword] = useState('');
-    const [userName, setUserName] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const isInvalid = password === '' || emailAddress === '' || userName === '';
+    const { ui: { signup: { modal, email, password, firstName, username } } } = store.getState()
+    const isInvalid = password === "" || email === "";
 
     const [createUser] = useMutation(CREATE_USER);
 
+    const handleModal = async (e) => {
+        store.dispatch(setSignupModal(!modal))
+        console.log(modal, email, password)
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
         //Check if username is taken or not
         //Check password strength later
-        
+
         const userData = {
-            username: userName,
-            email: emailAddress,
-            password: password,
-            firstName: firstName
+            username,
+            email,
+            password,
+            firstName
         }
 
         try {
@@ -51,104 +50,84 @@ function Signup() {
 
     return (
         <>
-
-            <Box>
-                <Button  bg="primary.lightGreen" mr="4">
-                    Sign Up
-                </Button>
-
-            </Box>
-
-            {/* <Modal
-                initialFocusRef={initialRef}
-                finalFocusRef={finalRef}
-                open={false}
+            <Button
+                sx={{
+                    backgroundColor: 'green',
+                    marginRight: 4,
+                    color: 'black',
+                    ':hover': {
+                        backgroundColor: 'darkgreen'
+                    }
+                }} onClick={handleModal}>
+                Sign Up
+            </Button>
+            <Modal
+                open={modal}
+                onClose={handleModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
-                <ModalOverlay />
-                <form onSubmit={handleFormSubmit}>
-                    <Box>
+                <Box sx={{
+                    position: 'fixed',
+                    width: 600,
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    border: '1px solid',
+                    p: 1,
+                    bgcolor: 'background.paper',
+                }}>
 
-                        <Typography>Create your account</Typography>
-                        <ModalCloseButton />
-                        <Box pb={6}>
-                            <FormControl>
-                                <FormLabel>Username</FormLabel>
-                                <Input ref={initialRef}
-                                    placeholder='Username'
-                                    type='text'
-                                    id='username'
-                                    onChange={({ target }) => setUserName(target.value)}
-                                />
-                                {isInvalid ? (
-                                    <Typography>
-                                        Enter a unique username
-                                    </Typography>
-                                ) : (
-                                    <Typography>username is required.</Typography>
-                                )}
-                            </FormControl>
-                            
-                            <FormControl>
-                                <FormLabel>First Name</FormLabel>
-                                <Input ref={initialRef}
-                                    placeholder='First name'
-                                    type='text'
-                                    id='firstName'
-                                    onChange={({ target }) => setFirstName(target.value)}
-                                />
-                            </FormControl>
+                    <FormControl>
+                        <FormLabel>Username</FormLabel>
+                        <Input
+                            type='text'
+                            id='username'
+                            value={username}
+                            onChange={({ target }) => store.dispatch(setSignupUsername(target.value))}
+                        />
 
-                            <FormControl mt={4}>
-                                <FormLabel>Email</FormLabel>
-                                <Input
-                                    placeholder='Email'
-                                    type='email'
-                                    id='email'
-                                    value={emailAddress}
-                                    onChange={({ target }) => setEmailAdress(target.value)}
-                                />
-                                {isInvalid ? (
-                                    <Typography>
-                                        Enter your email address
-                                    </Typography>
-                                ) : (
-                                    <Typography>Email is required.</Typography>
-                                )}
-                            </FormControl>
 
-                            <FormControl mt={4}>
-                                <FormLabel>Password</FormLabel>
-                                <Input
-                                    placeholder='Password'
-                                    type='password'
-                                    id='password'
-                                    value={password}
-                                    onChange={({ target }) => setPassword(target.value)}
-                                />
-                                {isInvalid ? (
-                                    <Typography>
-                                        Enter a unique password
-                                    </Typography>
-                                ) : (
-                                    <Typography>Password is required.</Typography>
-                                )}
-                            </FormControl>
-                        </Box>
 
-                        <Box>
+                        <FormLabel>First Name</FormLabel>
+                        <Input
+                            type='text'
+                            id='firstName'
+                            value={firstName}
+                            onChange={({ target }) => store.dispatch(setSignupFirstName(target.value))}
+                        />
 
-                            <Button type="submit" colorScheme='blue' mr={3} disabled={isInvalid}>
-                                Submit
-                            </Button>
-                            <Button>Cancel</Button>
 
-                        </Box>
 
-                    </Box>
-                </form>
-            </Modal> */}
+                        <FormLabel>Email</FormLabel>
+                        <Input
+                            type='email'
+                            id='email'
+                            value={email}
+                            onChange={({ target }) => store.dispatch(setSignupEmail(target.value))}
+                        />
+
+
+                        <FormLabel>Password</FormLabel>
+                        <Input
+                            type='password'
+                            id='password'
+                            value={password}
+                            onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
+                        />
+                    </FormControl>
+
+
+                    <Button onClick={handleFormSubmit} disabled={isInvalid}>
+                        Signup
+                    </Button>
+                    <Button onClick={handleModal}>Cancel</Button>
+                </Box>
+            </Modal >
+
 
         </>
+
     )
 }
 

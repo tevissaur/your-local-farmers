@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { QUERY_FARM } from '../utils/queries';
 import { Link } from 'react-router-dom'
-import FarmCard from '../components/FarmCard'
+import FarmCard from '../components/Storefront/FarmCard'
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
-import { Box, Button, Checkbox, List, ListItem, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormLabel, List, ListItem, Typography } from '@mui/material';
+
+
+
+
 function FarmsPage() {
     const { loading, data, error } = useQuery(QUERY_FARM)
 
@@ -81,124 +85,118 @@ function FarmsPage() {
     }
     return (
         <>
-            <Box>
-                <Box m={4} flex='1'>
-                    <Box justifyContent='center'>
-                        <Box
-                            maxW='container.xl'
-                            m={4}
-                            backgroundColor='white'
-                            border='black 1px solid'
-                            borderRadius='25px'
-                            boxShadow='2px 2px black'
-                        >
-                            <Box mt={3} justifyContent='space-evenly'
-                                alignItems='center' flexWrap='wrap'>
-                                {categoryList.map(category => {
-                                    const checked =
-                                        selectedCategoryNames.includes(category.name)
-                                    return <Checkbox
+            <Box display='flex' flexDirection='column' margin={5}>
+                <Box
+                    maxW='container.xl'
+                    m={4}
+                    backgroundColor='white'
+                    border='black 1px solid'
+                    borderRadius='25px'
+                    boxShadow='2px 2px black'
+                >
+                    <Box display='flex' justifyContent='space-evenly'
+                        alignItems='center' flexWrap='wrap'>
+                        {categoryList.map(category => {
+                            const checked = selectedCategoryNames.includes(category.name)
+                            return (
+                                <>
+
+                                    <Checkbox
                                         colorScheme="green"
                                         fontWeight='600'
                                         onChange={handleCheckBoxChange}
                                         value={category.name}
                                         key={category.name}
-                                        isChecked={checked}
-                                    >
-                                        {category.name}
-                                    </Checkbox>
-                                })}
-                            </Box>
-                        </Box>
+                                        isChecked={checked} />
+                                    <FormLabel>{category.name}</FormLabel>
+                                </>
+                            )
+                        })}
                     </Box>
-                    <Box maxW='100%'>
-                        <Box justifyContent='space-evenly' flexWrap='wrap'>
-                            {visibleFarms.map(farm => {
-                                return <FarmCard key={farm._id}
-                                    title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
-                                    categories={farm.products.map(product => {
-                                        return product.categories[0].name
-                                    })} />
-                            })}
-                        </Box>
-                        <Box
-                            maxW='container.xl'
-                            borderRadius='25px'
-                            mt={10}
-                            backgroundColor='primary.emeraldGreen'
-                            boxShadow='3px 3px black'
-                        >
-                            <Box justifyContent='center' flexDir='column' flexWrap='wrap'>
-                                <Typography as='h2'
-                                    color='primary.yellowGreen'
-                                    textAlign='center' fontSize='35px'>
-                                    Are You A Farmer or Want To Be One?
-                                </Typography>
-                                <Typography
-                                    textAlign='center'
-                                    color='White'
-                                    fontSize='30px'>FAQs</Typography>
-                                <Box maxW='100%'>
-                                    <Box
-                                        flexDir='column'
-                                        justifyContent='space-between'
-                                        alignItems='center'
-                                        mt={1}
-                                        maxH='min-content'
-                                        flexWrap='wrap'
+                </Box>
+                <Box display='flex' flexDirection='column'>
+                    <Box display='flex' justifyContent='space-evenly' margin={3} flexWrap='wrap'>
+                        {visibleFarms.map(farm => {
+                            return <FarmCard key={farm._id}
+                                title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
+                                categories={farm.products.map(product => {
+                                    return product.categories[0].name
+                                })} />
+                        })}
+                    </Box>
+                    <Box
+                        borderRadius='25px'
+                        mt={10}
+                        backgroundColor='green'
+                        boxShadow='3px 3px black'
+                    >
+                        <Box justifyContent='center' flexDir='column' flexWrap='wrap'>
+                            <Typography as='h2'
+                                color='primary.yellowGreen'
+                                textAlign='center' fontSize='35px'>
+                                Are You A Farmer or Want To Be One?
+                            </Typography>
+                            <Typography
+                                textAlign='center'
+                                color='White'
+                                fontSize='30px'>FAQs</Typography>
+                            <Box maxW='100%'>
+                                <Box
+                                    flexDir='column'
+                                    justifyContent='space-between'
+                                    alignItems='center'
+                                    mt={1}
+                                    maxH='min-content'
+                                    flexWrap='wrap'
+                                >
+                                    <List
+                                        textAlign='Left'
+                                        fontWeight='bolder'
+                                        color='white'
+                                        fontSize='25px'
                                     >
-                                        <List
-                                            textAlign='Left'
-                                            fontWeight='bolder'
-                                            color='white'
-                                            fontSize='25px'
-                                        >
-                                            <ListItem >
-                                                {/* <ListIcon as={BsQuestionLg} color='red' /> */}
-                                                What if I am are not tech savy?
-                                            </ListItem>
-                                            <ListItem ms={8} fontSize='22px'
-                                                color='primary.yellowGreen'>
-                                                Dont worry we make it as stress
-                                                free as possible with an accessible managment system.
-                                            </ListItem>
-                                            <ListItem>
-                                                {/* <ListIcon as={BsQuestionLg} color='red' /> */}
-                                                Dont you need a lot of land to
-                                                be a farmer?
-                                            </ListItem>
-                                            <ListItem ms={8} fontSize='22px'
-                                                color='primary.yellowGreen'>
-                                                Absolutely not! It certainly
-                                                helps if you are looking to make a living off of the goods you are selling but
-                                                if you are looking for that next side hustle or as a hobbyist there is no better
-                                                way to get involved in your community!
-                                            </ListItem>
-                                            <ListItem>
-                                                {/* <ListIcon color='red' as={BsQuestionLg} /> */}
-                                                Is there a monthly quota you
-                                                need to meet to continue being a farmer?
-                                            </ListItem>
-                                            <ListItem ms={8} fontSize='22px' color='primary.yellowGreen'>
-                                                There are no monthly quotas. We
-                                                just ensure customers are getting what they order and as long as that continues
-                                                you can continue being a farmer as long as you desire!
-                                            </ListItem>
-                                        </List>
-                                        {/* <Image src={farmerPic}></Image> */}
-                                    </Box>
-                                    <Link to='/myFarm'>
-                                        <Box justifyContent='center'>
-                                            <Button mb={3} mt={3}
-                                                textAlign='center' backgroundColor='white'>Register to become a farmer
-                                                today!</Button>
-                                        </Box>
-                                    </Link>
+                                        <ListItem >
+                                            {/* <ListIcon as={BsQuestionLg} color='red' /> */}
+                                            What if I am are not tech savy?
+                                        </ListItem>
+                                        <ListItem ms={8} fontSize='22px'
+                                            color='primary.yellowGreen'>
+                                            Dont worry we make it as stress
+                                            free as possible with an accessible managment system.
+                                        </ListItem>
+                                        <ListItem>
+                                            {/* <ListIcon as={BsQuestionLg} color='red' /> */}
+                                            Dont you need a lot of land to
+                                            be a farmer?
+                                        </ListItem>
+                                        <ListItem ms={8} fontSize='22px'
+                                            color='primary.yellowGreen'>
+                                            Absolutely not! It certainly
+                                            helps if you are looking to make a living off of the goods you are selling but
+                                            if you are looking for that next side hustle or as a hobbyist there is no better
+                                            way to get involved in your community!
+                                        </ListItem>
+                                        <ListItem>
+                                            {/* <ListIcon color='red' as={BsQuestionLg} /> */}
+                                            Is there a monthly quota you
+                                            need to meet to continue being a farmer?
+                                        </ListItem>
+                                        <ListItem ms={8} fontSize='22px' color='primary.yellowGreen'>
+                                            There are no monthly quotas. We
+                                            just ensure customers are getting what they order and as long as that continues
+                                            you can continue being a farmer as long as you desire!
+                                        </ListItem>
+                                    </List>
+                                    {/* <Image src={farmerPic}></Image> */}
                                 </Box>
+                                <Link to='/myFarm'>
+                                    <Box justifyContent='center'>
+                                        <Button mb={3} mt={3}
+                                            textAlign='center' backgroundColor='white'>Register to become a farmer
+                                            today!</Button>
+                                    </Box>
+                                </Link>
                             </Box>
-                        </Box>
-                        <Box justifyContent='center' mt={4}>
-                            <Footer />
                         </Box>
                     </Box>
                 </Box>

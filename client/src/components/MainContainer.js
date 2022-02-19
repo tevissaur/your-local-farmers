@@ -4,25 +4,15 @@ import styled from '@mui/material/styles/styled';
 const drawerWidth = 240;
 
 
-const MainContainer = styled('main', { 
+const MainContainer = styled('main', {
     shouldForwardProp: (prop) => prop !== 'open'
- })(({ theme, open }) => ({
+})(({ theme, open }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
     flexGrow: 1,
-    padding: theme.spacing(2),
-    marginTop: '64px',
     zIndex: '0',
-    transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeInOut,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `calc(${theme.spacing(9)} + 1px)`,
-    ...(open && {
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeInOut,
-            duration: theme.transitions.duration.enteringScreen,
-        })
-    }),
+    minHeight: 'calc(100vh - 100px)'
 }),
 );
 

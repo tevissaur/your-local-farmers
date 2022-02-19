@@ -1,10 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_FARM } from "../utils/queries";
 import { useParams } from "react-router-dom";
-import localFarm from "../assets/localFarm.jpg";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import SideNavBar from "../components/SideNavBar";
 import Auth from "../utils/auth";
 import ReviewButton from "../components/ReviewButton";
 import FarmProductCard from "../components/FarmProductCard";

@@ -1,7 +1,7 @@
 import { Box, Typography, Link, Button } from '@mui/material'
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
-import localFarm from '../assets/localFarm.jpg'
+import localFarm from '../../assets/localFarm.jpg'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import StarsRender from './StarsRender'
 
@@ -12,15 +12,14 @@ function FarmCard({ title, reviews, numericReview, categories }) {
     return (
 
         <Box
-            flexDir='column'
+            display='flex'
+            flexDirection='column'
             alignItems='center'
-            border='2px solid black'
-            padding={2}
-            borderRadius='25px'
+            border='1px solid black'
+            borderRadius='15px'
             backgroundColor='lightyellow'
-            mt={4}
-            maxW='250px'
-            alignSelf='flex-start'
+            maxWidth='250px'
+            margin={2}
             boxShadow='1px 1px black'
         >
             <Typography
@@ -30,9 +29,11 @@ function FarmCard({ title, reviews, numericReview, categories }) {
                 textAlign='center'
             >{title}
             </Typography>
-            {/* <Image boxSize='190px' src={localFarm} borderRadius='25px'></Image> */}
+            <Box component={'img'} src={localFarm} borderRadius='5px' border='1px solid black' width='90%' margin='auto'></Box>
             <Box>
-                <Typography fontWeight='600' mt={1}>Goods Most Likely Available</Typography>
+                <Typography fontWeight='600' mt={1}>
+                    Goods Most Likely Available
+                </Typography>
 
             </Box>
             <Box mt={2} justifyContent='space-around' w='100%'>

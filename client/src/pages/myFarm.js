@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'
-import SideNavBar from '../components/SideNavBar'
 import MyFarmForm from '../components/MyFarmForm'
 import MyFarmDash from '../components/MyFarmDash'
 import auth from '../utils/auth'
 import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client'
+import { Box } from '@mui/material'
 
 function MyFarm() {
     let userDetails = auth.getProfile()
@@ -27,21 +26,21 @@ function MyFarm() {
     }, [isFarmer, data,  loading])
 
     return (
-        <Flex>
+        <Box>
             <Box m={4} flex='1'>
         
-                <Container maxW='100%'>
-                    <Flex justifyContent='space-evenly' flexWrap='wrap'>
+                <Box maxW='100%'>
+                    <Box justifyContent='space-evenly' flexWrap='wrap'>
                         {isFarmer ? (
 
                             <MyFarmDash userId={userDetails.data._id} />
                         ) : (
                             <MyFarmForm setIsFarmer={setIsFarmer} />
                         )}
-                    </Flex>
-                </Container>
+                    </Box>
+                </Box>
             </Box>
-        </Flex>
+        </Box>
     )
 }
 

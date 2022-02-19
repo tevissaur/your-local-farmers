@@ -3,12 +3,12 @@ import Homepage from "./pages/Homepage";
 import Product from "./components/Product";
 import Profile from "./pages/Profile"
 import Category from "./components/Category";
-import Farm from "./pages/Farm";
+import Farm from "./pages/SingleFarm";
 import MyFarm from './pages/myFarm'
 import FarmsPage from "./pages/FarmsPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useSelector, useDispatch } from 'react-redux'
-import Cart from "./components/Cart";
+import Cart from "./components/Storefront/Cart";
 import MainLayout from "./pages/MainLayout";
 
 const client = new ApolloClient({

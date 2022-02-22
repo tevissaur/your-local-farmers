@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 import { categoryData } from '../../categoryData'
-import SmallCategoryIcon from '../../components/SmallCategoryIcon'
+import SmallCategoryIcon from './SmallCategoryIcon'
 import Banner from "../Banner";
 
 

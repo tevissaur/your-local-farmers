@@ -3,11 +3,13 @@ import { useQuery } from '@apollo/client'
 import { QUERY_FARM } from '../utils/queries';
 import { Link } from 'react-router-dom'
 import FarmCard from '../components/Storefront/FarmCard'
-import Footer from '../components/Footer'
+import Footer from '../components/NavComponents/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, List, ListItem, Typography } from '@mui/material';
 import Banner from '../components/Banner';
+import store from '../utils/store';
+import { setActivePage } from '../utils/actions';
 
 
 
@@ -84,6 +86,10 @@ const FarmsPage = () => {
         setSelectedCategoryNames(updatedSelectedCategoriesNames)
 
     }
+
+    useEffect(() => {
+        store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
+      }, [])
     return (
         <>
             <Box sx={{
@@ -96,7 +102,6 @@ const FarmsPage = () => {
                 position: 'relative'
             }} display='flex' flexDirection='column' margin={5}>
                 <Box
-
                     maxW='container.xl'
                     m={4}
                     backgroundColor='white'

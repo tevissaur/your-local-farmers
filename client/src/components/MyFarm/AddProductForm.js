@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useMutation, useQuery } from '@apollo/client'
 import { Box, Button, Checkbox, FormControl, FormGroup, FormLabel, Input, TextField } from '@mui/material'
-import Auth from "../utils/auth"
-import { QUERY_CATEGORIES } from "../utils/queries"
-import { CREATE_PRODUCT } from '../utils/mutations'
+import Auth from "../../utils/auth"
+import { QUERY_CATEGORIES } from "../../utils/queries"
+import { CREATE_PRODUCT } from '../../utils/mutations'
 
 
 

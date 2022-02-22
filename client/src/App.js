@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import Product from "./components/Product";
+import Product from "./components/Storefront/Product";
 import Profile from "./pages/Profile"
-import Category from "./components/Category";
+import Category from "./components/Storefront/CategoryProducts";
 import Farm from "./pages/SingleFarm";
-import MyFarm from './pages/myFarm'
+import MyFarm from './pages/MyFarm'
 import FarmsPage from "./pages/FarmsPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useSelector, useDispatch } from 'react-redux'

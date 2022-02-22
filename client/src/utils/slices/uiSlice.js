@@ -1,5 +1,4 @@
 const initialState = {
-    drawerOpen: false,
     login: {
         modal: false,
         email: '',
@@ -11,6 +10,9 @@ const initialState = {
         password: '',
         firstName: '',
         username: ''
+    },
+    nav: {
+        activePage: ''
     },
     openFarm: {},
     openProduct: {},
@@ -25,6 +27,13 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 drawerOpen: action.payload
+            }
+        case 'ui/nav/activePage':
+            return {
+                ...state,
+                nav: {
+                    activePage: action.payload
+                }
             }
         case 'ui/openFarm':
             return {

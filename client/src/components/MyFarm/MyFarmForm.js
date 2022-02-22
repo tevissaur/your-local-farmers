@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import { CREATE_FARM } from '../utils/mutations'
-import { UPDATE_USER } from '../utils/mutations'
+import { CREATE_FARM } from '../../utils/mutations'
+import { UPDATE_USER } from '../../utils/mutations'
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
 
 

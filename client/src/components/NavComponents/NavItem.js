@@ -6,26 +6,27 @@ import Button from '@mui/material/Button'
 import Icon from '@mui/material/Icon'
 import Typography from '@mui/material/Typography'
 import store from '../../utils/store'
+import { setActivePage } from '../../utils/actions'
 
 
 function NavItem({ text, active, pageUrl }) {
-    const { ui: { drawerOpen } } = store.getState()
+    const { ui: { drawerOpen, nav: { activePage } } } = store.getState()
 
 
     return (
-        <Link to={`/${pageUrl}`} component={ReactLink} underline='none' color='black' >
+        <Link to={`/${pageUrl}`} component={ReactLink} underline='none' color='black' marginX='10px' >
             <Button sx={{
                 borderRadius: '25px',
                 paddingX: 1.5,
                 color: 'black',
-                backgroundColor: 'ivory',
+                backgroundColor: activePage === pageUrl ? '#b2cfab' : 'ivory',
                 border: '1px solid black',
-                marginX: '10px',
+                boxShadow: activePage === pageUrl ? '1px 1px 0 black' : '0 0 0 black',
                 ':hover': {
                     backgroundColor: 'white',
-                    boxShadow: '1px 1px 0 black'
+                    boxShadow: activePage === pageUrl ? '0 0 0 black' : '1px 1px 0 black'
                 }
-            }}>
+            }} onClick={() => store.dispatch(setActivePage(pageUrl))}>
                 {text}
             </Button>
         </Link>

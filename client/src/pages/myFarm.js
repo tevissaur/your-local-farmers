@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import MyFarmForm from '../components/MyFarmForm'
-import MyFarmDash from '../components/MyFarmDash'
+import MyFarmForm from '../components/MyFarm/MyFarmForm'
+import MyFarmDash from '../components/MyFarm/MyFarmDash'
 import auth from '../utils/auth'
 import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client'
 import { Box } from '@mui/material'
+import Banner from '../components/Banner'
 
 function MyFarm() {
     let userDetails = auth.getProfile()
@@ -20,19 +21,19 @@ function MyFarm() {
 
 
     useEffect(() => {
-        loading? console.log("Bro") : setIsFarmer(data.me?.isFarmer)
+        loading ? console.log("Bro") : setIsFarmer(data.me?.isFarmer)
 
 
-    }, [isFarmer, data,  loading])
+    }, [isFarmer, data, loading])
 
     return (
-        <Box>
+        <Box position='relative'>
+            <Banner />
             <Box m={4} flex='1'>
-        
+
                 <Box maxW='100%'>
                     <Box justifyContent='space-evenly' flexWrap='wrap'>
                         {isFarmer ? (
-
                             <MyFarmDash userId={userDetails.data._id} />
                         ) : (
                             <MyFarmForm setIsFarmer={setIsFarmer} />

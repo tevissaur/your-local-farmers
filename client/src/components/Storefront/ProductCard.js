@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { imageSeeds } from "../imageSeeds";
+import { imageSeeds } from "../../imageSeeds";
 
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";

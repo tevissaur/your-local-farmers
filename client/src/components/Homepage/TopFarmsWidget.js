@@ -1,6 +1,11 @@
-import { Box, Typography } from "@mui/material"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Link from "@mui/material/Link"
+import { Link as ReactLink } from "react-router-dom"
 import { categoryData } from "../../categoryData"
-import SmallCategoryIcon from "../SmallCategoryIcon"
+import SmallCategoryIcon from "./SmallCategoryIcon"
+import store from "../../utils/store"
+import { setActivePage } from "../../utils/actions"
 
 
 
@@ -22,15 +27,25 @@ const TopFarmsWidget = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 flexWrap: 'wrap',
+                margin: '40px auto'
             }}>
-                <Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }} >
                     <Typography variant="h5" sx={{
-                        textAlign: 'center',
                         marginY: '10px',
-                        fontSize: '36px'
+                        fontSize: '28px'
                     }}>
                         Here Are Some Of Our Top Farmers
                     </Typography>
+                    <Typography variant="h5" sx={{
+                        marginY: '10px',
+                        fontSize: '20px',
+                        alignSelf: 'center'
+                    }}>
+                        <Link component={ReactLink} to='/farms' underline="none" sx={{ ':hover': { textDecoration: 'underline' } }} >
+                        See More
+                    </Link>
+                    </Typography>
+                    
                 </Box>
 
                 <Box sx={{

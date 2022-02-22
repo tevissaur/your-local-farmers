@@ -1,6 +1,6 @@
 import React from "react";
-import CheckOutBtn from "../CheckOutBtn";
-import ProductCardCart from "../ProductCardCart";
+import CheckOutBtn from "./CheckOutBtn";
+import ProductCardCart from "./ProductCardCart";
 import store from "../../utils/store";
 import { setCartItems } from "../../utils/actions";
 import { Box, Typography } from "@mui/material";

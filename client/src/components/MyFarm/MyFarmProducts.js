@@ -1,4 +1,4 @@
-import FarmProductCard from './FarmProductCard'
+import FarmProductCard from '../Storefront/FarmProductCard'
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 

@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_PO } from "../utils/mutations";
+import { CREATE_PO } from '../../utils/mutations';
 import PlaceOrderBtn from "./PlaceOrderBtn";
-import auth from "../utils/auth";
+import auth from "../../utils/auth";
 import { Button, Drawer } from "@mui/material";
 
 const CheckOutBtn = ({ cartItems, totalPrice }) => {

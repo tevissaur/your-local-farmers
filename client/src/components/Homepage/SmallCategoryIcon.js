@@ -1,8 +1,6 @@
 import { Box, CardMedia, Typography, Link } from '@mui/material';
 import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import bakedGoods from '../assets/beverages2.jpg'
-import DairyMeatEggs from '../assets/DairyMeatEggs.jpg'
 
 
 
@@ -15,16 +13,19 @@ const SmallCategoryIcon = ({ card }) => {
                     marginX: 1.5,
                     color: 'black',
                     ':hover': {
-                        transform: 'scale(1.05)'
+                        '> img': {
+                            transform: 'scale(1.05)',
+                            transition: 'all 300ms',
+                            boxShadow: '0 0 5px black'
+                        },
                     },
-                    transition: 'all 200ms',
                 }}>
                     <CardMedia
                         src={card.image}
                         component='img'
                         sx={{
                             ':hover': {
-                                boxShadow: '0 0 5px black'
+                                
                             },
                             height: '125px',
                             width: '125px',

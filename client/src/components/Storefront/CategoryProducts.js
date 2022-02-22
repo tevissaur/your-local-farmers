@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_FARM } from "../utils/queries";
+import { QUERY_FARM } from "../../utils/queries";
 import ProductCard from "./ProductCard";
-import Footer from "./Footer";
+import Footer from "../NavComponents/Footer";
 import { Box } from "@mui/material";
 
 

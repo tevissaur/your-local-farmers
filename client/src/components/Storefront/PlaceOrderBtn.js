@@ -1,7 +1,7 @@
-import { QUERY_PRODUCTS, QUERY_FARM } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_FARM } from "../../utils/queries";
 import { Button, Modal, Typography } from "@mui/material";
 import { useQuery, useMutation } from "@apollo/client";
-import { CREATE_PO } from "../utils/mutations";
+import { CREATE_PO } from "../../utils/mutations";
 import { Box } from "@mui/system";
 
 

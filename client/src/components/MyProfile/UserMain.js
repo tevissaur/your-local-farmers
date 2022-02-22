@@ -1,8 +1,7 @@
-
 import { Link as ReactLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { useMutation } from '@apollo/client'
-import { UPDATE_USER } from '../utils/mutations'
+import { UPDATE_USER } from '../../utils/mutations'
 
 
 const UserMain = ({ userData }) => {
@@ -54,7 +53,7 @@ const UserMain = ({ userData }) => {
 
     return (
         <>
-            <Flex h="60vh">
+            {/* <Flex h="60vh">
                 <Avatar src='https://bit.ly/sage-adebayo' w='250px' h='250px' />
                 <Flex ml='3' flexWrap='wrap' flexDirection='column' justifyContent='flex-start'>
                     <Heading fontWeight='bold' w="100%" h="min-content" marginBottom={3}>
@@ -213,7 +212,7 @@ const UserMain = ({ userData }) => {
 
                     </FormControl>
                 </Flex>
-            </Flex>
+            </Flex> */}
         </>
     )
 }

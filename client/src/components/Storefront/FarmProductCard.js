@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { imageSeeds } from "../imageSeeds";
+import { imageSeeds } from "../../imageSeeds";
 
 const FarmProduct = ({ product }) => {
   const cardArr = imageSeeds.map((card) => card);

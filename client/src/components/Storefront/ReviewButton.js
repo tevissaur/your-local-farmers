@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useMutation } from "@apollo/client";
-import { POST_REVIEW } from "../utils/mutations";
-import auth from "../utils/auth";
+import { POST_REVIEW } from "../../utils/mutations";
+import auth from "../../utils/auth";
 
 const ReviewButton = ({
   inputText,
@@ -13,15 +13,12 @@ const ReviewButton = ({
   setRating,
   farm,
 }) => {
- 
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const [ratingInput, setRatingInput] = useState(0);
   const [content, setContent] = useState("");
   const [postReview, { data, loading, error }] = useMutation(POST_REVIEW);
-
-  const initialRef = useRef();
-  const finalRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputText) return;
@@ -42,12 +39,11 @@ const ReviewButton = ({
     console.log(newReview);
     setReviews([newReview.data.postReview, ...reviews]);
     setInputText("");
-    onClose();
   };
 
   return (
-    <div>
-      <Button
+    <>
+      {/* <Button
         color="black"
         backgroundColor="primary.yellowGreen"
         fontSize="sm"
@@ -100,8 +96,8 @@ const ReviewButton = ({
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
-    </div>
+      </Modal> */}
+    </>
   );
 };
 

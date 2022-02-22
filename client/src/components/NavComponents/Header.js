@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link as ReactLink } from 'react-router-dom'
 import auth from '../../utils/auth';
 import store from '../../utils/store';
-import { setDrawerOpen } from '../../utils/actions';
+import { setActivePage, setDrawerOpen } from '../../utils/actions';
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
 import LoggedOutButtons from "./LoggedOutButtons";
@@ -81,12 +81,13 @@ export const NavLink = styled(Link)({
 })
 
 const Header = () => {
-  const { profile: { loggedIn }, ui: { drawerOpen } } = store.getState()
-  const theme = useTheme()
-  console.log(theme)
+  const { profile: { loggedIn } } = store.getState()
+  useEffect(() => {
+    store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
+  }, [])
 
   return (
-    <AppBar open={drawerOpen} position='static' sx={{ borderBottom: '1px solid black', backgroundColor: 'whitesmoke' }}>
+    <AppBar position='static' sx={{ borderBottom: '1px solid black', backgroundColor: 'whitesmoke' }}>
       <Box component='nav' sx={{
         padding: '5px 10px', width: '75%',
         maxHeight: '50px', margin: 'auto', display: 'flex', justifyContent: 'space-around', color: 'black'
@@ -105,7 +106,7 @@ const Header = () => {
           />
         </Search>
 
-        {auth.loggedIn() ? (
+        {loggedIn ? (
           <ProfileNavIcons />
         ) : (
           <LoggedOutButtons />

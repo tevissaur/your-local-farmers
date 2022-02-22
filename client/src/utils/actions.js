@@ -5,13 +5,6 @@ export const setCartItems = (payload) => {
     }
 }
 
-export const setDrawerOpen = (payload) => {
-    return {
-        type: 'ui/drawer',
-        payload
-    }
-}
-
 export const setLoginModal = (payload) => {
     return {
         type: 'ui/login/modal',
@@ -57,6 +50,12 @@ export const setSignupUsername = (payload) => {
 export const setSignupFirstName = (payload) => {
     return {
         type: 'ui/signup/firstName',
+        payload
+    }
+}
+export const setActivePage = (payload) => {
+    return {
+        type: 'ui/nav/activePage',
         payload
     }
 }

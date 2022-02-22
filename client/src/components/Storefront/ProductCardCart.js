@@ -1,7 +1,6 @@
 import React from "react";
-import asters from "../assets/flowersPlants/asters.jpg";
 import { ImCross } from "react-icons/im";
-import { imageSeeds } from "../imageSeeds";
+import { imageSeeds } from "../../imageSeeds";
 import { Box, Typography, Button } from "@mui/material";
 
 function ProductCardCart({ item, cartItems, setCartItems }) {

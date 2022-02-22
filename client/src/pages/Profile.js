@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { GET_ME } from "../utils/queries";
-import UserMain from "../components/UserMain.js";
+import UserMain from "../components/MyProfile/UserMain.js";
 import Auth from "../utils/auth";
 import { Box, Tab, Tabs } from "@mui/material";
 
@@ -57,23 +57,22 @@ const Profile = () => {
 
   }, [loading, data, error, userData]);
   console.log(purchasedOrder.map((order) => order.dateCreated))
-  
+
 
   if (loading) return "loading";
   return (
     <>
-      <Box>
-        <Box m={4} flex="1">
-          <Box
-            justifyContent="center"
-            w="100%"
-            borderRadius="10px"
-            border="1px grey solid"
-            backgroundColor="lightYellow"
-          >
-            {Auth.loggedIn() ? (
-              <>
-                {/* <Tabs isFitted variant="enclosed" color="black" w="100%" p={3}>
+      <Box m={4} flex="1">
+        <Box
+          justifyContent="center"
+          w="100%"
+          borderRadius="10px"
+          border="1px grey solid"
+          backgroundColor="lightYellow"
+        >
+          {Auth.loggedIn() ? (
+            <>
+              {/* <Tabs isFitted variant="enclosed" color="black" w="100%" p={3}>
                     <Tab color="black">Home</Tab>
                     <Tab color="black">My Orders</Tab>
 
@@ -112,13 +111,12 @@ const Profile = () => {
                     </TabPanel>
                   </TabPanels>
                 </Tabs> */}
-              </>
-            ) : (
-              <>
-                
-              </>
-            )}
-          </Box>
+            </>
+          ) : (
+            <>
+
+            </>
+          )}
         </Box>
       </Box>
     </>

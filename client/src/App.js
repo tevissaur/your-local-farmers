@@ -10,6 +10,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useSelector, useDispatch } from 'react-redux'
 import Cart from "./components/Storefront/Cart";
 import MainLayout from "./pages/MainLayout";
+import AboutUs from "./pages/AboutUs";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -38,6 +39,8 @@ function App() {
               <Route path='farms' element={<FarmsPage />} />
               <Route path='myfarm' element={<MyFarm />} />
               <Route path="cart" element={<Cart />} />
+              <Route path="about-us" element={<AboutUs />} />
+              <Route path="resources" element={<Cart />} />
             </Route>
           </Routes>
         </Router>

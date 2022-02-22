@@ -6,12 +6,13 @@ import FarmCard from '../components/Storefront/FarmCard'
 import Footer from '../components/Footer'
 import farmerPic from '../assets/farmerkid.png'
 import { BsQuestionLg } from 'react-icons/bs'
-import { Box, Button, Checkbox, FormLabel, List, ListItem, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, List, ListItem, Typography } from '@mui/material';
+import Banner from '../components/Banner';
 
 
 
 
-function FarmsPage() {
+const FarmsPage = () => {
     const { loading, data, error } = useQuery(QUERY_FARM)
 
     const farmList = data ? data.farms : []
@@ -85,8 +86,17 @@ function FarmsPage() {
     }
     return (
         <>
-            <Box display='flex' flexDirection='column' margin={5}>
+            <Box sx={{
+                position: 'relative'
+            }}>
+
+                <Banner />
+            </Box>
+            <Box sx={{
+                position: 'relative'
+            }} display='flex' flexDirection='column' margin={5}>
                 <Box
+
                     maxW='container.xl'
                     m={4}
                     backgroundColor='white'
@@ -99,17 +109,23 @@ function FarmsPage() {
                         {categoryList.map(category => {
                             const checked = selectedCategoryNames.includes(category.name)
                             return (
-                                <>
-
+                                <FormControl>
+                                    {/* <FormControlLabel
+                                        label={category.name}
+                                        control={<Checkbox
+                                            checked={checked}
+                                            value={category.name}
+                                            key={category.name} />} /> */}
                                     <Checkbox
                                         colorScheme="green"
                                         fontWeight='600'
                                         onChange={handleCheckBoxChange}
                                         value={category.name}
                                         key={category.name}
-                                        isChecked={checked} />
+                                        checked={checked}
+                                    />
                                     <FormLabel>{category.name}</FormLabel>
-                                </>
+                                </FormControl>
                             )
                         })}
                     </Box>

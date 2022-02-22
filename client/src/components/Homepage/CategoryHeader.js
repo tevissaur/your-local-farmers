@@ -1,6 +1,7 @@
 import { Typography, Box } from "@mui/material";
 import { categoryData } from '../../categoryData'
 import SmallCategoryIcon from '../../components/SmallCategoryIcon'
+import Banner from "../Banner";
 
 
 const CategoryHeader = () => {
@@ -13,16 +14,6 @@ const CategoryHeader = () => {
             justifyContent: 'center',
             flexWrap: 'wrap',
         }}>
-            <Box sx={{
-                position: 'absolute',
-                backgroundColor: 'peachpuff',
-                width: '100%',
-                height: '65%',
-                top: '0',
-                zIndex: -1
-            }}>
-
-            </Box>
             <Box>
                 <Typography variant="h5" sx={{
                     textAlign: 'center',

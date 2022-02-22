@@ -1,5 +1,3 @@
-import Signup from "../Signup";
-import LoginForm from "../LoginForm";
 import ProfileNavIcons from './ProfileNavIcons'
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/icons-material/Menu'
@@ -12,13 +10,17 @@ import store from '../../utils/store';
 import { setDrawerOpen } from '../../utils/actions';
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
+import LoggedOutButtons from "./LoggedOutButtons";
+import NavItem from './NavItem';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: '25px',
+  border: '1px solid black',
+  boxShadow: '2px 2px 0 black',
   backgroundColor: alpha(theme.palette.common.black, 0.15),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.05),
   },
   margin: 'auto',
   flexGrow: 1,
@@ -49,7 +51,7 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  height: '100px',
+  height: '120px',
   boxShadow: 'none',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -84,51 +86,39 @@ const Header = () => {
   console.log(theme)
 
   return (
-    <AppBar open={drawerOpen} position='static' sx={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid black', backgroundColor: 'whitesmoke' }}>
-      <Box component='nav' sx={{ padding: '5px 10px', width: '50%', margin: 'auto' }}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%'
-        }}>
-          <Box>
+    <AppBar open={drawerOpen} position='static' sx={{ borderBottom: '1px solid black', backgroundColor: 'whitesmoke' }}>
+      <Box component='nav' sx={{
+        padding: '5px 10px', width: '75%',
+        maxHeight: '50px', margin: 'auto', display: 'flex', justifyContent: 'space-around', color: 'black'
+      }}>
+        <Link component={ReactLink} to='/' variant="h1" fontSize='26px' sx={{ color: 'black' }} underline='none' alignSelf='center' marginX={3}>
+          Local Farmers
+        </Link>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            fullWidth
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
 
-          </Box>
-          <Link component={ReactLink} to='/' variant="h1" fontSize='26px' sx={{ color: 'black' }} underline='none' alignSelf='center' marginX={3}>
-              Local Farmers
-          </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-
-          {auth.loggedIn() ? (
-            <>
-
-              <ProfileNavIcons />
-            </>
-          ) : (
-            <Box sx={{
-              display: 'flex',
-              justifySelf: 'flex-end',
-              width: '100%',
-              marginX: 2
-            }}>
-              <Signup></Signup>
-              <LoginForm></LoginForm>
-              <Link to={"/cart"} component={ReactLink}>
-                <ShoppingCartIcon fontSize="40px" />
-              </Link>
-            </Box>
-          )}
+        {auth.loggedIn() ? (
+          <ProfileNavIcons />
+        ) : (
+          <LoggedOutButtons />
+        )}
 
 
-        </Box>
+      </Box>
+      <Box component='nav' sx={{ padding: '5px 10px', width: '65%', margin: 'auto', display: 'flex', justifyContent: 'center' }}>
+        <NavItem text='Home' pageUrl='' />
+        <NavItem text='Local Farms' pageUrl='farms' />
+        <NavItem text='My Farm' pageUrl='myfarm' />
+        <NavItem text='Resources' pageUrl='resources' />
+        <NavItem text='About Us' pageUrl='about-us' />
       </Box>
     </AppBar>
   )

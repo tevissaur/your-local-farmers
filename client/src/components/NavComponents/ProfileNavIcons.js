@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import Link from '@mui/material/Link'
-// import { ShoppingCart } from '@mui/icons-material';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import PersonAdd from '@mui/icons-material/PersonAdd'
@@ -14,7 +14,6 @@ import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 import auth from '../../utils/auth';
 import { Link as ReactLink } from 'react-router-dom';
-import { NavLink } from './Header';
 import store from '../../utils/store';
 
 export default function AccountMenu() {
@@ -42,10 +41,15 @@ export default function AccountMenu() {
                         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
-                <Link component={ReactLink} to={"/cart"}>
-                    {/* <ShoppingCart fontSize="40px" /> */}
-                </Link>
-                <span>{cartItems === undefined ? (<></>) : cartItems.reduce((total, item) => total += item.quantity, 0)}</span>
+                <Tooltip title="Your cart">
+
+                    <Link component={ReactLink} to={"/cart"}>
+                        <IconButton>
+
+                            <ShoppingCart />
+                        </IconButton>
+                    </Link>
+                </Tooltip>
             </Box>
             <Menu
                 anchorEl={anchorEl}

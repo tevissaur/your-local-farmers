@@ -1,10 +1,8 @@
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
-import {} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { GET_ME } from "../utils/queries";
 import UserMain from "../components/UserMain.js";
 import Auth from "../utils/auth";
-import Signup from "../components/Signup";
 import { Box, Tab, Tabs } from "@mui/material";
 
 const Profile = () => {
@@ -117,7 +115,7 @@ const Profile = () => {
               </>
             ) : (
               <>
-                <Signup />
+                
               </>
             )}
           </Box>

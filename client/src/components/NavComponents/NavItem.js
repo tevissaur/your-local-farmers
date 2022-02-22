@@ -8,38 +8,25 @@ import Typography from '@mui/material/Typography'
 import store from '../../utils/store'
 
 
-function NavItem({ title, icon, active, pageUrl }) {
+function NavItem({ text, active, pageUrl }) {
     const { ui: { drawerOpen } } = store.getState()
 
 
     return (
-        <Link
-            as={ReactLink}
-            to={pageUrl}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '90%',
-                margin: '5px auto',
-                borderRadius: '5px',
-            }}
-            underline='none'
-        >
+        <Link to={`/${pageUrl}`} component={ReactLink} underline='none' color='black' >
             <Button sx={{
-                display: 'flex',
-                justifyContent: drawerOpen ? 'flex-start' : 'center',
-                padding: 1.5,
-                width: '100%',
-            }} >
-
-                <Icon component={icon}
-                    sx={{
-                        alignSelf: 'center',
-                        margin: drawerOpen ? '1px 10px 1px 0' : '1px auto'
-                    }} />
-                <Typography sx={{ display: drawerOpen ? 'flex' : 'none' }}>
-                    {title}
-                </Typography>
+                borderRadius: '25px',
+                paddingX: 1.5,
+                color: 'black',
+                backgroundColor: 'ivory',
+                border: '1px solid black',
+                marginX: '10px',
+                ':hover': {
+                    backgroundColor: 'white',
+                    boxShadow: '1px 1px 0 black'
+                }
+            }}>
+                {text}
             </Button>
         </Link>
     )

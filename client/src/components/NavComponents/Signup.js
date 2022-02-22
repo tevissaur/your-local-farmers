@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { CREATE_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 import { Box, Button, Modal, FormLabel, FormControl, Input, FormHelperText, Typography, Fade } from "@mui/material";
-import store from "../utils/store";
-import { setSignupEmail, setSignupFirstName, setSignupModal, setSignupPass, setSignupUsername } from "../utils/actions";
+import store from "../../utils/store";
+import { setSignupEmail, setSignupFirstName, setSignupModal, setSignupPass, setSignupUsername } from "../../utils/actions";
 
 
 function Signup() {
@@ -50,15 +50,18 @@ function Signup() {
 
     return (
         <>
-            <Button
-                sx={{
-                    backgroundColor: 'green',
-                    marginRight: 4,
-                    color: 'black',
-                    ':hover': {
-                        backgroundColor: 'darkgreen'
-                    }
-                }} onClick={handleModal}>
+            <Button sx={{
+                borderRadius: '25px',
+                paddingX: 1.5,
+                color: 'black',
+                backgroundColor: 'lightgray',
+                border: '1px solid black',
+                marginRight: 2,
+                ':hover': {
+                    backgroundColor: 'white',
+                    boxShadow: '1px 1px 0 black'
+                }
+            }} onClick={handleModal}>
                 Sign Up
             </Button>
             <Modal

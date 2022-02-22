@@ -4,6 +4,8 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import List from '@mui/material/List'
 import CategoryHeader from '../components/Homepage/CategoryHeader'
+import TopFarmsWidget from '../components/Homepage/TopFarmsWidget'
+import Banner from '../components/Banner'
 
 const Homepage = () => {
 
@@ -14,49 +16,59 @@ const Homepage = () => {
         display='flex'
         flexDirection='column'
         justifyContent='flex-start'
+        position='relative'
         flexGrow={1}
       >
+        <Banner />
         <CategoryHeader />
-
+        <TopFarmsWidget />
         <Box sx={{
-          margin: '10px'
+          margin: '20px auto',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '20px',
+          width: '40%',
+          backgroundColor: 'ghostwhite',
+          borderRadius: '10px',
+          border: '1px solid black',
+          boxShadow: '1px 1px 0 black'
         }}>
-          <Box sx={{
-            margin: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '20px',
-            width: '60%',
-            backgroundColor: 'green',
-            borderRadius: '10px'
+          <Typography variant='h5' sx={{
+            textAlign: 'center'
           }}>
-            <Typography variant='h5' sx={{
-              textAlign: 'center'
-            }}>
-              Our Mission Statement!
-            </Typography>
-            <List sx={{
-              
-              margin: 'auto'
-            }}>
-              <ListItem>
-                <ListItemIcon />
-                Support local farming communities
-              </ListItem>
+            Our Mission Statement!
+          </Typography>
+          <List sx={{
 
-              <ListItem>
-                <ListItemIcon />
-                To Raise awareness for developing and supporting those that generate goods in a renewable way
-              </ListItem>
+            margin: 'auto'
+          }}>
+            <ListItem>
+              <ListItemIcon />
+              Support local farming communities
+            </ListItem>
 
-              <ListItem>
-                <ListItemIcon />
-                Creating a community where people can get the food and resources they need to survive
-              </ListItem>
-            </List>
-          </Box>
+            <ListItem>
+              <ListItemIcon />
+              To Raise awareness for developing and supporting those that generate goods in a renewable way
+            </ListItem>
+
+            <ListItem>
+              <ListItemIcon />
+              Creating a community where people can get the food and resources they need to survive
+            </ListItem>
+          </List>
         </Box>
-        {/* <Box>
+        <Box sx={{
+          margin: '20px auto',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '20px',
+          width: '40%',
+          backgroundColor: 'ghostwhite',
+          borderRadius: '10px',
+          border: '1px solid black',
+          boxShadow: '1px 1px 0 black'
+        }}>
           <Typography as='h2' fontSize='3.5rem' textAlign='center' color={'green'}>
             The Whys Behind The Whats
           </Typography>
@@ -90,14 +102,10 @@ const Homepage = () => {
               population will grow by 42 percent in the
               next 50 years. Many developing nations
               already are concerned about food security."
-              <Link
-                to='https://sustainable-farming.rutgers.edu/wp-content/uploads/2017/10/Why-Save-Farmland.pdf'
-                target='_blank' fontWeight='bold' color={'green'}>
-                To read more from this article Click Here!
-              </Link>
+
             </Typography>
           </Box>
-        </Box> */}
+        </Box>
       </Box>
 
     </>

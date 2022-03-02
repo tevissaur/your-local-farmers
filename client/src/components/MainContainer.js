@@ -1,18 +1,14 @@
 import styled from '@mui/material/styles/styled';
 
 
-const drawerWidth = 240;
-
-
-const MainContainer = styled('main', {
-    shouldForwardProp: (prop) => prop !== 'open'
-})(({ theme, open }) => ({
+const MainContainer = styled('main')(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
     flexGrow: 1,
-    zIndex: '0',
-    minHeight: 'calc(100vh - 100px)'
+    zIndex: '-1',
+    minHeight: 'calc(100vh - 100px)', 
+    backgroundColor: theme.palette.common.white
 }),
 );
 

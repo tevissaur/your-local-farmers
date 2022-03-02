@@ -47,7 +47,7 @@ function FarmCard({ title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Box>
-            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button mt={3} mb={0} backgroundColor={'white'}>Visit Farm</Button></Link>
+            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button sx={{ backgroundColor: 'gre' }}>Visit Farm</Button></Link>
         </Box>
 
     )

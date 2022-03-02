@@ -11,6 +11,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import Cart from "./components/Storefront/Cart";
 import MainLayout from "./pages/MainLayout";
 import AboutUs from "./pages/AboutUs";
+import NoPage from "./pages/NoPage";
+import { ThemeProvider, useTheme } from "@mui/material";
+import { createTheme } from "@mui/system";
+import { red } from "@mui/material/colors";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -22,28 +26,42 @@ const client = new ApolloClient({
 function App() {
   useDispatch()
   useSelector((state) => state)
-
-
+  const defaultTheme = useTheme()
+  const theme = createTheme(defaultTheme, {
+    palette: {
+      primary: {
+        main: red[500]
+      }
+    } 
+  })
 
   return (
     <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+
         <Router>
 
           <Routes>
-            <Route exact path="/" element={<MainLayout />}>
+            <Route exact path="/*" element={<MainLayout />}>
               <Route index element={<Homepage />} />
               <Route path="farm/:name" element={<Farm />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="category/:name" element={<Category />} />
-              <Route path="products/:id" element={<Product />} />
+              <Route path="category/*" element={<Category />}>
+                <Route path=":name" element={<Category />} />
+              </Route>
+              <Route path="products/*">
+                <Route path=":id" element={<Product />} />
+              </Route>
               <Route path='farms' element={<FarmsPage />} />
               <Route path='myfarm' element={<MyFarm />} />
               <Route path="cart" element={<Cart />} />
               <Route path="about-us" element={<AboutUs />} />
               <Route path="resources" element={<Cart />} />
+              <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
         </Router>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }

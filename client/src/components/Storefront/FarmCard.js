@@ -12,20 +12,21 @@ function FarmCard({ title, reviews, numericReview, categories }) {
     return (
 
         <Box
-            display='flex'
-            flexDirection='column'
-            alignItems='center'
             border='1px solid black'
             borderRadius='15px'
             backgroundColor='lightyellow'
-            maxWidth='250px'
+            maxWidth='275px'
             margin={2}
             boxShadow='1px 1px black'
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
         >
             <Typography
-                as='h6'
-                size='lg'
-                pb={2}
+                variant='h6'
+                sx={{ fontSize: 24 }}
                 textAlign='center'
             >{title}
             </Typography>
@@ -47,7 +48,23 @@ function FarmCard({ title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Box>
-            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`}><Button sx={{ backgroundColor: 'gre' }}>Visit Farm</Button></Link>
+            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`} underline='none' color='black' marginY={4}>
+                <Button sx={{
+                    borderRadius: '25px',
+                    paddingX: 1.5,
+                    marginY: 1.5,
+                    color: 'black',
+                    backgroundColor: 'lightgray',
+                    border: '1px solid black',
+                    marginRight: 2,
+                    ':hover': {
+                        backgroundColor: 'white',
+                        boxShadow: '1px 1px 0 black'
+                    }
+                }}>
+                    Visit Farm
+                </Button>
+            </Link>
         </Box>
 
     )

@@ -59,3 +59,21 @@ export const setActivePage = (payload) => {
         payload
     }
 }
+export const setTopFarms = (payload) => {
+    return {
+        type: 'farm/topFarms',
+        payload
+    }
+}
+export const setFarms = (payload) => {
+    return {
+        type: 'farm/farms',
+        payload
+    }
+}
+export const setSingleFarm = (payload) => {
+    return {
+        type: 'farm/singleFarm',
+        payload
+    }
+}

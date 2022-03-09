@@ -14,6 +14,10 @@ const initialState = {
     nav: {
         activePage: ''
     },
+    review: {
+        inputText: '',
+        rating: ''
+    },
     openFarm: {},
     openProduct: {},
     products: [],

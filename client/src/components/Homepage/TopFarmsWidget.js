@@ -5,7 +5,12 @@ import { Link as ReactLink } from "react-router-dom"
 import { categoryData } from "../../categoryData"
 import SmallCategoryIcon from "./SmallCategoryIcon"
 import store from "../../utils/store"
-import { setActivePage } from "../../utils/actions"
+import { setActivePage, setTopFarms } from "../../utils/actions"
+import { useQuery } from "@apollo/client"
+import { QUERY_FARM } from "../../utils/queries"
+import { useEffect } from "react"
+import FarmCard from "../Storefront/FarmCard"
+import SmallFarms from "./SmallFarms"
 
 
 
@@ -17,7 +22,14 @@ import { setActivePage } from "../../utils/actions"
 
 
 const TopFarmsWidget = () => {
+    const { loading, data, error } = useQuery(QUERY_FARM)
+    const { farm: { topFarms } } = store.getState()
+    console.log(topFarms)
 
+    useEffect(() => {
+        loading ? console.log(loading) : store.dispatch(setTopFarms(data?.farms))
+
+    }, [data, loading, error])
 
     return (
         <>
@@ -42,21 +54,33 @@ const TopFarmsWidget = () => {
                         alignSelf: 'center'
                     }}>
                         <Link component={ReactLink} to='/farms' underline="none" sx={{ ':hover': { textDecoration: 'underline' } }} >
-                        See More
-                    </Link>
+                            See More
+                        </Link>
                     </Typography>
-                    
-                </Box>
 
-                <Box sx={{
-                    margin: '5px auto',
-                    display: 'flex',
-                    flexWrap: 'wrap'
-                }}>
-                    {categoryData.map((card, index) => {
-                        return (<SmallCategoryIcon key={index} card={card} />)
-                    })}
                 </Box>
+                {loading ? (
+                    <>
+
+                    </>
+                ) : (
+                    <Box sx={{
+                        margin: '5px auto',
+                        display: 'flex',
+                        flexWrap: 'wrap'
+                    }}>
+                        {topFarms?.map((farm, index) => {
+                            return (
+                                <SmallFarms key={farm._id}
+                                    title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
+                                    categories={farm.products.map(product => {
+                                        return product.categories[0].name
+                                    })} />
+                            )
+                        })}
+                    </Box>
+                )}
+
             </Box>
         </>
     )

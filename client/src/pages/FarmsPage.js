@@ -89,26 +89,29 @@ const FarmsPage = () => {
 
     useEffect(() => {
         store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
-      }, [])
+    }, [])
+
+    
     return (
         <>
             <Box sx={{
                 position: 'relative'
             }}>
-
                 <Banner />
             </Box>
             <Box sx={{
-                position: 'relative'
-            }} display='flex' flexDirection='column' margin={5}>
-                <Box
-                    maxW='container.xl'
-                    m={4}
-                    backgroundColor='white'
-                    border='black 1px solid'
-                    borderRadius='25px'
-                    boxShadow='2px 2px black'
-                >
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                margin: 2
+            }}>
+                <Box sx={{
+                    margin: 4,
+                    backgroundColor: 'white',
+                    border: 'black 1px solid',
+                    borderRadius: '25px',
+                    boxShadow: '2px 2px black'
+                }}>
                     <Box display='flex' justifyContent='space-evenly'
                         alignItems='center' flexWrap='wrap'>
                         {categoryList.map(category => {
@@ -145,12 +148,11 @@ const FarmsPage = () => {
                                 })} />
                         })}
                     </Box>
-                    <Box
-                        borderRadius='25px'
-                        mt={10}
-                        backgroundColor='green'
-                        boxShadow='3px 3px black'
-                    >
+                    <Box sx={{
+                        borderRadius: '25px',
+                        backgroundColor: 'green',
+                        boxShadow: '3px 3px black'
+                    }}>
                         <Box justifyContent='center' flexDir='column' flexWrap='wrap'>
                             <Typography as='h2'
                                 color='primary.yellowGreen'
@@ -160,7 +162,9 @@ const FarmsPage = () => {
                             <Typography
                                 textAlign='center'
                                 color='White'
-                                fontSize='30px'>FAQs</Typography>
+                                fontSize='30px'>
+                                FAQs
+                            </Typography>
                             <Box maxW='100%'>
                                 <Box
                                     flexDir='column'

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_FARM } from "../../utils/queries";
+import { QUERY_FARMS } from "../../utils/queries";
 import ProductCard from "./ProductCard";
 import Footer from "../NavComponents/Footer";
 import { Box } from "@mui/material";
@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 const Category = () => {
   const { name } = useParams();
   console.log(name);
-  const { loading, data, error } = useQuery(QUERY_FARM);
+  const { loading, data, error } = useQuery(QUERY_FARMS);
 
   const farmList = data ? data.farms : [];
   const allProducts = farmList

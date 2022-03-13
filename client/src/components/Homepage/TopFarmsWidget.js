@@ -7,7 +7,7 @@ import SmallCategoryIcon from "./SmallCategoryIcon"
 import store from "../../utils/store"
 import { setActivePage, setTopFarms } from "../../utils/actions"
 import { useQuery } from "@apollo/client"
-import { QUERY_FARM } from "../../utils/queries"
+import { QUERY_FARMS } from "../../utils/queries"
 import { useEffect } from "react"
 import FarmCard from "../Storefront/FarmCard"
 import SmallFarms from "./SmallFarms"
@@ -22,7 +22,7 @@ import SmallFarms from "./SmallFarms"
 
 
 const TopFarmsWidget = () => {
-    const { loading, data, error } = useQuery(QUERY_FARM)
+    const { loading, data, error } = useQuery(QUERY_FARMS)
     const { farm: { topFarms } } = store.getState()
     console.log(topFarms)
 
@@ -71,11 +71,8 @@ const TopFarmsWidget = () => {
                     }}>
                         {topFarms?.map((farm, index) => {
                             return (
-                                <SmallFarms key={farm._id}
-                                    title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
-                                    categories={farm.products.map(product => {
-                                        return product.categories[0].name
-                                    })} />
+                                <SmallFarms key={farm._id} id={farm._id}
+                                    title={farm.name} />
                             )
                         })}
                     </Box>

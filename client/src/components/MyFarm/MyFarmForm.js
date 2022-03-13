@@ -4,6 +4,7 @@ import { UPDATE_USER } from '../../utils/mutations'
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
+import store from "../../utils/store";
 
 
 function MyFarm({ setIsFarmer, setFarmId }) {
@@ -35,7 +36,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
         setFarmName('')
         setAddress('')
         setStory('')
-        setIsFarmer(true)
+        // store.dispatch(setIsFarmer(true))
         window.location.reload()
 
         
@@ -44,13 +45,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
 
     return (
         <>
-            <Box 
-                maxW='container.md'
-                border='lightgrey 2px solid'  
-                padding={2} boxShadow='1px 1px black'
-                borderRadius='25px'
-                mt={3}
-            >
+            <Box>
                 <form onSubmit={handleFormSubmit} >
                 <FormControl onSubmit={handleFormSubmit}  >
                     <FormLabel fontSize='20px' fontWeight='600'>Enter your farm name</FormLabel>
@@ -86,13 +81,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                     />
                 </FormControl>
                 <FormControl mt={4} >
-                    <Button 
-                        type="submit" 
-                        mr={3}  
-                        onClick={handleFormSubmit}
-                        border="1px solid grey"
-                        boxShadow="1px 1px black"
-                        backgroundColor="primary.lightGreen">
+                    <Button >
                     Add Farm
                     </Button>
                 </FormControl>

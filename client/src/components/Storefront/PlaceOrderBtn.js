@@ -1,4 +1,4 @@
-import { QUERY_PRODUCTS, QUERY_FARM } from "../../utils/queries";
+import { QUERY_PRODUCTS, QUERY_FARMS } from "../../utils/queries";
 import { Button, Modal, Typography } from "@mui/material";
 import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_PO } from "../../utils/mutations";
@@ -8,7 +8,7 @@ import { Box } from "@mui/system";
 
 const PlaceOrderBtn = ({ cartItems, pickUpDate, pickUpTime, totalPrice, buyer, }) => {
   
-  const { loading, data, error } = useQuery(QUERY_FARM);
+  const { loading, data, error } = useQuery(QUERY_FARMS);
   const [createPO] = useMutation(CREATE_PO);
   const farmList = data ? data.farms : [];
 

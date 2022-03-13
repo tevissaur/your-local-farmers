@@ -6,10 +6,12 @@ import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client'
 import { Box } from '@mui/material'
 import Banner from '../components/Banner'
+import store from '../utils/store'
+import { setIsFarmer } from '../utils/actions'
 
 function MyFarm() {
     let userDetails = auth.getProfile()
-    const [userData, setUserData] = useState({})
+    const { profile: { isFarmer } } = store.getState()
 
     const { data, error, loading } = useQuery(GET_ME, {
         variables: {
@@ -17,12 +19,10 @@ function MyFarm() {
         }
     })
 
-    const [isFarmer, setIsFarmer] = useState(userDetails.data.isFarmer)
-
 
     useEffect(() => {
-        loading ? console.log("Bro") : setIsFarmer(data.me?.isFarmer)
-
+        loading ? console.log("Bro") : store.dispatch(setIsFarmer(data?.me?.isFarmer))
+        console.log(isFarmer)
 
     }, [isFarmer, data, loading])
 
@@ -36,7 +36,7 @@ function MyFarm() {
                         {isFarmer ? (
                             <MyFarmDash userId={userDetails.data._id} />
                         ) : (
-                            <MyFarmForm setIsFarmer={setIsFarmer} />
+                            <MyFarmForm />
                         )}
                     </Box>
                 </Box>

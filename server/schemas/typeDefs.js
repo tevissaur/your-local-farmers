@@ -20,7 +20,7 @@ const typeDefs = gql`
         avgScore: Int
         inSeason: Boolean
         categories: [Category]
-        farm: String!
+        farm: Farm
     }
     type Category {
         _id: ID!

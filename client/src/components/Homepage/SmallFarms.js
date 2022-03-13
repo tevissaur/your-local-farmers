@@ -5,11 +5,11 @@ import localFarm from '../../assets/localFarm.jpg'
 
 
 
-const SmallFarms = ({ title }) => {
+const SmallFarms = ({ id, title }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/farm/${title.toLowerCase()}`} component={ReactLink} underline='none'>
+            <Link to={`/farm/${id}`} component={ReactLink} underline='none'>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',

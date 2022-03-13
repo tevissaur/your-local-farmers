@@ -32,7 +32,7 @@ function App() {
       primary: {
         main: red[500]
       }
-    } 
+    }
   })
 
   return (
@@ -44,7 +44,12 @@ function App() {
           <Routes>
             <Route exact path="/*" element={<MainLayout />}>
               <Route index element={<Homepage />} />
-              <Route path="farm/:name" element={<Farm />} />
+              <Route path="farm/:fid">
+                <Route index element={<Farm />} />
+                <Route path="products/*">
+                  <Route path=":pid" element={<Product />} />
+                </Route>
+              </Route>
               <Route path="profile" element={<Profile />} />
               <Route path="category/*" element={<Category />}>
                 <Route path=":name" element={<Category />} />

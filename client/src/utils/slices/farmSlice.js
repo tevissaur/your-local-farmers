@@ -1,7 +1,8 @@
 const initialState = {
     farms: [],
     singleFarm: {},
-    topFarms: []
+    topFarms: [],
+    myFarm: {}
 }
 
 function farmReducer(state = initialState, action) {
@@ -20,6 +21,11 @@ function farmReducer(state = initialState, action) {
             return {
                 ...state,
                 farms: action.payload
+            }
+        case 'farm/myFarm':
+            return {
+                ...state,
+                myFarm: action.payload
             }
         default: 
             return state

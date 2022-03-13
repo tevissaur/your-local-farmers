@@ -15,24 +15,24 @@ const resolvers = {
     Query: {
         me: async (parent, { _id }) => {
             console.log(_id)
-            const user =  await User.findById(_id).populate([
-                
-                    {
-                        path: 'purchasedOrders',
-                        model: 'PurchaseOrder',
-                        populate :[
-                            {
-                            path:"seller",
-                            model:"Farm"
+            const user = await User.findById(_id).populate([
+
+                {
+                    path: 'purchasedOrders',
+                    model: 'PurchaseOrder',
+                    populate: [
+                        {
+                            path: "seller",
+                            model: "Farm"
                         },
                         {
                             path: "items",
-                            model:"Product"
+                            model: "Product"
                         }
                     ]
-                    },
+                },
 
-                
+
             ])
             console.log(user)
             return user
@@ -167,7 +167,7 @@ const resolvers = {
                         path: 'purchaseOrders',
                         model: 'PurchaseOrder',
                         populate: [{
-                            
+
                             path: 'sellers',
                             model: 'Farm'
                         },
@@ -179,7 +179,7 @@ const resolvers = {
                             path: 'buyer',
                             model: 'User'
                         }
-                    ]
+                        ]
                     }
                 ]
             )
@@ -199,20 +199,42 @@ const resolvers = {
         farmStore: async (parent, { _id }) => {
             return await Farm.findById(_id).populate([
                 {
-                    path: 'products',
-                    model: 'Product',
+                    path: 'reviews',
+                    model: 'Review',
                     populate: {
-                        path: 'reviews',
-                        model: 'Review',
-                        populate: {
-                            path: 'author',
-                            model: 'User'
-                        }
+                        path: 'author',
+                        model: 'User'
                     }
                 },
                 {
-                    path: 'reviews',
-
+                    path: 'owners',
+                    model: 'User',
+                    populate: {
+                        path: 'reviews',
+                        model: 'Review'
+                    }
+                },
+                {
+                    path: 'products',
+                    model: 'Product',
+                    populate: [
+                        {
+                            path: 'categories',
+                            model: 'Category'
+                        },
+                        {
+                            path: 'reviews',
+                            model: 'Review',
+                            populate: {
+                                path: 'author',
+                                model: 'User'
+                            }
+                        }
+                    ]
+                },
+                {
+                    path: 'purchaseOrders',
+                    model: 'PurchaseOrder'
                 }
             ])
         },
@@ -233,7 +255,11 @@ const resolvers = {
                     },
                     {
                         path: 'farm',
-                        model: 'Farm'
+                        model: 'Farm',
+                        populate: {
+                            path: 'owners',
+                            model: 'User'
+                        }
                     }
                 ]
             )
@@ -383,35 +409,35 @@ const resolvers = {
             return newFarm
         },
         createPO: async (parent, { PO }) => {
-          
-            
+
+
             const newPO = await PurchaseOrder.create(PO)
             const POWithFarm = await PurchaseOrder.findById(newPO._id).populate([
                 {
-                    path:"seller",
-                    model:"Farm"
+                    path: "seller",
+                    model: "Farm"
                 },
                 {
-                    path:"buyer",
-                    model:"User"
+                    path: "buyer",
+                    model: "User"
                 },
                 {
-                    path:"items",
-                    model:"Product"
+                    path: "items",
+                    model: "Product"
                 },
 
             ])
-            const userWithPO =   await User.findByIdAndUpdate(
+            const userWithPO = await User.findByIdAndUpdate(
                 PO.buyer,
-                 {$push : {purchasedOrders : newPO}},
-                 {new: true}
-             )
-             const farmWithPO = await Farm.findByIdAndUpdate(
-                 PO.seller,
-                 {$push: {purchaseOrders : newPO}},
-                 {new: true}
-             )
-              console.log(newPO)
+                { $push: { purchasedOrders: newPO } },
+                { new: true }
+            )
+            const farmWithPO = await Farm.findByIdAndUpdate(
+                PO.seller,
+                { $push: { purchaseOrders: newPO } },
+                { new: true }
+            )
+            console.log(newPO)
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {

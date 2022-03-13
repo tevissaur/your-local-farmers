@@ -16,12 +16,8 @@ const initialState = {
     },
     review: {
         inputText: '',
-        rating: ''
-    },
-    openFarm: {},
-    openProduct: {},
-    products: [],
-    farms: []
+        rating: 0
+    }
 }
 
 
@@ -111,6 +107,22 @@ function uiReducer(state = initialState, action) {
                 signup: {
                     ...state.login,
                     firstName: action.payload
+                }
+            }
+        case 'ui/review/inputText':
+            return {
+                ...state,
+                review: {
+                    ...state.review,
+                    inputText: action.payload
+                }
+            }
+        case 'ui/review/rating':
+            return {
+                ...state,
+                review: {
+                    ...state.review,
+                    rating: action.payload
                 }
             }
         default:

@@ -7,93 +7,68 @@ import { BsPersonFill } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { imageSeeds } from "../../imageSeeds";
-import { QUERY_PRODUCTS, QUERY_FARM } from "../../utils/queries";
+import { QUERY_FARMS, QUERY_PRODUCT } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import { useEffect, useState, useRef } from "react";
 import ReviewButton from "./ReviewButton";
 import { Box, Typography, Button } from "@mui/material";
+import store from "../../utils/store";
+import { setSingleProduct } from "../../utils/actions";
 
-const Product = ({cartItems,setCartItems}) => {
+const Product = ({ cartItems, setCartItems }) => {
+  const { product: { product } } = store.getState()
   const [inputText, setInputText] = useState("");
   const [rating, setRating] = useState("");
 
   // const [reviews, setReviews] = useState("");
   const [dataReviews, setDataReviews] = useState([]);
-  
 
-  const handleLogOut = () => {
-    Auth.logout();
-  };
-
-  const { id } = useParams();
+  const { fid, pid } = useParams();
   const {
     loading: productLoading,
     data: productData,
-    error: productError,
-  } = useQuery(QUERY_PRODUCTS);
-  const {
-    loading: farmLoading,
-    data: farmData,
-    error: farmError,
-  } = useQuery(QUERY_FARM);
-
-  const productList = productData ? productData.products : [];
-  const foundProduct = productList.find((product) => product._id === id);
-  console.log(foundProduct)
-
+    error: productError } = useQuery(QUERY_PRODUCT, { variables: { id: pid } })
   useEffect(() => {
-    if (foundProduct) {
-      setDataReviews([...foundProduct.reviews].reverse());
-    }
-  }, [foundProduct]);
+    productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
+    console.log(product)
+  }, [productLoading, productData])
 
-  if (productLoading || farmLoading) {
+  if (productLoading) {
     return "loading";
   }
 
-  // console.log(foundProduct);
-  const farmList = farmData ? farmData.farms : [];
-  const farm = farmList.find((farm) => {
-    const foundFarmProduct = farm.products.find(
-      (product) => product._id === id
-    );
-    return foundFarmProduct ? farm : {};
-  });
 
-  // finding image matched product from seed
-  const cardArr = imageSeeds.map((card) => card);
-  const foundProductImage = cardArr
-    .filter((arr) => arr.name === foundProduct.name)
-    .map((card) => card.img);
+  const handleAddToCart = (product) => {
 
-  const handleAddToCart = (product)=>{
-  
     console.log('test')
     const productExist = cartItems.find((item) => item._id === product._id)
-    if(productExist){
-      setCartItems(cartItems.map((item) => item._id === product._id ? {...productExist, quantity: productExist.quantity + 1} : item))
+    if (productExist) {
+      setCartItems(cartItems.map((item) => item._id === product._id ? { ...productExist, quantity: productExist.quantity + 1 } : item))
     } else {
-      setCartItems([...cartItems,{...product, quantity: 1} ])
+      setCartItems([...cartItems, { ...product, quantity: 1 }])
     }
   }
-  
+
+
 
   return (
     <>
-      <Box>
-        <Box m={4} flex="1" alignItems="center">
-       
-          <Box
-            border="green 2px solid"
-            alignItems="stretch"
-            justifyItems="center"
-            backgroundColor="lightyellow"
-            padding={5}
-            margin={10}
-          >
-            <Box>
+      {productLoading ? (
+        <></>
+      ) : (
+        <Box>
+          <Box m={4} flex="1" alignItems="center">
+
+            <Box
+              border="green 2px solid"
+              alignItems="stretch"
+              justifyItems="center"
+              backgroundColor="lightyellow"
+              padding={5}
+              margin={10}
+            >
               <Box>
-                <img src={foundProductImage} style={{ width: "300px" }} />
+                {/* <img src={productImage} style={{ width: "300px" }} /> */}
 
                 <Box
                   p="10px"
@@ -112,8 +87,8 @@ const Product = ({cartItems,setCartItems}) => {
                     <Typography fontSize="sm">
 
                       Based on {dataReviews.length} reviews
-  
-                   
+
+
 
                     </Typography>
                     {Auth.loggedIn() ? (
@@ -122,7 +97,7 @@ const Product = ({cartItems,setCartItems}) => {
                         setInputText={setInputText}
                         reviews={dataReviews}
                         setReviews={setDataReviews}
-                        product={foundProduct}
+                        product={product}
                         rating={rating}
                         setRating={setRating}
                       />
@@ -131,103 +106,100 @@ const Product = ({cartItems,setCartItems}) => {
                     )}
                   </Box>
                 </Box>
-              </Box>
 
-              <Box m="30px">
-                <Link to={`/farm/${farm.name.toLowerCase()}`}>
-                  <Box>
-                    <Typography fontSize="2xl" color="primary.darkGreen">
-                      {farm.name}
-                    </Typography>
-                    {<BsFillHouseFill />}
-                  </Box>
-                </Link>
-                <Typography
-                  fontSize="2xl"
-                  px="4px"
-                  px="10px"
-                  style={{ fontWeight: "bolder" }}
-                >
-                  {foundProduct.name}
-                </Typography>
-                [product's description]
-                <Box>
-                  <Typography>Available :</Typography>
+                <Box m="30px">
+                  <Link to={`/farm/${fid}`}>
+                    <Box>
+                      <Typography fontSize="2xl" color="primary.darkGreen">
+                        {product?.farm?.name}
+                      </Typography>
+                      {<BsFillHouseFill />}
+                    </Box>
+                  </Link>
                   <Typography
-                    color="primary.darkGreen"
+                    fontSize="2xl"
+                    px="4px"
                     style={{ fontWeight: "bolder" }}
                   >
-                    {foundProduct.quantity}
+                    {product?.name}
                   </Typography>
-                </Box>
-                <Box>
+                  [product's description]
                   <Box>
-                    <Typography fontSize="2xl">$ {foundProduct.price}.00</Typography>
+                    <Typography>Available :</Typography>
+                    <Typography
+                      color="primary.darkGreen"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      {product?.quantity}
+                    </Typography>
                   </Box>
-                  {Auth.loggedIn() ? (
-                    <Button
-                    leftIcon={<CgShoppingCart fontSize="20px" />}
-                    backgroundColor="primary.lightGreen"
-                    variant="solid"
-                    fontSize="sm"
-                    onClick={() => handleAddToCart(foundProduct)}
-                  >
-                    Add To Cart
-                  </Button>
-                  ) : ("")}
-                  
+                  <Box>
+                    <Box>
+                      <Typography fontSize="2xl">$ {product?.price}.00</Typography>
+                    </Box>
+                    {Auth.loggedIn() ? (
+                      <Button
+                        leftIcon={<CgShoppingCart fontSize="20px" />}
+                        backgroundColor="primary.lightGreen"
+                        variant="solid"
+                        fontSize="sm"
+                      >
+                        Add To Cart
+                      </Button>
+                    ) : ("")}
+
+                  </Box>
                 </Box>
               </Box>
             </Box>
-          </Box>
-          <Box
-            border="green 2px solid"
-            alignItems="stretch"
-            justifyItems="center"
-            backgroundColor="lightyellow"
-            padding={5}
-            mx={10}
-          >
-            <Typography
-              fontSize="2xl"
-              px="4px"
-              px="10px"
-              style={{ fontWeight: "bolder" }}
-              mb={5}
+            <Box
+              border="green 2px solid"
+              alignItems="stretch"
+              justifyItems="center"
+              backgroundColor="lightyellow"
+              padding={5}
+              mx={10}
             >
-              Customer Review
-            </Typography>
-            {/* {reviews.map((review,idx) => (
+              <Typography
+                fontSize="2xl"
+                px="4px"
+                sx={{ fontWeight: "bolder" }}
+                mb={5}
+              >
+                Customer Review
+              </Typography>
+              {/* {reviews.map((review,idx) => (
               <h1 key={idx}>{review.content}</h1>
             ))} */}
 
-            {dataReviews.map((review, idx) => (
-              <Box m="15px" key={idx}>
-                <Box>
-                  {Array(review.rating)
-                    .fill(0)
-                    .map(() => (
-                      <AiFillStar color="green" />
-                    ))}
-                </Box>
-
-                <Box gap={6}>
+              {dataReviews.map((review, idx) => (
+                <Box m="15px" key={idx}>
                   <Box>
-                    <RiDoubleQuotesL />
-                    <Typography>{review.content}...</Typography>
-                    <RiDoubleQuotesR />
+                    {Array(review.rating)
+                      .fill(0)
+                      .map(() => (
+                        <AiFillStar color="green" />
+                      ))}
                   </Box>
 
-                  <Box alignItems="center">
-                    <BsPersonFill />
-                    <Typography>{review.author.firstName}</Typography>
+                  <Box gap={6}>
+                    <Box>
+                      <RiDoubleQuotesL />
+                      <Typography>{review.content}...</Typography>
+                      <RiDoubleQuotesR />
+                    </Box>
+
+                    <Box alignItems="center">
+                      <BsPersonFill />
+                      <Typography>{review.author.firstName}</Typography>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
           </Box>
         </Box>
-      </Box>
+      )}
     </>
   )
 }

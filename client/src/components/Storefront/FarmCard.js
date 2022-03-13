@@ -5,7 +5,7 @@ import localFarm from '../../assets/localFarm.jpg'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import StarsRender from './StarsRender'
 
-function FarmCard({ title, reviews, numericReview, categories }) {
+function FarmCard({ id, title, reviews, numericReview, categories }) {
 
     let filteredCategories = new Set([...categories])
 
@@ -48,7 +48,7 @@ function FarmCard({ title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Box>
-            <Link as={ReactLink} to={`/farm/${title.toLowerCase()}`} underline='none' color='black' marginY={4}>
+            <Link as={ReactLink} to={`/farm/${id}`} underline='none' color='black' marginY={4}>
                 <Button sx={{
                     borderRadius: '25px',
                     paddingX: 1.5,

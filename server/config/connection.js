@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/yourlocalfarmersdb", {
+// Add process.env.MONGODB_URI ||  when deploying
+
+mongoose.connect("mongodb://localhost/yourlocalfarmersdb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

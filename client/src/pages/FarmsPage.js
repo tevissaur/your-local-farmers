@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
-import { QUERY_FARM } from '../utils/queries';
+import { QUERY_FARMS } from '../utils/queries';
 import { Link } from 'react-router-dom'
 import FarmCard from '../components/Storefront/FarmCard'
 import Footer from '../components/NavComponents/Footer'
@@ -15,7 +15,7 @@ import { setActivePage } from '../utils/actions';
 
 
 const FarmsPage = () => {
-    const { loading, data, error } = useQuery(QUERY_FARM)
+    const { loading, data, error } = useQuery(QUERY_FARMS)
 
     const farmList = data ? data.farms : []
 
@@ -118,12 +118,6 @@ const FarmsPage = () => {
                             const checked = selectedCategoryNames.includes(category.name)
                             return (
                                 <FormControl>
-                                    {/* <FormControlLabel
-                                        label={category.name}
-                                        control={<Checkbox
-                                            checked={checked}
-                                            value={category.name}
-                                            key={category.name} />} /> */}
                                     <Checkbox
                                         colorScheme="green"
                                         fontWeight='600'
@@ -141,7 +135,7 @@ const FarmsPage = () => {
                 <Box display='flex' flexDirection='column'>
                     <Box display='flex' justifyContent='space-evenly' margin={3} flexWrap='wrap'>
                         {visibleFarms.map(farm => {
-                            return <FarmCard key={farm._id}
+                            return <FarmCard key={farm._id} id={farm._id}
                                 title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
                                 categories={farm.products.map(product => {
                                     return product.categories[0].name

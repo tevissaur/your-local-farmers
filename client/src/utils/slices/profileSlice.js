@@ -1,7 +1,8 @@
 import auth from "../auth"
 
 const initialState = {
-    loggedIn: auth.loggedIn()
+    loggedIn: auth.loggedIn(),
+    isFarmer: false
 }
 
 
@@ -11,6 +12,11 @@ function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loggedIn: action.payload
+            }
+        case 'user/isFarmer': 
+            return {
+                ...state,
+                isFarmer: action.payload
             }
         default: 
             return state

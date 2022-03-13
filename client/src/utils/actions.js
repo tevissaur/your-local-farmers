@@ -77,3 +77,37 @@ export const setSingleFarm = (payload) => {
         payload
     }
 }
+
+export const setReviewContent = (payload) => {
+    return {
+        type: 'ui/review/inputText',
+        payload
+    }
+}
+export const setReviewRating = (payload) => {
+    return {
+        type: 'ui/review/rating',
+        payload
+    }
+}
+
+export const setSingleProduct = (payload) => {
+    return {
+        type: 'product/singleProduct',
+        payload
+    }
+}
+
+export const setIsFarmer = (payload) => {
+    return {
+        type: 'user/isFarmer', 
+        payload
+    }
+}
+
+export const setMyFarm = (payload) => {
+    return {
+        type: 'farm/myFarm',
+        payload
+    }
+}

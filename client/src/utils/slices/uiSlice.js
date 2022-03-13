@@ -73,7 +73,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 signup: {
-                    ...state.login,
+                    ...state.signup,
                     modal: action.payload
                 }
             }
@@ -81,7 +81,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 signup: {
-                    ...state.login,
+                    ...state.signup,
                     email: action.payload
                 }
             }
@@ -89,7 +89,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 signup: {
-                    ...state.login,
+                    ...state.signup,
                     password: action.payload
                 }
             }
@@ -97,7 +97,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 signup: {
-                    ...state.login,
+                    ...state.signup,
                     username: action.payload
                 }
             }
@@ -105,7 +105,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 signup: {
-                    ...state.login,
+                    ...state.signup,
                     firstName: action.payload
                 }
             }

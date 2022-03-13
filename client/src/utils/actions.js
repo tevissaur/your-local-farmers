@@ -12,6 +12,7 @@ export const setLoginModal = (payload) => {
     }
 }
 export const setLoginEmail = (payload) => {
+    console.log(payload)
     return {
         type: 'ui/login/email',
         payload
@@ -42,6 +43,7 @@ export const setSignupPass = (payload) => {
     }
 }
 export const setSignupUsername = (payload) => {
+    console.log(payload)
     return {
         type: 'ui/signup/username',
         payload

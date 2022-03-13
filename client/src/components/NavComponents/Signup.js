@@ -81,7 +81,7 @@ function Signup() {
                     bgcolor: 'background.paper',
                 }}>
 
-                    <FormControl>
+                    <Box>
                         <FormLabel>Username</FormLabel>
                         <Input
                             type='text'
@@ -118,7 +118,7 @@ function Signup() {
                             value={password}
                             onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
                         />
-                    </FormControl>
+                    </Box>
 
 
                     <Button onClick={handleFormSubmit} disabled={isInvalid}>

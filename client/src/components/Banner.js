@@ -3,7 +3,7 @@ import styled from '@mui/material/styles/styled';
 
 const Banner = styled(Box)(({ theme }) => ({
     position: 'absolute',
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     width: '100%',
     height: '160px',
     top: '0',

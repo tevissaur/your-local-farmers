@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link as ReactLink } from 'react-router-dom'
 import auth from '../../utils/auth';
 import store from '../../utils/store';
-import { setActivePage, setDrawerOpen } from '../../utils/actions';
+import { setActivePage } from '../../utils/actions';
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
 import LoggedOutButtons from "./LoggedOutButtons";

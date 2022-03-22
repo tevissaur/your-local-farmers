@@ -76,7 +76,7 @@ function LoginForm() {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           border: '1px solid',
-          padding: 1,
+          padding: 'auto 1',
           bgcolor: 'background.paper',
         }}>
           <FormControl width='100%'>

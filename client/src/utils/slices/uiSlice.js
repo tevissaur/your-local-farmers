@@ -12,11 +12,20 @@ const initialState = {
         username: ''
     },
     nav: {
-        activePage: ''
+        activePage: '',
+        profileDropdown: {
+            anchorEl: null,
+            open: false
+        }
     },
     review: {
         inputText: '',
         rating: 0
+    },
+    newFarm: {
+        name: '',
+        address: '',
+        story: ''
     }
 }
 
@@ -123,6 +132,30 @@ function uiReducer(state = initialState, action) {
                 review: {
                     ...state.review,
                     rating: action.payload
+                }
+            }
+        case 'ui/newFarm/name':
+            return {
+                ...state,
+                newFarm: {
+                    ...state.review,
+                    name: action.payload
+                }
+            }
+        case 'ui/newFarm/address':
+            return {
+                ...state,
+                newFarm: {
+                    ...state.review,
+                    address: action.payload
+                }
+            }
+        case 'ui/newFarm/story':
+            return {
+                ...state,
+                newFarm: {
+                    ...state.review,
+                    story: action.payload
                 }
             }
         default:

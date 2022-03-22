@@ -1,16 +1,40 @@
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types'
 import { GET_ME } from "../utils/queries";
 import UserMain from "../components/MyProfile/UserMain.js";
 import Auth from "../utils/auth";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
   const [purchasedOrder, setPurchasedOrder] = useState([]);
   const [itemNameArr, setItemNameArr] = useState([]);
-  const [sumTotal, setSumTotal] = useState("");
-  const [isFarmer, setIsFarmer] = useState(userData.isFarmer);
   const {
     data: { _id },
   } = Auth.getProfile();
@@ -39,7 +63,7 @@ const Profile = () => {
         ) {
           return previousValue + currentValue;
         });
-        setSumTotal(sumOrderTotal);
+        // setSumTotal(sumOrderTotal);
 
         const items = userData.purchasedOrders.map((order) => order.items);
         console.log(items);
@@ -72,45 +96,42 @@ const Profile = () => {
         >
           {Auth.loggedIn() ? (
             <>
-              {/* <Tabs isFitted variant="enclosed" color="black" w="100%" p={3}>
-                    <Tab color="black">Home</Tab>
-                    <Tab color="black">My Orders</Tab>
+              <Tabs value>
+                <Tab color="black">Home</Tab>
+                <Tab color="black">My Orders</Tab>
 
-                  <TabPanels>
-                    Tab for the main profile page
-                    <TabPanel>
-                      <UserMain userData={userData} />
-                    </TabPanel>
+              </Tabs>
+              <TabPanel>
+                <UserMain userData={userData} />
+              </TabPanel>
 
-                    <TabPanel>
-                      {purchasedOrder.map((order, idx) => (
-                        <Box key={idx} m="10px" border="green 2px solid"  borderRadius="25px"
-                        boxShadow="2px 2px green" p="10px" px="15px">
-                          <Box >
-                            <Text>Order Date : {new Date(parseInt(order.dateCreated)).toISOString().slice(0, 10).split('-').reverse().join('/')}</Text>
-                            <Text> Order Total : ${order.orderTotal}.00</Text>
-                          </Box>
-                          <Flex>
-                            <Text>
-                              {order.items.map((item, idx) => (
-                                <Text
-                                  key={idx}
-                                  style={{ fontWeight: "bolder" }}
-                                >
-                                  {item.name}
-                                </Text>
-                              ))}
-                            </Text>
-                          </Flex>
+              <TabPanel>
+                {purchasedOrder.map((order, idx) => (
+                  <Box key={idx} m="10px" border="green 2px solid" borderRadius="25px"
+                    boxShadow="2px 2px green" p="10px" px="15px">
+                    <Box >
+                      <Typography>Order Date : {new Date(parseInt(order.dateCreated)).toISOString().slice(0, 10).split('-').reverse().join('/')}</Typography>
+                      <Typography> Order Total : ${order.orderTotal}.00</Typography>
+                    </Box>
+                    <Box>
+                      <Typography>
+                        {order.items.map((item, idx) => (
+                          <Typography
+                            key={idx}
+                            style={{ fontWeight: "bolder" }}
+                          >
+                            {item.name}
+                          </Typography>
+                        ))}
+                      </Typography>
+                    </Box>
 
-                          <Text color="green"> from {order.seller.name}</Text>
-                        </Box>
-                      ))}
+                    <Typography color="green"> from {order.seller.name}</Typography>
+                  </Box>
+                ))}
 
-                      Order Total : ${sumTotal}
-                    </TabPanel>
-                  </TabPanels>
-                </Tabs> */}
+                {/* Order Total : ${sumTotal} */}
+              </TabPanel>
             </>
           ) : (
             <>

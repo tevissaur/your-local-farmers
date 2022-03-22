@@ -29,16 +29,19 @@ function MyFarm() {
     return (
         <Box position='relative'>
             <Banner />
-            <Box m={4} flex='1'>
-
-                <Box maxW='100%'>
-                    <Box justifyContent='space-evenly' flexWrap='wrap'>
-                        {isFarmer ? (
-                            <MyFarmDash userId={userDetails.data._id} />
-                        ) : (
-                            <MyFarmForm />
-                        )}
-                    </Box>
+            <Box sx={{
+                marginTop: '180px'
+            }}>
+                <Box sx={{ 
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    flexWrap: 'wrap'
+                 }}>
+                    {isFarmer ? (
+                        <MyFarmDash userId={userDetails.data._id} />
+                    ) : (
+                        <MyFarmForm />
+                    )}
                 </Box>
             </Box>
         </Box>

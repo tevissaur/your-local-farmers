@@ -113,3 +113,29 @@ export const setMyFarm = (payload) => {
         payload
     }
 }
+
+export const setNewFarmName = (payload) => {
+    return {
+        type: 'ui/newFarm/name',
+        payload
+    }
+} 
+export const setNewFarmAddress = (payload) => {
+    return {
+        type: 'ui/newFarm/address',
+        payload
+    }
+} 
+export const setNewFarmStory = (payload) => {
+    return {
+        type: 'ui/newFarm/story',
+        payload
+    }
+} 
+
+export const setProfDropdownOpen = (payload) => {
+    return {
+        type: 'ui/nav/profileDropdown',
+        payload
+    }
+}

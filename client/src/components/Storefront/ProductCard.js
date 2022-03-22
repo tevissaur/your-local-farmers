@@ -23,13 +23,12 @@ const ProductCard = ({ product }) => {
       <Box p="10px" flex="50%">
         <Box border="green 2px solid" borderRadius="25px" height="100%">
           <Box>
-            <img src={foundProductImage} style={{ borderRadius: "25px" }} />
+            <Box component='img' src={foundProductImage} style={{ borderRadius: "25px" }} />
             <Link to={`/products/${product._id}`}>
               <Box justifyContent="space-between">
                 <Typography
                   fontSize="2xl"
                   px="4px"
-                  px="10px"
                   style={{ fontWeight: "bolder" }}
                 >
                   {product.name}

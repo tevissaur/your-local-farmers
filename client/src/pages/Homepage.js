@@ -4,6 +4,7 @@ import TopFarmsWidget from '../components/Homepage/TopFarmsWidget'
 import Banner from '../components/Banner'
 import WhatIs from '../components/Homepage/WhatIs'
 import MissionStatement from '../components/AboutUs/MissionStatement'
+import { memo } from 'react'
 
 const Homepage = () => {
 

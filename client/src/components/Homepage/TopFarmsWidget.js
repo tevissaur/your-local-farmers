@@ -8,7 +8,7 @@ import store from "../../utils/store"
 import { setActivePage, setTopFarms } from "../../utils/actions"
 import { useQuery } from "@apollo/client"
 import { QUERY_FARMS } from "../../utils/queries"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import FarmCard from "../Storefront/FarmCard"
 import SmallFarms from "./SmallFarms"
 
@@ -24,7 +24,7 @@ import SmallFarms from "./SmallFarms"
 const TopFarmsWidget = () => {
     const { loading, data, error } = useQuery(QUERY_FARMS)
     const { farm: { topFarms } } = store.getState()
-    console.log(topFarms)
+    
 
     useEffect(() => {
         loading ? console.log(loading) : store.dispatch(setTopFarms(data?.farms))

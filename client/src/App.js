@@ -15,6 +15,9 @@ import NoPage from "./pages/NoPage";
 import { ThemeProvider, useTheme } from "@mui/material";
 import { createTheme } from "@mui/system";
 import { red } from "@mui/material/colors";
+import store from "./utils/store";
+import auth from "./utils/auth";
+import { useEffect } from "react";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -34,6 +37,12 @@ function App() {
       }
     }
   })
+  useEffect(() => {
+    if (auth.isTokenExpired(auth.getToken())) {
+      console.log(auth.isTokenExpired())
+      auth.logout()
+    }
+  }, [])
 
   return (
     <ApolloProvider client={client}>

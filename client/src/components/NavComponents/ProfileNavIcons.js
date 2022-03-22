@@ -18,8 +18,9 @@ import store from '../../utils/store';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { cart: { cartItems } } = store.getState()
+    const { cart: { cartItems }, ui: { nav: { profileDropdown } } } = store.getState()
     const open = Boolean(anchorEl);
+    
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };

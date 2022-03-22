@@ -1,91 +1,114 @@
 import { useState, useRef } from "react";
-import { CREATE_FARM } from '../../utils/mutations'
-import { UPDATE_USER } from '../../utils/mutations'
+import { CREATE_FARM, UPDATE_USER } from '../../utils/mutations'
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
 import store from "../../utils/store";
+import { setNewFarmAddress, setNewFarmName, setNewFarmStory } from "../../utils/actions";
 
 
 function MyFarm({ setIsFarmer, setFarmId }) {
-    const initialRef = useRef()
-    const finalRef = useRef()
-    const { data: { _id }} = Auth.getProfile()
-    const [farmName, setFarmName] = useState('');
-    const [address, setAddress] = useState('');
-    const [story, setStory] = useState('');
-    const isInvalid = farmName === '' || address === '' || story === '';
+    const { profile: { loggedIn }, ui: { newFarm: { name, address, story } } } = store.getState()
+    const isInvalid = name === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
     const [updateUser] = useMutation(UPDATE_USER)
-    const user = Auth.getProfile()
-    
+
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        const newFarm = await createFarm({
-            variables: {
-                farm: {
-                    name: farmName,
-                    address,
-                    owners: [_id],
-                    story
+        if (loggedIn) {
+            const { data: { _id } } = Auth.getProfile()
+
+            const newFarm = await createFarm({
+                variables: {
+                    farm: {
+                        name,
+                        address,
+                        owners: [_id],
+                        story
+                    }
                 }
-            }
-        })
+            })
 
-        setFarmName('')
-        setAddress('')
-        setStory('')
-        // store.dispatch(setIsFarmer(true))
-        window.location.reload()
+            store.dispatch(setNewFarmName(''))
+            store.dispatch(setNewFarmAddress(''))
+            store.dispatch(setNewFarmStory(''))
+            // store.dispatch(setIsFarmer(true))
+            window.location.reload()
+        }
 
-        
+
     }
 
 
     return (
         <>
-            <Box>
-                <form onSubmit={handleFormSubmit} >
-                <FormControl onSubmit={handleFormSubmit}  >
-                    <FormLabel fontSize='20px' fontWeight='600'>Enter your farm name</FormLabel>
-                    <Input
-                        ref={initialRef}
+            <Box onSubmit={handleFormSubmit} component='form' sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                margin: 'auto'
+            }}>
+                <FormControl onSubmit={handleFormSubmit}>
+                    <FormLabel sx={{
+                        fontSize: '20px',
+                        fontWeight: '600',
+                        margin: '20px 0 10px 0'
+                    }}>Enter your farm name</FormLabel>
+                    <TextField
                         placeholder='Farm Name'
                         type='text'
                         id='name'
-                        value={farmName}
-                        onChange={({ target }) => setFarmName(target.value)}
+                        value={name}
+                        onChange={({ target }) => store.dispatch(setNewFarmName(target.value))}
                     />
                 </FormControl>
 
-                <FormControl mt={4}>
-                    <FormLabel fontSize='20px' fontWeight='600'>Enter your farms address</FormLabel>
-                    <Input
+                <FormControl>
+                    <FormLabel sx={{
+                        fontSize: '20px',
+                        fontWeight: '600',
+                        margin: '20px 0 10px 0'
+                    }}>Enter your farms address</FormLabel>
+                    <TextField
                         placeholder='Enter address'
                         type='text'
                         id='address'
                         value={address}
-                        onChange={({ target }) => setAddress(target.value)}
+                        onChange={({ target }) => store.dispatch(setNewFarmAddress(target.value))}
                     />
                 </FormControl>
 
-                <FormControl mt={4}>
-                    <FormLabel fontSize='20px' fontWeight='600'>Your Farms Story</FormLabel>
+                <FormControl>
+                    <FormLabel sx={{
+                        fontSize: '20px',
+                        fontWeight: '600',
+                        margin: '20px 0 10px 0'
+                    }}>Your Farms Story</FormLabel>
                     <TextField
                         placeholder='Tell us about your farm'
                         type='text'
                         id='story'
                         value={story}
-                        onChange={({ target }) => setStory(target.value)}
+                        onChange={({ target }) => store.dispatch(setNewFarmStory(target.value))}
                     />
                 </FormControl>
-                <FormControl mt={4} >
-                    <Button >
-                    Add Farm
+                <FormControl>
+                    <Button type="submit" disabled={isInvalid} sx={{
+                        marginY: '25px',
+                        borderRadius: '25px',
+                        paddingX: 1.5,
+                        color: 'black',
+                        backgroundColor: 'lightgray',
+                        border: '1px solid black',
+                        ':hover': {
+                            backgroundColor: 'white',
+                            boxShadow: '1px 1px 0 black'
+                        }
+                    }}>
+                        Add Farm
                     </Button>
                 </FormControl>
-                </form>
             </Box>
         </>
     )

@@ -123,7 +123,6 @@ const Product = ({ cartItems, setCartItems }) => {
                   >
                     {product?.name}
                   </Typography>
-                  [product's description]
                   <Box>
                     <Typography>Available :</Typography>
                     <Typography

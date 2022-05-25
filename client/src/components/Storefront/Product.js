@@ -85,11 +85,7 @@ const Product = ({ cartItems, setCartItems }) => {
                       <AiFillStar fontSize="15px" />
                     </Box>
                     <Typography fontSize="sm">
-
                       Based on {dataReviews.length} reviews
-
-
-
                     </Typography>
                     {Auth.loggedIn() ? (
                       <ReviewButton

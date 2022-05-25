@@ -7,6 +7,7 @@ import EditFarm from './EditFarm'
 import MyFarmProducts from './MyFarmProducts';
 import { useEffect, useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
+import auth from '../../utils/auth';
 
 
 
@@ -31,16 +32,15 @@ function TabPanel(props) {
     );
 }
 
-function MyFarmDash({ userId }) {
-    console.log(userId)
+function MyFarmDash() {
     const [farm, setFarm] = useState({})
     const [purchasedOrder, setPurchasedOrder] = useState([]);
     const [itemNameArr, setItemNameArr] = useState([]);
     const [sumTotal, setSumTotal] = useState("");
-
+    const { data: { _id } } = auth.getProfile()
     const { data, loading, error } = useQuery(GET_MY_FARM, {
         variables: {
-            id: userId
+            id: _id
         }
     })
     useEffect(() => {
@@ -77,6 +77,7 @@ function MyFarmDash({ userId }) {
 
         }
     }, [data, loading, error])
+
     useEffect(() => {
         console.log(farm)
     }, [farm])
@@ -86,8 +87,6 @@ function MyFarmDash({ userId }) {
 
 
     return (
-        <Box maxW='100%'>
-            <Box m={4} flex="1">
                 <Box justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
                     {loading ? (
                         <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3}>
@@ -100,7 +99,6 @@ function MyFarmDash({ userId }) {
                     ) : (
 
                         <Tabs isFitted variant='enclosed' colorScheme='green' w='100%' p={3} sx={{ color: 'white' }}>
-                            {console.log(farm)}
                             <Tab>Orders</Tab>
                             <Tab>View Products</Tab>
                             <Tab>Add Product</Tab>
@@ -126,8 +124,6 @@ function MyFarmDash({ userId }) {
                     )}
 
                 </Box>
-            </Box>
-        </Box>
     )
 }
 

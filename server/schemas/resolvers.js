@@ -183,7 +183,6 @@ const resolvers = {
                     }
                 ]
             )
-            console.log(farm, 'farmdash')
             return farm
         },
         categories: async (parent, args) => {

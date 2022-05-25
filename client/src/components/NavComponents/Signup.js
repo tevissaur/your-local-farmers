@@ -76,48 +76,64 @@ function Signup() {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    border: '1px solid',
-                    p: 1,
+                    border: '1px solid black',
+                    borderRadius: '2px',
                     bgcolor: 'background.paper',
+                    padding: '20px'
                 }}>
 
-                    <Box>
-                        <FormLabel>Username</FormLabel>
-                        <Input
-                            type='text'
-                            id='username'
-                            value={username}
-                            onChange={({ target }) => store.dispatch(setSignupUsername(target.value))}
-                        />
+                    <Box sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center'
+                    }}>
+                        <FormControl fullWidth>
 
+                            <FormLabel sx={{
+                                margin: '10px 0 0 0'
+                            }}>Username</FormLabel>
+                            <Input
+                                type='text'
+                                id='username'
+                                value={username}
+                                onChange={({ target }) => store.dispatch(setSignupUsername(target.value))}
+                            />
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <FormLabel sx={{
+                                margin: '10px 0 0 0'
+                            }}>First Name</FormLabel>
+                            <Input
+                                type='text'
+                                id='firstName'
+                                value={firstName}
+                                onChange={({ target }) => store.dispatch(setSignupFirstName(target.value))}
+                            />
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <FormLabel sx={{
+                                margin: '10px 0 0 0'
+                            }}>Email</FormLabel>
+                            <Input
+                                type='email'
+                                id='email'
+                                value={email}
+                                onChange={({ target }) => store.dispatch(setSignupEmail(target.value))}
+                            />
 
-
-                        <FormLabel>First Name</FormLabel>
-                        <Input
-                            type='text'
-                            id='firstName'
-                            value={firstName}
-                            onChange={({ target }) => store.dispatch(setSignupFirstName(target.value))}
-                        />
-
-
-
-                        <FormLabel>Email</FormLabel>
-                        <Input
-                            type='email'
-                            id='email'
-                            value={email}
-                            onChange={({ target }) => store.dispatch(setSignupEmail(target.value))}
-                        />
-
-
-                        <FormLabel>Password</FormLabel>
-                        <Input
-                            type='password'
-                            id='password'
-                            value={password}
-                            onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
-                        />
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <FormLabel sx={{
+                                margin: '10px 0 0 0'
+                            }}>Password</FormLabel>
+                            <Input
+                                
+                                type='password'
+                                id='password'
+                                value={password}
+                                onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
+                            />
+                        </FormControl>
                     </Box>
 
 

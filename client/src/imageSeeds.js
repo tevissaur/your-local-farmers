@@ -1,7 +1,7 @@
 import blueberrymuffins from './assets/bakedGoods/Blueberry Muffins.jpg';
 import breadloaves from './assets/bakedGoods/Breadloaves.jpg';
-import croissant from'./assets/bakedGoods/Croissant.jpg';
-import franziskaner  from'./assets/bakedGoods/Franziskaner-loaf.jpg'
+import croissant from './assets/bakedGoods/Croissant.jpg';
+import franziskaner from './assets/bakedGoods/Franziskaner-loaf.jpg';
 import painauchocolat from './assets/bakedGoods/PainAuChocolat.jpg';
 import celerySmoothies from './assets/beverages/celery-smoothie.jpg'
 import coffeeSlush from './assets/beverages/coffee-slush.jpg'
@@ -28,6 +28,7 @@ import corn from './assets/seasonalStuffs/corn.jpg'
 import honey from './assets/seasonalStuffs/honey.jpg'
 import mushroom from './assets/seasonalStuffs/mushrooms-ss.jpg'
 import passionfruit from './assets/seasonalStuffs/passionfruit-ss.jpg'
+
 
 
 export const imageSeeds =[

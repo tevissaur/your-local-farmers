@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import MyFarmForm from '../components/MyFarm/MyFarmForm'
 import MyFarmDash from '../components/MyFarm/MyFarmDash'
-import auth from '../utils/auth'
+import Auth from '../utils/auth'
 import { GET_ME } from '../utils/queries'
-import { useQuery } from '@apollo/client'
-import { Box } from '@mui/material'
+import { useLazyQuery } from '@apollo/client'
+import Box from '@mui/material/Box'
 import Banner from '../components/Banner'
 import store from '../utils/store'
 import { setIsFarmer } from '../utils/actions'
+import LoginForm from '../components/NavComponents/LoginForm'
+import Signup from '../components/NavComponents/Signup'
 
 function MyFarm() {
-    let userDetails = auth.getProfile()
-    const { profile: { isFarmer } } = store.getState()
+    const { profile: { isFarmer, loggedIn } } = store.getState()
 
-    const { data, error, loading } = useQuery(GET_ME, {
-        variables: {
-            id: userDetails.data._id
-        }
-    })
 
+    const [getMe, { data, error, loading }] = useLazyQuery(GET_ME)
 
     useEffect(() => {
-        loading ? console.log("Bro") : store.dispatch(setIsFarmer(data?.me?.isFarmer))
-        console.log(isFarmer)
+        if (loggedIn) {
+
+            let { data: { _id } } = Auth.getProfile()
+            getMe({
+                variables: {
+                    id: _id
+                }
+            })
+
+        }
+
+    }, [])
+
+    useEffect(() => {
+        if (!loading) {
+            if (data !== undefined) {
+                store.dispatch(setIsFarmer(data?.me?.isFarmer))
+            }
+        }
 
     }, [isFarmer, data, loading])
 
@@ -32,17 +46,15 @@ function MyFarm() {
             <Box sx={{
                 marginTop: '180px'
             }}>
-                <Box sx={{ 
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    flexWrap: 'wrap'
-                 }}>
                     {isFarmer ? (
-                        <MyFarmDash userId={userDetails.data._id} />
+                        <MyFarmDash />
                     ) : (
-                        <MyFarmForm />
+                        loggedIn ? (<MyFarmForm />) : (<>
+                            <LoginForm/>
+                            <Signup/>
+                        </>)
+
                     )}
-                </Box>
             </Box>
         </Box>
     )

@@ -27,7 +27,6 @@ function FarmCard({ id, title, reviews, numericReview, categories }) {
             <Typography
                 variant='h6'
                 sx={{ fontSize: 24 }}
-                textAlign='center'
             >{title}
             </Typography>
             <Box component={'img'} src={localFarm} borderRadius='5px' border='1px solid black' width='90%' margin='auto'></Box>
@@ -48,7 +47,7 @@ function FarmCard({ id, title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Box>
-            <Link as={ReactLink} to={`/farm/${id}`} underline='none' color='black' marginY={4}>
+            <Link as={ReactLink} to={`/farm/${id}`} underline='none' color='black'>
                 <Button sx={{
                     borderRadius: '25px',
                     paddingX: 1.5,

@@ -119,11 +119,10 @@ const FarmsPage = () => {
                             return (
                                 <FormControl>
                                     <Checkbox
-                                        colorScheme="green"
                                         fontWeight='600'
                                         onChange={handleCheckBoxChange}
                                         value={category.name}
-                                        key={category.name}
+                                        key={Math.random(Math.floor()) * 20000}
                                         checked={checked}
                                     />
                                     <FormLabel>{category.name}</FormLabel>
@@ -138,6 +137,7 @@ const FarmsPage = () => {
                             return <FarmCard key={farm._id} id={farm._id}
                                 title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
                                 categories={farm.products.map(product => {
+                                    console.log(product.categories[0].name, farm.name)
                                     return product.categories[0].name
                                 })} />
                         })}
@@ -149,12 +149,10 @@ const FarmsPage = () => {
                     }}>
                         <Box justifyContent='center' flexDir='column' flexWrap='wrap'>
                             <Typography as='h2'
-                                color='primary.yellowGreen'
-                                textAlign='center' fontSize='35px'>
+                                color='primary.yellowGreen' fontSize='35px'>
                                 Are You A Farmer or Want To Be One?
                             </Typography>
                             <Typography
-                                textAlign='center'
                                 color='White'
                                 fontSize='30px'>
                                 FAQs
@@ -169,7 +167,6 @@ const FarmsPage = () => {
                                     flexWrap='wrap'
                                 >
                                     <List
-                                        textAlign='Left'
                                         fontWeight='bolder'
                                         color='white'
                                         fontSize='25px'
@@ -210,8 +207,7 @@ const FarmsPage = () => {
                                 </Box>
                                 <Link to='/myFarm'>
                                     <Box justifyContent='center'>
-                                        <Button mb={3} mt={3}
-                                            textAlign='center' backgroundColor='white'>Register to become a farmer
+                                        <Button mb={3} mt={3}>Register to become a farmer
                                             today!</Button>
                                     </Box>
                                 </Link>

@@ -138,7 +138,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 newFarm: {
-                    ...state.review,
+                    ...state.newFarm,
                     name: action.payload
                 }
             }
@@ -146,7 +146,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 newFarm: {
-                    ...state.review,
+                    ...state.newFarm,
                     address: action.payload
                 }
             }
@@ -154,7 +154,7 @@ function uiReducer(state = initialState, action) {
             return {
                 ...state,
                 newFarm: {
-                    ...state.review,
+                    ...state.newFarm,
                     story: action.payload
                 }
             }

@@ -24,7 +24,7 @@ const AboutUs = () => {
                 flexGrow={1}
             >
                 <Box sx={{
-                    margin: '20px auto',
+                    margin: '220px auto 2% auto',
                     display: 'flex',
                     flexDirection: 'column',
                     padding: '20px',

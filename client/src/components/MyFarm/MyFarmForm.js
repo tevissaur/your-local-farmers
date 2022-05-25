@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { CREATE_FARM, UPDATE_USER } from '../../utils/mutations'
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
@@ -18,6 +18,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
         e.preventDefault()
         if (loggedIn) {
             const { data: { _id } } = Auth.getProfile()
+            console.log(name, address, _id, story)
 
             const newFarm = await createFarm({
                 variables: {
@@ -29,7 +30,7 @@ function MyFarm({ setIsFarmer, setFarmId }) {
                     }
                 }
             })
-
+            console.log(newFarm)
             store.dispatch(setNewFarmName(''))
             store.dispatch(setNewFarmAddress(''))
             store.dispatch(setNewFarmStory(''))
@@ -39,6 +40,9 @@ function MyFarm({ setIsFarmer, setFarmId }) {
 
 
     }
+    useEffect(() => {
+        console.log(name, address)
+    }, [name, address])
 
 
     return (

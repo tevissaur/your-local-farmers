@@ -5,19 +5,17 @@ import { LOG_IN } from '../../utils/mutations';
 import { Box, Button, Backdrop, Modal, FormControl, FormLabel, Input, Typography, Portal, ClickAwayListener } from "@mui/material";
 import store from "../../utils/store";
 import { setLoginEmail, setLoginModal, setLoginPass } from "../../utils/actions";
+import { useDispatch } from 'react-redux'
 
 function LoginForm() {
-
+  const dispatch = useDispatch()
   const { ui: { login: { modal, email, password } } } = store.getState()
-  const { ui } = store.getState()
   const isInvalid = password === "" || email === "";
 
   const [LoginUser] = useMutation(LOG_IN);
 
   const handleModal = async (e) => {
-    store.dispatch(setLoginModal(!modal))
-    console.log(modal, email, password)
-    console.log(ui)
+    dispatch(setLoginModal(!modal))
   }
 
   const handleFormSubmit = async (e) => {
@@ -26,7 +24,6 @@ function LoginForm() {
       email,
       password,
     };
-    console.log(userData)
 
     try {
       const {
@@ -91,7 +88,7 @@ function LoginForm() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={({ target }) => store.dispatch(setLoginEmail(target.value))}
+                onChange={({ target }) => dispatch(setLoginEmail(target.value))}
               />
             </FormControl>
 
@@ -105,7 +102,7 @@ function LoginForm() {
                 type="password"
                 id="password"
                 value={password}
-                onChange={({ target }) => store.dispatch(setLoginPass(target.value))}
+                onChange={({ target }) => dispatch(setLoginPass(target.value))}
               />
             </FormControl>
 

@@ -3,8 +3,6 @@ import Typography from '@mui/material/Typography'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import List from '@mui/material/List'
-import CategoryHeader from '../components/Homepage/CategoryHeader'
-import TopFarmsWidget from '../components/Homepage/TopFarmsWidget'
 import Banner from '../components/Banner'
 
 const AboutUs = () => {

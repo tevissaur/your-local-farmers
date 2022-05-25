@@ -1,6 +1,6 @@
 
-modules.export({
-    uploadRoute: require('./routes/uploadRoutes/uploadRoutes')
-})
+module.exports = {
+    uploadRoute: require('./uploadRoutes/uploadRoutes')
+}
 
 

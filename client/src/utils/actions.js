@@ -12,7 +12,6 @@ export const setLoginModal = (payload) => {
     }
 }
 export const setLoginEmail = (payload) => {
-    console.log(payload)
     return {
         type: 'ui/login/email',
         payload

@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import Product from "./components/Storefront/Product";
-import Profile from "./pages/Profile"
-import Category from "./components/Storefront/CategoryProducts";
-import Farm from "./pages/SingleFarm";
-import MyFarm from './pages/MyFarm'
-import FarmsPage from "./pages/FarmsPage";
+import Homepage from "./pages/Home/Homepage";
+import Product from "./pages/SingleProduct/Product";
+import Profile from "./pages/Profile/Profile"
+import Category from "./pages/ProductByCategory/CategoryProducts";
+import Farm from "./pages/SingleFarm/SingleFarm";
+import MyFarm from './pages/MyFarm/MyFarm'
+import FarmsPage from "./pages/BrowseFarms/FarmsPage";
+import Cart from "./components/Cart/Cart";
+import MainLayout from "./pages/MainLayout";
+import AboutUs from "./pages/AboutUs/AboutUs";
+import NoPage from "./pages/NoPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useSelector, useDispatch } from 'react-redux'
-import Cart from "./components/Storefront/Cart";
-import MainLayout from "./pages/MainLayout";
-import AboutUs from "./pages/AboutUs";
-import NoPage from "./pages/NoPage";
 import { ThemeProvider, useTheme } from "@mui/material";
 import { createTheme } from "@mui/system";
 import { red } from "@mui/material/colors";

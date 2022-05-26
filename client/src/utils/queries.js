@@ -66,7 +66,6 @@ export const QUERY_FARM = gql`
     }
   }
 `
-
 export const QUERY_FARMS = gql`
   query Farms {
     categories {
@@ -161,7 +160,6 @@ export const QUERY_PRODUCT = gql`
       }
     }
 `
-
 export const QUERY_PRODUCTS = gql`
     query Product {
       products {
@@ -187,7 +185,6 @@ export const QUERY_PRODUCTS = gql`
 
 
 `
-
 export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {

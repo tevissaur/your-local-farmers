@@ -1,6 +1,7 @@
 import { Box, CardMedia, Typography, Link } from '@mui/material';
 import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
+import slugify from 'slugify'
 
 
 
@@ -8,7 +9,7 @@ const SmallCategoryIcon = ({ card }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/category/${card.title.toLowerCase()}`} component={ReactLink} underline='none'>
+            <Link to={`/category/${slugify(card.title, { lower: true })}`} component={ReactLink} underline='none'>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',

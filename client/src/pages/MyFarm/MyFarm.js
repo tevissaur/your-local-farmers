@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import MyFarmForm from '../../components/MyFarm/MyFarmForm'
-import MyFarmDash from '../../components/MyFarm/MyFarmDash'
+import MyFarmForm from './components/MyFarmForm'
+import MyFarmDash from './components/MyFarmDash'
 import Auth from '../../utils/auth'
 import { GET_ME } from '../../utils/queries'
 import { useLazyQuery } from '@apollo/client'
@@ -9,7 +9,7 @@ import Banner from '../../components/Banner'
 import store from '../../utils/store'
 import { setIsFarmer } from '../../utils/actions'
 import LoginForm from '../../components/AuthForms/LoginForm'
-import Signup from '../../components/NavComponents/Signup'
+import Signup from '../../components/AuthForms/SignupForm'
 
 function MyFarm() {
     const { profile: { isFarmer, loggedIn } } = store.getState()

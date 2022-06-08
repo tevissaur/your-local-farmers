@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_FARM } from "../../utils/queries";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Auth from "../../utils/auth";
-import ReviewButton from "../../components/Storefront/ReviewButton";
-import FarmProductCard from "../../components/Storefront/FarmProductCard";
-import ProductCard from "../../components/Storefront/ProductCard";
-import localFarm from '../assets/localFarm.jpg'
+import UtilsService from '../../utils/utils'
+import ReviewButton from "../../components/Buttons/ReviewButton";
+import FarmProductCard from "./components/FarmProductCard";
+import localFarm from '../../assets/localFarm.jpg'
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
@@ -23,12 +23,13 @@ import { setSingleFarm } from "../../utils/actions";
 
 const Farm = () => {
   const { profile: { loggedIn }, farm: { singleFarm: { address, name, owners, products, reviews, story } } } = store.getState()
-  const { fid } = useParams();
-  const { loading, data, error } = useQuery(QUERY_FARM, { variables: { id: fid } });
+  const { fname } = useParams()
+  const { search } = useLocation()
+  const { loading, data, error } = useQuery(QUERY_FARM, { variables: { id: search.split('=')[1] } });
 
   useEffect(() => {
-    loading ? console.log(loading) : store.dispatch(setSingleFarm(data.farmStore))
-    console.log(data)
+    loading ? console.log(loading) : store.dispatch(setSingleFarm(data?.farmStore))
+    console.log(UtilsService.getSearchParams(search))
   }, [loading, data, error])
 
 

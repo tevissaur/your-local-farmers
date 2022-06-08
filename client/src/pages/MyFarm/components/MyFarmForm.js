@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { CREATE_FARM, UPDATE_USER } from '../../utils/mutations'
+import { CREATE_FARM, UPDATE_USER } from '../../../utils/mutations'
 import { useMutation } from "@apollo/client";
-import Auth from "../../utils/auth";
+import Auth from "../../../utils/auth";
 import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
-import store from "../../utils/store";
-import { setNewFarmAddress, setNewFarmName, setNewFarmStory } from "../../utils/actions";
+import store from "../../../utils/store";
+import { setNewFarmAddress, setNewFarmName, setNewFarmStory } from "../../../utils/actions";
 
 
 function MyFarm({ setIsFarmer, setFarmId }) {

@@ -1,13 +1,13 @@
 
 import AddProductForm from './AddProductForm';
-import { GET_MY_FARM } from '../../utils/queries'
+import { GET_MY_FARM } from '../../../utils/queries'
 import { useQuery } from '@apollo/client'
 import MyOrders from './FarmOrders';
 import EditFarm from './EditFarm'
 import MyFarmProducts from './MyFarmProducts';
 import { useEffect, useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
-import auth from '../../utils/auth';
+import auth from '../../../utils/auth';
 
 
 

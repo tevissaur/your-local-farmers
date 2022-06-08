@@ -14,7 +14,6 @@ function SignupForm() {
 
     const handleModal = async (e) => {
         store.dispatch(setSignupModal(!modal))
-        console.log(modal, email, password)
     }
 
     const handleFormSubmit = async (e) => {

@@ -4,11 +4,10 @@ import TopFarmsWidget from './components/TopFarmsWidget'
 import Banner from '../../components/Banner'
 import WhatIs from './components/WhatIs'
 import MissionStatement from '../AboutUs/components/MissionStatement'
-import { memo } from 'react'
+import { useEffect } from 'react'
 
 const Homepage = () => {
-
-
+  
   return (
     <>
       <Box

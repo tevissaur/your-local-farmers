@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
@@ -9,8 +9,9 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { imageSeeds } from "../../imageSeeds";
 import { QUERY_FARMS, QUERY_PRODUCT } from "../../utils/queries";
 import Auth from "../../utils/auth";
+import UtilsService from '../../utils/utils';
 import { useEffect, useState, useRef } from "react";
-import ReviewButton from "../../components/ReviewButton";
+import ReviewButton from "../../components/Buttons/ReviewButton";
 import { Box, Typography, Button } from "@mui/material";
 import store from "../../utils/store";
 import { setSingleProduct } from "../../utils/actions";
@@ -23,14 +24,15 @@ const Product = ({ cartItems, setCartItems }) => {
   // const [reviews, setReviews] = useState("");
   const [dataReviews, setDataReviews] = useState([]);
 
-  const { fid, pid } = useParams();
+  const { search } = useLocation()
+  const { fid, pid } = UtilsService.getSearchParams(search)
   const {
     loading: productLoading,
     data: productData,
     error: productError } = useQuery(QUERY_PRODUCT, { variables: { id: pid } })
   useEffect(() => {
     productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
-    console.log(product)
+    console.log(product) 
   }, [productLoading, productData])
 
   if (productLoading) {

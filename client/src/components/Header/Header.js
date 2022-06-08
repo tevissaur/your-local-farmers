@@ -1,4 +1,4 @@
-import ProfileNavIcons from '../ProfileNavIcons'
+import ProfileNavIcons from './ProfileNavIcons'
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'

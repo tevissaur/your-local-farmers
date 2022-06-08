@@ -11,13 +11,13 @@ import MainLayout from "./pages/MainLayout";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import NoPage from "./pages/NoPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { useSelector, useDispatch } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 import { ThemeProvider, useTheme } from "@mui/material";
-import { createTheme } from "@mui/system";
-import { red } from "@mui/material/colors";
-import store from "./utils/store";
 import auth from "./utils/auth";
 import { useEffect } from "react";
+import { createTheme } from "@mui/system";
+import customTheme from "./styles/theme";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -27,16 +27,9 @@ const client = new ApolloClient({
 
 
 function App() {
-  useDispatch()
   useSelector((state) => state)
   const defaultTheme = useTheme()
-  const theme = createTheme(defaultTheme, {
-    palette: {
-      primary: {
-        main: red[500]
-      }
-    }
-  })
+  const theme = createTheme(defaultTheme, customTheme)
   useEffect(() => {
     if (auth.isTokenExpired(auth.getToken())) {
       console.log(auth.isTokenExpired())
@@ -53,18 +46,18 @@ function App() {
           <Routes>
             <Route exact path="/*" element={<MainLayout />}>
               <Route index element={<Homepage />} />
-              <Route path="farm/:fid">
+              <Route path="farm/:fname">
                 <Route index element={<Farm />} />
-                <Route path="products/*">
-                  <Route path=":pid" element={<Product />} />
+                <Route path="product/:pname">
+                  <Route index element={<Product />} />
                 </Route>
               </Route>
               <Route path="profile" element={<Profile />} />
               <Route path="category/*" element={<Category />}>
                 <Route path=":name" element={<Category />} />
               </Route>
-              <Route path="products/*">
-                <Route path=":id" element={<Product />} />
+              <Route path="product/*">
+                <Route path=":pname" element={<Product />} />
               </Route>
               <Route path='farms' element={<FarmsPage />} />
               <Route path='myfarm' element={<MyFarm />} />

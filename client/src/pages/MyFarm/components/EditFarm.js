@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation } from '@apollo/client'
-import { UPDATE_FARM } from '../../utils/mutations'
+import { UPDATE_FARM } from '../../../utils/mutations'
 import { Box, FormControl, FormLabel, Input, Button, Typography } from "@mui/material";
 
 

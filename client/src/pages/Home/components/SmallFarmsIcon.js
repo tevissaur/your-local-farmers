@@ -2,14 +2,17 @@ import { Box, CardMedia, Typography, Link } from '@mui/material';
 import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import localFarm from '../../../assets/localFarm.jpg'
+import slugify from 'slugify';
+import store from '../../../utils/store'
+import { setSingleFarm } from '../../../utils/actions';
 
 
 
-const SmallFarms = ({ id, title }) => {
+const SmallFarmsIcon = ({ id, name }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/farm/${id}`} component={ReactLink} underline='none'>
+            <Link to={`/farm/${ slugify(name, { lower: true }) }?fid=${ id }`} component={ReactLink} underline='none'>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',
@@ -33,11 +36,11 @@ const SmallFarms = ({ id, title }) => {
                             margin: 'auto',
                             borderRadius: '50%'
                         }} />
-                    <Typography textAlign="center" paddingY={1.5}>{title}</Typography>
+                    <Typography textAlign="center" paddingY={1.5}>{ name }</Typography>
                 </Box>
             </Link>
         </Box>
     )
 }
 
-export default SmallFarms
+export default SmallFarmsIcon

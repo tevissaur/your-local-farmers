@@ -1,7 +1,7 @@
 import { Link as ReactLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { useMutation } from '@apollo/client'
-import { UPDATE_USER } from '../../utils/mutations'
+import { UPDATE_USER } from '../../../utils/mutations'
 
 
 const UserMain = ({ userData }) => {

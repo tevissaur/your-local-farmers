@@ -1,6 +1,3 @@
-
-import { GET_PO } from '../../utils/queries'
-import { useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 

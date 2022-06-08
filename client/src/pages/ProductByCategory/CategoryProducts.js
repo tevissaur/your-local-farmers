@@ -4,7 +4,7 @@ import { QUERY_FARMS } from "../../utils/queries";
 import ProductCard from "../../components/ProductCard";
 import Footer from "../../components/Footer/Footer";
 import { Box } from "@mui/material";
-
+import slugify from 'slugify'
 
 const Category = () => {
   const { name } = useParams();
@@ -22,7 +22,7 @@ const Category = () => {
     .flat();
   const foundProducts = allProducts.filter((product) => {
     return product.categories.find(
-      (category) => category.name.toLowerCase() === name
+      (category) => slugify(category.name, { lower: true }) === name
     );
   });
 

@@ -1,12 +1,24 @@
 
-import passionfruit from './assets/seasonalStuffs/passionfruit-ss.jpg'
+
 class UtilsService { 
     preloadImages() {
         
     }
 
     cacheImages(image) {
+
+    }
+
+    getSearchParams(params) {
+        const paramsArr = params.split('&').map(param => param.split('='))
+        let paramsObj
+        for (let param of paramsArr) {
+            paramsObj = {
+                ...paramsObj,
+                [param[0].replace('?', '')]: param[1]
+            }
+        }
+        return paramsObj
     }
 }
-UtilsService.cacheImages(passionfruit)
 export default new UtilsService();

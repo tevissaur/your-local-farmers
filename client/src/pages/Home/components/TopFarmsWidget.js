@@ -2,14 +2,12 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Link from "@mui/material/Link"
 import { Link as ReactLink } from "react-router-dom"
-import { categoryData } from "../../../categoryData"
-import SmallCategoryIcon from "./SmallCategoryIcon"
 import store from "../../../utils/store"
 import { setActivePage, setTopFarms } from "../../../utils/actions"
 import { useQuery } from "@apollo/client"
-import { QUERY_FARMS } from "../../../utils/queries"
-import { useEffect, useMemo } from "react"
-import SmallFarms from "./SmallFarms"
+import { QUERY_TOP_FARMS } from "../queries/topFarms"
+import { useEffect } from "react"
+import SmallFarmsIcon from "./SmallFarmsIcon"
 
 
 
@@ -21,7 +19,7 @@ import SmallFarms from "./SmallFarms"
 
 
 const TopFarmsWidget = () => {
-    const { loading, data, error } = useQuery(QUERY_FARMS)
+    const { loading, data, error } = useQuery(QUERY_TOP_FARMS)
     const { farm: { topFarms } } = store.getState()
     
 
@@ -70,8 +68,8 @@ const TopFarmsWidget = () => {
                     }}>
                         {topFarms?.map((farm, index) => {
                             return (
-                                <SmallFarms key={farm._id} id={farm._id}
-                                    title={farm.name} />
+                                <SmallFarmsIcon key={farm._id} id={farm._id}
+                                    name={farm.name} />
                             )
                         })}
                     </Box>

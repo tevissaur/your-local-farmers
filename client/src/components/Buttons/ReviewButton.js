@@ -5,7 +5,7 @@ import auth from "../../utils/auth";
 import { Button, FormControl, FormLabel, Input, Select } from "@mui/material";
 import { Box } from "@mui/system";
 import store from '../../utils/store'
-import LoggedOutButtons from "../NavComponents/LoggedOutButtons";
+import LoggedOutButtons from "./LoggedOutButtons";
 import { setReviewContent } from "../../utils/actions";
 
 const ReviewButton = ({
@@ -23,7 +23,7 @@ const ReviewButton = ({
     const profile = auth.getProfile();
     console.log(profile.data._id);
 
-    const newReview = await postReview({
+    const newReview = await postReview({ 
       variables: {
         review: {
           author: profile.data._id,

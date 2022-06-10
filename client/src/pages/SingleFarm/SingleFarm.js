@@ -1,18 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { QUERY_FARM } from "../../utils/queries";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
-import Auth from "../../utils/auth";
-import UtilsService from '../../utils/utils'
-import ReviewButton from "../../components/Buttons/ReviewButton";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import FarmProductCard from "./components/FarmProductCard";
+import FarmReviews from "./components/FarmReviews";
 import localFarm from '../../assets/localFarm.jpg'
-import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
-import { BsPersonFill } from "react-icons/bs";
-import { useState, useEffect } from "react";
-import { AiFillStar } from "react-icons/ai";
+import UtilsService from '../../services/utils.service'
+import StoreService from '../../services/store.service'
 import { Box, Typography } from "@mui/material";
 import store from "../../utils/store";
 import { setSingleFarm } from "../../utils/actions";
+import { SINGLE_FARM } from "./queries/queries";
 
 
 
@@ -22,14 +19,13 @@ import { setSingleFarm } from "../../utils/actions";
 
 
 const Farm = () => {
-  const { profile: { loggedIn }, farm: { singleFarm: { address, name, owners, products, reviews, story } } } = store.getState()
-  const { fname } = useParams()
+  const { farm: { singleFarm: { address, name, owners, products, story } } } = store.getState()
   const { search } = useLocation()
-  const { loading, data, error } = useQuery(QUERY_FARM, { variables: { id: search.split('=')[1] } });
+  const { fid } = UtilsService.getSearchParams(search)
+  const { loading, data, error } = useQuery(StoreService.queryBuilder(SINGLE_FARM), { variables: { id: fid } });
 
   useEffect(() => {
     loading ? console.log(loading) : store.dispatch(setSingleFarm(data?.farmStore))
-    console.log(UtilsService.getSearchParams(search))
   }, [loading, data, error])
 
 
@@ -83,7 +79,7 @@ const Farm = () => {
                 borderRadius: '10px'
               }} />
               {owners?.map((owner, idx) => (
-                <Typography key={idx} fontWeight="600" mt={1}>
+                <Typography key={owner} fontWeight="600" mt={1}>
                   {owner.fullName}
                 </Typography>
               ))}
@@ -110,63 +106,11 @@ const Farm = () => {
               flexWrap: 'wrap',
             }}>
               {products?.map((product, idx) => (
-                <FarmProductCard key={idx} product={product} />
+                <FarmProductCard key={product._id} product={product} />
               ))}
             </Box>
           </Box>
-          <Box
-            p="10px"
-            backgroundColor="darkGreen"
-            borderRadius="25px"
-            color="yellowGreen"
-            justifyContent="space-between"
-          >
-            <Box flexDirection="column" alignItems="center">
-              <Box>
-                <AiFillStar fontSize="15px" />
-                <AiFillStar fontSize="15px" />
-                <AiFillStar fontSize="15px" />
-                <AiFillStar fontSize="15px" />
-              </Box>
-              <Typography fontSize="sm">
-                Based on {reviews?.length} reviews
-              </Typography>
-
-            </Box>
-
-          </Box>
-          <Box sx={{
-            width: '40%'
-          }}>
-            {reviews?.map((review, idx) => (
-              <Box m="15px" key={idx}>
-                <Box>
-                  {Array(review.rating)
-                    .fill(0)
-                    .map(() => (
-                      <AiFillStar color="green" />
-                    ))}
-                </Box>
-
-                <Box gap={6}>
-                  <Box>
-                    <RiDoubleQuotesL />
-                    <Typography fontSize="sm">{review.content}...</Typography>
-                    <RiDoubleQuotesR />
-                  </Box>
-
-                  <Box alignItems="center">
-                    <BsPersonFill />
-                    <Typography fontSize="sm">{review.author.firstName}</Typography>
-                  </Box>
-                </Box>
-              </Box>
-            ))}
-            {reviews?.map((review, idx) => (
-              <p key={idx}>{review.rating}</p>
-            ))}
-          </Box>
-          <ReviewButton />
+          <FarmReviews />
         </Box>
       )}
 

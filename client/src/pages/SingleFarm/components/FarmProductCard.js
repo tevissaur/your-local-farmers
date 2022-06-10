@@ -12,7 +12,7 @@ const FarmProduct = ({ product }) => {
   const foundProduct = cardArr.filter((arr) => arr.name === product.name);
 
   const foundProductImage = foundProduct.map((card) => card.img);
-  console.log(foundProductImage)
+  
   return (
     <Box sx={{
       display: 'flex',
@@ -31,7 +31,7 @@ const FarmProduct = ({ product }) => {
         alt="Dan Abramov"
       />
 
-      <Link component={ReactLink} to={`/farm/${ slugify( fname, { lower: true }) }/product/${ slugify( product.name, { lower: true }) }?fid=${singleFarm._id}&pid=${product._id}`}>
+      <Link component={ReactLink} to={`/farm/${ slugify( fname, { lower: true }) }/store/product/${ slugify( product.name, { lower: true }) }?fid=${singleFarm._id}&pid=${product._id}`}>
         <Box flexDirection="column" alignItems="center">
           <Typography fontSize="2xl">{product.name}</Typography>
 

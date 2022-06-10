@@ -1,10 +1,17 @@
+import { useQuery } from "@apollo/client";
 import { Typography, Box } from "@mui/material";
+import { useEffect } from "react";
 import { categoryData } from '../../../categoryData'
+import { QUERY_CATEGORIES } from "../queries/getCategories";
 import SmallCategoryIcon from './SmallCategoryIcon'
 
 
 const CategoryHeader = () => {
+    const { loading, data, error } = useQuery(QUERY_CATEGORIES)
 
+    useEffect(() => {
+        loading ? console.log(loading) : console.log(data)
+    }, [loading, data])
     return (
         <Box sx={{
             display: 'flex',
@@ -22,16 +29,18 @@ const CategoryHeader = () => {
                     Explore Our Most Popular Categories
                 </Typography>
             </Box>
-
-            <Box sx={{
+            
+            {loading ? (<></>) : (<Box sx={{
                 margin: '5px auto',
                 display: 'flex',
                 flexWrap: 'wrap'
             }}>
-                {categoryData.map((card, index) => {
-                    return (<SmallCategoryIcon key={index} card={card} />)
+                {categoryData.map((category, index) => {
+                    console.log(category, data)
+                    return (<SmallCategoryIcon key={category._id} card={category} />)
                 })}
-            </Box>
+            </Box>)}
+            
         </Box>
     )
 }

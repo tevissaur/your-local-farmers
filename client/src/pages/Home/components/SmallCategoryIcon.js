@@ -9,7 +9,7 @@ const SmallCategoryIcon = ({ card }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/category/${slugify(card.title, { lower: true })}`} component={ReactLink} underline='none'>
+            <Link to={`/category/${slugify(card.title, { lower: true })}?cid=${card._id}`} component={ReactLink} underline='none'>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',

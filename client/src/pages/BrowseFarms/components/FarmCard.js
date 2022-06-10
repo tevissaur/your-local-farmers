@@ -4,6 +4,7 @@ import { Link as ReactLink } from 'react-router-dom'
 import localFarm from '../../../assets/localFarm.jpg'
 import FarmCardAvailableGoods from './FarmCardAvailableGoods'
 import StarsRender from '../../../components/StarsRender'
+import slugify from 'slugify'
 
 function FarmCard({ id, title, reviews, numericReview, categories }) {
 
@@ -47,7 +48,7 @@ function FarmCard({ id, title, reviews, numericReview, categories }) {
                 <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
 
             </Box>
-            <Link as={ReactLink} to={`/farm/${id}`} underline='none' color='black'>
+            <Link as={ReactLink} to={`/farm/${slugify(title, { lower: true })}/store?fid=${id}`} underline='none' color='black'>
                 <Button sx={{
                     borderRadius: '25px',
                     paddingX: 1.5,

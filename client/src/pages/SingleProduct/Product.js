@@ -6,15 +6,15 @@ import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { imageSeeds } from "../../imageSeeds";
 import { QUERY_FARMS, QUERY_PRODUCT } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import UtilsService from '../../utils/utils';
+import UtilsService from '../../services/utils.service';
 import { useEffect, useState, useRef } from "react";
 import ReviewButton from "../../components/Buttons/ReviewButton";
 import { Box, Typography, Button } from "@mui/material";
 import store from "../../utils/store";
 import { setSingleProduct } from "../../utils/actions";
+import slugify from "slugify";
 
 const Product = ({ cartItems, setCartItems }) => {
   const { product: { product } } = store.getState()
@@ -30,9 +30,11 @@ const Product = ({ cartItems, setCartItems }) => {
     loading: productLoading,
     data: productData,
     error: productError } = useQuery(QUERY_PRODUCT, { variables: { id: pid } })
+
+    
   useEffect(() => {
     productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
-    console.log(product) 
+
   }, [productLoading, productData])
 
   if (productLoading) {
@@ -42,7 +44,6 @@ const Product = ({ cartItems, setCartItems }) => {
 
   const handleAddToCart = (product) => {
 
-    console.log('test')
     const productExist = cartItems.find((item) => item._id === product._id)
     if (productExist) {
       setCartItems(cartItems.map((item) => item._id === product._id ? { ...productExist, quantity: productExist.quantity + 1 } : item))
@@ -106,14 +107,14 @@ const Product = ({ cartItems, setCartItems }) => {
                 </Box>
 
                 <Box m="30px">
-                  <Link to={`/farm/${fid}`}>
+                  {/* <Link to={`/farm/${slugify(product?.farm?.name, { lower: true })}${fid}`}>
+                  </Link> */}
                     <Box>
                       <Typography fontSize="2xl" color="primary.darkGreen">
                         {product?.farm?.name}
                       </Typography>
                       {<BsFillHouseFill />}
                     </Box>
-                  </Link>
                   <Typography
                     fontSize="2xl"
                     px="4px"

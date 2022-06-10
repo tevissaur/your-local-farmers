@@ -12,7 +12,7 @@ const SmallFarmsIcon = ({ id, name }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/farm/${ slugify(name, { lower: true }) }?fid=${ id }`} component={ReactLink} underline='none'>
+            <Link to={`/farm/${ slugify(name, { lower: true }) }/store?fid=${ id }`} component={ReactLink} underline='none'>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',

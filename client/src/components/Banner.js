@@ -1,7 +1,10 @@
 import Box from "@mui/material/Box"
 import styled from '@mui/material/styles/styled';
+import { useEffect } from "react";
+import store from "../utils/store";
 
-const Banner = styled(Box)(({ theme }) => ({
+
+const BannerStyled = styled(Box)(({ theme }) => ({
     position: 'absolute',
     backgroundColor: theme.palette.primary.main,
     width: '100%',
@@ -9,5 +12,14 @@ const Banner = styled(Box)(({ theme }) => ({
     top: '0',
     zIndex: 0
 }))
+
+
+const Banner = () => {
+
+    return (
+    <BannerStyled />
+    )
+}
+
 
 export default Banner

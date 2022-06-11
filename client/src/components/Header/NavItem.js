@@ -9,8 +9,14 @@ import store from '../../utils/store'
 import { setActivePage } from '../../utils/actions'
 
 
-function NavItem({ text, active, pageUrl }) {
-    const { ui: { drawerOpen, nav: { activePage } } } = store.getState()
+function NavItem({ text, pageUrl }) {
+    const {
+        ui: {
+            nav: {
+                activePage
+            }
+        }
+    } = store.getState()
 
 
     return (
@@ -19,12 +25,15 @@ function NavItem({ text, active, pageUrl }) {
                 borderRadius: '25px',
                 paddingX: 1.5,
                 color: 'black',
+                transition: 'all 100ms',
+                transform: activePage === pageUrl ? 'translate(0px, 0px)' : 'translate(-1px, -1px)',
                 backgroundColor: activePage === pageUrl ? '#b2cfab' : 'ivory',
                 border: '1px solid black',
-                boxShadow: activePage === pageUrl ? '1px 1px 0 black' : '0 0 0 black',
+                boxShadow: activePage === pageUrl ? '0 0 0 black' : '1px 1px 0 black' ,
                 ':hover': {
-                    backgroundColor: 'white',
-                    boxShadow: activePage === pageUrl ? '0 0 0 black' : '1px 1px 0 black'
+                    backgroundColor: '#b2cfab',
+                    boxShadow: '0 0 0 black',
+                    transform: 'translate(0px, 0px)'
                 }
             }} onClick={() => store.dispatch(setActivePage(pageUrl))}>
                 {text}

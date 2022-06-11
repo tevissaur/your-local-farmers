@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Home/Homepage";
-import Product from "./pages/SingleProduct/Product";
+import Product from "./pages/SingleProduct/SingleProduct";
 import Profile from "./pages/Profile/Profile"
 import Category from "./pages/ProductByCategory/CategoryProducts";
 import Farm from "./pages/SingleFarm/SingleFarm";
@@ -19,16 +19,14 @@ const FarmersRouter = () => {
 
       <Routes>
         <Route exact path="/*" element={<MainLayout />}>
-          <Route index element={<Homepage />} />
+          <Route path="home" element={<Homepage />} />
           <Route path="farm/:fname">
 
             <Route path="about" element={<Farm />}/>
 
             <Route path="store">
               <Route index element={<Farm />} />
-              <Route path="product/:pname">
-                <Route index element={<Product />} />
-              </Route>
+              <Route path="product/:pname" element={<Product />} />
             </Route>
 
 

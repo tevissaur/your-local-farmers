@@ -7,11 +7,11 @@ import SmallCategoryIcon from './SmallCategoryIcon'
 
 
 const CategoryHeader = () => {
-    const { loading, data, error } = useQuery(QUERY_CATEGORIES)
+    // const { loading, data, error } = useQuery(QUERY_CATEGORIES)
 
-    useEffect(() => {
-        loading ? console.log(loading) : console.log(data)
-    }, [loading, data])
+    // useEffect(() => {
+    //     loading ? console.log(loading) : console.log(data)
+    // }, [loading, data])
     return (
         <Box sx={{
             display: 'flex',
@@ -30,14 +30,14 @@ const CategoryHeader = () => {
                 </Typography>
             </Box>
             
-            {loading ? (<></>) : (<Box sx={{
+            {/* Ignore this garbage right now */}
+            {false ? (<></>) : (<Box sx={{
                 margin: '5px auto',
                 display: 'flex',
                 flexWrap: 'wrap'
             }}>
                 {categoryData.map((category, index) => {
-                    console.log(category, data)
-                    return (<SmallCategoryIcon key={category._id} card={category} />)
+                    return (<SmallCategoryIcon key={index + 30} card={category} />)
                 })}
             </Box>)}
             

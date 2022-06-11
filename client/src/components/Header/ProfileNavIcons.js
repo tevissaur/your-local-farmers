@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
@@ -6,18 +6,18 @@ import MenuItem from '@mui/material/MenuItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import Link from '@mui/material/Link'
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import PersonAdd from '@mui/icons-material/PersonAdd'
 import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
-import auth from '../../utils/auth';
+import AuthService from '../../services/authentication.service';
 import { Link as ReactLink } from 'react-router-dom';
 import store from '../../utils/store';
+import CartIcon from '../Cart/CartIcon'
 
-export default function AccountMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+const AccountMenu = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
     const { cart: { cartItems }, ui: { nav: { profileDropdown } } } = store.getState()
     const open = Boolean(anchorEl);
     
@@ -42,15 +42,7 @@ export default function AccountMenu() {
                         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title="Your cart">
-
-                    <Link component={ReactLink} to={"/cart"}>
-                        <IconButton>
-
-                            <ShoppingCart />
-                        </IconButton>
-                    </Link>
-                </Tooltip>
+                <CartIcon />
             </Box>
             <Menu
                 anchorEl={anchorEl}
@@ -109,7 +101,7 @@ export default function AccountMenu() {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={() => auth.logout()}>
+                <MenuItem onClick={() => AuthService.logout()}>
                     <ListItemIcon>
 
                         <Logout fontSize="small" />
@@ -120,3 +112,5 @@ export default function AccountMenu() {
         </>
     );
 }
+
+export default AccountMenu

@@ -5,8 +5,8 @@ import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { QUERY_FARMS, QUERY_PRODUCT } from "../../utils/queries";
+import { AiFillStar } from "react-icons/ai";
+import { QUERY_PRODUCT } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import UtilsService from '../../services/utils.service';
 import { useEffect, useState, useRef } from "react";
@@ -14,7 +14,6 @@ import ReviewButton from "../../components/Buttons/ReviewButton";
 import { Box, Typography, Button } from "@mui/material";
 import store from "../../utils/store";
 import { setSingleProduct } from "../../utils/actions";
-import slugify from "slugify";
 
 const Product = ({ cartItems, setCartItems }) => {
   const { product: { product } } = store.getState()

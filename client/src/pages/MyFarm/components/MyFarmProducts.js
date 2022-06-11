@@ -1,11 +1,12 @@
 import FarmProductCard from './FarmProductCard'
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
+import store from '../../../utils/store'
 
 
-const MyFarmProducts = ({ products }) => {
-    
-    console.log(products)
+const MyFarmProducts = () => {
+    const { farm: { myFarm } } = store.getState()
+    const { products } = myFarm
 
     return (
         <Box h="60vh" flexWrap="wrap" overflow="scroll" >

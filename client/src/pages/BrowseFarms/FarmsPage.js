@@ -3,13 +3,9 @@ import { useQuery } from '@apollo/client'
 import { QUERY_FARMS } from '../../utils/queries';
 import { Link } from 'react-router-dom'
 import FarmCard from './components/FarmCard'
-import Footer from '../../components/Footer/Footer'
-import farmerPic from '../../assets/farmerkid.png'
-import { BsQuestionLg } from 'react-icons/bs'
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, List, ListItem, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormControl, FormLabel, List, ListItem, Typography } from '@mui/material';
 import Banner from '../../components/Banner';
 import store from '../../utils/store';
-import { setActivePage } from '../../utils/actions';
 
 
 
@@ -86,11 +82,6 @@ const FarmsPage = () => {
         setSelectedCategoryNames(updatedSelectedCategoriesNames)
 
     }
-
-    useEffect(() => {
-        store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
-    }, [])
-
     
     return (
         <>

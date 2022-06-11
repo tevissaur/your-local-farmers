@@ -32,12 +32,7 @@ function MyFarm() {
     }, [])
 
     useEffect(() => {
-        if (!loading) {
-            if (data !== undefined) {
-                store.dispatch(setIsFarmer(data?.me?.isFarmer))
-            }
-        }
-
+        loading ? console.log(loading) : store.dispatch(setIsFarmer(data?.me?.isFarmer))
     }, [isFarmer, data, loading])
 
     return (
@@ -46,15 +41,19 @@ function MyFarm() {
             <Box sx={{
                 marginTop: '180px'
             }}>
-                    {isFarmer ? (
-                        <MyFarmDash />
+                {loggedIn && isFarmer ? (
+                    <MyFarmDash />
+                ) : (
+                    loggedIn && !isFarmer ? (
+                        <MyFarmForm />
                     ) : (
-                        loggedIn ? (<MyFarmForm />) : (<>
-                            <LoginForm/>
-                            <Signup/>
-                        </>)
+                        <>
+                            <LoginForm />
+                            <Signup />
+                        </>
+                    )
 
-                    )}
+                )}
             </Box>
         </Box>
     )

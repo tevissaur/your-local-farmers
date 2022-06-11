@@ -1,11 +1,10 @@
 import UserMain from '../components/UserMain.js'
-
 import MyFarmForm from './MyFarmForm'
 import { useEffect, useState } from 'react'
 import AddProductForm from './AddProductForm.js'
 
 
-const MyFarmTabs = ({ isFarmer, setIsFarmer }) => {
+const MyFarmTabs = () => {
 
 
     return (

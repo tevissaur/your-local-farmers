@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
+import store from '../../../utils/store';
 
-function MyOrders({ thisFarm }) {
-  const [farm, setFarm] = useState(thisFarm)
-  console.log(thisFarm)
+function MyOrders() {
+  const { farm: { myFarm } } = store.getState()
 
 
   useEffect(() => {
-    setFarm(thisFarm)
-    console.log(farm)
-  }, [thisFarm])
+
+  }, [myFarm])
 
   return (
-    <>{farm?.purchaseOrders ? (
+    <>{myFarm?.purchaseOrders  ? (
       <Box>
         <Box>
-          {farm.purchaseOrders.map((order, idx) => (
+          {myFarm.purchaseOrders.map((order, idx) => (
             <Box key={idx} m="10px" border="green 2px solid" borderRadius="25px"
               boxShadow="2px 2px green" p="10px" px="15px">
               <Box >
@@ -43,7 +42,7 @@ function MyOrders({ thisFarm }) {
 
         </Box>
       </Box>) :
-      (<></>)}
+      (<>No Purchase Orders yet!</>)}
     </>
   )
 

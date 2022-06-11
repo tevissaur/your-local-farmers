@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
-import Auth from "../../utils/auth";
+import AuthService from "../../services/authentication.service";
 import { useMutation } from "@apollo/client";
 import { LOG_IN } from '../../utils/mutations';
-import { Box, Button, Backdrop, Modal, FormControl, FormLabel, Input, Typography, Portal, ClickAwayListener } from "@mui/material";
+import { Box, Modal, FormControl, FormLabel, Input, Typography } from "@mui/material";
+import { BaseButton as Button } from "../Buttons/BaseButton";
 import store from "../../utils/store";
 import { setLoginEmail, setLoginModal, setLoginPass } from "../../utils/actions";
 import { useDispatch } from 'react-redux'
@@ -28,7 +29,9 @@ function LoginForm() {
     try {
       const {
         data: {
-          login: { token },
+          login: {
+            token
+          },
         },
       } = await LoginUser({
         variables: {
@@ -36,7 +39,8 @@ function LoginForm() {
         },
       });
 
-      Auth.login(token);
+      AuthService.login(token);
+      window.location.reload()
     } catch (err) {
       console.log(err);
     }
@@ -44,18 +48,7 @@ function LoginForm() {
 
   return (
     <>
-      <Button
-        sx={{
-          borderRadius: '25px',
-          paddingX: 1.5,
-                color: 'black',
-          backgroundColor: 'lightgray',
-          border: '1px solid black',
-          ':hover': {
-            backgroundColor: 'white',
-            boxShadow: '1px 1px 0 black'
-          }
-        }} onClick={handleModal}>
+      <Button onClick={handleModal}>
         Login
       </Button>
       <Modal
@@ -73,10 +66,16 @@ function LoginForm() {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           border: '1px solid',
+          borderRadius: '10px',
           padding: 'auto 1',
           bgcolor: 'background.paper',
         }}>
-          <FormControl width='100%'>
+          <Box width='100%' sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column'
+          }}>
             <Typography variant='h6' textAlign='center'>Login</Typography>
             <FormControl sx={{
               width: '50%',
@@ -86,7 +85,7 @@ function LoginForm() {
               <Input
                 placeholder="Email"
                 type="email"
-                id="email"
+                id="email-login"
                 value={email}
                 onChange={({ target }) => dispatch(setLoginEmail(target.value))}
               />
@@ -100,36 +99,21 @@ function LoginForm() {
               <Input
                 placeholder="Password"
                 type="password"
-                id="password"
+                id="password-login"
                 value={password}
                 onChange={({ target }) => dispatch(setLoginPass(target.value))}
               />
             </FormControl>
-
-            <Button onClick={handleFormSubmit} disabled={isInvalid} sx={{
-              borderRadius: '25px',
-              paddingX: 1.5,
-              backgroundColor: 'lightgray',
-              border: '1px solid black',
-              ':hover': {
-                backgroundColor: 'white',
-                boxShadow: '1px 1px 0 black'
-              }
-            }}>
+            <Button
+              onClick={handleFormSubmit}
+              disabled={isInvalid}
+            >
               Login
             </Button>
-            <Button onClick={handleModal} sx={{
-              borderRadius: '25px',
-              paddingX: 1.5,
-                color: 'black',
-              backgroundColor: 'lightgray',
-              border: '1px solid black',
-              ':hover': {
-                backgroundColor: 'white',
-                boxShadow: '1px 1px 0 black'
-              }
-            }}>Cancel</Button>
-          </FormControl>
+            <Button onClick={handleModal}>
+              Cancel
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>

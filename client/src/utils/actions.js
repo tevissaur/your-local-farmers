@@ -42,7 +42,6 @@ export const setSignupPass = (payload) => {
     }
 }
 export const setSignupUsername = (payload) => {
-    console.log(payload)
     return {
         type: 'ui/signup/username',
         payload
@@ -102,13 +101,6 @@ export const setSingleProduct = (payload) => {
 export const setIsFarmer = (payload) => {
     return {
         type: 'user/isFarmer', 
-        payload
-    }
-}
-
-export const setMyFarm = (payload) => {
-    return {
-        type: 'farm/myFarm',
         payload
     }
 }

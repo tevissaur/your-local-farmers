@@ -10,7 +10,7 @@ const LoggedOutButtons = () => {
         <>
             <Box sx={{
               display: 'flex',
-              marginX: 'auto'
+              marginX: 1,
             }}>
               <SignupForm></SignupForm>
               <LoginForm></LoginForm>

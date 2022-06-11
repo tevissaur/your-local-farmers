@@ -3,7 +3,6 @@ import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import { AppBar as MuiAppBar, Toolbar, Button, Typography, Box, Slide, Link, IconButton, useScrollTrigger, CardMedia, InputBase } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link as ReactLink } from 'react-router-dom'
 import store from '../../utils/store';
 import { setActivePage } from '../../utils/actions';
@@ -80,7 +79,12 @@ export const NavLink = styled(Link)({
 })
 
 const Header = () => {
-  const { profile: { loggedIn } } = store.getState()
+  const {
+    profile: {
+      loggedIn
+    }
+  } = store.getState()
+
   useEffect(() => {
     store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
   }, [])
@@ -91,7 +95,7 @@ const Header = () => {
         padding: '5px 10px', width: '75%',
         maxHeight: '50px', margin: 'auto', display: 'flex', justifyContent: 'space-around', color: 'black'
       }}>
-        <Link component={ReactLink} to='/' variant="h1" fontSize='26px' sx={{ color: 'black' }} underline='none' alignSelf='center' marginX={3}>
+        <Link component={ReactLink} to='/home' variant="h1" fontSize='26px' sx={{ color: 'black' }} underline='none' alignSelf='center' marginX={3}>
           Local Farmers
         </Link>
         <Search>
@@ -114,7 +118,7 @@ const Header = () => {
 
       </Box>
       <Box component='nav' sx={{ padding: '5px 10px', width: '65%', margin: 'auto', display: 'flex', justifyContent: 'center' }}>
-        <NavItem text='Home' pageUrl='' />
+        <NavItem text='Home' pageUrl='home' />
         <NavItem text='Local Farms' pageUrl='farms' />
         <NavItem text='My Farm' pageUrl='myfarm' />
         <NavItem text='Resources' pageUrl='resources' />

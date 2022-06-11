@@ -9,7 +9,6 @@ const MainContainer = styled('main')(({ theme }) => ({
     zIndex: '-1',
     minHeight: 'calc(100vh - 100px)', 
     backgroundColor: theme.palette.common.white
-}),
-);
+}));
 
 export default MainContainer

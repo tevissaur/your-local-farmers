@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../../utils/mutations';
-import Auth from '../../utils/auth';
-import { Box, Button, Modal, FormLabel, FormControl, Input, FormHelperText, Typography, Fade } from "@mui/material";
+import AuthService from '../../services/authentication.service';
+import { Box, Modal, FormLabel, FormControl, Input } from "@mui/material";
+import { BaseButton as Button } from "../Buttons/BaseButton";
 import store from "../../utils/store";
 import { setSignupEmail, setSignupFirstName, setSignupModal, setSignupPass, setSignupUsername } from "../../utils/actions";
 
@@ -15,12 +16,18 @@ function SignupForm() {
     const handleModal = async (e) => {
         store.dispatch(setSignupModal(!modal))
     }
+    const clearForm = async () => {
+
+    }
+
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        //Check if username is taken or not
-        //Check password strength later
+        /* 
+        TODO: Check if username is taken or not
+        TODO: Check password strength
+        */ 
 
         const userData = {
             username,
@@ -35,8 +42,8 @@ function SignupForm() {
                     ...userData
                 }
             })
-            Auth.login(token)
-
+            AuthService.login(token)
+            window.location.reload()
         }
         catch (err) {
             console.log(err)
@@ -49,23 +56,19 @@ function SignupForm() {
 
     return (
         <>
-            <Button sx={{
-                borderRadius: '25px',
-                paddingX: 1.5,
-                color: 'black',
-                backgroundColor: 'lightgray',
-                border: '1px solid black',
-                marginRight: 2,
-                ':hover': {
-                    backgroundColor: 'white',
-                    boxShadow: '1px 1px 0 black'
-                }
-            }} onClick={handleModal}>
+            <Button onClick={handleModal}>
                 Sign Up
             </Button>
+
+
+
+
             <Modal
                 open={modal}
                 onClose={handleModal}
+                sx={{
+                    borderRadius: '10px'
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -76,7 +79,7 @@ function SignupForm() {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     border: '1px solid black',
-                    borderRadius: '2px',
+                    borderRadius: '10px',
                     bgcolor: 'background.paper',
                     padding: '20px'
                 }}>
@@ -84,7 +87,8 @@ function SignupForm() {
                     <Box sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        margin: '1'
                     }}>
                         <FormControl fullWidth>
 
@@ -115,7 +119,7 @@ function SignupForm() {
                             }}>Email</FormLabel>
                             <Input
                                 type='email'
-                                id='email'
+                                id='email-signup'
                                 value={email}
                                 onChange={({ target }) => store.dispatch(setSignupEmail(target.value))}
                             />
@@ -126,9 +130,9 @@ function SignupForm() {
                                 margin: '10px 0 0 0'
                             }}>Password</FormLabel>
                             <Input
-                                
+
                                 type='password'
-                                id='password'
+                                id='password-signup'
                                 value={password}
                                 onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
                             />

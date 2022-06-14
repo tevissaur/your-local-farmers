@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { useMutation } from '@apollo/client'
 import { UPDATE_FARM } from '../../../utils/mutations'
-import { Box, FormControl, FormLabel, Input, Button, Typography } from "@mui/material";
+import { Box, FormControl, FormLabel, Input, Typography } from "@mui/material";
+import { BaseButton as Button } from "../../../components/Buttons/BaseButton";
+import store from "../../../utils/store";
 
 
-function EditFarm({ thisFarm }) {
-    const [farm, setFarm] = useState(thisFarm)
+function EditFarm() {
+    const { dashboard: { myFarm: farm } } = store.getState()
     const [editingFarmName, setEditFarmName] = useState(false)
     const [editingFarmAddress, setEditFarmAddress] = useState(false)
     const [editingFarmStory, setEditFarmStory] = useState(false)
     const [updateFarm] = useMutation(UPDATE_FARM)
-    console.log(thisFarm)
-    useEffect(() => {
-        setFarm(thisFarm)
-        console.log(farm)
-        }, [thisFarm])
+    const style = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+
+    }
+
     const handleSubmit = async (e) => {
         const { data: UpdatedFarm } = await updateFarm({
             variables: {
@@ -27,122 +31,99 @@ function EditFarm({ thisFarm }) {
             }
         })
         console.log(UpdatedFarm)
-        thisFarm = UpdatedFarm
     }
 
+    const handleChange = () => {
 
+    }
 
     return (
-        <Box>
-            <Box ml='3' flexWrap='wrap'>
-                <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
-                    <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
-
-                        {editingFarmName ? (
-                            <Box w="100%" justifyContent='start' alignItems='center'>
-                                <FormLabel width='145px' fontSize={22}>
-                                    New Farm Name:
-                                </FormLabel>
-                                {console.log(farm)}
-                                <Input w="50%" value={farm.name} onChange={({ target }) => setFarm({
-                                    ...farm,
-                                    name: target.value,
-                                })} />
-                                <Button type="submit" m={3} id="first-name" onClick={(e) => {
-                                    setEditFarmName(false)
-                                    handleSubmit(e)
-                                }}>
-                                    Edit Name
-                                </Button>
-                            </Box>) : (
-                            <Box>
-                                <FormLabel width='145px' fontSize={22}>
-                                    Farm Name:
-                                </FormLabel>
-                                <Typography marginEnd={4} fontSize={20}>
+        <Box component='form' onSubmit={handleSubmit} sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '50%',
+            margin: 'auto'
+        }}>
+            <FormControl sx={style}>
+                {editingFarmName ? (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            New Farm Name:
+                        </FormLabel>
+                        <Input w="50%" value={farm.name} />
+                        <Button type="submit" m={3} id="name">
+                            Edit Name
+                        </Button>
+                    </>) : (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            Farm Name:
+                        </FormLabel>
+                        <Typography marginEnd={4} fontSize={20}>
 
 
-                                    {farm ? farm.name : '...'}
-                                </Typography>
-                                <Button size='sm' onClick={() => setEditFarmName(true)}>
-                                    
-                                </Button>
-                            </Box>)}
-                    </FormControl>
-                </FormControl>
+                            {farm ? farm.name : '...'}
+                        </Typography>
+                        <Button size='sm'>
+                            Edit Name
+                        </Button>
+                    </>)}
+            </FormControl>
 
-                <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
-                    <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
-
-                        {editingFarmAddress ? (
-                            <Box w="100%" justifyContent='start' alignItems='center'>
-                                <FormLabel width='145px' fontSize={22}>
-                                    New Address:
-                                </FormLabel>
-                                <Input w="50%" value={farm.address} onChange={({ target }) => setFarm({
-                                    ...farm,
-                                    address: target.value,
-                                })} />
-                                <Button type="submit" m={3} id="first-name" onClick={(e) => {
-                                    setEditFarmAddress(false)
-                                    handleSubmit(e)
-                                }}>
-                                    Edit Address
-                                </Button>
-                            </Box>) : (
-                            <Box>
-                                <FormLabel width='145px' fontSize={22}>
-                                    Farm Address:
-                                </FormLabel>
-                                <Typography marginEnd={4} fontSize={20}>
+            <FormControl sx={style}>
+                {editingFarmAddress ? (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            New Address:
+                        </FormLabel>
+                        <Input w="50%" value={farm.address} />
+                        <Button type="submit" m={3} id="first-name">
+                            Edit Address
+                        </Button>
+                    </>) : (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            Farm Address:
+                        </FormLabel>
+                        <Typography marginEnd={4} fontSize={20}>
 
 
-                                    {farm ? farm.address : '...'}
-                                </Typography>
-                                <Button size='sm' onClick={() => setEditFarmAddress(true)}>
-                                    
-                                </Button>
-                            </Box>)}
-                    </FormControl>
-                </FormControl>
+                            {farm ? farm.address : '...'}
+                        </Typography>
+                        <Button size='sm'>
+                            Edit Address
+                        </Button>
+                    </>)}
+            </FormControl>
 
 
 
-                <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
-                    <FormControl fontSize='sm' display='flex' flexWrap="wrap" justifyContent='start' onSubmit={handleSubmit}>
+            <FormControl sx={style}>
 
-                        {editingFarmStory ? (
-                            <Box w="100%" justifyContent='start' alignItems='center'>
-                                <FormLabel width='145px' fontSize={22}>
-                                    New Farm Story:
-                                </FormLabel>
-                                <Input w="50%" value={farm.story} onChange={({ target }) => setFarm({
-                                    ...farm,
-                                    story: target.value,
-                                })} />
-                                <Button type="submit" m={3} id="first-name" onClick={(e) => {
-                                    setEditFarmStory(false)
-                                    handleSubmit(e)
-                                }}>
-                                    Edit Story
-                                </Button>
-                            </Box>) : (
-                            <Box>
-                                <FormLabel width='145px' fontSize={22}>
-                                    Farm Story:
-                                </FormLabel>
-                                <Typography marginEnd={4} fontSize={20}>
+                {editingFarmStory ? (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            New Farm Story:
+                        </FormLabel>
+                        <Input w="50%" value={farm.story} />
+                        <Button type="submit" m={3} id="first-name" >
+                            Edit Story
+                        </Button>
+                    </>) : (
+                    <>
+                        <FormLabel width='145px' fontSize={22}>
+                            Farm Story:
+                        </FormLabel>
+                        <Typography marginEnd={4} fontSize={20}>
 
 
-                                    {farm ? farm.story : '...'}
-                                </Typography>
-                                <Button size='sm' onClick={() => setEditFarmStory(true)}>
-                                    
-                                </Button>
-                            </Box>)}
-                    </FormControl>
-                </FormControl>
-            </Box>
+                            {farm ? farm.story : '...'}
+                        </Typography>
+                        <Button size='sm' >
+                            Edit Story
+                        </Button>
+                    </>)}
+            </FormControl>
         </Box>
     )
 }

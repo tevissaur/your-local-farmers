@@ -5,12 +5,11 @@ import store from '../../../utils/store'
 
 
 const MyFarmProducts = () => {
-    const { farm: { myFarm } } = store.getState()
-    const { products } = myFarm
+    const { dashboard: { myFarm: { products } } } = store.getState()
 
     return (
         <Box h="60vh" flexWrap="wrap" overflow="scroll" >
-            {(products?.length === 0) || (!products) ? (
+            {(products.length === 0) || (!products) ? (
                 <Typography>
                     No products
                 </Typography>

@@ -33,6 +33,11 @@ const typeDefs = gql`
         content: String!
         rating: Int!
     }
+    type Location {
+        _id: ID
+        latitude: Int
+        longitude: Int
+    }
     type Farm {
         _id: ID!
         name: String!
@@ -58,10 +63,17 @@ const typeDefs = gql`
         fullName: String
         profilePic: String 
         purchasedOrders: [PurchaseOrder]
+        location: Location
     }
+
     type Auth {
         token: ID!
         user: User
+    }
+
+    input EditLocation {
+        latitude: Int
+        longitude: Int
     }
 
     input UpdatedUser {

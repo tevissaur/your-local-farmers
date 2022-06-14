@@ -41,7 +41,11 @@ const userSchema = new Schema(
     purchasedOrders :[{
       type: Schema.Types.ObjectId,
       ref: 'PurchaseOrder'
-    }]
+    }],
+    location: {
+      type: Schema.Types.ObjectId,
+      ref: 'Location'
+    }
   },
   {
     

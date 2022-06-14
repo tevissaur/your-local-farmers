@@ -4,13 +4,9 @@ import { imageSeeds } from "../../../imageSeeds";
 import store from "../../../utils/store";
 
 const FarmProduct = ({ product }) => {
-  const { farm: { singleFarm } } = store.getState()
-  const cardArr = imageSeeds.map((card) => card);
+  const { dashboard: { myFarm } } = store.getState()
 
-  const foundProduct = cardArr.filter((arr) => arr.name === product.name);
 
-  const foundProductImage = foundProduct.map((card) => card.img);
-  console.log(foundProductImage)
   return (
     <Box sx={{
       display: 'flex',
@@ -25,11 +21,11 @@ const FarmProduct = ({ product }) => {
           maxWidth: '200px'
         }}
         objectFit="cover"
-        src={`${foundProductImage}`}
-        alt="Dan Abramov"
+        // src={`${foundProductImage}`}
+        alt="Delish food photo"
       />
 
-      <Link component={ReactLink} to={`/farm/${singleFarm._id}/products/${product._id}`}>
+      <Link component={ReactLink} to={`/farm/${myFarm._id}/products/${product._id}`}>
         <Box flexDirection="column" alignItems="center">
           <Typography fontSize="2xl">{product.name}</Typography>
 

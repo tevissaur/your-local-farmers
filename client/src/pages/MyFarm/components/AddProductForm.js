@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import { useMutation, useQuery } from '@apollo/client'
 import { Box, Button, Checkbox, FormControl, FormGroup, FormLabel, Input, TextField } from '@mui/material'
-import Auth from "../../../utils/auth"
-import { QUERY_CATEGORIES } from "../../../utils/queries"
 import { CREATE_PRODUCT } from '../../../utils/mutations'
 import store from "../../../utils/store"
 import { setMyFarm, updateNewProductForm } from "../../../resources/farm-dashboard/dashboard.actions"
@@ -11,75 +9,87 @@ import { setMyFarm, updateNewProductForm } from "../../../resources/farm-dashboa
 
 
 
-// I am syncing local state to redux, unable to figure out better solution rn
-
-const AddProductForm = ({ farmId, setFarm }) => {
-    const { categories: { categories }, farm: { myFarm }, dashboard: { ui: { newProduct } } } = store.getState()
-    const [productCategories, setProductCategories] = useState([])
+const AddProductForm = () => {
+    const { categories: { categories }, dashboard: { ui: { newProduct }, myFarm } } = store.getState()
+    let payload
     const [createProduct] = useMutation(CREATE_PRODUCT)
 
 
-    const handleSubmit = async (e) => {
-        // if (productCategories !== []) {
-        //     const data = await createProduct({
-        //         variables: {
-        //             product: {
-        //                 name: productName,
-        //                 price: parseInt(productPrice),
-        //                 quantity: parseInt(productQuant),
-        //                 categories: productCategories,
-        //                 description: productDescription,
-        //             },
-        //             farmId: farmId
-        //         }
-        //     })
-        //     console.log(data)
-        //     setProductName('')
-        //     setProductCategories([])
-        //     setProductDescription('')
-        //     setProductPrice(0)
-        //     setProductQuant(0)
-        // } else {
-        //     alert('Add all necessary fields')
-        // }
+    const handleSubmit = async () => {
+        if (newProduct.categories !== [] && newProduct.name !== '' && newProduct.price !== 0) {
+            const data = await createProduct({
+                variables: {
+                    product: {
+                        ...newProduct
+                    },
+                    farmId: myFarm._id
+                }
+            })
+            store.dispatch(setMyFarm(data?.farmDashboard))
+            store.dispatch(updateNewProductForm())
+        } else {
+            alert('Add all necessary fields')
+        }
     }
 
-    const handleChange = (e) => {
-        console.log(e)
-        console.log(categories)
-        let payload
+    const removeCategory = (e) => {
+
+        const newArr = newProduct.categories.filter(cat => {
+            return cat !== e.target.id
+        })
+        payload = {
+            payload: newArr,
+            param: 'categories'
+        }
+        store.dispatch(updateNewProductForm(payload))
+
+    }
+    const addCategory = (e) => {
+        const newArr = newProduct.categories
+        newArr.push(e.target.id)
+        payload = {
+            payload: newArr,
+            param: 'categories'
+        }
+        store.dispatch(updateNewProductForm(payload))
+
+    }
+
+    const handleChange = async (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         if (e.target.type === 'checkbox') {
-            const removeCategory = (e) => {
-                setProductCategories(productCategories => {
-                    return productCategories.filter((category) => {
-                        return category !== e.target.id
-                    })
-                })
-            }
-            const addCategory = (e) => {
-                setProductCategories(productCategories => {
-                    productCategories.push(e.target.id)
-                    return productCategories
-                })
-            }
-    
-            e.target.value ? addCategory(e) : removeCategory(e)
 
-            payload = {
-                payload: productCategories,
-                param: 'categories'
+            if (e.target.checked && !newProduct.categories.includes(e.target.id)) {
+                addCategory(e)
+            } else {
+                removeCategory(e)
             }
-
-        } else {
+            store.dispatch(updateNewProductForm(payload))
+        } else if (e.target.type === 'text') {
 
             payload = {
                 payload: e.target.value,
                 param: e.target.id
             }
+
+            store.dispatch(updateNewProductForm(payload))
+        } else if (e.target.type === 'number') {
+
+            payload = {
+                payload: e.target.valueAsNumber,
+                param: e.target.id
+            }
+
+            store.dispatch(updateNewProductForm(payload))
         }
-        store.dispatch(updateNewProductForm(payload))
-        console.log(store.getState())
+
     }
+
+    useEffect(() => {
+        console.log(newProduct)
+        console.log(myFarm)
+    }, [newProduct, myFarm])
 
 
     return (
@@ -134,9 +144,11 @@ const AddProductForm = ({ farmId, setFarm }) => {
 
                     {categories.map((category, index) => {
                         return (
-                            <Checkbox margin={3} key={category._id} checked={categories[index].isChecked} id={category._id}>
-                                {category.name}
-                            </Checkbox>
+                            <Box key={category._id} >
+                                <FormLabel key={index + 40}>{category.name}</FormLabel>
+                                <Checkbox margin={3} checked={newProduct.categories.includes(category._id)} id={category._id} />
+
+                            </Box>
 
                         )
                     })}
@@ -148,7 +160,7 @@ const AddProductForm = ({ farmId, setFarm }) => {
                 <FormLabel>
                     Description
                 </FormLabel>
-                <TextField value={newProduct.description} />
+                <TextField id="description" value={newProduct.description} />
             </FormControl>
             <Button margin={3} onClick={handleSubmit}>
                 Add Product

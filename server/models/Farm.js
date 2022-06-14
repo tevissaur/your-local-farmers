@@ -9,7 +9,8 @@ const farmSchema = new Schema(
         },
         address: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         reviews: [{
             type: Schema.Types.ObjectId,
@@ -33,6 +34,10 @@ const farmSchema = new Schema(
         avgScore: {
             type: Number
         },
+        offersDelivery: {
+            type: Boolean,
+            default: false
+        }
     }
 )
 

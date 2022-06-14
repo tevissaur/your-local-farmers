@@ -2,12 +2,12 @@ import AddProductForm from './AddProductForm';
 import { useQuery } from '@apollo/client'
 import FarmOrders from './FarmOrders';
 import EditFarm from './EditFarm'
-import StoreService from '../../../services/store.service'
 import MyFarmProducts from './MyFarmProducts';
 import { useEffect } from 'react';
 import { TabPanel, a11yProps } from '../../../components/TabPanel/TabPanel'
-import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import AuthService from '../../../services/authentication.service';
+import StoreService from '../../../services/store.service'
 import store from '../../../utils/store';
 import { setMyFarm, setOpenTab } from '../../../resources/farm-dashboard/dashboard.actions';
 import { GET_MY_FARM } from '../../../resources/farm-dashboard/dashboard.controller';
@@ -17,7 +17,7 @@ import { GET_MY_FARM } from '../../../resources/farm-dashboard/dashboard.control
 
 
 const MyFarmDash = () => {
-    const { dashboard: { ui: { openTab } } } = store.getState()
+    const { dashboard: { ui: { openTab }, myFarm } } = store.getState()
     const { data: { _id } } = AuthService.getProfile()
     const { data, loading, error } = useQuery(StoreService.queryBuilder(GET_MY_FARM), {
         variables: {
@@ -28,6 +28,7 @@ const MyFarmDash = () => {
 
     useEffect(() => {
         loading ? console.log('loading') : store.dispatch(setMyFarm(data?.farmDashboard))
+        console.log(data)
     }, [data, loading, error])
 
     const handleChange = (e, newOpenTab) => {
@@ -37,21 +38,23 @@ const MyFarmDash = () => {
 
 
     return (
-        <Box justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
+        <Box sx={{
+            margin: '10px 30px',
+
+        }} justifyContent='center' w="100%" borderRadius='10px' border='1px grey solid'>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
                 <Tabs
                     centered
                     value={openTab}
                     onChange={handleChange}
-                    w='100%'
                     p={3}
-                    sx={{ color: 'white' }}
+                    sx={{ color: 'white', width: '100%' }}
                 >
-                    <Tab label="Orders" {...a11yProps(0)} />
-                    <Tab label="View Products" {...a11yProps(1)} />
-                    <Tab label="Add Product" {...a11yProps(2)} />
-                    <Tab label="Edit Farm" {...a11yProps(3)} />
+                    <Tab sx={{ flexGrow: 1 }} label="Orders" {...a11yProps(0)} />
+                    <Tab sx={{ flexGrow: 1 }} label="View Products" {...a11yProps(1)} />
+                    <Tab sx={{ flexGrow: 1 }} label="Add Product" {...a11yProps(2)} />
+                    <Tab sx={{ flexGrow: 1 }} label="Edit Farm" {...a11yProps(3)} />
                 </Tabs>
             </Box>
             <TabPanel value={openTab} index={0}>

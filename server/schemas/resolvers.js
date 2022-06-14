@@ -332,6 +332,7 @@ const resolvers = {
             return newReviewWithAuthor
         },
         createProduct: async (parent, { product, farmId }) => {
+            console.log(product, farmId)
             const newProduct = await Product.create(product)
             const farm = await Farm.findByIdAndUpdate(farmId, {
                 $push: { products: newProduct }

@@ -119,7 +119,7 @@ const Header = () => {
       </Box>
       <Box component='nav' sx={{ padding: '5px 10px', width: '65%', margin: 'auto', display: 'flex', justifyContent: 'center' }}>
         <NavItem text='Home' pageUrl='home' />
-        <NavItem text='Local Farms' pageUrl='farms' />
+        <NavItem text='Local Farms' pageUrl='browse-farms' />
         <NavItem text='My Farm' pageUrl='myfarm' />
         <NavItem text='Resources' pageUrl='resources' />
         <NavItem text='About Us' pageUrl='about-us' />

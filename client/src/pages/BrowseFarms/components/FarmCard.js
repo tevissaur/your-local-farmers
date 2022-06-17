@@ -1,4 +1,5 @@
-import { Box, Typography, Link, Button } from '@mui/material'
+import { Box, Typography, Link, } from '@mui/material'
+import { BaseButton as Button } from '../../../components/Buttons/BaseButton'
 import React from 'react'
 import { Link as ReactLink } from 'react-router-dom'
 import localFarm from '../../../assets/localFarm.jpg'
@@ -23,6 +24,7 @@ function FarmCard({ id, title, reviews, numericReview, categories }) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                padding: '10px 0px 15px 0'
             }}
         >
             <Typography
@@ -45,23 +47,11 @@ function FarmCard({ id, title, reviews, numericReview, categories }) {
             </Box>
             <Box mt={2} alignItems='center'>
 
-                <StarsRender reviews={reviews} numericReview={numericReview} averageReview={[5]} />
+                <StarsRender />
 
             </Box>
             <Link as={ReactLink} to={`/farm/${slugify(title, { lower: true })}/store?fid=${id}`} underline='none' color='black'>
-                <Button sx={{
-                    borderRadius: '25px',
-                    paddingX: 1.5,
-                    marginY: 1.5,
-                    color: 'black',
-                    backgroundColor: 'lightgray',
-                    border: '1px solid black',
-                    marginRight: 2,
-                    ':hover': {
-                        backgroundColor: 'white',
-                        boxShadow: '1px 1px 0 black'
-                    }
-                }}>
+                <Button >
                     Visit Farm
                 </Button>
             </Link>

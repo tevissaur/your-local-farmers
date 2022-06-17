@@ -3,10 +3,12 @@ import Link from '@mui/material/Link'
 import { Link as ReactLink } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
+import store from '../../utils/store';
 
 
 
 const CartIcon = () => {
+    const { cart: { items } } = store.getState()
 
     return (
         <Tooltip title="Your cart">
@@ -14,6 +16,7 @@ const CartIcon = () => {
             <Link component={ReactLink} to={"/cart"}>
                 <IconButton>
                     <ShoppingCart />
+                    {items.length}
                 </IconButton>
             </Link>
         </Tooltip>)

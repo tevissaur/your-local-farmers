@@ -15,6 +15,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     loading ? console.log(loading) : store.dispatch(setCategories(data.categories))
+
     
   }, [loading, data])
   

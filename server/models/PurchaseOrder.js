@@ -6,6 +6,9 @@ const purchaseOrderSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Product'
         }],
+        quantity: {
+            type: Number
+        },
         pickUpTime: {
             type: String,
             required: true
@@ -28,6 +31,7 @@ const purchaseOrderSchema = new Schema(
         }
     }
 )
+
 
 const PurchaseOrder = model('PurchaseOrder', purchaseOrderSchema)
 

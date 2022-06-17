@@ -296,8 +296,7 @@ const resolvers = {
                 console.log(err)
             }
         },
-        postReview: async (parent, { review, product_id, user, farm_id }) => {
-            console.log(review)
+        postReview: async (parent, { review, productId, user, farmId }) => {
             const newReview = Review.create(review)
             const newReviewWithAuthor = await Review.findById(newReview._id).populate([
                 {
@@ -306,19 +305,19 @@ const resolvers = {
                 },
             ])
 
-            if (product_id) {
+            if (productId) {
                 const reviewedProduct = await Product.findByIdAndUpdate(
-                    product_id,
+                    productId,
                     { $push: { reviews: newReviewWithAuthor } },
                     { new: true }
                 )
 
             }
 
-            if (farm_id) {
+            if (farmId) {
                 console.log(newReviewWithAuthor)
                 const reviewedFarm = await Farm.findByIdAndUpdate(
-                    farm_id,
+                    farmId,
                     { $push: { reviews: newReviewWithAuthor } },
                     { new: true }
 

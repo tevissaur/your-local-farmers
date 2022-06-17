@@ -5,7 +5,7 @@ import slugify from 'slugify';
 import store from "../../../utils/store";
 
 const FarmProduct = ({ product }) => {
-  const { farm: { singleFarm } } = store.getState()
+  const { browseFarms: { singleFarm } } = store.getState()
   const { fname } = useParams()
   const cardArr = imageSeeds.map((card) => card);
 

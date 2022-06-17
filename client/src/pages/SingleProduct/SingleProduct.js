@@ -1,55 +1,43 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-import { CgShoppingCart } from "react-icons/cg";
 import { AiFillStar } from "react-icons/ai";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import UtilsService from '../../services/utils.service';
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import ReviewButton from "../../components/Buttons/ReviewButton";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { BaseButton as Button } from "../../components/Buttons/BaseButton";
+import AddToCardBtn from "../../components/Buttons/AddToCartBtn";
 import store from "../../utils/store";
-import { setSingleProduct } from "../../utils/actions";
+import { setSingleProduct } from "../../resources/product/product.actions";
 
-const Product = ({ cartItems, setCartItems }) => {
-  const { product: { product } } = store.getState()
-  const [inputText, setInputText] = useState("");
-  const [rating, setRating] = useState("");
 
-  // const [reviews, setReviews] = useState("");
-  const [dataReviews, setDataReviews] = useState([]);
+const Product = () => {
+  const { product: { product }, profile: { loggedIn } } = store.getState()
+
 
   const { search } = useLocation()
   const { fid, pid } = UtilsService.getSearchParams(search)
+
   const {
     loading: productLoading,
     data: productData,
     error: productError } = useQuery(QUERY_PRODUCT, { variables: { id: pid } })
 
-    
+
   useEffect(() => {
+
     productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
 
   }, [productLoading, productData])
 
-  if (productLoading) {
-    return "loading";
-  }
 
 
-  const handleAddToCart = (product) => {
-
-    const productExist = cartItems.find((item) => item._id === product._id)
-    if (productExist) {
-      setCartItems(cartItems.map((item) => item._id === product._id ? { ...productExist, quantity: productExist.quantity + 1 } : item))
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }])
-    }
-  }
+  
 
 
 
@@ -72,48 +60,17 @@ const Product = ({ cartItems, setCartItems }) => {
               <Box>
                 {/* <img src={productImage} style={{ width: "300px" }} /> */}
 
-                <Box
-                  p="10px"
-                  backgroundColor="darkGreen"
-                  color="yellowGreen"
-                  justifyContent="center"
-                  mt="10px"
-                >
-                  <Box flexDirection="column" alignItems="center">
-                    <Box>
-                      <AiFillStar fontSize="15px" />
-                      <AiFillStar fontSize="15px" />
-                      <AiFillStar fontSize="15px" />
-                      <AiFillStar fontSize="15px" />
-                    </Box>
-                    <Typography fontSize="sm">
-                      Based on {dataReviews.length} reviews
-                    </Typography>
-                    {Auth.loggedIn() ? (
-                      <ReviewButton
-                        inputText={inputText}
-                        setInputText={setInputText}
-                        reviews={dataReviews}
-                        setReviews={setDataReviews}
-                        product={product}
-                        rating={rating}
-                        setRating={setRating}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </Box>
-                </Box>
+
 
                 <Box m="30px">
                   {/* <Link to={`/farm/${slugify(product?.farm?.name, { lower: true })}${fid}`}>
                   </Link> */}
-                    <Box>
-                      <Typography fontSize="2xl" color="primary.darkGreen">
-                        {product?.farm?.name}
-                      </Typography>
-                      {<BsFillHouseFill />}
-                    </Box>
+                  <Box>
+                    <Typography fontSize="2xl" color="primary.darkGreen">
+                      {product?.farm?.name}
+                    </Typography>
+                    {<BsFillHouseFill />}
+                  </Box>
                   <Typography
                     fontSize="2xl"
                     px="4px"
@@ -134,15 +91,8 @@ const Product = ({ cartItems, setCartItems }) => {
                     <Box>
                       <Typography fontSize="2xl">$ {product?.price}.00</Typography>
                     </Box>
-                    {Auth.loggedIn() ? (
-                      <Button
-                        leftIcon={<CgShoppingCart fontSize="20px" />}
-                        backgroundColor="primary.lightGreen"
-                        variant="solid"
-                        fontSize="sm"
-                      >
-                        Add To Cart
-                      </Button>
+                    {Auth.loggedIn() && loggedIn ? (
+                      <AddToCardBtn product={product} />
                     ) : ("")}
 
                   </Box>
@@ -169,7 +119,7 @@ const Product = ({ cartItems, setCartItems }) => {
               <h1 key={idx}>{review.content}</h1>
             ))} */}
 
-              {dataReviews.map((review, idx) => (
+              {product.reviews?.map((review, idx) => (
                 <Box m="15px" key={idx}>
                   <Box>
                     {Array(review.rating)
@@ -193,7 +143,32 @@ const Product = ({ cartItems, setCartItems }) => {
                   </Box>
                 </Box>
               ))}
+              <Box
+                p="10px"
+                backgroundColor="darkGreen"
+                color="yellowGreen"
+                justifyContent="center"
+                mt="10px"
+              >
+                <Box flexDirection="column" alignItems="center">
+                  <Box>
+                    <AiFillStar fontSize="15px" />
+                    <AiFillStar fontSize="15px" />
+                    <AiFillStar fontSize="15px" />
+                    <AiFillStar fontSize="15px" />
+                  </Box>
+                  <Typography fontSize="sm">
+                    Based on {product.reviews?.length} reviews
+                  </Typography>
+                  {Auth.loggedIn() ? (
+                    <ReviewButton />
+                  ) : (
+                    ""
+                  )}
+                </Box>
+              </Box>
             </Box>
+
           </Box>
         </Box>
       )}

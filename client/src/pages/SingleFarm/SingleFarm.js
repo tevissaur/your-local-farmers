@@ -19,7 +19,7 @@ import { SINGLE_FARM } from "./queries/queries";
 
 
 const Farm = () => {
-  const { farm: { singleFarm: { address, name, owners, products, story } } } = store.getState()
+  const { browseFarms: { singleFarm: { address, name, owners, products, story } } } = store.getState()
   const { search } = useLocation()
   const { fid } = UtilsService.getSearchParams(search)
   const { loading, data, error } = useQuery(StoreService.queryBuilder(SINGLE_FARM), { variables: { id: fid } });

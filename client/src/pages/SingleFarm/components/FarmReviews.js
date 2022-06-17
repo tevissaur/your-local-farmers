@@ -7,7 +7,7 @@ import { BsPersonFill } from "react-icons/bs";
 import store from "../../../utils/store";
 
 const FarmReviews = () => {
-    const { profile: { loggedIn }, farm: { singleFarm: { reviews } } } = store.getState()
+    const { profile: { loggedIn }, browseFarms: { singleFarm: { reviews } } } = store.getState()
 
     return (
         <>

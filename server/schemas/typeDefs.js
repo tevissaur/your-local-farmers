@@ -7,6 +7,7 @@ const typeDefs = gql`
         buyer: User
         dateCreated: String
         items: [Product]
+        quantity: Int
         pickUpTime: String!
         orderTotal: Int
     }
@@ -62,7 +63,7 @@ const typeDefs = gql`
         reviews: [Review]
         fullName: String
         profilePic: String 
-        purchasedOrders: [PurchaseOrder]
+        orders: [PurchaseOrder]
         location: Location
     }
 

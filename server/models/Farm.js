@@ -37,6 +37,10 @@ const farmSchema = new Schema(
         offersDelivery: {
             type: Boolean,
             default: false
+        },
+        type: {
+            type: String,
+            enum: ['CSA', 'Agritourism', '']
         }
     }
 )

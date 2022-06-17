@@ -11,6 +11,7 @@ import store from '../../utils/store';
 
 
 const FarmsPage = () => {
+    // const { categories: { categories } } = store.getState()
     const { loading, data, error } = useQuery(QUERY_FARMS)
 
     const farmList = data ? data.farms : []
@@ -128,7 +129,6 @@ const FarmsPage = () => {
                             return <FarmCard key={farm._id} id={farm._id}
                                 title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
                                 categories={farm.products.map(product => {
-                                    console.log(product.categories[0].name, farm.name)
                                     return product.categories[0].name
                                 })} />
                         })}

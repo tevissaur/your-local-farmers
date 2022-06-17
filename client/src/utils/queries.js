@@ -119,7 +119,7 @@ export const GET_ME = gql`
       email
       address
       isFarmer
-      purchasedOrders {
+      orders {
         _id
         seller {
           _id

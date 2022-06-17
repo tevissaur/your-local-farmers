@@ -91,12 +91,6 @@ export const setReviewRating = (payload) => {
     }
 }
 
-export const setSingleProduct = (payload) => {
-    return {
-        type: 'product/singleProduct',
-        payload
-    }
-}
 
 export const setIsFarmer = (payload) => {
     return {

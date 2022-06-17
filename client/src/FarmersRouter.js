@@ -13,14 +13,16 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import NoPage from "./pages/NoPage";
 import { useEffect } from "react";
 import store from "./utils/store";
-import { setCoords } from "./resources/location/location.actions";
+import { setCoords } from "./resources/profile/profile.actions";
 
 
 const FarmersRouter = () => {
-  const { location: { coords: { latitude, longitude } } } = store.getState()
+  const { profile: { userData: { location } } } = store.getState()
 
   useEffect(() => {
-    if ('geolocation' in navigator && (latitude === 0 && longitude === 0)) {
+
+    if ('geolocation' in navigator && (location.coords.latitude === 0 && location.coords.longitude === 0)) {
+
       navigator.geolocation.getCurrentPosition((e) => {
         const coords = { 
           latitude: e.coords.latitude, 
@@ -29,12 +31,12 @@ const FarmersRouter = () => {
         store.dispatch(setCoords(coords))
       })
     }
+    console.log(location)
   }, [])
-
   useEffect(() => {
-    console.log(latitude, longitude)
-  }, [latitude, longitude])
+    console.log(location)
 
+  }, [location])
   return (
     <Router>
 
@@ -60,7 +62,7 @@ const FarmersRouter = () => {
           <Route path="product/*">
             <Route path=":pname" element={<Product />} />
           </Route>
-          <Route path='farms' element={<FarmsPage />} />
+          <Route path='browse-farms' element={<FarmsPage />} />
           <Route path='myfarm' element={<MyFarm />} />
           <Route path="cart" element={<Cart />} />
           <Route path="about-us" element={<AboutUs />} />

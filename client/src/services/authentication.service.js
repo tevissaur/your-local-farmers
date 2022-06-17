@@ -5,7 +5,10 @@ import decode from 'jwt-decode';
 class AuthService {
   // get user data
   getProfile() {
-    return decode(this.getToken());
+    if (!this.isTokenExpired(this.getToken()) && this.loggedIn()) {
+      return decode(this.getToken());
+    }
+    return null
   }
 
   // check if user's logged in
@@ -32,10 +35,10 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken) {
+  login(idToken, redirectUrl) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    window.location.assign(`/${redirectUrl}`);
   }
 
   logout() {

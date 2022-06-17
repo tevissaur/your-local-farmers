@@ -20,7 +20,7 @@ import SmallFarmsIcon from "./SmallFarmsIcon"
 
 const TopFarmsWidget = () => {
     const { loading, data, error } = useQuery(QUERY_TOP_FARMS)
-    const { farm: { topFarms } } = store.getState()
+    const { browseFarms: { topFarms } } = store.getState()
     
 
     useEffect(() => {

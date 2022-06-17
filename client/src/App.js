@@ -20,6 +20,7 @@ function App() {
   useSelector((state) => state)
   const defaultTheme = useTheme()
   const theme = createTheme(defaultTheme, customTheme)
+  
   useEffect(() => {
     if (AuthService.isTokenExpired(AuthService.getToken())) {
       AuthService.logout()

@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckOutBtn from "../Buttons/CheckOutBtn";
 import ProductCardCart from "./ProductCardCart";
 import store from "../../utils/store";
 import { setCartItems } from "../../utils/actions";
 import { Box, Typography } from "@mui/material";
+import { setCartArray } from "../../resources/cart/cart.actions";
+import UtilsService from "../../services/utils.service";
 
 
 function Cart() {
-  const { cart: { cartItems } } = store.getState()
+  const { cart: { items, cart } } = store.getState()
+  
+  
+  useEffect(() => {
+    store.dispatch(setCartArray(UtilsService.cartItemsToArray(items)))
+  }, [])
 
-  const totalPrice = cartItems.reduce((price, item) => price + item.quantity * item.price, 0)
+  useEffect(() => {
+    console.log(items, cart)
+  }, [items, cart])
+
+  // const totalPrice = items.reduce((price, item) => price + item.quantity * item.price, 0)
   return (
     <>
       <Box>
@@ -31,20 +42,16 @@ function Cart() {
 
               <Box maxW="100%">
                 <Box flexDir="column"></Box>
-                {cartItems.length === 0 &&
+                {cart.length === 0 &&
                   (<Typography>No items are added</Typography>)}
 
-                {cartItems.map((item, idx) => (
+                {/* { 
+                  for (let item in items) {
+                    <ProductCardCart key={idx} item={item} cartItems={items} setCartItems={setCartItems} />
+                  }
+                } */}
 
-                  <ProductCardCart key={idx} item={item} cartItems={cartItems} setCartItems={setCartItems} />
-
-
-
-
-
-                ))}
-
-
+                {cart.map((item, itx) => <ProductCardCart key={itx} item={item} />)}
 
 
                 <Box
@@ -57,10 +64,10 @@ function Cart() {
                   <Box>
                     <Typography fontSize="35px">Total:</Typography>
                     <Typography ms={2} fontSize="35px">
-                      ${totalPrice}
+                      ${0}
                     </Typography>
                   </Box>
-                  {cartItems.length === 0 ? "" : <CheckOutBtn cartItems={cartItems} totalPrice={totalPrice} />}
+                  {items.length === 0 ? "" : <CheckOutBtn cartItems={items} totalPrice={0} />}
                 </Box>
               </Box>
             </Box>

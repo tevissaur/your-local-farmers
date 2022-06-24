@@ -13,6 +13,7 @@ const Footer = () => {
         <>
             <Box component='nav' sx={{
                 display: 'flex',
+                width: '100%',
                 justifyContent: 'space-around',
                 flexWrap: 'wrap',
                 paddingX: '20px',

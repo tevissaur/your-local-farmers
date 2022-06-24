@@ -8,25 +8,27 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../utils/queries';
 import store from '../utils/store';
 import { setCategories } from '../resources/categories/categories.actions';
+import Banner from '../components/Banner';
 
 const MainLayout = () => {
-    
+
   const { loading, data, error } = useQuery(QUERY_CATEGORIES)
 
   useEffect(() => {
     loading ? console.log(loading) : store.dispatch(setCategories(data.categories))
 
-    
+
   }, [loading, data])
-  
+
 
   return (
     <>
       <Header />
       <MainContainer>
+        <Banner />
         <Outlet />
-        <Footer />
       </MainContainer>
+      <Footer />
     </>
   );
 };

@@ -1,15 +1,16 @@
-import { Box, CardMedia, Typography, Link } from '@mui/material';
+import { Box, CardMedia, Typography } from '@mui/material';
 import React from 'react';
-import { Link as ReactLink } from 'react-router-dom';
 import slugify from 'slugify'
-
+import { LinkBase as Link } from '../../../components/LinkBase';
 
 
 const SmallCategoryIcon = ({ card }) => {
+
+
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/category/${slugify(card.title, { lower: true })}?cid=${card._id}`} component={ReactLink} underline='none'>
+            <Link to={`/category/${slugify(card.title, { lower: true })}?cid=${card._id}`}>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',

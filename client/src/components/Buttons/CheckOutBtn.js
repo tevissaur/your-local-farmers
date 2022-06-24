@@ -1,15 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import auth from "../../utils/auth";
 import { Button, Drawer } from "@mui/material";
+import store from "../../utils/store";
 
-const CheckOutBtn = ({ cartItems, totalPrice }) => {
- 
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  const [pickUpDate, setPickUpDate] = useState("");
-  const [pickUpTime, setPickUpTime] = useState("");
- 
-  const firstField = useRef();
-  const profile = auth.getProfile();
+const CheckOutBtn = () => {
+  const { profile } = store.getState()
+
+  const handleCheckout = () => {
+    
+  }
 
   return (
     <>

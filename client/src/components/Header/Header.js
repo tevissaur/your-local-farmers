@@ -85,12 +85,12 @@ const Header = () => {
     }
   } = store.getState()
 
-  useEffect(() => {
-    store.dispatch(setActivePage(window.location.pathname.split('/')[1]))
-  }, [])
 
   return (
-    <AppBar position='static' sx={{ borderBottom: '1px solid black', backgroundColor: 'whitesmoke' }}>
+    <AppBar sx={{
+      borderBottom: '1px solid black',
+      backgroundColor: 'whitesmoke'
+    }}>
       <Box component='nav' sx={{
         padding: '5px 10px', width: '75%',
         maxHeight: '50px', margin: 'auto', display: 'flex', justifyContent: 'space-around', color: 'black'
@@ -117,7 +117,13 @@ const Header = () => {
 
 
       </Box>
-      <Box component='nav' sx={{ padding: '5px 10px', width: '65%', margin: 'auto', display: 'flex', justifyContent: 'center' }}>
+      <Box component='nav' sx={{
+        padding: '5px 10px',
+        width: '65%',
+        margin: 'auto',
+        display: 'flex',
+        justifyContent: 'center'
+      }}>
         <NavItem text='Home' pageUrl='home' />
         <NavItem text='Local Farms' pageUrl='browse-farms' />
         <NavItem text='My Farm' pageUrl='myfarm' />

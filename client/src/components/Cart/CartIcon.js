@@ -8,7 +8,8 @@ import store from '../../utils/store';
 
 
 const CartIcon = () => {
-    const { cart: { items } } = store.getState()
+    const { cart: { items, cart } } = store.getState()
+    
 
     return (
         <Tooltip title="Your cart">
@@ -16,7 +17,7 @@ const CartIcon = () => {
             <Link component={ReactLink} to={"/cart"}>
                 <IconButton>
                     <ShoppingCart />
-                    {items.length}
+                    {cart.length}
                 </IconButton>
             </Link>
         </Tooltip>)

@@ -11,7 +11,9 @@ import FarmersRouter from "./FarmersRouter";
 
 const client = new ApolloClient({
   uri: "/graphql",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    resultCaching: true
+  }),
 });
 
 

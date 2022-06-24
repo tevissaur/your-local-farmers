@@ -3,7 +3,7 @@ import { SET_CART_ARRAY, SET_CART_ITEMS } from "./cart.types"
 
 const initialState = {
     items: JSON.parse(localStorage.getItem('cart')) || {},
-    cart: []
+    cart: UtilsService.cartItemsToArray(JSON.parse(localStorage.getItem('cart'))) || []
 }
 
 

@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link as ReactLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import Icon from '@mui/material/Icon'
 import Typography from '@mui/material/Typography'
 import store from '../../utils/store'
 import { setActivePage } from '../../utils/actions'
+import { LinkBase as Link } from '../LinkBase'
 
 
 function NavItem({ text, pageUrl }) {
@@ -20,8 +19,9 @@ function NavItem({ text, pageUrl }) {
 
 
     return (
-        <Link to={`/${pageUrl}`} component={ReactLink} underline='none' color='black' marginX='10px' >
+        <Link to={`/${pageUrl}`} >
             <Button sx={{
+                margin: '10px',
                 borderRadius: '25px',
                 paddingX: 1.5,
                 color: 'black',
@@ -35,7 +35,7 @@ function NavItem({ text, pageUrl }) {
                     boxShadow: '0 0 0 black',
                     transform: 'translate(0px, 0px)'
                 }
-            }} onClick={() => store.dispatch(setActivePage(pageUrl))}>
+            }}>
                 {text}
             </Button>
         </Link>

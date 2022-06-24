@@ -87,11 +87,6 @@ const FarmsPage = () => {
     return (
         <>
             <Box sx={{
-                position: 'relative'
-            }}>
-                <Banner />
-            </Box>
-            <Box sx={{
                 position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',

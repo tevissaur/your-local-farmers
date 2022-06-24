@@ -36,25 +36,20 @@ function MyFarm() {
     }, [isFarmer, data, loading])
 
     return (
-        <Box position='relative'>
-            <Banner />
-            <Box sx={{
-                marginTop: '180px'
-            }}>
-                {loggedIn && isFarmer ? (
-                    <MyFarmDash />
+        <Box>
+            {loggedIn && isFarmer ? (
+                <MyFarmDash />
+            ) : (
+                loggedIn && !isFarmer ? (
+                    <MyFarmForm />
                 ) : (
-                    loggedIn && !isFarmer ? (
-                        <MyFarmForm />
-                    ) : (
-                        <>
-                            <LoginForm />
-                            <Signup />
-                        </>
-                    )
+                    <>
+                        <LoginForm />
+                        <Signup />
+                    </>
+                )
 
-                )}
-            </Box>
+            )}
         </Box>
     )
 }

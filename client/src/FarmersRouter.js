@@ -31,14 +31,10 @@ const FarmersRouter = () => {
         store.dispatch(setCoords(coords))
       })
     }
-    console.log(location)
   }, [])
-  useEffect(() => {
-    console.log(location)
 
-  }, [location])
   return (
-    <Router>
+    <Router >
 
       <Routes>
         <Route exact path="/*" element={<MainLayout />}>
@@ -46,7 +42,7 @@ const FarmersRouter = () => {
           <Route path="home" element={<Homepage />} />
           <Route path="farm/:fname">
 
-            <Route path="about" element={<Farm />}/>
+            <Route path="about" element={<Farm />} />
 
             <Route path="store">
               <Route index element={<Farm />} />

@@ -4,6 +4,7 @@ import TopFarmsWidget from './components/TopFarmsWidget'
 import Banner from '../../components/Banner'
 import WhatIs from './components/WhatIs'
 import MissionStatement from '../AboutUs/components/MissionStatement'
+import { match } from 'react-router-dom'
 import { useEffect } from 'react'
 import store from '../../utils/store'
 
@@ -15,10 +16,8 @@ const Homepage = () => {
       display='flex'
       flexDirection='column'
       justifyContent='flex-start'
-      position='relative'
       flexGrow={1}
     >
-      <Banner />
       <CategoryHeader />
       <TopFarmsWidget />
       <MissionStatement />

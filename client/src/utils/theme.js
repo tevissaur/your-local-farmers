@@ -19,5 +19,14 @@ export const theme = createTheme({
         tertiary: {
             main: '#C58181'
         }
+    },
+    components: {
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    height: '119px'
+                }
+            }
+        }
     }
 })

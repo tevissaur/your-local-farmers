@@ -3,11 +3,11 @@ import styled from '@mui/material/styles/styled';
 
 const MainContainer = styled('main')(({ theme }) => ({
     display: 'flex',
-    justifyContent: 'space-between',
+    position: 'relative',
+    justifyContent: 'flex-start',
     flexDirection: 'column',
     flexGrow: 1,
-    zIndex: '-1',
-    minHeight: 'calc(100vh - 100px)', 
+    minHeight: 'calc(100vh - 316px)', 
     backgroundColor: theme.palette.common.white
 }));
 

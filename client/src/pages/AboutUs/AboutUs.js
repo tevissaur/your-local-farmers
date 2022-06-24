@@ -10,11 +10,6 @@ const AboutUs = () => {
 
     return (
         <>
-            <Box sx={{
-                position: 'relative'
-            }}>
-            <Banner />
-            </Box>
             <Box
                 display='flex'
                 flexDirection='column'

@@ -1,15 +1,11 @@
 import ProfileNavIcons from './ProfileNavIcons'
 import { styled, alpha } from '@mui/material/styles';
-import Menu from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import { AppBar as MuiAppBar, Toolbar, Button, Typography, Box, Slide, Link, IconButton, useScrollTrigger, CardMedia, InputBase } from '@mui/material'
-import { Link as ReactLink } from 'react-router-dom'
+import { AppBar as MuiAppBar, Toolbar, Button, Typography, Box, Slide, InputBase } from '@mui/material'
 import store from '../../utils/store';
-import { setActivePage } from '../../utils/actions';
-import { useEffect, useState } from "react";
-import { useTheme } from "@mui/system";
 import LoggedOutButtons from "../Buttons/LoggedOutButtons";
 import NavItem from './NavItem';
+import { LinkBase as Link } from '../LinkBase';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -92,10 +88,19 @@ const Header = () => {
       backgroundColor: 'whitesmoke'
     }}>
       <Box component='nav' sx={{
-        padding: '5px 10px', width: '75%',
-        maxHeight: '50px', margin: 'auto', display: 'flex', justifyContent: 'space-around', color: 'black'
+        padding: '5px 10px',
+        width: '75%',
+        maxHeight: '50px',
+        margin: 'auto',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        color: 'black'
       }}>
-        <Link component={ReactLink} to='/home' variant="h1" fontSize='26px' sx={{ color: 'black' }} underline='none' alignSelf='center' marginX={3}>
+        <Link to='/home' variant="h1" sx={{
+          fontSize: '26px',
+          marginX: 3
+        }}>
           Local Farmers
         </Link>
         <Search>

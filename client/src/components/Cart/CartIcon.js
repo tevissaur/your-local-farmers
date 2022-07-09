@@ -1,6 +1,5 @@
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
-import Link from '@mui/material/Link'
-import { Link as ReactLink } from 'react-router-dom';
+import ShoppingCart from '@mui/icons-material/ShoppingCart'
+import { LinkBase as Link } from '../LinkBase';
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import store from '../../utils/store';
@@ -14,7 +13,7 @@ const CartIcon = () => {
     return (
         <Tooltip title="Your cart">
 
-            <Link component={ReactLink} to={"/cart"}>
+            <Link to={"/cart"}>
                 <IconButton>
                     <ShoppingCart />
                     {cart.length}

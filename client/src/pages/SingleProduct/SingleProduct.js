@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { BsFillHouseFill } from "react-icons/bs";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
@@ -10,7 +10,6 @@ import UtilsService from '../../services/utils.service';
 import { useEffect } from "react";
 import ReviewButton from "../../components/Buttons/ReviewButton";
 import { Box, Typography } from "@mui/material";
-import { BaseButton as Button } from "../../components/Buttons/BaseButton";
 import AddToCardBtn from "../../components/Buttons/AddToCartBtn";
 import store from "../../utils/store";
 import { setSingleProduct } from "../../resources/product/product.actions";
@@ -21,7 +20,7 @@ const Product = () => {
 
 
   const { search } = useLocation()
-  const { fid, pid } = UtilsService.getSearchParams(search)
+  const { pid } = UtilsService.getSearchParams(search)
 
   const {
     loading: productLoading,

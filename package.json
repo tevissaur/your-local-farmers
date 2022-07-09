@@ -5,6 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "seed": "node server/seeds/seeds.js",
+    "usda-seed": "node server/seeds/usdaSeeds.js",
     "start": "node server/server.js",
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",

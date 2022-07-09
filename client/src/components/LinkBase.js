@@ -1,19 +1,26 @@
 import { Link as ReactLink } from 'react-router-dom'
 import Link from '@mui/material/Link'
 import { setActivePage } from '../utils/actions'
-import store from '../utils/store'
+import { useDispatch } from 'react-redux'
 
 
-export const LinkBase = ({ to, children }) => {
+export const LinkBase = ({ to, children, variant, sx }) => {
+    const dispatch = useDispatch()
 
     const handleClick = (e) => {
-        console.log(to.split('/')[1])
         let pageUrl = to.split('/')[1]
 
-        store.dispatch(setActivePage(pageUrl))
+        dispatch(setActivePage(pageUrl))
     }
     return (
-        <Link to={to} component={ReactLink} onClick={handleClick} underline='none'>
+        <Link
+            to={to}
+            component={ReactLink}
+            variant={variant}
+            onClick={handleClick}
+            underline='none'
+            sx={sx}
+        >
             {children}
         </Link>
     )

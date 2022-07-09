@@ -33,7 +33,6 @@ const resolvers = {
 
 
             ])
-            console.log(user)
             return user
         },
         reviews: async (parent, args) => {
@@ -82,7 +81,6 @@ const resolvers = {
             ])
         },
         farms: async (parent, args) => {
-            console.log(parent, args)
             return await Farm.find().populate(
                 [
                     {
@@ -124,10 +122,10 @@ const resolvers = {
                         model: 'PurchaseOrder'
                     }
                 ]
-            )
+            ).limit(10)
         },
         farmDashboard: async (parent, { _id }) => {
-            const farm = await Farm.findOne({ owners: [_id] }).populate(
+            return await Farm.findOne({ owners: [_id] }).populate(
                 [
                     {
                         path: 'reviews',
@@ -180,10 +178,13 @@ const resolvers = {
                             model: 'User'
                         }
                         ]
+                    },
+                    {
+                        path: 'categoriesOffered',
+                        model: 'Category'
                     }
                 ]
             )
-            return farm
         },
         categories: async (parent, args) => {
             const productCategory = await Category.find().populate([
@@ -192,7 +193,6 @@ const resolvers = {
                     model: 'Product'
                 }
             ])
-            console.log(productCategory, 'categories')
             return productCategory
         },
         farmStore: async (parent, { _id }) => {
@@ -335,47 +335,46 @@ const resolvers = {
             const newProduct = await Product.create(product)
             const farm = await Farm.findByIdAndUpdate(farmId, {
                 $push: { products: newProduct }
-            },
-                {
-                    new: true
-                }).populate(
-                    [
-                        {
-                            path: 'reviews',
-                            model: 'Review',
-                            populate: {
-                                path: 'author',
-                                model: 'User'
-                            }
-                        },
-                        {
-                            path: 'owners',
-                            model: 'User',
-                            populate: {
-                                path: 'reviews',
-                                model: 'Review'
-                            }
-                        },
-                        {
-                            path: 'products',
-                            model: 'Product',
-                            populate: [
-                                {
-                                    path: 'categories',
-                                    model: 'Category'
-                                },
-                                {
-                                    path: 'reviews',
-                                    model: 'Review',
-                                    populate: {
-                                        path: 'author',
-                                        model: 'User'
-                                    }
-                                }
-                            ]
+            }, {
+                new: true
+            }).populate(
+                [
+                    {
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User'
                         }
-                    ]
-                )
+                    },
+                    {
+                        path: 'owners',
+                        model: 'User',
+                        populate: {
+                            path: 'reviews',
+                            model: 'Review'
+                        }
+                    },
+                    {
+                        path: 'products',
+                        model: 'Product',
+                        populate: [
+                            {
+                                path: 'categories',
+                                model: 'Category'
+                            },
+                            {
+                                path: 'reviews',
+                                model: 'Review',
+                                populate: {
+                                    path: 'author',
+                                    model: 'User'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            )
             return farm
         },
         createCategory: async (parent, { category }) => {

@@ -1,4 +1,4 @@
-import { gql, readQu } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const GET_MY_FARM = gql`
   query FarmDashboard($id: ID!) {
@@ -67,15 +67,15 @@ export const QUERY_FARM = gql`
 `
 export const QUERY_FARMS = gql`
   query Farms {
-    categories {
-      _id
-      name
-    }
     farms {
       _id
       name
       address
       story
+      categoriesOffered {
+        _id
+        name
+      }
       reviews {
        author{
          firstName

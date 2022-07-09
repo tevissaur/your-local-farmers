@@ -22,5 +22,10 @@ class UtilsService {
         return cart
     }
 
+    getActivePage() {
+        console.log(window.location.pathname.split('/')[1])
+        return window.location.pathname.split('/')[1]
+    }
+
 }
 export default new UtilsService();

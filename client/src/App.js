@@ -9,7 +9,7 @@ import { createTheme } from "@mui/system";
 import customTheme from "./styles/theme";
 import FarmersRouter from "./FarmersRouter";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: "/graphql",
   cache: new InMemoryCache({
     resultCaching: true
@@ -27,6 +27,7 @@ function App() {
     if (AuthService.isTokenExpired(AuthService.getToken())) {
       AuthService.logout()
     }
+
   }, [])
 
   return (

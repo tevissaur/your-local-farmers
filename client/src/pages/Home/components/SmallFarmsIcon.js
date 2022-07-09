@@ -3,8 +3,6 @@ import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import localFarm from '../../../assets/localFarm.jpg'
 import slugify from 'slugify';
-import store from '../../../utils/store'
-import { setSingleFarm } from '../../../utils/actions';
 
 
 

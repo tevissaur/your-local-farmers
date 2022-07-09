@@ -1,89 +1,88 @@
 import React, { useState, useEffect } from 'react'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import { QUERY_FARMS } from '../../utils/queries';
 import { Link } from 'react-router-dom'
 import FarmCard from './components/FarmCard'
 import { Box, Button, Checkbox, FormControl, FormLabel, List, ListItem, Typography } from '@mui/material';
-import Banner from '../../components/Banner';
+import StoreService from '../../services/store.service';
 import store from '../../utils/store';
+import { client } from '../../App';
+import { setFarms, setSelectedCategories, setVisibleFarms } from '../../resources/browse-farms/browse-farms.actions';
 
 
 
 
 const FarmsPage = () => {
-    // const { categories: { categories } } = store.getState()
-    const { loading, data, error } = useQuery(QUERY_FARMS)
 
-    const farmList = data ? data.farms : []
-
-    const [visibleFarms, setVisibleFarms] = useState(farmList)
-    const categoryList = data ? data.categories : []
-
-    const [selectedCategoryNames, setSelectedCategoryNames] = useState([])
-
-
-    useEffect(() => {
-        setSelectedCategoryNames(categoryList.map(category => category.name))
-    }, [loading])
-
-
-    useEffect(() => {
-        setVisibleFarms(farmList)
-    }, [categoryList])
-
-    useEffect(() => {
-
-        let unselectedArray = []
-
-        for (let i = 0; i < categoryList.length; i++) {
-            if (!selectedCategoryNames.includes(categoryList[i].name)) {
-                unselectedArray.push(categoryList[i])
-            }
-
-        }
-        let displayFarms = []
-        let destroyFarms = []
-        for (let i = 0; i < farmList.length; i++) {
-
-            for (let p = 0; p < farmList[i].products.length; p++) {
-
-                for (let f = 0; f < unselectedArray.length; f++) {
-
-                    if (farmList[i].products[p].categories[0].name === unselectedArray[f].name) {
-
-
-                        if (!destroyFarms.includes(farmList[i])) {
-                            destroyFarms.push(farmList[i])
-                        }
-
-                    }
-
-                }
-
+    const {
+        categories: {
+            categories
+        },
+        browseFarms: {
+            farms,
+            ui: {
+                visibleFarms,
+                selectedCategories
             }
         }
-        let finalArray = []
-        for (let q = 0; q < farmList.length; q++) {
-            if (!destroyFarms.includes(farmList[q])) {
-                finalArray.push(farmList[q])
+    } = store.getState()
 
+    const [getFarms, { loading, data, error }] = useLazyQuery(QUERY_FARMS)
 
-            }
+    useEffect(async () => {
+        store.dispatch(setSelectedCategories(categories))
+
+    }, [])
+
+    useEffect(async () => {
+        const cachedFarms = client.readQuery({
+            query: QUERY_FARMS,
+        })
+        if (cachedFarms && !data) {
+            store.dispatch(setFarms(cachedFarms.farms))
+            store.dispatch(setVisibleFarms(cachedFarms.farms))
+
+        } else {
+            await getFarms()
+            console.log(data.farms)
+            store.dispatch(setFarms(data?.farms))
+            store.dispatch(setVisibleFarms(data?.farms))
         }
-        setVisibleFarms(finalArray)
+    }, [loading, data])
 
-    }, [selectedCategoryNames])
+    useEffect(() => {
+        console.log(visibleFarms)
+    }, [visibleFarms])
 
-    const handleCheckBoxChange = (e) => {
+    const handleCheckBoxChange = async (e) => {
         const name = e.target.value
-        const updatedSelectedCategoriesNames =
-            selectedCategoryNames.includes(name)
-                ? selectedCategoryNames.filter(categoryId => categoryId !== name)
-                : [...selectedCategoryNames, name]
-        setSelectedCategoryNames(updatedSelectedCategoriesNames)
 
+        const category = categories.filter(cat => cat.name === name)
+
+        const updatedSelectedCategoriesNames =
+            selectedCategories.includes(category[0])
+                ? selectedCategories.filter(cat => cat.name !== name)
+                : [...selectedCategories, category[0]]
+        console.log(updatedSelectedCategoriesNames)
+
+        await store.dispatch(setSelectedCategories(updatedSelectedCategoriesNames))
+        let catNames = updatedSelectedCategoriesNames.map(cat => cat.name)
+
+        const updatedVisibleFarms = farms.filter(farm => {
+            for (let i = 0; i < farm.categoriesOffered.length; i++) {
+                console.log(catNames, farm.categoriesOffered[i].name, farm.name)
+                if (catNames.includes(farm.categoriesOffered[i].name)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+        })
+        console.log(updatedVisibleFarms, 'updatedVisibleFarms')
+        await store.dispatch(setVisibleFarms(updatedVisibleFarms))
     }
-    
+
     return (
         <>
             <Box sx={{
@@ -101,15 +100,15 @@ const FarmsPage = () => {
                 }}>
                     <Box display='flex' justifyContent='space-evenly'
                         alignItems='center' flexWrap='wrap'>
-                        {categoryList.map(category => {
-                            const checked = selectedCategoryNames.includes(category.name)
+                        {categories.map(category => {
+                            const checked = selectedCategories.includes(category)
                             return (
                                 <FormControl>
                                     <Checkbox
                                         fontWeight='600'
                                         onChange={handleCheckBoxChange}
                                         value={category.name}
-                                        key={Math.random(Math.floor()) * 20000}
+                                        key={category._id}
                                         checked={checked}
                                     />
                                     <FormLabel>{category.name}</FormLabel>
@@ -120,13 +119,17 @@ const FarmsPage = () => {
                 </Box>
                 <Box display='flex' flexDirection='column'>
                     <Box display='flex' justifyContent='space-evenly' margin={3} flexWrap='wrap'>
-                        {visibleFarms.map(farm => {
-                            return <FarmCard key={farm._id} id={farm._id}
-                                title={farm.name} reviews={farm.reviews} numericReview={farm.reviews.length}
-                                categories={farm.products.map(product => {
-                                    return product.categories[0].name
-                                })} />
-                        })}
+                        {visibleFarms?.map(farm => {
+                                return <FarmCard
+                                    key={farm._id}
+                                    id={farm._id}
+                                    title={farm.name}
+                                    reviews={farm.reviews}
+                                    numericReview={farm.reviews.length}
+                                    categories={farm.products.map(product => {
+                                        return product.categories[0]?.name
+                                    })} />
+                            })}
                     </Box>
                     <Box sx={{
                         borderRadius: '25px',

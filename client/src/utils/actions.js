@@ -1,9 +1,4 @@
-export const setCartItems = (payload) => {
-    return {
-        type: 'cart/items',
-        payload
-    }
-}
+
 
 export const setLoginModal = (payload) => {
     return {
@@ -62,12 +57,6 @@ export const setActivePage = (payload) => {
 export const setTopFarms = (payload) => {
     return {
         type: 'farm/topFarms',
-        payload
-    }
-}
-export const setFarms = (payload) => {
-    return {
-        type: 'farm/farms',
         payload
     }
 }

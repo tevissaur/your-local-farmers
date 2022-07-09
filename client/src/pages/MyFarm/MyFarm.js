@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MyFarmForm from './components/MyFarmForm'
 import MyFarmDash from './components/MyFarmDash'
-import Auth from '../../utils/auth'
+import AuthService from '../../services/authentication.service'
 import { GET_ME } from '../../utils/queries'
 import { useLazyQuery } from '@apollo/client'
 import Box from '@mui/material/Box'
@@ -13,27 +13,6 @@ import Signup from '../../components/AuthForms/SignupForm'
 
 function MyFarm() {
     const { profile: { isFarmer, loggedIn } } = store.getState()
-
-
-    const [getMe, { data, error, loading }] = useLazyQuery(GET_ME)
-
-    useEffect(() => {
-        if (loggedIn) {
-
-            let { data: { _id } } = Auth.getProfile()
-            getMe({
-                variables: {
-                    id: _id
-                }
-            })
-
-        }
-
-    }, [])
-
-    useEffect(() => {
-        loading ? console.log(loading) : store.dispatch(setIsFarmer(data?.me?.isFarmer))
-    }, [isFarmer, data, loading])
 
     return (
         <Box>

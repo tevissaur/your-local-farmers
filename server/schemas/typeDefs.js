@@ -7,6 +7,7 @@ const typeDefs = gql`
         buyer: User
         dateCreated: String
         items: [Product]
+        quantity: Int
         pickUpTime: String!
         orderTotal: Int
     }
@@ -33,6 +34,11 @@ const typeDefs = gql`
         content: String!
         rating: Int!
     }
+    type Location {
+        _id: ID
+        latitude: Int
+        longitude: Int
+    }
     type Farm {
         _id: ID!
         name: String!
@@ -41,9 +47,9 @@ const typeDefs = gql`
         reviews: [Review]
         products: [Product]
         avgScore: Int
-        categories: [Category]
         purchaseOrders: [PurchaseOrder]
         owners: [User]
+        categoriesOffered: [Category]
     }
     type User {
         _id: ID!
@@ -57,11 +63,18 @@ const typeDefs = gql`
         reviews: [Review]
         fullName: String
         profilePic: String 
-        purchasedOrders: [PurchaseOrder]
+        orders: [PurchaseOrder]
+        location: Location
     }
+
     type Auth {
         token: ID!
         user: User
+    }
+
+    input EditLocation {
+        latitude: Int
+        longitude: Int
     }
 
     input UpdatedUser {

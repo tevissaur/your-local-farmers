@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-
 export const GET_MY_FARM = gql`
   query FarmDashboard($id: ID!) {
     farmDashboard(_id: $id) {
@@ -66,18 +65,17 @@ export const QUERY_FARM = gql`
     }
   }
 `
-
 export const QUERY_FARMS = gql`
   query Farms {
-    categories {
-      _id
-      name
-    }
     farms {
       _id
       name
       address
       story
+      categoriesOffered {
+        _id
+        name
+      }
       reviews {
        author{
          firstName
@@ -121,7 +119,7 @@ export const GET_ME = gql`
       email
       address
       isFarmer
-      purchasedOrders {
+      orders {
         _id
         seller {
           _id
@@ -161,7 +159,6 @@ export const QUERY_PRODUCT = gql`
       }
     }
 `
-
 export const QUERY_PRODUCTS = gql`
     query Product {
       products {
@@ -187,7 +184,6 @@ export const QUERY_PRODUCTS = gql`
 
 
 `
-
 export const QUERY_CATEGORIES = gql`
   query Categories {
     categories {

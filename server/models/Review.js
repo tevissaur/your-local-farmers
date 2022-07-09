@@ -14,6 +14,14 @@ const reviewSchema = new Schema(
             type: Number,
             required: true,
             default: 0
+        },
+        farm: {
+            type: Schema.Types.ObjectId,
+            ref: 'Farm'
+        },
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
         }
     }
 )

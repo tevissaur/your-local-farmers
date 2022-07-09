@@ -38,10 +38,20 @@ const userSchema = new Schema(
       type: Buffer,
       ref: 'Image'
     },
-    purchasedOrders :[{
+    orders :[{
       type: Schema.Types.ObjectId,
       ref: 'PurchaseOrder'
-    }]
+    }],
+    location: {
+      type: Schema.Types.ObjectId,
+      ref: 'Location'
+    },
+    cart: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+      }
+    ]
   },
   {
     

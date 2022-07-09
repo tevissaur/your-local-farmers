@@ -1,18 +1,73 @@
 
-import Header from '../components/NavComponents/Header'
-import Footer from '../components/NavComponents/Footer'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
 import { Outlet } from "react-router-dom";
-import MainContainer from "../components/MainContainer";
+import { useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/client';
+import { QUERY_CATEGORIES, GET_ME } from '../utils/queries';
+import AuthService from '../services/authentication.service'
+import store from '../utils/store';
+import { setCategories } from '../resources/categories/categories.actions';
+import Banner from '../components/Banner';
+import styled from '@mui/material/styles/styled';
+import { setActivePage, setIsFarmer } from '../utils/actions';
+import UtilsService from '../services/utils.service';
+import { setSelectedCategories } from '../resources/browse-farms/browse-farms.actions';
+
+
+const MainContainer = styled('main')(({ theme }) => ({
+  display: 'flex',
+  position: 'relative',
+  justifyContent: 'flex-start',
+  flexDirection: 'column',
+  flexGrow: 1,
+  minHeight: 'calc(100vh - 316px)',
+  backgroundColor: theme.palette.common.white
+}));
+
+
 
 const MainLayout = () => {
+
+  const { profile: { loggedIn, isFarmer } } = store.getState()
+
+  const { loading, data, error } = useQuery(QUERY_CATEGORIES)
+  const [getMe, { data: me, error: userInfoError, loading: userInfoLoading }] = useLazyQuery(GET_ME)
+
+  useEffect(() => {
+
+    store.dispatch(setActivePage(UtilsService.getActivePage()))
+
+    if (loggedIn) {
+      let { data: { _id } } = AuthService.getProfile()
+      getMe({
+          variables: {
+              id: _id
+          }
+      })
+  }
+  }, [])
+  
+  useEffect(() => {
+    userInfoLoading ? console.log('user info loading') : store.dispatch(setIsFarmer(me?.me?.isFarmer))
+  }, [me, isFarmer, userInfoLoading])
+
+  useEffect(() => {
+    if (!loading) {
+      store.dispatch(setCategories(data.categories))
+      store.dispatch(setSelectedCategories(data.categories))
+    }
+  }, [loading, data])
+
 
   return (
     <>
       <Header />
       <MainContainer>
+        <Banner />
         <Outlet />
-        <Footer />
       </MainContainer>
+      <Footer />
     </>
   );
 };

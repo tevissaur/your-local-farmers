@@ -7,7 +7,7 @@ const {
     PurchaseOrder
 } = require('../models');
 const { Types: { ObjectId } } = require('mongoose')
-const db = require('../config/connection')
+const db = require('../config/connection');;
 
 
 // Generating Ids to hardcode them into the seed references
@@ -197,7 +197,7 @@ const reviewData = [
     {
         _id: reviewIds[4],
         author: userIds[3],
-        content: 'this is trash',
+        content: 'this is not good',
         rating: 1
     },
     {
@@ -595,26 +595,30 @@ const seedData = async () => {
 
         // Seeding Users
         await User.deleteMany({})
-        // userData.forEach( async (user) => {
-        //     await User.create(user)
-        // })
         await User.insertMany(userData)
         console.log('============ USERS SEEDED =============')
+        
+        
+        // Seeding Categories
+        await Category.deleteMany({})
+        await Category.insertMany(categoryData)
+        console.log('============ CATEGORIES SEEDED =============')
+
         
         // Seeding Products 
         await Product.deleteMany({})
         await Product.insertMany(productData)
         console.log('============ PRODUCTS SEEDED =============')
 
+
+
         // Seeding Farms
         await Farm.deleteMany({})
         await Farm.insertMany(farmData)
         console.log('============ FARMS SEEDED =============')
 
-        // Seeding Categories
-        await Category.deleteMany({})
-        await Category.insertMany(categoryData)
-        console.log('============ CATEGORIES SEEDED =============')
+
+
 
         // Seeding Reviews
         await Review.deleteMany({})
@@ -626,6 +630,7 @@ const seedData = async () => {
         await PurchaseOrder.insertMany(purchaseOrderData)
         console.log('============ PURCHASE ORDERS SEEDED =============')
         
+
 
         process.exit(0)
 

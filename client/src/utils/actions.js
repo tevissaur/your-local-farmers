@@ -1,9 +1,4 @@
-export const setCartItems = (payload) => {
-    return {
-        type: 'cart/items',
-        payload
-    }
-}
+
 
 export const setLoginModal = (payload) => {
     return {
@@ -42,7 +37,6 @@ export const setSignupPass = (payload) => {
     }
 }
 export const setSignupUsername = (payload) => {
-    console.log(payload)
     return {
         type: 'ui/signup/username',
         payload
@@ -66,12 +60,6 @@ export const setTopFarms = (payload) => {
         payload
     }
 }
-export const setFarms = (payload) => {
-    return {
-        type: 'farm/farms',
-        payload
-    }
-}
 export const setSingleFarm = (payload) => {
     return {
         type: 'farm/singleFarm',
@@ -92,23 +80,10 @@ export const setReviewRating = (payload) => {
     }
 }
 
-export const setSingleProduct = (payload) => {
-    return {
-        type: 'product/singleProduct',
-        payload
-    }
-}
 
 export const setIsFarmer = (payload) => {
     return {
         type: 'user/isFarmer', 
-        payload
-    }
-}
-
-export const setMyFarm = (payload) => {
-    return {
-        type: 'farm/myFarm',
         payload
     }
 }

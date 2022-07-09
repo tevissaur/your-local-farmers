@@ -26,6 +26,16 @@ const initialState = {
         name: '',
         address: '',
         story: ''
+    },
+    farmDash: {
+        openTab: 0,
+        newProduct: {
+            name: '',
+            price: 0,
+            quantity: 0,
+            categories: [],
+            description: ''
+        }
     }
 }
 
@@ -156,6 +166,22 @@ function uiReducer(state = initialState, action) {
                 newFarm: {
                     ...state.newFarm,
                     story: action.payload
+                }
+            }
+        case 'ui/farmdash/tab': 
+            return {
+                ...state,
+                farmDash: {
+                    ...state.farmDash,
+                    openTab: action.payload
+                }
+            }
+        case 'ui/farmdash/newProdForm': 
+            return {
+                ...state,
+                farmDash: {
+                    ...state.farmDash,
+                    newProdForm: action.payload
                 }
             }
         default:

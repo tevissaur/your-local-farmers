@@ -4,8 +4,7 @@ const {
 const { Types: { ObjectId } } = require('mongoose')
 const fs = require('node:fs')
 const xlsx = require('node-xlsx')
-const db = require('../config/connection');
-const { Buffer } = require('node:buffer');
+
 
 class csaSeeder {
     static file = xlsx.parse(fs.readFileSync('C:/Users/tevis/code/bootcamp/your-local-farmers/server/seeds/csa_2022-66195453.xlsx'))
@@ -255,43 +254,44 @@ const createFarms = () => {
 }
 
 const main = async (args) => {
-    const seeder = new csaSeeder()
-    file.forEach(({ data }) => {
-        buildFarms(data)
-    })
-    // console.log(farms)
-    // await Farm.deleteMany({})
-    // await Farm.insertMany(farms)
-    // console.log('==== CSAs INSERTED ====')
-    await Product.deleteMany({})
+    // const seeder = new csaSeeder()
+    // file.forEach(({ data }) => {
+    //     buildFarms(data)
+    // })
+    // // console.log(farms)
+    // // await Farm.deleteMany({})
+    // // await Farm.insertMany(farms)
+    // // console.log('==== CSAs INSERTED ====')
+    // await Product.deleteMany({})
 
-    for (farmName in allProducts) {
-        let products = allProducts[farmName]
-        let farm = await Farm.find({ name: farmName }, (err, obj) => {
-            // console.log(obj)
-        })
-        console.log(ObjectId.isValid(farm[0]._id))
-        let newProduct = {
-            price: 1,
-            quantity: 1,
-            name: '',
-            farm: ObjectId(farm[0]._id),
-            categories: [],
-            description: ''
-        }
-        products.forEach(async product => {
-            newProduct = {
-                ...newProduct,
-                name: product
-            }
-            let insertedProduct = await Product.create(newProduct)
-            await Farm.findByIdAndUpdate(farm[0]._id, {
-                $push: { products: insertedProduct._id }
-            }, { new: true })
-        })
-        // await Product.insertMany
-        // console.log(emptyFarm)
-    }
+    // for (farmName in allProducts) {
+    //     let products = allProducts[farmName]
+    //     let farm = await Farm.find({ name: farmName }, (err, obj) => {
+    //         // console.log(obj)
+    //     })
+    //     console.log(ObjectId.isValid(farm[0]._id))
+    //     let newProduct = {
+    //         price: 1,
+    //         quantity: 1,
+    //         name: '',
+    //         farm: ObjectId(farm[0]._id),
+    //         categories: [],
+    //         description: ''
+    //     }
+    //     products.forEach(async product => {
+    //         newProduct = {
+    //             ...newProduct,
+    //             name: product
+    //         }
+    //         let insertedProduct = await Product.create(newProduct)
+    //         await Farm.findByIdAndUpdate(farm[0]._id, {
+    //             $push: { products: insertedProduct._id }
+    //         }, { new: true })
+    //     })
+    //     // await Product.insertMany
+    //     // console.log(emptyFarm)
+    // }
+
     process.exit(0)
 }
 

@@ -29,9 +29,17 @@ const FarmsPage = () => {
 
     const [getFarms, { loading, data, error }] = useLazyQuery(QUERY_FARMS)
 
+
+    // CORS ANYWHERE: https://intense-reef-62305.herokuapp.com/
     useEffect(async () => {
+        const baseUrl = 'https://intense-reef-62305.herokuapp.com/'
         store.dispatch(setSelectedCategories(categories))
 
+        const response = await fetch(`${baseUrl}https://www.usdalocalfoodportal.com/api/agritourism/?apikey=zBKAMQhIEC&x=-84&y=42&radius=30`, {
+            
+        })
+        const data = await response.json();
+        console.log(data)
     }, [])
 
     useEffect(async () => {
@@ -44,7 +52,6 @@ const FarmsPage = () => {
 
         } else {
             await getFarms()
-            console.log(data.farms)
             store.dispatch(setFarms(data?.farms))
             store.dispatch(setVisibleFarms(data?.farms))
         }

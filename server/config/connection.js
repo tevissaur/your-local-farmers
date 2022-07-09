@@ -3,7 +3,7 @@ require('dotenv').config()
 
 // Add process.env.MONGODB_URI ||  when deploying
 
-mongoose.connect("mongodb://localhost/yourlocalfarmersdb", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/yourlocalfarmersdb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

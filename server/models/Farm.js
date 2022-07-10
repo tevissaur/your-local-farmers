@@ -9,7 +9,6 @@ const farmSchema = new Schema(
         address: {
             type: String,
             required: true
-            // unique: true
         },
         reviews: [{
             type: Schema.Types.ObjectId,
@@ -56,9 +55,19 @@ const farmSchema = new Schema(
             longitude: Schema.Types.Decimal128
         },
         season: {
-            start: String,
-            end: String
-        }
+            start: {
+                type: Number,
+                default: 1
+            },
+            end: {
+                type: Number,
+                default: 12
+            }
+        },
+        tags: [{
+            type: Schema.Types.ObjectId,
+            default: []
+        }]
     }
 )
 

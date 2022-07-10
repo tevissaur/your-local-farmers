@@ -27,10 +27,6 @@ const productSchema = new Schema(
         avgScore: {
             type: Number
         },
-        inSeason: {
-            type: Boolean,
-            default: false
-        },
         categories: [{
             type: Schema.Types.ObjectId,
             ref: 'Category'
@@ -41,9 +37,29 @@ const productSchema = new Schema(
         },
         description: {
             type: String,
+        },
+        season: {
+            start: {
+                type: Number,
+                default: 1
+            },
+            end: {
+                type: Number,
+                default: 12
+            }
         }
     }
 )
+
+productSchema.virtual('inSeason').get(function() {
+    let date = new Date();
+    let month = date.getMonth()
+    if ((month >= this.season.start) && (month <= this.season.end)) {
+        return true
+    } else {
+        return false
+    }
+})
 
 // productSchema.pre('save', async function(next) {
 //     let total = 0

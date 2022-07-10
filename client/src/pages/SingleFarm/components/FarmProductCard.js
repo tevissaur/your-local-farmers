@@ -21,15 +21,14 @@ const FarmProduct = ({ product }) => {
       alignContent: 'space-between',
       paddingX: 3 
     }}>
-      <Box
+      {/* <Box
         component='img'
         sx={{
           maxWidth: '200px'
         }}
         objectFit="cover"
         src={`${foundProductImage}`}
-        alt="Dan Abramov"
-      />
+      /> */}
 
       <Link component={ReactLink} to={`/farm/${ slugify( fname, { lower: true }) }/store/product/${ slugify( product.name, { lower: true }) }?fid=${singleFarm._id}&pid=${product._id}`}>
         <Box flexDirection="column" alignItems="center">

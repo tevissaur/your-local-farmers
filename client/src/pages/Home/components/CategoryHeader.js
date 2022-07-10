@@ -12,6 +12,7 @@ const CategoryHeader = () => {
     // useEffect(() => {
     //     loading ? console.log(loading) : console.log(data)
     // }, [loading, data])
+
     return (
         <Box sx={{
             display: 'flex',
@@ -29,9 +30,9 @@ const CategoryHeader = () => {
                     Explore Our Most Popular Categories
                 </Typography>
             </Box>
-            
+
             {/* Ignore this garbage right now */}
-            {false ? (<></>) : (<Box sx={{
+            <Box sx={{
                 margin: '5px auto',
                 display: 'flex',
                 flexWrap: 'wrap'
@@ -39,8 +40,8 @@ const CategoryHeader = () => {
                 {categoryData.map((category, index) => {
                     return (<SmallCategoryIcon key={index + 30} card={category} />)
                 })}
-            </Box>)}
-            
+            </Box>
+
         </Box>
     )
 }

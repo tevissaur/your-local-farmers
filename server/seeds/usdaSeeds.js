@@ -4,10 +4,11 @@ const {
 const { Types: { ObjectId } } = require('mongoose')
 const fs = require('node:fs')
 const xlsx = require('node-xlsx')
+const path = require('path')
 
 
 class csaSeeder {
-    static file = xlsx.parse(fs.readFileSync('C:/Users/tevis/code/bootcamp/your-local-farmers/server/seeds/csa_2022-66195453.xlsx'))
+    static file = xlsx.parse(fs.readFileSync(path.join(__dirname, './csa_2022-66195453.xlsx')))
     static farms = []
     static allProducts = {}
     seed() {

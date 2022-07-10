@@ -35,11 +35,11 @@ const FarmsPage = () => {
         const baseUrl = 'https://intense-reef-62305.herokuapp.com/'
         store.dispatch(setSelectedCategories(categories))
 
-        const response = await fetch(`${baseUrl}https://www.usdalocalfoodportal.com/api/agritourism/?apikey=zBKAMQhIEC&x=-84&y=42&radius=30`, {
-            
-        })
-        const data = await response.json();
-        console.log(data)
+        // const response = await fetch(`https://www.usdalocalfoodportal.com/api/csa/?apikey=zBKAMQhIEC&x=-84&y=42&radius=30`, {
+        //     'mode': 'no-cors'
+        // })
+        // const x = await response.json();
+        // console.log(x)
     }, [])
 
     useEffect(async () => {
@@ -70,23 +70,21 @@ const FarmsPage = () => {
             selectedCategories.includes(category[0])
                 ? selectedCategories.filter(cat => cat.name !== name)
                 : [...selectedCategories, category[0]]
-        console.log(updatedSelectedCategoriesNames)
 
         await store.dispatch(setSelectedCategories(updatedSelectedCategoriesNames))
+
+
         let catNames = updatedSelectedCategoriesNames.map(cat => cat.name)
 
         const updatedVisibleFarms = farms.filter(farm => {
-            for (let i = 0; i < farm.categoriesOffered.length; i++) {
-                console.log(catNames, farm.categoriesOffered[i].name, farm.name)
-                if (catNames.includes(farm.categoriesOffered[i].name)) {
-                    return true
-                } else {
-                    return false
+            console.log(catNames)
+            catNames.forEach(cat => {
+                if (farm.categoriesOffered.includes(cat)) {
+                    console.log(cat, farm)
                 }
-            }
-
+            })
         })
-        console.log(updatedVisibleFarms, 'updatedVisibleFarms')
+
         await store.dispatch(setVisibleFarms(updatedVisibleFarms))
     }
 
@@ -127,16 +125,16 @@ const FarmsPage = () => {
                 <Box display='flex' flexDirection='column'>
                     <Box display='flex' justifyContent='space-evenly' margin={3} flexWrap='wrap'>
                         {visibleFarms?.map(farm => {
-                                return <FarmCard
-                                    key={farm._id}
-                                    id={farm._id}
-                                    title={farm.name}
-                                    reviews={farm.reviews}
-                                    numericReview={farm.reviews.length}
-                                    categories={farm.products.map(product => {
-                                        return product.categories[0]?.name
-                                    })} />
-                            })}
+                            return <FarmCard
+                                key={farm._id}
+                                id={farm._id}
+                                title={farm.name}
+                                reviews={farm.reviews}
+                                numericReview={farm.reviews.length}
+                                categories={farm.products.map(product => {
+                                    return product.categories[0]?.name
+                                })} />
+                        })}
                     </Box>
                     <Box sx={{
                         borderRadius: '25px',

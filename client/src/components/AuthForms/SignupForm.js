@@ -4,22 +4,18 @@ import AuthService from '../../services/authentication.service';
 import { Box, Modal, FormLabel, FormControl, Input } from "@mui/material";
 import { BaseButton as Button } from "../Buttons/BaseButton";
 import store from "../../utils/store";
-import { setSignupEmail, setSignupFirstName, setSignupModal, setSignupPass, setSignupUsername } from "../../utils/actions";
+import { showSignupModal } from '../../resources/auth-forms/auth.actions';
 
 
 function SignupForm() {
-    const { ui: { signup: { modal, email, password, firstName, username } } } = store.getState()
+    const { auth: { signup: { modal: signUpModal, email, password, firstName, username }, authFailed } } = store.getState()
     const isInvalid = password === "" || email === "";
 
     const [createUser] = useMutation(CREATE_USER);
 
     const handleModal = async (e) => {
-        store.dispatch(setSignupModal(!modal))
+        store.dispatch(showSignupModal(!signUpModal))
     }
-    const clearForm = async () => {
-
-    }
-
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -51,6 +47,9 @@ function SignupForm() {
 
 
     }
+    const handlePause = (e) => {
+        console.log(e)
+    }
 
 
 
@@ -60,11 +59,8 @@ function SignupForm() {
                 Sign Up
             </Button>
 
-
-
-
             <Modal
-                open={modal}
+                open={signUpModal}
                 onClose={handleModal}
                 sx={{
                     borderRadius: '10px'
@@ -99,7 +95,7 @@ function SignupForm() {
                                 type='text'
                                 id='username'
                                 value={username}
-                                onChange={({ target }) => store.dispatch(setSignupUsername(target.value))}
+                                onPause={handlePause}
                             />
                         </FormControl>
                         <FormControl fullWidth>
@@ -110,7 +106,6 @@ function SignupForm() {
                                 type='text'
                                 id='firstName'
                                 value={firstName}
-                                onChange={({ target }) => store.dispatch(setSignupFirstName(target.value))}
                             />
                         </FormControl>
                         <FormControl fullWidth>
@@ -121,7 +116,6 @@ function SignupForm() {
                                 type='email'
                                 id='email-signup'
                                 value={email}
-                                onChange={({ target }) => store.dispatch(setSignupEmail(target.value))}
                             />
 
                         </FormControl>
@@ -134,7 +128,6 @@ function SignupForm() {
                                 type='password'
                                 id='password-signup'
                                 value={password}
-                                onChange={({ target }) => store.dispatch(setSignupPass(target.value))}
                             />
                         </FormControl>
                     </Box>

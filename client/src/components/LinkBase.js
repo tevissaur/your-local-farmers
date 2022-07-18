@@ -1,7 +1,7 @@
 import { Link as ReactLink } from 'react-router-dom'
 import Link from '@mui/material/Link'
-import { setActivePage } from '../utils/actions'
 import { useDispatch } from 'react-redux'
+import { setActivePage } from '../resources/ui/ui.actions'
 
 
 export const LinkBase = ({ to, children, variant, sx }) => {

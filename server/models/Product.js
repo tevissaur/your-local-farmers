@@ -13,17 +13,29 @@ const productSchema = new Schema(
             type: Number,
             required: true
         },
-        imgUrl: {
-            type: String
-        },
+        // imgUrl: {
+        //     type: String
+        // },
         quantity: {
-            type: Number,
-            required: true
+            type: {
+                type: Number,
+                enum: [
+                    'lbs',
+                    'oz',
+                    'g',
+                    'each'
+                ]
+            },
+            amount: {
+                type: Number,
+                required: true
+            }
         },
-        reviews: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }],
+        // // Remove
+        // reviews: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Review'
+        // }],
         avgScore: {
             type: Number
         },
@@ -47,11 +59,22 @@ const productSchema = new Schema(
                 type: Number,
                 default: 12
             }
-        }
+        },
+        type: {
+            type: String,
+            enum: [
+                'CSA Share',
+                'Individual Product'
+            ]
+        },
+        tags: [{
+            type: Schema.Types.ObjectId,
+            default: []
+        }]
     }
 )
 
-productSchema.virtual('inSeason').get(function() {
+productSchema.virtual('inSeason').get(function () {
     let date = new Date();
     let month = date.getMonth()
     if ((month >= this.season.start) && (month <= this.season.end)) {

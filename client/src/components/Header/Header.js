@@ -87,20 +87,25 @@ const Header = () => {
       borderBottom: '1px solid black',
       backgroundColor: 'whitesmoke'
     }}>
-      <Box component='nav' sx={{
-        padding: '5px 10px',
-        width: '75%',
-        maxHeight: '50px',
-        margin: 'auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: 'black'
-      }}>
-        <Link to='/home' variant="h1" sx={{
-          fontSize: '26px',
-          marginX: 3
+      <Box
+        component='nav'
+        sx={{
+          padding: '5px 10px',
+          width: '75%',
+          maxHeight: '50px',
+          margin: 'auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          color: 'black'
         }}>
+        <Link
+          to='/home'
+          variant="h1"
+          sx={{
+            fontSize: '26px',
+            marginX: 3
+          }}>
           Local Farmers
         </Link>
         <Search>

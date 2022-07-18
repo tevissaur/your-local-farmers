@@ -267,7 +267,6 @@ const resolvers = {
     Mutation: {
         createUser: async (parent, args) => {
             try {
-
                 const user = await User.create(args)
                 const token = signToken(user)
                 return { user, token }
@@ -293,7 +292,8 @@ const resolvers = {
                 const token = signToken(user)
                 return { token, user }
             } catch (err) {
-                console.log(err)
+                // console.log(err)
+                return err
             }
         },
         postReview: async (parent, { review, productId, user, farmId }) => {

@@ -7,9 +7,7 @@ import { BaseButton as Button } from '../Buttons/BaseButton'
 function NavItem({ text, pageUrl }) {
     const {
         ui: {
-            nav: {
-                activePage
-            }
+            activePage
         }
     } = store.getState()
 

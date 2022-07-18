@@ -36,17 +36,15 @@ const farmSchema = new Schema(
             type: Boolean,
             default: false
         },
-        type: [{
-            type: 'String', 
+        type: {
+            type: String, 
             enum: [
                 'CSA',
                 'Homestead',
-                'Farmers Market',
-                'Food Hub',
                 'On-Farm Market',
                 'Agritourism'
             ]
-        }],
+        },
         acceptedPayments: [{
             type: String
         }],

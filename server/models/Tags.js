@@ -1,10 +1,12 @@
 const { Schema, model } = require('mongoose');
+const { tagsEnum } = require('../utils/enums/TagsEnum');
 
 const tagsSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            enum: tagsEnum
         }
     }
 )

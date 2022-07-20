@@ -13,4 +13,6 @@ export const tagsEnum = [
     'Foraged',
     'Non-profit',
     'Proceeds go to charity',
+    'Co-Op',
+    'Employee Owned'
 ]

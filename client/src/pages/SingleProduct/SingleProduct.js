@@ -83,7 +83,7 @@ const Product = () => {
                       color="primary.darkGreen"
                       style={{ fontWeight: "bolder" }}
                     >
-                      {product?.quantity}
+                      {product?.quantity.amount} /{product?.quantity.type}
                     </Typography>
                   </Box>
                   <Box>

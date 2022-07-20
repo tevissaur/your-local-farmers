@@ -26,7 +26,8 @@ const purchaseOrderSchema = new Schema(
             ref: 'Farm'
         },
         orderTotal: {
-            type: Number,
+            type: Schema.Types.Decimal128,
+            required: true,
             default: 0
         }
     }

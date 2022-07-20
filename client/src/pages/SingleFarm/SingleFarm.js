@@ -27,6 +27,7 @@ const Farm = () => {
 
   useEffect(() => {
     loading ? console.log(loading) : store.dispatch(setSingleFarm(data?.farmStore))
+    console.log(data)
   }, [loading, data, error])
 
 
@@ -85,9 +86,9 @@ const Farm = () => {
                 </Typography>
               ))}
 
-              <Typography fontWeight="600" mt={1}>
+              {/* <Typography fontWeight="600" mt={1}>
                 {address}
-              </Typography>
+              </Typography> */}
 
               <Typography
                 as="samp"

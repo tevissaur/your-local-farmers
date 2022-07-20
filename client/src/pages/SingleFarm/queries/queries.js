@@ -18,7 +18,10 @@ export const SINGLE_FARM = `query FarmStore($id: ID!) {
         _id
         name
         price
-        quantity
+        quantity {
+          type
+          amount
+        }
         categories {
           name
         }

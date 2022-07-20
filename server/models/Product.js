@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require('mongoose')
+const { ProductQuantityTypeEnum } = require('../utils/enums/ProductQuantityTypeEnum.js')
 
 const productSchema = new Schema(
     {
@@ -18,13 +19,8 @@ const productSchema = new Schema(
         // },
         quantity: {
             type: {
-                type: Number,
-                enum: [
-                    'lbs',
-                    'oz',
-                    'g',
-                    'each'
-                ]
+                type: String,
+                enum: ProductQuantityTypeEnum
             },
             amount: {
                 type: Number,
@@ -116,4 +112,4 @@ productSchema.virtual('inSeason').get(function () {
 
 const Product = model('Product', productSchema)
 
-module.exports = Product
+module.exports = Product;

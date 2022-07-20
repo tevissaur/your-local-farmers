@@ -92,33 +92,33 @@ const categoryData = [
     { 
         _id: categoryIds[0],
         name: 'Baked Goods',
-        imgUrl: './assets/bakedGoods.jpg',
+        imgUrl: '/assets/bakedGoods.jpg',
        
     },
     {
         _id: categoryIds[1],
         name: 'Dairy, Meat & Eggs',
-        imgUrl: './assets/DairyMeatEggs.jpg'
+        imgUrl: '/assets/DairyMeatEggs.jpg'
     },
     {
         _id: categoryIds[2],
         name: 'Fruits & Vegetables',
-        imgUrl: './assets/fruitVegetables.jpg'
+        imgUrl: '/assets/fruitVegetables.jpg'
     },
     {
         _id: categoryIds[3],
         name: 'Flowers & Plants',
-        imgUrl: './assets/flowersPlants.jpg'
+        imgUrl: '/assets/flowersPlants.jpg'
     },
     {
         _id: categoryIds[4],
         name: 'Beverages',
-        imgUrl: './assets/beverages2.jpg'
+        imgUrl: '/assets/beverages2.jpg'
     },
     {
         _id: categoryIds[5],
         name: 'Seasonal Stuffs',
-        imgUrl: './assets/seasonalStuffs-2.jpg'
+        imgUrl: '/assets/seasonalStuffs-2.jpg'
     },
 ]
 
@@ -255,7 +255,10 @@ const productData = [
         _id: productIds[0],
         name: 'Blueberry Muffins',
         price: 1,
-        quantity: 6,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[2]],
         inSeason: true,
         categories: categoryIds[0],
@@ -265,7 +268,10 @@ const productData = [
         _id: productIds[1],
         name: 'Bread Loaf',
         price: 2,
-        quantity: 5,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[4],],
         inSeason: true,
         categories:categoryIds[0],
@@ -275,7 +281,10 @@ const productData = [
         _id: productIds[2],
         name: 'Croissant',
         price: 3,
-        quantity: 4,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[1], reviewIds[4]],
         inSeason: true,
         categories: categoryIds[0],
@@ -285,7 +294,10 @@ const productData = [
         _id: productIds[3],
         name: 'Franziskaner Loaf',
         price: 4,
-        quantity: 3,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[1], reviewIds[0], reviewIds[3]],
         inSeason: true,
         categories: categoryIds[0],
@@ -295,7 +307,10 @@ const productData = [
         _id: productIds[4],
         name: 'Pain au Chocolat',
         price: 5,
-        quantity: 2,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[4], reviewIds[1], reviewIds[2]],
         inSeason: true,
         categories: categoryIds[0],
@@ -305,7 +320,10 @@ const productData = [
         _id: productIds[5],
         name: 'Celery Smoothie',
         price: 6,
-        quantity: 6,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[2], reviewIds[3], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[4],
@@ -315,7 +333,10 @@ const productData = [
         _id: productIds[6],
         name: 'Coffee Slush',
         price: 2,
-        quantity: 1,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: reviewIds[0],
         inSeason: true,
         categories:categoryIds[4],
@@ -325,7 +346,10 @@ const productData = [
         _id: productIds[7],
         name: 'Lemonade',
         price: 3,
-        quantity: 3,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[4],
@@ -335,7 +359,10 @@ const productData = [
         _id: productIds[8],
         name: 'Milk',
         price: 2,
-        quantity: 1,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0],reviewIds[1]],
         inSeason: true,
         categories:categoryIds[4],
@@ -345,7 +372,10 @@ const productData = [
         _id: productIds[9],
         name: 'Eggs',
         price: 2,
-        quantity: 1,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0],reviewIds[1]],
         inSeason: true,
         categories:categoryIds[1],
@@ -355,7 +385,10 @@ const productData = [
         _id: productIds[10],
         name: 'Herbs Cheddar Cheese',
         price: 2,
-        quantity: 8,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3],reviewIds[4]],
         inSeason: true,
         categories:categoryIds[1],
@@ -365,7 +398,10 @@ const productData = [
         _id: productIds[11],
         name: 'Quail Eggs',
         price: 2,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[4],reviewIds[2]],
         inSeason: true,
         categories:categoryIds[1],
@@ -375,7 +411,10 @@ const productData = [
         _id: productIds[12],
         name: 'Salmon',
         price: 5,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: reviewIds[1],
         inSeason: true,
         categories:categoryIds[1],
@@ -385,7 +424,10 @@ const productData = [
         _id: productIds[13],
         name: 'Sausages',
         price: 4,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[1], reviewIds[0]],
         inSeason: true,
         categories:categoryIds[1],
@@ -395,7 +437,10 @@ const productData = [
         _id: productIds[14],
         name: 'Steaks and Herbs',
         price: 6,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[2], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[1],
@@ -406,7 +451,10 @@ const productData = [
         _id: productIds[15],
         name: 'Aster',
         price: 1,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[2], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[3],
@@ -416,7 +464,10 @@ const productData = [
         _id: productIds[16],
         name: 'Mint',
         price: 1,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[3],
@@ -426,7 +477,10 @@ const productData = [
         _id: productIds[17],
         name: 'Rose',
         price: 1,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: reviewIds[3],
         inSeason: true,
         categories:categoryIds[3],
@@ -436,7 +490,10 @@ const productData = [
         _id: productIds[18],
         name: 'Tulip',
         price: 2,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[3],
@@ -446,7 +503,10 @@ const productData = [
         _id: productIds[19],
         name: 'Apricot',
         price: 2,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[2],
@@ -456,7 +516,10 @@ const productData = [
         _id: productIds[20],
         name: 'Carrot',
         price: 2,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[2],
@@ -466,7 +529,10 @@ const productData = [
         _id: productIds[21],
         name: 'Green Bean',
         price: 2,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0], reviewIds[1]],
         inSeason: true,
         categories:categoryIds[2],
@@ -476,7 +542,10 @@ const productData = [
         _id: productIds[22],
         name: 'Radish',
         price: 1,
-        quantity: 30,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[4]],
         inSeason: true,
         categories:categoryIds[2],
@@ -486,7 +555,10 @@ const productData = [
         _id: productIds[23],
         name: 'Watermelon',
         price: 4,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[1], reviewIds[2]],
         inSeason: true,
         categories:categoryIds[2],
@@ -496,7 +568,10 @@ const productData = [
         _id: productIds[24],
         name: 'Corn',
         price: 1,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[1], reviewIds[2]],
         inSeason: true,
         categories:categoryIds[5],
@@ -506,7 +581,10 @@ const productData = [
         _id: productIds[25],
         name: 'Honey',
         price: 4,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[3], reviewIds[4]],
         inSeason: true,
         categories:categoryIds[5],
@@ -516,7 +594,10 @@ const productData = [
         _id: productIds[26],
         name: 'Mushroom',
         price: 2,
-        quantity: 20,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[0], reviewIds[2]],
         inSeason: true,
         categories:categoryIds[5],
@@ -526,7 +607,10 @@ const productData = [
         _id: productIds[27],
         name: 'Passion fruit',
         price: 1,
-        quantity: 10,
+        quantity: {
+            type: 'each',
+            amount: 2
+        },
         reviews: [reviewIds[2], reviewIds[3]],
         inSeason: true,
         categories:categoryIds[5],

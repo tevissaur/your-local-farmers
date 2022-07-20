@@ -11,12 +11,16 @@ const typeDefs = gql`
         pickUpTime: String!
         orderTotal: Int
     }
+    type ProductQuantity {
+        type: String!
+        amount: Int!
+    }
     type Product {
         _id: ID! 
         name: String!
         image: String
         price: Float!
-        quantity: Int!
+        quantity: ProductQuantity
         reviews: [Review]
         avgScore: Int
         inSeason: Boolean

@@ -40,7 +40,7 @@ const FarmProduct = ({ product }) => {
 
       <Typography>
         Available:{" "}
-        <span style={{ fontWeight: "bolder" }}>{product.quantity}</span>
+        <span style={{ fontWeight: "bolder" }}>{product.quantity.amount}/{product.quantity.type}</span>
       </Typography>
     </Box>
   );

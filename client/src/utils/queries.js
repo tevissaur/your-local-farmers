@@ -11,7 +11,10 @@ export const GET_MY_FARM = gql`
         _id
         name
         price
-        quantity
+        quantity { 
+          type
+          amount
+        }
         categories { 
           name
         }
@@ -54,7 +57,10 @@ export const QUERY_FARM = gql`
         _id
         name
         price
-        quantity
+        quantity {
+          type
+          amount
+        }
         categories {
           name
         }
@@ -89,7 +95,10 @@ export const QUERY_FARMS = gql`
         image
         name
         price
-        quantity
+        quantity {
+          type
+          amount
+        }
         reviews {
           author {
             username
@@ -141,7 +150,10 @@ export const QUERY_PRODUCT = gql`
         _id
         name
         price
-        quantity
+        quantity {
+          type
+          amount
+        }
         inSeason
         farm {
           name
@@ -189,6 +201,7 @@ export const QUERY_CATEGORIES = gql`
     categories {
       _id
       name
+      imgUrl
     }
   }
 

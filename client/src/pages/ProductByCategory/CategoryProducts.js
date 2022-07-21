@@ -28,25 +28,20 @@ const Category = () => {
 
   return (
     <>
-      <Box>
-        <Box m={4} flex="1" alignItems="center">
-       
+      <Box m={4} flex="1" alignItems="center">
+        <Box
+          borderRadius="25px"
 
-          <Box
-            borderRadius="25px"
-
-            border="green 2px solid"
-            alignItems="stretch"
-            justifyItems="center"
-            backgroundColor="lightyellow"
-            padding={5}
-            margin={20}
-            flexWrap="wrap" >
-            {foundProducts.map((product, idx) => (
-              <ProductCard key={idx} product={product} />
-            ))}
-          </Box>
-          <Footer />
+          border="green 2px solid"
+          alignItems="stretch"
+          justifyItems="center"
+          backgroundColor="lightyellow"
+          padding={5}
+          margin={20}
+          flexWrap="wrap" >
+          {foundProducts.map((product, idx) => (
+            <ProductCard key={idx} product={product} />
+          ))}
         </Box>
       </Box>
     </>

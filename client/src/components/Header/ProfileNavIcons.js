@@ -15,17 +15,20 @@ import AuthService from '../../services/authentication.service';
 import { Link as ReactLink } from 'react-router-dom';
 import store from '../../utils/store';
 import CartIcon from '../Cart/CartIcon'
+import { showProfileDropdown } from '../../resources/ui/ui.actions'
 
 const AccountMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const { cart: { cartItems }, ui: { nav: { profileDropdown } } } = store.getState()
-    const open = Boolean(anchorEl);
+    const { cart: { cartItems }, ui: { profileDropdown: open } } = store.getState()
     
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+        store.dispatch(showProfileDropdown(!open))
     };
     const handleClose = () => {
         setAnchorEl(null);
+        store.dispatch(showProfileDropdown(!open))
+
     };
     return (
         <>

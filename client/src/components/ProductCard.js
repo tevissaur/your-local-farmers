@@ -45,19 +45,19 @@ const ProductCard = ({ product }) => {
               <AiFillStar />
               <AiFillStar />
             </Box>
-            <small>Based on {product.reviews.length} reviews</small>
+            <small>Based on {product.reviews?.length} reviews</small>
           </Box>
 
           <Box p="10px">
             <Typography>
               Available:
               <span style={{ fontWeight: "bolder" }}>
-                {` ${product.quantity} `}
+                {` ${product.quantity.amount} `}
               </span>
               from
             </Typography>
 
-            <Link to={`/farm/${slugify(product.farm.name, { lower: true })}`}>
+            <Link to={`/farm/${slugify(product.farm.name, { lower: true })}/store?fid=${product.farm._id}`}>
               <Typography fontSize="2xl" color="primary.darkGreen">
                 {product.farm.name}
               </Typography>

@@ -5,13 +5,38 @@ import Auth from "../../../utils/auth";
 import { Box, FormControl, Input, TextField, Button, FormLabel } from "@mui/material";
 import store from "../../../utils/store";
 import { setNewFarmAddress, setNewFarmName, setNewFarmStory } from "../../../utils/actions";
+import { updateNewFarmForm } from "../../../resources/farm-dashboard/dashboard.actions";
 
 
 function MyFarm() {
-    const { profile: { loggedIn }, ui: { newFarm: { name, address, story } } } = store.getState()
+    const {
+        profile: {
+            loggedIn
+        },
+        dashboard: {
+            ui: {
+                newFarm: {
+                    name,
+                    address,
+                    story
+                }
+            }
+        }
+    } = store.getState()
+    let payload
+
     const isInvalid = name === '' || address === '' || story === '';
     const [createFarm] = useMutation(CREATE_FARM)
 
+    const handleChange = async (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        payload = {
+            payload: e.target.value,
+            param: e.target.id
+        }
+        store.dispatch(updateNewFarmForm(payload))
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
@@ -29,9 +54,6 @@ function MyFarm() {
                     }
                 }
             })
-            store.dispatch(setNewFarmName(''))
-            store.dispatch(setNewFarmAddress(''))
-            store.dispatch(setNewFarmStory(''))
             window.location.reload()
         }
 
@@ -44,10 +66,14 @@ function MyFarm() {
 
     return (
         <>
-            <Box onSubmit={handleFormSubmit} component='form' sx={{
-                display: 'flex',
-                justifyContent: 'center'
-            }}>
+            <Box
+                onSubmit={handleFormSubmit}
+                onChange={handleChange}
+                component='form'
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}>
 
                 <Box sx={{
                     display: 'flex',

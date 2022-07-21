@@ -4,12 +4,13 @@ import AuthService from '../../services/authentication.service';
 import { Box, Modal, FormLabel, FormControl, Input } from "@mui/material";
 import { BaseButton as Button } from "../Buttons/BaseButton";
 import store from "../../utils/store";
-import { showSignupModal } from '../../resources/auth-forms/auth.actions';
+import { showSignupModal, updateSignupForm } from '../../resources/auth-forms/auth.actions';
 
 
 function SignupForm() {
     const { auth: { signup: { modal: signUpModal, email, password, firstName, username }, authFailed } } = store.getState()
     const isInvalid = password === "" || email === "";
+    let payload
 
     const [createUser] = useMutation(CREATE_USER);
 
@@ -23,7 +24,7 @@ function SignupForm() {
         /* 
         TODO: Check if username is taken or not
         TODO: Check password strength
-        */ 
+        */
 
         const userData = {
             username,
@@ -46,6 +47,16 @@ function SignupForm() {
         }
 
 
+    }
+
+    const handleFormChange = async (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        payload = {
+            payload: e.target.value,
+            param: e.target.id
+        }
+        store.dispatch(updateSignupForm(payload))
     }
     const handlePause = (e) => {
         console.log(e)
@@ -80,12 +91,14 @@ function SignupForm() {
                     padding: '20px'
                 }}>
 
-                    <Box sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'center',
-                        margin: '1'
-                    }}>
+                    <Box component={'form'}
+                        onChange={handleFormChange}
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            justifyContent: 'center',
+                            margin: '1'
+                        }}>
                         <FormControl fullWidth>
 
                             <FormLabel sx={{
@@ -114,7 +127,7 @@ function SignupForm() {
                             }}>Email</FormLabel>
                             <Input
                                 type='email'
-                                id='email-signup'
+                                id='email'
                                 value={email}
                             />
 
@@ -124,9 +137,8 @@ function SignupForm() {
                                 margin: '10px 0 0 0'
                             }}>Password</FormLabel>
                             <Input
-
                                 type='password'
-                                id='password-signup'
+                                id='password'
                                 value={password}
                             />
                         </FormControl>

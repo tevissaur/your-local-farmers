@@ -10,6 +10,7 @@ import { showLoginModal, updateLoginForm } from "../../resources/auth-forms/auth
 function LoginForm() {
   const { auth: { login: { email, password, modal: loginModal }, authFailed } } = store.getState()
   const isInvalid = password === "" || email === "";
+  let payload
 
   const [LoginUser, { error, loading, data }] = useMutation(LOG_IN);
 
@@ -20,7 +21,11 @@ function LoginForm() {
   const handleChange = async (e) => {
     e.preventDefault()
     e.stopPropagation()
-
+    payload = {
+      payload: e.target.value,
+      param: e.target.id
+    }
+    store.dispatch(updateLoginForm(payload))
   }
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -62,23 +67,24 @@ function LoginForm() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-
-        <Box  sx={{
-          position: 'fixed',
-          width: 600,
-          height: 400,
-          top: '50%',
-          left: '50%',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          transform: 'translate(-50%, -50%)',
-          border: '1px solid',
-          borderRadius: '10px',
-          padding: 'auto 1',
-          bgcolor: 'ivory',
-        }}>
+        <Box component={'form'}
+          onChange={handleChange}
+          sx={{
+            position: 'fixed',
+            width: 600,
+            height: 400,
+            top: '50%',
+            left: '50%',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            transform: 'translate(-50%, -50%)',
+            border: '1px solid',
+            borderRadius: '10px',
+            padding: 'auto 1',
+            bgcolor: 'ivory',
+          }}>
           <Typography variant='h6' textAlign='center'>Login</Typography>
           <FormControl sx={{
             width: '50%',
@@ -88,7 +94,7 @@ function LoginForm() {
             <Input
               placeholder="Email"
               type="email"
-              id="email-login"
+              id="email"
               value={email}
             />
           </FormControl>
@@ -101,7 +107,7 @@ function LoginForm() {
             <Input
               placeholder="Password"
               type="password"
-              id="password-login"
+              id="password"
               value={password}
             />
           </FormControl>

@@ -35,7 +35,7 @@ const SmallCategoryIcon = ({ card }) => {
                             margin: 'auto',
                             borderRadius: '50%'
                         }} />
-                    <Typography textAlign="center" paddingY={1.5}>{card.title}</Typography>
+                    <Typography textAlign="center" paddingY={1.5}>{card.name}</Typography>
                 </Box>
             </Link>
         </Box>

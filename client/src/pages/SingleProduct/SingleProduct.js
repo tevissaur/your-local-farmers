@@ -31,12 +31,12 @@ const Product = () => {
   useEffect(() => {
 
     productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
-
+    console.log(productData)
   }, [productLoading, productData])
 
 
 
-  
+
 
 
 
@@ -83,7 +83,7 @@ const Product = () => {
                       color="primary.darkGreen"
                       style={{ fontWeight: "bolder" }}
                     >
-                      {product?.quantity.amount} /{product?.quantity.type}
+                      {product?.quantity?.amount} /{product?.quantity?.type}
                     </Typography>
                   </Box>
                   <Box>
@@ -109,7 +109,9 @@ const Product = () => {
               <Typography
                 fontSize="2xl"
                 px="4px"
-                sx={{ fontWeight: "bolder" }}
+                sx={{
+                  fontWeight: "bolder"
+                }}
                 mb={5}
               >
                 Customer Review

@@ -1,9 +1,25 @@
 import UtilsService from "../../services/utils.service"
-import { SET_CART_ARRAY, SET_CART_ITEMS } from "./cart.types"
+import { GET_CART_ITEMS, SET_CART_ITEMS, SET_CART_OWNER, SET_CART_TOTAL } from "./cart.types"
+
+/*  cart product structure
+    {
+        product: {
+            _id: '',
+            price: 0.00,
+            quantity: {
+                amount: 0,
+                type: ''
+            },
+            farm: '',
+            dateAdded: 0
+        }
+    }
+*/
 
 const initialState = {
-    items: JSON.parse(localStorage.getItem('cart')) || {},
-    cart: UtilsService.cartItemsToArray(JSON.parse(localStorage.getItem('cart'))) || []
+    items: [],
+    cartOwner: '',
+    cartTotal: 0
 }
 
 
@@ -12,19 +28,21 @@ export function cartReducer(state = initialState, action) {
         case SET_CART_ITEMS:
             return {
                 ...state,
-                items: {
-                    ...state.items,
-                    [action.payload.name]: {
-                        ...action.payload.product
-                    }
-                },
+                items: [
+                    ...action.payload
+                ]
             }
-        case SET_CART_ARRAY:
+        case SET_CART_OWNER:
             return {
                 ...state,
-                cart: action.payload
+                cartOwner: action.payload
             }
-        default: 
+        case SET_CART_TOTAL:
+            return {
+                ...state,
+                cartTotal: action.payload
+            }
+        default:
             return state
     }
 }

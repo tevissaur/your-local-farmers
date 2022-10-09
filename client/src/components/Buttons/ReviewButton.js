@@ -16,10 +16,12 @@ const ReviewButton = () => {
     profile: {
       loggedIn
     },
-    ui: {
-      review: {
-        inputText,
-        rating
+    product: {
+      ui: {
+        addReview: {
+          content,
+          rating
+        }
       }
     },
     product: {
@@ -33,7 +35,7 @@ const ReviewButton = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!inputText) return;
+    if (!content) return;
     const profile = auth.getProfile();
     console.log(profile.data._id);
 
@@ -41,7 +43,7 @@ const ReviewButton = () => {
       variables: {
         review: {
           author: profile.data._id,
-          content: inputText,
+          content: content,
           rating: parseInt(rating),
         },
         product_id: pid,
@@ -61,7 +63,7 @@ const ReviewButton = () => {
           display: 'flex',
 
         }}>
-          <Input type="text" id='review-content' value={inputText} onChange={e => store.dispatch(setReviewContent(e.target.value))} />
+          <Input type="text" id='review-content' value={content} onChange={e => store.dispatch(setReviewContent(e.target.value))} />
           <Input type="number" id='review-rating' value={rating} />
           <Button>
             Leave a review

@@ -28,7 +28,7 @@ const userSchema = new Schema(
       default: false,
     },
     address: {
-      type: String, 
+      type: String,
     },
     reviews: [{
       type: Schema.Types.ObjectId,
@@ -38,7 +38,7 @@ const userSchema = new Schema(
       type: Buffer,
       ref: 'Image'
     },
-    orders :[{
+    orders: [{
       type: Schema.Types.ObjectId,
       ref: 'PurchaseOrder'
     }],
@@ -46,15 +46,32 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Location'
     },
-    cart: [
-      {
+    cart: [{
+      price: {
+        type: Number
+      },
+      dateAdded: {
+        type: Date,
+        default: new Date().toUTCString()
+      },
+      quantity: {
+        type: {
+          type: String
+        },
+        amount: Number
+      },
+      farmID: {
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Farm'
+      },
+      productID: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product' 
       }
-    ]
+    }]
   },
   {
-    
+
   }
 );
 
@@ -74,7 +91,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('fullName').get(function() {
+userSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`
 })
 

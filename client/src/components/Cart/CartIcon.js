@@ -6,14 +6,14 @@ import store from '../../utils/store';
 
 
 const CartIcon = () => {
-    const { cart: { items, cart } } = store.getState()
+    const { cart: { items } } = store.getState()
 
 
     return (
             <Link to={"/cart"}>
                 <IconButton>
                     <ShoppingCart />
-                    {cart.length}
+                    {items.length}
                 </IconButton>
             </Link>
     )

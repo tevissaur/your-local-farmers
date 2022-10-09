@@ -423,7 +423,6 @@ const resolvers = {
             return POWithFarm
         },
         updateUser: async (parent, { user }) => {
-            console.log(user)
             const updatedUser = await User.findByIdAndUpdate(user._id, {
                 $set: {
                     ...user
@@ -431,16 +430,17 @@ const resolvers = {
             }, {
                 new: true
             })
-            return updatedUser.populate([
-                {
-                    path: 'reviews',
-                    model: 'Review',
-                    populate: {
-                        path: 'author',
-                        model: 'User'
-                    }
+            return updatedUser
+        },
+        updateCart: async (parent, { cart: { owner, cart } }) => {
+            console.log(owner, cart)
+            return await User.findByIdAndUpdate(owner, {
+                $set: {
+                    cart: cart
                 }
-            ])
+            }, {
+                new: true
+            })
         },
         updateFarm: async (parent, { farm }) => {
             const updatedFarm = await Farm.findByIdAndUpdate(farm._id, {

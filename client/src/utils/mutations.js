@@ -10,7 +10,13 @@ export const CREATE_USER = gql`
         }
     }
 `
-
+export const ADD_ITEM_TO_CART = gql`
+    mutation addItemToCart($item: AddItemToCart) {
+        addItem(item: $item) {
+            _id
+        }
+    }
+`
 export const LOG_IN = gql`
     mutation LogIn($email: String!, $password: String!) {
         login(email: $email, password: $password) {
@@ -113,3 +119,21 @@ export const CREATE_PO = gql`
 
 
 `
+
+export const UPDATE_CART = gql`
+        mutation updateCart($cart: CartInput) {
+            updateCart(cart: $cart) {
+                _id
+                cart {
+                    dateAdded
+                    price
+                    quantity {
+                        type
+                        amount
+                    }
+                    farmID
+                    productID
+                }
+            }
+        }
+    `

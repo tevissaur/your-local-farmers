@@ -11,7 +11,7 @@ const typeDefs = gql`
         pickUpTime: String!
         orderTotal: Int
     }
-    type ProductQuantity {
+    type Quantity {
         type: String!
         amount: Int!
     }
@@ -20,7 +20,7 @@ const typeDefs = gql`
         name: String!
         image: String
         price: Float!
-        quantity: ProductQuantity
+        quantity: Quantity
         reviews: [Review]
         avgScore: Int
         inSeason: Boolean
@@ -49,7 +49,7 @@ const typeDefs = gql`
         address: String!
         story: String!
         reviews: [Review]
-        products: [Product]
+        products: [Product] 
         avgScore: Int
         purchaseOrders: [PurchaseOrder]
         owners: [User]
@@ -69,18 +69,40 @@ const typeDefs = gql`
         profilePic: String 
         orders: [PurchaseOrder]
         location: Location
+        cart: [CartProduct]
     }
-
+    type CartProduct {
+        price: Int!
+        quantity: Quantity!
+        dateAdded: String
+        farmID: ID!
+        productID: ID!
+    }
     type Auth {
         token: ID!
         user: User
     }
-
+    input QuantityInput {
+        amount: Int!
+        type: String!
+    }
+    input CartInput {
+        owner: ID!
+        cart: [CartProductInput]
+    }
+    input CartProductInput {
+        price: Int!
+        quantity: QuantityInput!
+        dateAdded: String
+        farmID: ID!
+        productID: ID!
+    }
+    
     input EditLocation {
         latitude: Int
         longitude: Int
     }
-
+    
     input UpdatedUser {
         _id: ID!
         firstName: String
@@ -152,6 +174,7 @@ const typeDefs = gql`
         createPO(PO: NewPurchaseOrder): PurchaseOrder
         updateUser(user: UpdatedUser): User
         updateFarm(farm: UpdatedFarm): Farm
+        updateCart(cart: CartInput): User
     }
 `
 

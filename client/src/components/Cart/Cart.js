@@ -7,13 +7,17 @@ import { Box, Typography } from "@mui/material";
 
 
 function Cart() {
-  const { cart: { items, cart }, profile: { loggedIn } } = store.getState()
-
+  const { cart: { items }, profile: { loggedIn } } = store.getState()
 
   useEffect(() => {
+    
+    console.log()
+  }, [])
+  useEffect(() => {
+
     console.log(items)
-    console.log(JSON.parse(localStorage.getItem('cart')))
   }, [items])
+
   // const totalPrice = items.reduce((price, item) => price + item.quantity * item.price, 0)
   return (
     <>
@@ -35,13 +39,13 @@ function Cart() {
 
         <Box maxW="100%">
           <Box flexDir="column"></Box>
-          {loggedIn ? (cart.length === 0 ? (
+          {loggedIn ? (items.length === 0 ? (
             <Typography>
               No items are added
             </Typography>
           ) : (
             <>
-              {cart.map((item, itx) => <ProductCardCart key={itx} item={item} />)}
+              {items.map((item, itx) => <ProductCardCart key={itx} item={item} />)}
             </>
           )) : (<></>)}
 
@@ -61,7 +65,7 @@ function Cart() {
                 ${0}
               </Typography>
             </Box>
-            {cart.length === 0 ? "" : <CheckOutBtn cartItems={cart} totalPrice={0} />}
+            {items.length === 0 ? "" : <CheckOutBtn cartItems={items} totalPrice={0} />}
           </Box>
         </Box>
       </Box>

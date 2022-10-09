@@ -11,6 +11,7 @@ import { setCategories } from '../resources/categories/categories.actions';
 import Banner from '../components/Banner';
 import styled from '@mui/material/styles/styled';
 import { setActivePage, setIsFarmer } from '../utils/actions';
+import { setCartItems } from '../resources/cart/cart.actions' 
 import UtilsService from '../services/utils.service';
 import { setSelectedCategories } from '../resources/browse-farms/browse-farms.actions';
 
@@ -49,7 +50,11 @@ const MainLayout = () => {
   }, [])
   
   useEffect(() => {
-    userInfoLoading ? console.log('user info loading') : store.dispatch(setIsFarmer(me?.me?.isFarmer))
+    if (!userInfoLoading && me !== undefined) {
+      store.dispatch(setIsFarmer(me?.me?.isFarmer))
+      store.dispatch(setCartItems(me?.me?.cart))
+    }
+
   }, [me, isFarmer, userInfoLoading])
 
   useEffect(() => {

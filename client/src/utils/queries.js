@@ -128,6 +128,16 @@ export const GET_ME = gql`
       email
       address
       isFarmer
+      cart {
+        productID
+        farmID
+        dateAdded
+        price
+        quantity {
+          type
+          amount
+        }
+      }
       orders {
         _id
         seller {

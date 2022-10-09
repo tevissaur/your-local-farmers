@@ -2,6 +2,10 @@
 
 class UtilsService {
 
+    isCartDuplicate(cart = [], newItem) {
+        return cart.includes(newItem)
+    }
+
     getSearchParams(params) {
         const paramsArr = params.split('&').map(param => param.split('='))
         let paramsObj
@@ -22,10 +26,9 @@ class UtilsService {
         return cart
     }
 
-    getActivePage() {
-        console.log(window.location.pathname.split('/')[1])
-        return window.location.pathname.split('/')[1]
-    }
+    getActivePage = () => window.location.pathname.split('/')[1]
+
+    
 
 }
 export default new UtilsService();

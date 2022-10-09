@@ -1,4 +1,4 @@
-import { SET_CART_ARRAY, SET_CART_ITEMS } from "./cart.types"
+import { GET_CART_ITEMS, SET_CART_ITEMS, SET_CART_OWNER, SET_CART_TOTAL } from "./cart.types"
 
 export const setCartItems = (payload) => {
     return {
@@ -7,9 +7,16 @@ export const setCartItems = (payload) => {
     }
 }
 
-export const setCartArray = (payload) => {
+export const setCartOwner = (payload) => {
     return {
-        type: SET_CART_ARRAY,
+        type: SET_CART_OWNER,
+        payload
+    }
+}
+
+export const setCartTotal = (payload) => {
+    return {
+        type: SET_CART_TOTAL,
         payload
     }
 }

@@ -433,10 +433,14 @@ const resolvers = {
             return updatedUser
         },
         updateCart: async (parent, { cart: { owner, cart } }) => {
-            console.log(owner, cart)
+            console.log(cart)
+            let cartTotal = cart.reduce((total, num) => total + num)
             return await User.findByIdAndUpdate(owner, {
                 $set: {
-                    cart: cart
+                    cart: {
+                        total: cartTotal,
+                        items
+                    }
                 }
             }, {
                 new: true

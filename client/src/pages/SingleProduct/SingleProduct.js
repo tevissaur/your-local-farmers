@@ -31,7 +31,6 @@ const Product = () => {
   useEffect(() => {
 
     productLoading ? console.log(productLoading) : store.dispatch(setSingleProduct(productData.oneProduct))
-    console.log(productData)
   }, [productLoading, productData])
 
 

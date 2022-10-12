@@ -13,6 +13,7 @@ function Cart() {
     
     console.log()
   }, [])
+  
   useEffect(() => {
 
     console.log(items)
@@ -22,20 +23,13 @@ function Cart() {
   return (
     <>
       <Box
-        justifyContent="center"
-        alignItems="center"
-        fontWeight="600"
-        backgroundColor="white"
-        border="grey 2px solid"
-        borderRadius="25px"
-        boxShadow="1px 1px black"
         sx={{
           flexDirection: 'column',
           justifyContent: 'center',
           margin: '160px 20px'
         }}
       >
-        <Typography>Your Cart</Typography>
+        <Typography> Your Cart </Typography>
 
         <Box maxW="100%">
           <Box flexDir="column"></Box>
@@ -52,13 +46,7 @@ function Cart() {
 
 
 
-          <Box
-            mt={3}
-            mb={2}
-            justifyContent="center"
-            alignItems="center"
-            flexDir="column"
-          >
+          <Box>
             <Box>
               <Typography fontSize="35px">Total:</Typography>
               <Typography ms={2} fontSize="35px">

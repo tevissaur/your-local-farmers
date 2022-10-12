@@ -48,11 +48,14 @@ const MainLayout = () => {
       })
   }
   }, [])
-  
   useEffect(() => {
-    if (!userInfoLoading && me !== undefined) {
+    console.log(store.getState())
+  })
+  useEffect(() => {
+    if (!userInfoLoading && me?.me !== undefined) {
+      console.log(me?.me?.cart)
       store.dispatch(setIsFarmer(me?.me?.isFarmer))
-      store.dispatch(setCartItems(me?.me?.cart))
+      store.dispatch(setCartItems(UtilsService.cleanCart(me?.me?.cart?.items)))
     }
 
   }, [me, isFarmer, userInfoLoading])

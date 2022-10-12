@@ -28,7 +28,6 @@ const MyFarmDash = () => {
 
     useEffect(() => {
         loading ? console.log('loading') : store.dispatch(setMyFarm(data?.farmDashboard))
-        console.log(data)
     }, [data, loading, error])
 
     const handleChange = (e, newOpenTab) => {

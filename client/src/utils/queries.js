@@ -129,13 +129,16 @@ export const GET_ME = gql`
       address
       isFarmer
       cart {
-        productID
-        farmID
-        dateAdded
-        price
-        quantity {
-          type
-          amount
+        total
+        items {
+          productID
+          farmID
+          dateAdded
+          price
+          quantity {
+            type
+            amount
+          }
         }
       }
       orders {

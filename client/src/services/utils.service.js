@@ -3,7 +3,32 @@
 class UtilsService {
 
     isCartDuplicate(cart = [], newItem) {
-        return cart.includes(newItem)
+        for (let item of cart) {
+            if (item.productID === newItem.productID) {
+                return true
+            }
+        }
+        return false
+    }
+
+    cleanCart(cart = []) {
+        console.log(cart)
+        if (cart == []) {
+            return cart
+        }
+        return cart.map(item => {
+            return {
+                price: item.price,
+                quantity: {
+                    type: item.quantity.type,
+                    amount: item.quantity.amount
+                },
+                dateAdded: item.dateAdded,
+                farmID: item.farmID,
+                productID: item.productID
+            }
+
+        })
     }
 
     getSearchParams(params) {
@@ -28,7 +53,7 @@ class UtilsService {
 
     getActivePage = () => window.location.pathname.split('/')[1]
 
-    
+
 
 }
 export default new UtilsService();

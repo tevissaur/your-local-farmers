@@ -69,7 +69,11 @@ const typeDefs = gql`
         profilePic: String 
         orders: [PurchaseOrder]
         location: Location
-        cart: [CartProduct]
+        cart: Cart
+    }
+    type Cart {
+        total: Int
+        items: [CartProduct]
     }
     type CartProduct {
         price: Int!
@@ -86,9 +90,13 @@ const typeDefs = gql`
         amount: Int!
         type: String!
     }
-    input CartInput {
+    input UpdateCartInput {
         owner: ID!
-        cart: [CartProductInput]
+        cart: CartInput
+    }
+    input CartInput {
+        total: Int
+        items: [CartProductInput]
     }
     input CartProductInput {
         price: Int!

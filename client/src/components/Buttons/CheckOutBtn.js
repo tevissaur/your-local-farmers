@@ -13,10 +13,10 @@ const CheckOutBtn = () => {
   return (
     <>
       <Button
-        fontSize="25px"
-        border="1px solid grey"
-        boxShadow="1px 1px black"
-        backgroundColor="primary.lightGreen"
+        // fontSize="25px"
+        // border="1px solid grey"
+        // boxShadow="1px 1px black"
+        // backgroundColor="primary.lightGreen"
       >
         Checkout
       </Button>

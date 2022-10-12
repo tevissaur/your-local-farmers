@@ -19,7 +19,7 @@ const AddToCardBtn = ({ product }) => {
   
   const handleAddToCart = async () => {
     
-    const newItem = {
+    let newItem = {
       price: product.price,
       quantity: {
         type: product.quantity.type,
@@ -28,37 +28,21 @@ const AddToCardBtn = ({ product }) => {
       farmID: fid,
       productID: pid
     }
+
     if (UtilsService.isCartDuplicate(items, newItem)) {
       window.alert("This item is already in your cart!")
       return
     }
-    const cartInput = {
-      owner: _id,
-      cart: [...items, newItem]
-    }
+    
     const { data: { updateCart: { cart } } } = await updateCart({
       variables: {
         cart: {
-          ...cartInput
+          owner: _id,
+          cart: [...items, newItem]
         }
       }
     })
-    console.log(cart)
-    let cleanedCart = cart.map(item => {
-      return {
-        price: item.price,
-        quantity: {
-          type: item.quantity.type,
-          amount: item.quantity.amount
-        },
-        dateAdded: item.dateAdded,
-        farmID: item.farmID,
-        productID: item.productID
-      }
-
-    })
-    console.log(cleanedCart)
-    await store.dispatch(setCartItems(cleanedCart))
+    await store.dispatch(setCartItems(UtilsService.cleanCart(cart)))
 
 
   }

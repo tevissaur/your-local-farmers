@@ -46,32 +46,34 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Location'
     },
-    cart: [{
-      price: {
+    cart: {
+      total: {
         type: Number
       },
-      dateAdded: {
-        type: Date,
-        default: new Date().toUTCString()
-      },
-      quantity: {
-        type: {
-          type: String
+      items: [{
+        price: {
+          type: Number
         },
-        amount: Number
-      },
-      farmID: {
-        type: Schema.Types.ObjectId,
-        ref: 'Farm'
-      },
-      productID: {
-        type: Schema.Types.ObjectId,
-        ref: 'Product' 
-      }
-    }]
-  },
-  {
-
+        dateAdded: {
+          type: Date,
+          default: new Date().toUTCString()
+        },
+        quantity: {
+          type: {
+            type: String
+          },
+          amount: Number
+        },
+        farmID: {
+          type: Schema.Types.ObjectId,
+          ref: 'Farm'
+        },
+        productID: {
+          type: Schema.Types.ObjectId,
+          ref: 'Product'
+        }
+      }]
+    }
   }
 );
 

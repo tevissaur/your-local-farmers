@@ -18,7 +18,6 @@ import { GET_CART_ITEMS, SET_CART_ITEMS, SET_CART_OWNER, SET_CART_TOTAL } from "
 
 const initialState = {
     items: [],
-    cartOwner: '',
     cartTotal: 0
 }
 

@@ -7,9 +7,13 @@ import store from '../../../utils/store'
 const MyFarmProducts = () => {
     const { dashboard: { myFarm: { products } } } = store.getState()
 
+    useEffect(() => {
+        console.log(products)
+    }, [])
+
     return (
         <Box h="60vh" flexWrap="wrap" overflow="scroll" >
-            {(products.length === 0) || (!products) ? (
+            {(products?.length === 0) || (!products) ? (
                 <Typography>
                     No products
                 </Typography>
@@ -17,7 +21,7 @@ const MyFarmProducts = () => {
             ) : (
                 <>
                     
-                    {products.map((product) => {
+                    {products?.map((product) => {
                         return <FarmProductCard product={product} key={product._id} />
                     })}
                 </>

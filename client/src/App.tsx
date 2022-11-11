@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { createTheme } from "@mui/system";
 import customTheme from "./styles/theme";
 import FarmersRouter from "./FarmersRouter";
+import React from "react";
 
 export const client = new ApolloClient({
   uri: "/graphql",
@@ -21,7 +22,7 @@ export const client = new ApolloClient({
 function App() {
   useSelector((state) => state)
   const defaultTheme = useTheme()
-  const theme = createTheme(defaultTheme, customTheme)
+  const theme = createTheme(customTheme)
   
   useEffect(() => {
     if (AuthService.isTokenExpired(AuthService.getToken())) {

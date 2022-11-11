@@ -50,7 +50,7 @@ const farmSchema = new Schema(
         }],
         location: {
             latitude: Schema.Types.Decimal128,
-            longitude: Schema.Types.Decimal128
+            longitude: Schema.Types.Decimal128,
         },
         season: {
             start: {

@@ -1,80 +1,66 @@
-import { SET_MY_FARM, SET_OPEN_TAB, UPDATE_FARM_INFO, UPDATE_NEW_FARM_FORM, UPDATE_NEW_PRODUCT_FORM } from "./dashboard.types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IFarm } from "../../interfaces/IFarm";
+import { IProduct } from "../../interfaces/IProduct";
 
-const initialState = {
-    ui: {
-        openTab: 0,
-        newFarm: {
-            name: '',
-            story: '',
-            address: ''
-        },
-        newProduct: {
-            name: '',
-            price: 0,
-            quantity: 0,
-            categories: [],
-            description: ''
-        },
-        editFarm: {
-            name: '',
-            address: '',
-            story: ''
-        }
-    },
-    myFarm: {}
+export interface FarmDashboardSlice {
+	farm: IFarm;
+	product: IProduct;
 }
 
-export function dashboardReducer(state = initialState, action) {
-    switch(action.type) {
-        case UPDATE_NEW_PRODUCT_FORM:
-            return {
-                ...state,
-                ui: {
-                    ...state.ui,
-                    newProduct: {
-                        ...state.ui.newProduct,
-                        [action.param]: action.payload
-                    }
-                }
-            }
-        case UPDATE_NEW_FARM_FORM: {
-            return {
-                ...state,
-                ui: {
-                    ...state.ui,
-                    newFarm: {
-                        ...state.ui.newFarm,
-                        [action.param]: action.payload
-                    }
-                }
-            }
-        }
-        case UPDATE_FARM_INFO: {
-            return {
-                ...state,
-                ui: {
-                    ...state.ui,
-                    editFarm: {
-                        ...state.ui.newFarm,
-                        [action.param]: action.payload
-                    }
-                }
-            }
-        }
-        case SET_OPEN_TAB:
-            return {
-                ...state,
-                ui: {
-                    ...state.ui,
-                    openTab: action.payload
-                }
-            }
-        case SET_MY_FARM:
-            return {
-                ...state,
-                myFarm: action.payload
-            }
-        default: 
-            return state
-    }
-}
+const initialState: FarmDashboardSlice = {
+	farm: {
+		_id: "",
+		name: "",
+		address: "",
+		reviews: [],
+		products: [],
+		owners: [],
+		story: "",
+		offersDelivery: false,
+		tags: [],
+		season: {
+			start: 0,
+			end: 0,
+		},
+		acceptedPayments: [],
+		location: {
+			longitude: 0,
+			latitude: 0,
+		},
+		avgScore: 0,
+		purchaseOrders: [],
+	},
+	product: {
+		_id: "",
+		name: "",
+		image: "",
+		price: 0,
+		avgScore: 0,
+		reviews: [],
+		description: "",
+		season: {
+			start: 0,
+			end: 0,
+		},
+		type: "",
+		tags: [],
+		categories: [],
+	},
+};
+
+export const farmDashboardSlice = createSlice({
+	name: "farm-dashboard",
+	initialState,
+	reducers: {
+		setFarmData: (state, action: PayloadAction<IFarm>) => {
+			state.farm = action.payload;
+		},
+		setProductData: (state, action: PayloadAction<IProduct>) => {
+			state.farm = action.payload;
+		},
+	},
+});
+
+export const { setFarmData } = farmDashboardSlice.actions;
+
+export default farmDashboardSlice.reducer;

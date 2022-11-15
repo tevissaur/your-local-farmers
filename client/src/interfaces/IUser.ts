@@ -1,10 +1,40 @@
-import { IFarm } from "./IFarm";
-
+import { ICart } from "./ICart";
+import { IFarm, IPurchaseOrder } from "./IFarm";
+import { IReview } from "./IReview";
+export interface ILocation {
+	latitude: number;
+	longitude: number;
+}
+export interface IAuthToken {
+	data: {
+		_id: string;
+		exp: number;
+	}
+}
 export interface IUser {
-    username?: string;
-    firstName?: string;
-    lastName?: string;
-    isFarmer?: boolean;
-    farms?: Array<IFarm>;
-    fullName?: string;
+	_id?: string;
+	username?: string;
+	firstName?: string;
+	lastName?: string;
+	isFarmer?: boolean;
+	farms?: Array<IFarm>;
+	fullName?: string;
+	email?: string;
+	password?: string;
+	address?: string;
+	orders?: Array<IPurchaseOrder>;
+	cart?: ICart;
+	reviews?: Array<IReview>;
+	location?: ILocation;
+}
+
+export interface ILogin {
+	username?: string;
+	password?: string;
+}
+export interface ISignup {
+	firstName: string;
+	lastName: string;
+	username: string;
+	password: string;
 }

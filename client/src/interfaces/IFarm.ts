@@ -1,34 +1,31 @@
-import { IProduct } from "./IProduct";
+import { IProduct, ISeason } from "./IProduct";
 import { IReview } from "./IReview";
 import { IUser } from "./IUser";
 
-export interface IPurchaseOrder {
-
-}
+export interface IPurchaseOrder {}
 
 export interface ITag {
-
+    title: string;
 }
-
 export interface IFarm {
-    name: string;
-    address: string;
-    reviews?: Array<IReview>;
-    products?: Array<IProduct>;
-    purchaseOrders?: Array<IPurchaseOrder>;
-    owners: Array<IUser>;
-    story: string;
-    avgScore?: number;
-    offersDelivery: boolean;
-    type: string;
-    acceptedPayments: string;
-    location: {
-        latitude: number;
-        longitude: number;
-    };
-    season: {
-        start: number;
-        end: number;
-    };
-    tags: Array<ITag>;
+	_id?: string;
+	name?: string;
+	address?: string;
+	owners?: Array<IUser>;
+	offersDelivery?: boolean;
+	reviews?: Array<IReview>;
+	products?: Array<IProduct>;
+	purchaseOrders?: Array<IPurchaseOrder>;
+
+	story?: string;
+	avgScore?: number;
+
+	type?: string;
+	acceptedPayments?: Array<string>;
+	location?: {
+		latitude: number;
+		longitude: number;
+	};
+	season?: ISeason;
+	tags?: Array<ITag>;
 }

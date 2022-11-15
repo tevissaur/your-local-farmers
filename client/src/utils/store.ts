@@ -1,13 +1,11 @@
 import { createStore, combineReducers } from "redux";
 // import { persistReducer } from 'redux-persist'
 import cart from '../utils/slices/cart-slice';
-import { farmReducer as browseFarms } from "../resources/browse-farms/browse-farms.reducer";
-import { productReducer as product } from "../resources/product/product.reducer";
-import { profileReducer as profile } from "../resources/profile/profile.reducer";
-import { authReducer as auth } from "../resources/auth-forms/auth.reducer";
-import { categoriesReducer as categories } from "../resources/categories/categories.reducer";
-import { dashboardReducer as dashboard } from "../resources/farm-dashboard/dashboard.reducer";
-import { uiReducer as ui } from "../resources/ui/ui.reducer";
+import search from '../utils/slices/search-slice'
+import ui from '../utils/slices/ui-slice'
+import user from '../utils/slices/profile-slice'
+import farmDashboard from '../utils/slices/farm-dashboard-slice'
+import farmStore from '../utils/slices/farm-store-slice'
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api";
 
@@ -15,15 +13,18 @@ import { api } from "./api";
 const store = configureStore({
   reducer: {
     cart,
-    auth,
-    profile,
-    browseFarms,
-    product,
-    categories,
-    dashboard,
+    search,
     ui,
+    user,
+    farmDashboard,
+    farmStore,
     [api.reducerPath]: api.reducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
+
 
 export default store;

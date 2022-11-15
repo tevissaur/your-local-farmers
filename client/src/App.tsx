@@ -20,8 +20,6 @@ export const client = new ApolloClient({
 
 
 function App() {
-  useSelector((state) => state)
-  const defaultTheme = useTheme()
   const theme = createTheme(customTheme)
   
   useEffect(() => {

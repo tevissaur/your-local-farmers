@@ -9,7 +9,6 @@ import { CookiesProvider } from "react-cookie";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      
         <CookiesProvider>
           <App />
         </CookiesProvider>

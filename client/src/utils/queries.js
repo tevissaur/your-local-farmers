@@ -41,34 +41,7 @@ export const GET_MY_FARM = gql`
 `
 export const QUERY_FARM = gql`
   query FarmStore($id: ID!) {
-    farmStore(_id: $id) {
-      _id
-      name
-      address
-      story
-      reviews {
-        author{
-          firstName
-        }
-        content
-        rating
-      }
-      products {
-        _id
-        name
-        price
-        quantity {
-          type
-          amount
-        }
-        categories {
-          name
-        }
-      }
-      owners {
-        fullName
-      }
-    }
+   
   }
 `
 export const QUERY_FARMS = gql`

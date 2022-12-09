@@ -17,7 +17,7 @@ import { GET_MY_FARM } from '../../../resources/farm-dashboard/dashboard.control
 
 
 const MyFarmDash = () => {
-    const { dashboard: { ui: { openTab } } } = store.getState()
+    const { dashboard: { ui: { openTab } } } = useSelector((state: RootState) => state);
     const { data: { _id } } = AuthService.getProfile()
     const { data, loading, error } = useQuery(StoreService.queryBuilder(GET_MY_FARM), {
         variables: {

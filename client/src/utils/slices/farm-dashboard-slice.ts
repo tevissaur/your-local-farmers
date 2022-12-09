@@ -52,12 +52,12 @@ export const farmDashboardSlice = createSlice({
 	name: "farm-dashboard",
 	initialState,
 	reducers: {
-		setFarmData: (state, action: PayloadAction<IFarm>) => {
+		setFarmData: ((state, action: PayloadAction<IFarm>) => {
 			state.farm = action.payload;
-		},
-		setProductData: (state, action: PayloadAction<IProduct>) => {
+		}),
+		setProductData: ((state, action: PayloadAction<IProduct>) => {
 			state.farm = action.payload;
-		},
+		}),
 	},
 });
 

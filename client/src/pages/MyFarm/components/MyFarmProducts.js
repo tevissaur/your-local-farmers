@@ -5,7 +5,7 @@ import store from '../../../utils/store'
 
 
 const MyFarmProducts = () => {
-    const { dashboard: { myFarm: { products } } } = store.getState()
+    const { dashboard: { myFarm: { products } } } = useSelector((state: RootState) => state);
 
     useEffect(() => {
         console.log(products)

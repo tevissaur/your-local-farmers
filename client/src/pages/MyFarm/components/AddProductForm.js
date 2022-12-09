@@ -10,7 +10,7 @@ import { setMyFarm, updateNewProductForm } from "../../../resources/farm-dashboa
 
 
 const AddProductForm = () => {
-    const { categories: { categories }, dashboard: { ui: { newProduct }, myFarm } } = store.getState()
+    const { categories: { categories }, dashboard: { ui: { newProduct }, myFarm } } = useSelector((state: RootState) => state);
     let payload
     const [createProduct] = useMutation(CREATE_PRODUCT)
 

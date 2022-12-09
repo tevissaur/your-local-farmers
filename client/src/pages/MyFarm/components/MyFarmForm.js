@@ -22,7 +22,7 @@ function MyFarm() {
                 }
             }
         }
-    } = store.getState()
+    } = useSelector((state: RootState) => state);
     let payload
 
     const isInvalid = name === '' || address === '' || story === '';

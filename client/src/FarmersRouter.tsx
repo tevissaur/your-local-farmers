@@ -12,23 +12,24 @@ import MainLayout from "./pages/MainLayout";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import NoPage from "./pages/NoPage";
 import { useEffect } from "react";
-import store from "./utils/store";
-import { setCoords } from "./resources/profile/profile.actions";
+import store, { RootState } from "./utils/store";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const FarmersRouter = () => {
-  const { profile: { userData: { location } } } = store.getState()
+  const { user: { userData: { location } } } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
-    if ('geolocation' in navigator && (location.coords.latitude === 0 && location.coords.longitude === 0)) {
+    if ('geolocation' in navigator && (location?.latitude === 0 && location?.longitude === 0)) {
 
       navigator.geolocation.getCurrentPosition((e) => {
         const coords = { 
           latitude: e.coords.latitude, 
           longitude: e.coords.longitude
         }
-        store.dispatch(setCoords(coords))
       })
     }
   }, [])
@@ -37,7 +38,7 @@ const FarmersRouter = () => {
     <Router >
 
       <Routes>
-        <Route exact path="/*" element={<MainLayout />}>
+        <Route path="/*" element={<MainLayout />}>
           <Route index element={<Homepage />} />
           <Route path="home" element={<Homepage />} />
           <Route path="farm/:fname">

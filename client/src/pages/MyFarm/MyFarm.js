@@ -12,7 +12,7 @@ import LoginForm from '../../components/AuthForms/LoginForm'
 import Signup from '../../components/AuthForms/SignupForm'
 
 function MyFarm() {
-    const { profile: { isFarmer, loggedIn } } = store.getState()
+    const { profile: { isFarmer, loggedIn } } = useSelector((state: RootState) => state);
 
     return (
         <Box>

@@ -1,5 +1,5 @@
 import { ICategory } from "./ICategory";
-import { ITag } from "./IFarm";
+import { IFarm, ITag } from "./IFarm";
 import { IReview } from "./IReview";
 
 export interface ISeason {
@@ -19,5 +19,9 @@ export interface IProduct {
     type?: string;
     tags?: Array<ITag>;
     categories?: Array<ICategory>
-
+    quantity?: {
+        type: string;
+        amount: number;
+    };
+    farm?: IFarm;
 }

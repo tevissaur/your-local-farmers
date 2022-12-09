@@ -18,23 +18,23 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		addProduct: (state, action: PayloadAction<ICartProduct>) => {
+		addProduct: ((state, action: PayloadAction<ICartProduct>) => {
 			state.cart.products.push(action.payload);
 			state.cart.total = utilsService.calculateCartTotal(
 				state.cart.products
 			);
-		},
-		removeProduct: (state, action: PayloadAction<ICartProduct>) => {
+		}),
+		removeProduct: ((state, action: PayloadAction<ICartProduct>) => {
 			state.cart.products.filter((product) => {
 				product.productID !== action.payload.productID;
 			});
 			state.cart.total = utilsService.calculateCartTotal(
 				state.cart.products
 			);
-		},
-		setCartData: (state, action: PayloadAction<ICart>) => {
+		}),
+		setCartData: ((state, action: PayloadAction<ICart>) => {
 			state.cart = action.payload;
-		},
+		})
 	},
 });
 

@@ -9,7 +9,7 @@ const UserOrders = () => {
                 orders 
             } 
         } 
-    } = store.getState()
+    } = useSelector((state: RootState) => state);
 
     return (
         <>

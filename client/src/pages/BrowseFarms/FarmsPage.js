@@ -25,7 +25,7 @@ const FarmsPage = () => {
                 selectedCategories
             }
         }
-    } = store.getState()
+    } = useSelector((state: RootState) => state);
 
     const [getFarms, { loading, data, error }] = useLazyQuery(QUERY_FARMS)
 

@@ -4,7 +4,7 @@ import { imageSeeds } from "../../../imageSeeds";
 import store from "../../../utils/store";
 
 const FarmProduct = ({ product }) => {
-  const { dashboard: { myFarm } } = store.getState()
+  const { dashboard: { myFarm } } = useSelector((state: RootState) => state);
 
 
   return (

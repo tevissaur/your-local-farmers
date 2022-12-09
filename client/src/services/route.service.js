@@ -1,6 +1,5 @@
-export default class RouteService {
-
-    static notFoundPath = '/not-found'
-
-    
+class RouteService {
+	static notFoundPath = "/not-found";
 }
+
+export default new RouteService();

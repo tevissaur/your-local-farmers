@@ -170,6 +170,7 @@ const typeDefs = gql`
         categories: [Category]
         farmDashboard(_id: ID!): Farm
         farmStore(_id: ID!): Farm
+        localFarms(_id: ID!): [Farm]
     }
 
     type Mutation {

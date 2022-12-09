@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICategory } from "../../interfaces/ICategory";
 import { IFarm } from "../../interfaces/IFarm";
 import { IProduct } from "../../interfaces/IProduct";
 
@@ -46,12 +45,12 @@ export const farmStoreSlice = createSlice({
 	name: "farm-store",
 	initialState,
 	reducers: {
-		setFarmData: (state, action: PayloadAction<IFarm>) => {
+		setFarmData: ((state, action: PayloadAction<IFarm>) => {
 			state.farm = action.payload;
-		},
-		setProduct: (state, action: PayloadAction<IProduct>) => {
+		}),
+		setProduct: ((state, action: PayloadAction<IProduct>) => {
 			state.farm = action.payload;
-		},
+		})
 	},
 });
 

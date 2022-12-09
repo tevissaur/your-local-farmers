@@ -7,7 +7,7 @@ import store from "../../../utils/store";
 
 
 function EditFarm() {
-    const { dashboard: { myFarm: farm } } = store.getState()
+    const { dashboard: { myFarm: farm } } = useSelector((state: RootState) => state);
     const [editingFarmName, setEditFarmName] = useState(false)
     const [editingFarmAddress, setEditFarmAddress] = useState(false)
     const [editingFarmStory, setEditFarmStory] = useState(false)

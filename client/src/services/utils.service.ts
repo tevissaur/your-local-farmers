@@ -1,8 +1,7 @@
 import { ICart, ICartProduct } from "../interfaces/ICart";
-import { IProduct } from "../interfaces/IProduct";
 
 class UtilsService {
-	public calculateCartTotal(products: Array<ICartProduct>) {
+	calculateCartTotal(products: Array<ICartProduct>) {
 		return products.map(prod => prod.price).reduce((accumulator: number, currentValue: number) => accumulator + currentValue);
 	}
 
@@ -28,9 +27,9 @@ class UtilsService {
 		});
 	}
 
-	getSearchParams(params) {
+	getSearchParams(params: string) {
 		const paramsArr = params.split("&").map((param) => param.split("="));
-		let paramsObj;
+		let paramsObj: { fid: string; pid: string; } = { fid: '', pid: ''};
 		for (let param of paramsArr) {
 			paramsObj = {
 				...paramsObj,

@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import store from '../../../utils/store';
 
 function MyOrders() {
-  const { dashboard: { myFarm } } = store.getState()
+  const { dashboard: { myFarm } } = useSelector((state: RootState) => state);
 
 
   useEffect(() => {

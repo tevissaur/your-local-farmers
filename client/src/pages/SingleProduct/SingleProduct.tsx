@@ -19,8 +19,11 @@ const Product = () => {
 	const {
 		farmStore: { product, farm },
 		user: { loggedIn },
+		ui: { modal: { open } }
 	} = useSelector((state: RootState) => state);
+
 	const dispatch = useDispatch();
+	
 	const { search } = useLocation();
 	const { pid } = UtilsService.getSearchParams(search);
 

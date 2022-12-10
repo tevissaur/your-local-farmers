@@ -1,64 +1,52 @@
-
 import { BaseButton as Button } from "./BaseButton";
-import store, { RootState } from "../../utils/store";
-import { setCartItems } from "../../resources/cart/cart.actions";
-import { useEffect } from "react";
+import { RootState } from "../../utils/store";
+import { setCartData } from "../../utils/slices/cart-slice";
+import { FC, useEffect } from "react";
 import UtilsService from "../../services/utils.service";
-import AuthService from "../../services/authentication.service"
+import AuthService from "../../services/authentication.service";
 import { UPDATE_CART } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-const AddToCardBtn = ({ product }) => {
-  const { cart: { items } } = useSelector((state: RootState) => state);
-  const { search } = useLocation()
-  const { data: { _id } } = AuthService.getProfile()
-  const { fid, pid } = UtilsService.getSearchParams(search)
-  const [updateCart] = useMutation(UPDATE_CART)
-
-  
-  const handleAddToCart = async () => {
-    
-    let newItem = {
-      price: product.price,
-      quantity: {
-        type: product.quantity.type,
-        amount: product.quantity.amount
-      },
-      farmID: fid,
-      productID: pid
-    }
-
-    if (UtilsService.isCartDuplicate(items, newItem)) {
-      window.alert("This item is already in your cart!")
-      return
-    }
-    
-    const { data: { updateCart: { cart } } } = await updateCart({
-      variables: {
-        cart: {
-          owner: _id,
-          cart: [...items, newItem]
-        }
-      }
-    })
-    await store.dispatch(setCartItems(UtilsService.cleanCart(cart)))
+import { useDispatch, useSelector } from "react-redux";
+import { ICartProduct } from "../../interfaces/ICart";
+import { FarmProductProps } from "../../pages/SingleFarm/components/FarmProductCard";
 
 
-  }
 
-  useEffect(() => {
+const AddToCardBtn: FC<FarmProductProps> = ({ product }) => {
+	const { cart: { products } } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch()
+	const { search } = useLocation();
+	const {
+		data: { _id },
+	} = AuthService.getProfile();
+	const { fid, pid } = UtilsService.getSearchParams(search);
+	const [updateCart] = useMutation(UPDATE_CART);
 
+	const handleAddToCart = async () => {
+		let newItem: ICartProduct = {
+			price: product.price,
+			quantity: {
+				type: product.quantity.type,
+				amount: product.quantity.amount,
+			},
+			farmID: fid,
+			productID: pid,
+		};
 
-  }, [items])
+		if (UtilsService.isCartDuplicate(products, newItem)) {
+			window.alert("This item is already in your cart!");
+			return;
+		}
 
+		await dispatch(setCartData(UtilsService.cleanCart(cart.products)));
+	};
 
-  return (
-    <Button onClick={handleAddToCart}>
-      Add To Cart
-    </Button>
-  )
-}
+	useEffect(() => {
+    console.log(products)
+  }, [products]);
 
-export default AddToCardBtn
+	return <Button onClick={handleAddToCart}>Add To Cart</Button>;
+};
+
+export default AddToCardBtn;

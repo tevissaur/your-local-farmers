@@ -7,6 +7,8 @@ export interface UserSlice {
 	userData: IUser;
 }
 
+
+
 const initialState: UserSlice = {
 	loggedIn: authenticationService.loggedIn(),
 	userData: {

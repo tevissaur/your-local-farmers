@@ -38,6 +38,10 @@ const initialState: FarmStoreSlice = {
 		type: "",
 		tags: [],
 		categories: [],
+		quantity: {
+			amount: 0,
+			type: ''
+		}
 	}
 };
 

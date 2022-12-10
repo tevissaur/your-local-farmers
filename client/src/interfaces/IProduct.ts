@@ -11,7 +11,7 @@ export interface IProduct {
     _id?: string;
 	name: string;
 	image?: string;
-	price?: number;
+	price: number;
 	avgScore?: number;
 	reviews?: Array<IReview>;
     description?: string;
@@ -19,7 +19,7 @@ export interface IProduct {
     type?: string;
     tags?: Array<ITag>;
     categories?: Array<ICategory>
-    quantity?: {
+    quantity: {
         type: string;
         amount: number;
     };

@@ -22,7 +22,7 @@ export interface IUser {
 	farms?: Array<IFarm>;
 	fullName?: string;
 	email: string;
-	password: string;
+	password?: string;
 	address?: string;
 	orders?: Array<IPurchaseOrder>;
 	cart?: ICart;

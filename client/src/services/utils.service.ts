@@ -5,8 +5,8 @@ class UtilsService {
 		return products.map(prod => prod.price).reduce((accumulator: number, currentValue: number) => accumulator + currentValue);
 	}
 
-	isCartDuplicate(cart: ICart, newItem: ICartProduct) {
-		for (let item of cart.products) {
+	isCartDuplicate(products: Array<ICartProduct>, newItem: ICartProduct) {
+		for (let item of products) {
 			if (item.productID === newItem.productID) {
 				return true;
 			}

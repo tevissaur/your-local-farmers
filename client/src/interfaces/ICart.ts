@@ -1,11 +1,12 @@
 export interface ICartProduct {
-    productID?: string,
+    productID: string,
     price: number,
     quantity?: {
         amount?: number,
         type?: string
     },
-    dateAdded?: string
+    dateAdded?: string,
+    farmID: string;
 }
 
 

@@ -1,5 +1,5 @@
 // use this to decode a token and get the user's information out of it
-import decode, { JwtPayload } from "jwt-decode";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 import { IAuthToken } from "../interfaces/IUser";
 
 // create a new class to instantiate for a user
@@ -7,13 +7,10 @@ class AuthService {
 	// get user data
 	getProfile() {
 		try {
-			return decode<JwtPayload>(this.getToken());
+			return jwt_decode<IAuthToken>(this.getToken());
 		} catch (err) {
-			return {
-				data: {
-					_id: "",
-				},
-			};
+			console.log(err)
+			return err;
 		}
 	}
 
@@ -25,9 +22,9 @@ class AuthService {
 	}
 
 	// check if token is expired
-	isTokenExpired(token) {
+	isTokenExpired(token: string) {
 		try {
-			const decoded = decode<IAuthToken>(token);
+			const decoded = jwt_decode<IAuthToken>(token);
 			if (decoded.data.exp < Date.now() / 1000) {
 				return true;
 			} else return false;
@@ -38,10 +35,10 @@ class AuthService {
 
 	getToken() {
 		// Retrieves the user token from localStorage
-		return localStorage.getItem("id_token");
+		return localStorage.getItem("id_token") || "";
 	}
 
-	login(idToken, redirectUrl) {
+	login(idToken: string, redirectUrl: string) {
 		// Saves user token to localStorage
 		localStorage.setItem("id_token", idToken);
 		window.location.assign(`/${redirectUrl}`);

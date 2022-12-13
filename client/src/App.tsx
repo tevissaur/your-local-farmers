@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import { useSelector } from 'react-redux'
 import { ThemeProvider, useTheme } from "@mui/material";
-import AuthService from "./utils/auth";
+import AuthService from "./services/authentication.service";
 import { useEffect } from "react";
 import { createTheme } from "@mui/system";
 import customTheme from "./styles/theme";

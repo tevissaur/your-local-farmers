@@ -10,12 +10,12 @@ import styled from "@mui/material/styles/styled";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivePage } from "../utils/slices/ui-slice";
-import utilsService from "../services/utils.service";
 import { setCartData } from "../utils/slices/cart-slice";
 import { setCategories } from "../utils/slices/search-slice";
 import { useGetMeQuery } from "../services/api.service";
 import authenticationService from "../services/authentication.service";
 import { IAuthToken } from "../interfaces/IUser";
+import utilsService from "../services/utils.service";
 
 const MainContainer = styled("main")(({ theme }) => ({
 	display: "flex",
@@ -28,7 +28,7 @@ const MainContainer = styled("main")(({ theme }) => ({
 }));
 
 const MainLayout = () => {
-  const { data: { _id } } = authenticationService.getProfile()
+	const profile = authenticationService.getProfile();
 	const {
 		user: {
 			loggedIn,
@@ -38,7 +38,7 @@ const MainLayout = () => {
 	const dispatch = useDispatch();
 
 	// const { loading, data, error } = useQuery(QUERY_CATEGORIES);
-	const { data, isLoading, isError } = useGetMeQuery(profile.data._id)
+	const { data, isLoading, isError } = useGetMeQuery(profile);
 
 	useEffect(() => {
 		dispatch(setActivePage(utilsService.getActivePage()));
@@ -49,25 +49,26 @@ const MainLayout = () => {
 	});
 
 	useEffect(() => {
-		if (!userInfoLoading && me?.me !== undefined) {
-			dispatch(setCartData(utilsService.cleanCart(me?.me?.cart.products)));
+		console.log(data)
+		if (!isLoading && data !== undefined) {
+			// dispatch(setCartData(utilsService.cleanCart(data.cart.products)));
 		}
-	}, [me, isFarmer, userInfoLoading]);
+	}, [isFarmer, data]);
 
 	useEffect(() => {
-		if (!loading) {
-			dispatch(
-				setCategories(
-					data.categories.map((cat) => {
-						return {
-							...cat,
-							selected: false,
-						};
-					})
-				)
-			);
-		}
-	}, [loading, data]);
+		// if (!isLoading) {
+		// 	dispatch(
+		// 		setCategories(
+		// 			data.categories.map((cat) => {
+		// 				return {
+		// 					...cat,
+		// 					selected: false,
+		// 				};
+		// 			})
+		// 		)
+		// 	);
+		// }
+	}, [isLoading, data]);
 
 	return (
 		<>

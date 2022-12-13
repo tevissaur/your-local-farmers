@@ -3,7 +3,7 @@ import { createStore, combineReducers } from "redux";
 import cart from '../utils/slices/cart-slice';
 import search from '../utils/slices/search-slice'
 import ui from '../utils/slices/ui-slice'
-import user from '../utils/slices/profile-slice'
+import user from './slices/user-slice'
 import farmDashboard from '../utils/slices/farm-dashboard-slice'
 import farmStore from '../utils/slices/farm-store-slice'
 import { configureStore } from "@reduxjs/toolkit";

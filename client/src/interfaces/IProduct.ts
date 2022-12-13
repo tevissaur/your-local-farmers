@@ -1,5 +1,5 @@
 import { ICategory } from "./ICategory";
-import { ITag } from "./IFarm";
+import { IFarm, ITag } from "./IFarm";
 import { IReview } from "./IReview";
 
 export interface ISeason {
@@ -11,7 +11,7 @@ export interface IProduct {
     _id?: string;
 	name: string;
 	image?: string;
-	price?: number;
+	price: number;
 	avgScore?: number;
 	reviews?: Array<IReview>;
     description?: string;
@@ -19,5 +19,9 @@ export interface IProduct {
     type?: string;
     tags?: Array<ITag>;
     categories?: Array<ICategory>
-
+    quantity: {
+        type: string;
+        amount: number;
+    };
+    farm?: IFarm;
 }

@@ -1,4 +1,5 @@
 import { gql } from "graphql-request";
+import { ILogin } from "../interfaces/IUser";
 import { api } from "../utils/api";
 
 export const baseApi = api.injectEndpoints({
@@ -6,43 +7,43 @@ export const baseApi = api.injectEndpoints({
 		getMe: builder.query({
 			query: (id) => ({
 				body: gql`
-                    query {
-                        me(_id: "${id}") {
-                            _id
-                            firstName
-                            lastName
-                            username
-                            email
-                            address
-                            isFarmer
-                            cart {
-                                total
-                                items {
-                                    productID
-                                    farmID
-                                    dateAdded
-                                    price
-                                    quantity {
-                                        type
-                                        amount
-                                    }
+                query {
+                    me(_id: "${id}") {
+                        _id
+                        firstName
+                        lastName
+                        username
+                        email
+                        address
+                        isFarmer
+                        cart {
+                            total
+                            items {
+                                productID
+                                farmID
+                                dateAdded
+                                price
+                                quantity {
+                                    type
+                                    amount
                                 }
-                            }
-                            orders {
-                                _id
-                                seller {
-                                    _id
-                                    name
-                                }
-                                items {
-                                    _id
-                                    name
-                                }
-                                dateCreated
-                                orderTotal
                             }
                         }
-                    }`,
+                        orders {
+                            _id
+                            seller {
+                                _id
+                                name
+                            }
+                            items {
+                                _id
+                                name
+                            }
+                            dateCreated
+                            orderTotal
+                        }
+                    }
+                }`,
 			}),
 			transformResponse: (response) => response.me,
 		}),
@@ -51,38 +52,117 @@ export const baseApi = api.injectEndpoints({
 				body: gql` 
                 query {
                     farm(_id: "${id}") {
-                    _id
-                    name
-                    address
-                    story
-                    reviews {
-                      author{
-                        firstName
-                      }
-                      content
-                      rating
-                    }
-                    products {
                       _id
                       name
-                      price
-                      quantity {
-                        type
-                        amount
+                      address
+                      story
+                      reviews {
+                        author{
+                          firstName
+                        }
+                        content
+                        rating
                       }
-                      categories {
+                      products {
+                        _id
                         name
+                        price
+                        quantity {
+                          type
+                          amount
+                        }
+                        categories {
+                          name
+                        }
+                      }
+                      owners {
+                        fullName
                       }
                     }
-                    owners {
-                      fullName
-                    }
-                  }
-                }`,
+                  }`,
 			}),
 			transformResponse: (response) => response.farm,
+		}),
+		getProduct: builder.query({
+			query: (id) => ({
+				body: gql`
+        query {
+          product(_id: "${id}") {
+            _id
+            name
+            price
+            quantity {
+              type
+              amount
+            }
+            inSeason
+            farm {
+              name
+            }
+            categories {
+              name
+            }
+            reviews {
+              author {
+                username
+              }
+              content
+              rating
+            }
+          }
+        }
+        `,
+			}),
+			transformResponse: (response) => response.product,
+		}),
+		getLocalFarms: builder.query({
+			query: (id) => ({
+				body: gql`
+            query {
+              localFarms(_id: "${id}") {
+                _id
+                name
+              }
+            }
+          `,
+			}),
+		}),
+		login: builder.mutation({
+			query: (login: ILogin) => ({
+				body: gql`
+            mutation {
+                login(username: "${login.username}", password: "${login.password}")) {
+                  token
+                  user {
+                    _id
+                  }
+                }
+            }
+        `,
+			}),
+		}),
+    signup: builder.mutation({
+			query: (login: ILogin) => ({
+				body: gql`
+            mutation {
+                login(username: "${login.username}", password: "${login.password}")) {
+                  token
+                  user {
+                    _id
+                  }
+                }
+            }
+        `,
+			}),
 		}),
 	}),
 });
 
-export const { useGetMeQuery, useGetFarmQuery } = baseApi;
+export const {
+	useGetMeQuery,
+	useGetFarmQuery,
+	useGetProductQuery,
+	useGetLocalFarmsQuery,
+  useSignupMutation,
+  useLoginMutation
+} = baseApi;

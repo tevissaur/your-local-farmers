@@ -3,7 +3,7 @@ import * as geolib from 'geolib'
 import Homepage from "./pages/Home/Homepage";
 import Product from "./pages/SingleProduct/SingleProduct";
 import Profile from "./pages/Profile/Profile"
-import Category from "./pages/ProductByCategory/CategoryProducts";
+import Search from "./pages/Search/Search";
 import Farm from "./pages/SingleFarm/SingleFarm";
 import MyFarm from './pages/MyFarm/MyFarm'
 import FarmsPage from "./pages/BrowseFarms/FarmsPage";
@@ -12,23 +12,26 @@ import MainLayout from "./pages/MainLayout";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import NoPage from "./pages/NoPage";
 import { useEffect } from "react";
-import store from "./utils/store";
-import { setCoords } from "./resources/profile/profile.actions";
+import store, { RootState } from "./utils/store";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FarmSearch from "./pages/Search/components/FarmSearch";
+import ProductSearch from "./pages/Search/components/ProductSearch";
 
 
 const FarmersRouter = () => {
-  const { profile: { userData: { location } } } = store.getState()
+  const { user: { userData: { location } } } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
-    if ('geolocation' in navigator && (location.coords.latitude === 0 && location.coords.longitude === 0)) {
+    if ('geolocation' in navigator && (location?.latitude === 0 && location?.longitude === 0)) {
 
       navigator.geolocation.getCurrentPosition((e) => {
         const coords = { 
           latitude: e.coords.latitude, 
           longitude: e.coords.longitude
         }
-        store.dispatch(setCoords(coords))
       })
     }
   }, [])
@@ -37,7 +40,7 @@ const FarmersRouter = () => {
     <Router >
 
       <Routes>
-        <Route exact path="/*" element={<MainLayout />}>
+        <Route path="/*" element={<MainLayout />}>
           <Route index element={<Homepage />} />
           <Route path="home" element={<Homepage />} />
           <Route path="farm/:fname">
@@ -52,8 +55,9 @@ const FarmersRouter = () => {
 
           </Route>
           <Route path="profile" element={<Profile />} />
-          <Route path="category/*" element={<Category />}>
-            <Route path=":name" element={<Category />} />
+          <Route path="category/*" element={<Search />}>
+            <Route path="farms" element={<FarmSearch />} />
+            <Route path="products" element={<ProductSearch />} />
           </Route>
           <Route path="product/*">
             <Route path=":pname" element={<Product />} />

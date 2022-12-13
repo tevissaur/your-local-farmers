@@ -4,14 +4,13 @@ import { IProduct } from "../../interfaces/IProduct";
 import utilsService from "../../services/utils.service";
 
 export interface CartState {
-	cart: ICart;
+    products: Array<ICartProduct>;
+    total: number;
 }
 
 const initialState: CartState = {
-	cart: {
-		products: [],
-		total: 0,
-	},
+	products: [],
+	total: 0,
 };
 
 export const cartSlice = createSlice({
@@ -19,21 +18,21 @@ export const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addProduct: (state, action: PayloadAction<ICartProduct>) => {
-			state.cart.products.push(action.payload);
-			state.cart.total = utilsService.calculateCartTotal(
-				state.cart.products
+			state.products.push(action.payload);
+			state.total = utilsService.calculateCartTotal(
+				state.products
 			);
 		},
 		removeProduct: (state, action: PayloadAction<ICartProduct>) => {
-			state.cart.products.filter((product) => {
+			state.products.filter((product) => {
 				product.productID !== action.payload.productID;
 			});
-			state.cart.total = utilsService.calculateCartTotal(
-				state.cart.products
+			state.total = utilsService.calculateCartTotal(
+				state.products
 			);
 		},
 		setCartData: (state, action: PayloadAction<ICart>) => {
-			state.cart = action.payload;
+			state = action.payload;
 		},
 	},
 });

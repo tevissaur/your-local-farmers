@@ -1,13 +1,18 @@
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const { resolvers, typeDefs } = require('./schemas');
-const path = require('path');
-const db = require('./config/connection');
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { typeDefs } from './schemas/typeDefs';
+import { resolvers } from './schemas/resolvers';
+import path from 'path';
+import db from './config/connection';
+
+interface MyContext {
+  token?: String;
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const server = new ApolloServer({
+const server = new ApolloServer<MyContext>({
   resolvers,
   typeDefs,
 })

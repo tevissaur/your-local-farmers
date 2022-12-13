@@ -1,5 +1,7 @@
-
-export const tagsEnum = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.tagsEnum = void 0;
+exports.tagsEnum = [
     'Organic Practices',
     'Certified Organic',
     'Pasture-raised',
@@ -15,4 +17,4 @@ export const tagsEnum = [
     'Proceeds go to charity',
     'Co-Op',
     'Employee Owned'
-]
+];

@@ -1,7 +1,45 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+import { Schema, model, Types } from "mongoose";
+import bcrypt from "bcrypt";
+import { IReview } from "./Review";
+import { IPurchaseOrder } from "./PurchaseOrder";
 
-const userSchema = new Schema({
+export interface ILocation {
+	address: string;
+	latitude: number;
+	longitude: number;
+}
+
+export interface ICartProduct {
+	price: number;
+	dateAdded: string;
+	quantity: {
+		amount: number;
+		type: string;
+	};
+	productID: Types.ObjectId;
+	farmID: Types.ObjectId;
+	userType: string;
+}
+
+export interface IUser {
+	username: string;
+	firstName: string;
+	lastName: string;
+	fullName?: string;
+	email: string;
+	password: string;
+	isFarmer: boolean;
+	address: string;
+	reviews: Types.Array<IReview>;
+	orders: Types.Array<IPurchaseOrder>;
+	location: Types.ObjectId;
+	cart: {
+		total: number;
+		products: Types.Array<ICartProduct>
+	}
+}
+
+const userSchema = new Schema<IUser>({
 	username: {
 		type: String,
 		required: true,
@@ -21,6 +59,10 @@ const userSchema = new Schema({
 	password: {
 		type: String,
 		required: true,
+		set: async (plainTextPassword: string) => {
+			return await bcrypt.hash(plainTextPassword, 10);
+		},
+		get: (): undefined => undefined,
 	},
 	isFarmer: {
 		type: Boolean,
@@ -35,10 +77,6 @@ const userSchema = new Schema({
 			ref: "Review",
 		},
 	],
-	profilePic: {
-		type: Buffer,
-		ref: "Image",
-	},
 	orders: [
 		{
 			type: Schema.Types.ObjectId,
@@ -46,8 +84,11 @@ const userSchema = new Schema({
 		},
 	],
 	location: {
-		type: Schema.Types.ObjectId,
-		ref: "Location",
+		address: {
+			type: String,
+		},
+		latitude: Number,
+		longitude: Number,
 	},
 	cart: {
 		total: {
@@ -72,18 +113,21 @@ const userSchema = new Schema({
 					type: Schema.Types.ObjectId,
 					ref: "Product",
 				},
+				farmID: {
+					type: Schema.Types.ObjectId,
+					ref: 'Farm'
+				}
 			},
 		],
 	},
 	userType: {
 		type: String,
-    enum: ['Business', 'Personal']
+		enum: ["Business", "Personal"],
 	},
 });
 
 // hash user password
 userSchema.pre("save", async function (next) {
-	console.log(this);
 	if (this.isNew || this.isModified("password")) {
 		const saltRounds = 10;
 		this.password = await bcrypt.hash(this.password, saltRounds);
@@ -92,15 +136,10 @@ userSchema.pre("save", async function (next) {
 	next();
 });
 
-// custom method to compare and validate password for logging in
-userSchema.methods.isCorrectPassword = async function (password) {
-	return bcrypt.compare(password, this.password);
-};
-
 userSchema.virtual("fullName").get(function () {
 	return `${this.firstName} ${this.lastName}`;
 });
 
-const User = model("User", userSchema);
+const User = model<IUser>("User", userSchema);
 
-module.exports = User;
+export default User;

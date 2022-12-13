@@ -1,4 +1,4 @@
-const ProductQuantityTypeEnum = [
+export const ProductQuantityTypeEnum = [
     'lbs',
     'oz',
     'g',
@@ -7,5 +7,3 @@ const ProductQuantityTypeEnum = [
     'l',
     'ml',
 ]
-
-module.exports = ProductQuantityTypeEnum

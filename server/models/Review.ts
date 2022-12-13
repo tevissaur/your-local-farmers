@@ -1,6 +1,14 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model, Types } from 'mongoose'
 
-const reviewSchema = new Schema(
+export interface IReview {
+    author: Types.ObjectId;
+    content: string;
+    rating: number;
+    farm: Types.ObjectId;
+    product: Types.ObjectId;
+}
+
+const reviewSchema = new Schema<IReview>(
     {
         author: {
             type: Schema.Types.ObjectId,
@@ -26,6 +34,6 @@ const reviewSchema = new Schema(
     }
 )
 
-const Review = model('Review', reviewSchema)
+const Review = model<IReview>('Review', reviewSchema)
 
-module.exports = Review
+export default Review

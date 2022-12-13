@@ -1,12 +1,31 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model, Types } from 'mongoose';
+import { IProduct, ISeason } from './Product';
+import { IPurchaseOrder } from './PurchaseOrder';
+import { IReview } from './Review';
+import { ITag } from './Tags';
+import { ILocation, IUser } from './User';
 
-const farmSchema = new Schema(
+export interface IFarm {
+    name: string; 
+    reviews: Types.Array<IReview>;
+    products: Types.Array<IProduct>;
+    purchaseOrders: Types.Array<IPurchaseOrder>;
+    owners: Types.Array<IUser>;
+    story: string;
+    avgScore: number;
+    offersDelivery: boolean;
+    type: string;
+    acceptedPayments: Types.Array<string>;
+    location: ILocation;
+    season: ISeason;
+    tags: Types.Array<ITag>;
+
+}
+
+
+const farmSchema = new Schema<IFarm>(
     {
         name: {
-            type: String,
-            required: true
-        },
-        address: {
             type: String,
             required: true
         },
@@ -49,6 +68,7 @@ const farmSchema = new Schema(
             type: String
         }],
         location: {
+            address: String,
             latitude: Schema.Types.Decimal128,
             longitude: Schema.Types.Decimal128,
         },
@@ -66,26 +86,32 @@ const farmSchema = new Schema(
             type: Schema.Types.ObjectId,
             default: []
         }]
+    }, 
+    {
+        toJSON: {
+            getters: true,
+            virtuals: true
+        }
     }
 )
 
-farmSchema.virtual('categoriesOffered', {
-    ref: 'Category',
-    localField: 'name',
-    foreignField: 'name',
-    justOne: true,
-}).get(function() {
-    let arr = [] 
-    this.products.forEach(product => {
-        product.categories.forEach(category => {
-            if (!arr.includes(category)) {
-                arr.push(category)
-            }
-        })
-        return product.categories
-    })
-    return arr
-})
+// farmSchema.virtual('categoriesOffered', {
+//     ref: 'Category',
+//     localField: 'name',
+//     foreignField: 'name',
+//     justOne: true,
+// }).get(function() {
+//     let arr = [] 
+//     this.products.forEach(product => {
+//         product.categories.forEach(category => {
+//             if (!arr.includes(category)) {
+//                 arr.push(category)
+//             }
+//         })
+//         return product.categories
+//     })
+//     return arr
+// })
 
 // farmSchema.post('save', async function(next) {
 //     let categories = ["Dairy, Meat & Eggs", "Baked Goods", "Seasonal Stuffs", "Beverages", "Flowers & Plants", "Fruits & Vegetables"]
@@ -108,6 +134,6 @@ farmSchema.virtual('categoriesOffered', {
 //     console.log(this, this.avgScore)
 // })
 
-const Farm = model('Farm', farmSchema)
+const Farm = model<IFarm>('Farm', farmSchema)
 
-module.exports = Farm
+export default Farm

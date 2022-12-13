@@ -1,6 +1,8 @@
-const { gql } = require('apollo-server-express')
-
-const typeDefs = gql`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.typeDefs = void 0;
+const apollo_server_express_1 = require("apollo-server-express");
+exports.typeDefs = (0, apollo_server_express_1.gql) `
     type PurchaseOrder {
         _id: ID!
         seller: Farm
@@ -185,7 +187,4 @@ const typeDefs = gql`
         updateFarm(farm: UpdatedFarm): Farm
         updateCart(cart: CartInput): User
     }
-`
-
-
-module.exports = typeDefs
+`;

@@ -1,16 +1,10 @@
-const { AuthenticationError } = require("apollo-server-express");
-const {
-	User,
-	Review,
-	Product,
-	Category,
-	Farm,
-	PurchaseOrder,
-} = require("../models");
+import { AuthenticationError } from "apollo-server-express";
+import { User, Review, Product, Category, Farm, PurchaseOrder } from "../models";
+import bcrypt from 'bcrypt'
 
-const { signToken } = require("../utils/auth");
+import { signToken } from "../services/authentication.service";
 
-const resolvers = {
+export const resolvers = {
 	Query: {
 		me: async (parent, { _id }) => {
 			const user = await User.findById(_id).populate([
@@ -121,64 +115,7 @@ const resolvers = {
 				.limit(10);
 		},
 		farmDashboard: async (parent, { _id }) => {
-			return await Farm.findOne({ owners: [_id] }).populate([
-				{
-					path: "reviews",
-					model: "Review",
-					populate: {
-						path: "author",
-						model: "User",
-					},
-				},
-				{
-					path: "owners",
-					model: "User",
-					populate: {
-						path: "reviews",
-						model: "Review",
-					},
-				},
-				{
-					path: "products",
-					model: "Product",
-					populate: [
-						{
-							path: "categories",
-							model: "Category",
-						},
-						{
-							path: "reviews",
-							model: "Review",
-							populate: {
-								path: "author",
-								model: "User",
-							},
-						},
-					],
-				},
-				{
-					path: "purchaseOrders",
-					model: "PurchaseOrder",
-					populate: [
-						{
-							path: "sellers",
-							model: "Farm",
-						},
-						{
-							path: "items",
-							model: "Product",
-						},
-						{
-							path: "buyer",
-							model: "User",
-						},
-					],
-				},
-				{
-					path: "categoriesOffered",
-					model: "Category",
-				},
-			]);
+			return await Farm.findOne({ _id });
 		},
 		categories: async (parent, args) => {
 			const productCategory = await Category.find().populate([
@@ -274,15 +211,15 @@ const resolvers = {
 			try {
 				const user = await User.findOne({ email });
 
-				if (!user) {
-					throw new AuthenticationError("No Profile with that email");
-				}
+				if (!user) throw new AuthenticationError("No Profile with that email");
 
-				const correctPw = await user.isCorrectPassword(password);
+				const isPasswordMatching = await bcrypt.compare(
+					password,
+					user.get('password', null, { getters: false })
+				)
 
-				if (!correctPw) {
-					throw new AuthenticationError("Incorrect password!");
-				}
+				if (!isPasswordMatching) throw new AuthenticationError("Incorrect password!");
+				
 				const token = signToken(user);
 				return { token, user };
 			} catch (err) {
@@ -291,7 +228,7 @@ const resolvers = {
 			}
 		},
 		postReview: async (parent, { review, productId, user, farmId }) => {
-			const newReview = Review.create(review);
+			const newReview = await Review.create(review);
 			const newReviewWithAuthor = await Review.findById(
 				newReview._id
 			).populate([
@@ -441,7 +378,6 @@ const resolvers = {
 					$set: {
 						cart: {
 							total: cartTotal,
-							items,
 						},
 					},
 				},
@@ -505,5 +441,3 @@ const resolvers = {
 		},
 	},
 };
-
-module.exports = resolvers;

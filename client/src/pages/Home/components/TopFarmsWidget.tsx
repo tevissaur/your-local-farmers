@@ -67,15 +67,7 @@ const TopFarmsWidget = () => {
 						flexWrap: "wrap",
 					}}
 				>
-					{farms?.map((farm, index) => {
-						return (
-							<SmallFarmsIcon
-								key={farm._id}
-								id={farm._id}
-								name={farm.name}
-							/>
-						);
-					})}
+					
 				</Box>
 			</Box>
 		</>

@@ -33,7 +33,7 @@ const CategoryHeader = () => {
                 flexWrap: 'wrap'
             }}>
                 {categories.map((category, index) => {
-                    return (<SmallCategoryIcon key={index + 30} card={category} />)
+                    return (<SmallCategoryIcon key={index + 30} />)
                 })}
             </Box>
 

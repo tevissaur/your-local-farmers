@@ -1,21 +1,18 @@
 import ShoppingCart from '@mui/icons-material/ShoppingCart'
 import { LinkBase as Link } from '../LinkBase';
 import IconButton from '@mui/material/IconButton'
-import store from '../../utils/store';
+import store, { RootState } from '../../utils/store';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 
 
 const CartIcon = () => {
-    const { cart: { items } } = useSelector((state: RootState) => state);
+    const { cart: { products } } = useSelector((state: RootState) => state);
 
 
     return (
-            <Link to={"/cart"}>
-                <IconButton>
-                    <ShoppingCart />
-                    {items.length}
-                </IconButton>
-            </Link>
+            <></>
     )
 }
 

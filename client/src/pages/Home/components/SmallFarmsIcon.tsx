@@ -1,12 +1,11 @@
 import { Box, CardMedia, Typography, Link } from '@mui/material';
 import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import localFarm from '../../../assets/localFarm.jpg'
 import slugify from 'slugify';
 
 
 
-const SmallFarmsIcon = ({ id, name }) => {
+const SmallFarmsIcon = ({ id, name }: { id: string; name: string; }) => {
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
@@ -22,7 +21,7 @@ const SmallFarmsIcon = ({ id, name }) => {
                         },
                     },
                 }}>
-                    <CardMedia
+                    {/* <CardMedia
                         src={localFarm}
                         component='img'
                         sx={{
@@ -33,7 +32,7 @@ const SmallFarmsIcon = ({ id, name }) => {
                             width: '125px',
                             margin: 'auto',
                             borderRadius: '50%'
-                        }} />
+                        }} /> */}
                     <Typography textAlign="center" paddingY={1.5}>{ name }</Typography>
                 </Box>
             </Link>

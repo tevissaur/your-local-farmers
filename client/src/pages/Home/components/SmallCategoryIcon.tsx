@@ -2,16 +2,15 @@ import { Box, CardMedia, Typography } from '@mui/material';
 import React from 'react';
 import slugify from 'slugify'
 import { LinkBase as Link } from '../../../components/LinkBase';
-import categoryPlaceholderPhoto from '../../../assets/bakedGoods.jpg'
 
 
-const SmallCategoryIcon = ({ card }) => {
+const SmallCategoryIcon = () => {
 
 
     return (
         <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
 
-            <Link to={`/category/${slugify(card.name, { lower: true })}?cid=${card._id}`}>
+            {/* <Link to={`/category/${slugify(card.name, { lower: true })}?cid=${card._id}`}>
                 <Box sx={{
                     marginX: 1.5,
                     color: 'black',
@@ -24,7 +23,7 @@ const SmallCategoryIcon = ({ card }) => {
                     },
                 }}>
                     <CardMedia
-                        src={categoryPlaceholderPhoto}
+                        src={'../../../assets/bakedGoods.jpg'}
                         component='img'
                         sx={{
                             ':hover': {
@@ -37,7 +36,7 @@ const SmallCategoryIcon = ({ card }) => {
                         }} />
                     <Typography textAlign="center" paddingY={1.5}>{card.name}</Typography>
                 </Box>
-            </Link>
+            </Link> */}
         </Box>
     )
 }

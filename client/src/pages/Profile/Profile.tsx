@@ -4,7 +4,6 @@ import { GET_ME } from "../../utils/queries";
 import UserMain from "./components/UserMain";
 import AuthService from "../../services/authentication.service";
 import { Box, Tab, Tabs } from "@mui/material";
-import { TabPanel, a11yProps } from "../../components/TabPanel/TabPanel";
 import store, { RootState } from "../../utils/store";
 import UserOrders from "./components/UserOrders";
 import React from "react";

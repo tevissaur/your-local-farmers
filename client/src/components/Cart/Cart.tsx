@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CheckOutBtn from "../Buttons/CheckOutBtn";
-import ProductCardCart from "./ProductCardCart";
 import store, { RootState } from "../../utils/store";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -41,7 +40,7 @@ function Cart() {
             </Typography>
           ) : (
             <>
-              {products.map((item: ICartProduct, itx: number) => <ProductCardCart key={itx} item={item} />)}
+
             </>
           )) : (<></>)}
 

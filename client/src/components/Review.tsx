@@ -1,14 +1,15 @@
-import ReviewButton from "../../../components/Buttons/ReviewButton";
-import AuthService from "../../../utils/auth";
+import ReviewButton from "../components/Buttons/ReviewButton";
+import AuthService from "../services/authentication.service";
 import { AiFillStar } from "react-icons/ai";
 import { Box, Typography } from "@mui/material";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
-import store, { RootState } from "../../../utils/store";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { IReview } from "../interfaces/IReview";
+import { RootState } from "../utils/store";
 
-const FarmReviews = () => {
+const Reviews = () => {
     const {
 		farmStore: { product, farm },
 		user: { loggedIn },
@@ -26,7 +27,7 @@ const FarmReviews = () => {
                         <AiFillStar fontSize="15px"/> */}
                     </Box>
                     <Typography fontSize="sm">
-                        Based on {reviews?.length} reviews
+                        Based on {farm.reviews?.length} reviews
                     </Typography>
 
                 </Box>
@@ -35,7 +36,7 @@ const FarmReviews = () => {
             <Box sx={{
                 width: '40%'
             }}>
-                {reviews?.map((review, idx) => (
+                {farm.reviews?.map((review: IReview) => (
                     <Box m="15px" key={review._id}>
                         <Box>
                             {Array(review.rating)
@@ -76,4 +77,4 @@ const FarmReviews = () => {
     )
 }
 
-export default FarmReviews
+export default Reviews

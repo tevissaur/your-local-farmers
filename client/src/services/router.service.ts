@@ -2,7 +2,7 @@
 class RouterService {
     HOME_ROUTE = '/home'
 
-    redirectToPage(fromPageUrl, toPageUrl) {
+    redirectToPage(fromPageUrl: string, toPageUrl: string) {
 
         window.location.replace(toPageUrl)
     }

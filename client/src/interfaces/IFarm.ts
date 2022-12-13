@@ -2,7 +2,12 @@ import { IProduct, ISeason } from "./IProduct";
 import { IReview } from "./IReview";
 import { IUser } from "./IUser";
 
-export interface IPurchaseOrder {}
+export interface IPurchaseOrder {
+	dateCreated: string;
+	orderTotal: string;
+	items: Array<IProduct>;
+	seller: IFarm;
+}
 
 export interface ITag {
     title: string;

@@ -7,43 +7,43 @@ export const baseApi = api.injectEndpoints({
 		getMe: builder.query({
 			query: (id) => ({
 				body: gql`
-                    query {
-                        me(_id: "${id}") {
-                            _id
-                            firstName
-                            lastName
-                            username
-                            email
-                            address
-                            isFarmer
-                            cart {
-                                total
-                                items {
-                                    productID
-                                    farmID
-                                    dateAdded
-                                    price
-                                    quantity {
-                                        type
-                                        amount
-                                    }
+                query {
+                    me(_id: "${id}") {
+                        _id
+                        firstName
+                        lastName
+                        username
+                        email
+                        address
+                        isFarmer
+                        cart {
+                            total
+                            items {
+                                productID
+                                farmID
+                                dateAdded
+                                price
+                                quantity {
+                                    type
+                                    amount
                                 }
-                            }
-                            orders {
-                                _id
-                                seller {
-                                    _id
-                                    name
-                                }
-                                items {
-                                    _id
-                                    name
-                                }
-                                dateCreated
-                                orderTotal
                             }
                         }
-                    }`,
+                        orders {
+                            _id
+                            seller {
+                                _id
+                                name
+                            }
+                            items {
+                                _id
+                                name
+                            }
+                            dateCreated
+                            orderTotal
+                        }
+                    }
+                }`,
 			}),
 			transformResponse: (response) => response.me,
 		}),

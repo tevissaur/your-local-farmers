@@ -38,7 +38,12 @@ const initialState: UiState = {
 	},
 	openTab: 0,
 	review: {
-		author: "",
+		author: {
+			username: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+		},
 		content: "",
 		rating: 0,
 		farm: "",
@@ -76,6 +81,10 @@ const initialState: UiState = {
 		type: "",
 		tags: [],
 		categories: [],
+		quantity: {
+			amount: 0,
+			type: ''
+		}
 	}
 };
 
@@ -100,6 +109,9 @@ export const uiSlice = createSlice({
 		}),
 		setSignupForm: ((state, action: PayloadAction<ISignup>) => {
 			state.signup = { ...action.payload };
+		}),
+		setReviewForm: ((state, action: PayloadAction<IReview>) => {
+			state.review = { ...action.payload }
 		})
 	},
 });
@@ -110,7 +122,8 @@ export const {
 	setActivePage,
 	setOpenTab,
 	setLoginForm,
-	setSignupForm
+	setSignupForm,
+	setReviewForm
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

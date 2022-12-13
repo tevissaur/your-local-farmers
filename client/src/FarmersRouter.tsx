@@ -3,7 +3,7 @@ import * as geolib from 'geolib'
 import Homepage from "./pages/Home/Homepage";
 import Product from "./pages/SingleProduct/SingleProduct";
 import Profile from "./pages/Profile/Profile"
-import Category from "./pages/ProductByCategory/CategoryProducts";
+import Search from "./pages/Search/Search";
 import Farm from "./pages/SingleFarm/SingleFarm";
 import MyFarm from './pages/MyFarm/MyFarm'
 import FarmsPage from "./pages/BrowseFarms/FarmsPage";
@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import store, { RootState } from "./utils/store";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FarmSearch from "./pages/Search/components/FarmSearch";
+import ProductSearch from "./pages/Search/components/ProductSearch";
 
 
 const FarmersRouter = () => {
@@ -53,8 +55,9 @@ const FarmersRouter = () => {
 
           </Route>
           <Route path="profile" element={<Profile />} />
-          <Route path="category/*" element={<Category />}>
-            <Route path=":name" element={<Category />} />
+          <Route path="category/*" element={<Search />}>
+            <Route path="farms" element={<FarmSearch />} />
+            <Route path="products" element={<ProductSearch />} />
           </Route>
           <Route path="product/*">
             <Route path=":pname" element={<Product />} />

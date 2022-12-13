@@ -3,7 +3,8 @@ import { IProduct } from "./IProduct";
 import { ILogin, ISignup, IUser } from "./IUser";
 
 export interface IReview {
-    author: string;
+    _id?: string;
+    author: IUser;
     content: string;
     rating: number;
     farm: string;

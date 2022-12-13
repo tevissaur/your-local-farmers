@@ -13,35 +13,21 @@ import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 import AuthService from '../../services/authentication.service';
 import { Link as ReactLink } from 'react-router-dom';
-import store from '../../utils/store';
+import store, { RootState } from '../../utils/store';
 import CartIcon from '../Cart/CartIcon'
-import { showProfileDropdown } from '../../resources/ui/ui.actions'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleProfileDropdown } from '../../utils/slices/ui-slice'
 
 const AccountMenu = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const { cart: { cartItems }, ui: { profileDropdown: open } } = useSelector((state: RootState) => state);
+    const { cart: { products }, ui: { profileDropdown: open } } = useSelector((state: RootState) => state);
+    const dispatch = useDispatch();
     
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        store.dispatch(showProfileDropdown(!open))
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-        store.dispatch(showProfileDropdown(!open))
-
-    };
     return (
         <>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', marginX: 2 }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', marginX: 2 }}>
                 <Tooltip title="Account settings">
-                    <IconButton
-                        onClick={handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
-                        aria-controls={open ? 'account-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                    >
+                    <IconButton>
                         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
@@ -111,7 +97,7 @@ const AccountMenu = () => {
                     </ListItemIcon>
                     Logout
                 </MenuItem>
-            </Menu>
+            </Menu> */}
         </>
     );
 }

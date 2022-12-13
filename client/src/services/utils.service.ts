@@ -1,8 +1,13 @@
-import { ICart, ICartProduct } from "../interfaces/ICart";
+import { ICartProduct } from "../interfaces/ICart";
 
 class UtilsService {
 	calculateCartTotal(products: Array<ICartProduct>) {
-		return products.map(prod => prod.price).reduce((accumulator: number, currentValue: number) => accumulator + currentValue);
+		return products
+			.map((prod) => prod.price)
+			.reduce(
+				(accumulator: number, currentValue: number) =>
+					accumulator + currentValue
+			);
 	}
 
 	isCartDuplicate(products: Array<ICartProduct>, newItem: ICartProduct) {
@@ -23,13 +28,14 @@ class UtilsService {
 				quantity: item.quantity,
 				dateAdded: item.dateAdded,
 				productID: item.productID,
+				farmID: item.farmID,
 			};
 		});
 	}
 
 	getSearchParams(params: string) {
 		const paramsArr = params.split("&").map((param) => param.split("="));
-		let paramsObj: { fid: string; pid: string; } = { fid: '', pid: ''};
+		let paramsObj: { fid: string; pid: string } = { fid: "", pid: "" };
 		for (let param of paramsArr) {
 			paramsObj = {
 				...paramsObj,

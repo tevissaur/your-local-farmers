@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box"
 import styled from '@mui/material/styles/styled';
+import React from "react";
 import { useEffect } from "react";
-import store from "../utils/store";
+import { useSelector } from "react-redux";
+import store, { RootState } from "../utils/store";
 
 
 const BannerStyled = styled(Box)(({ theme }) => ({
@@ -15,7 +17,7 @@ const BannerStyled = styled(Box)(({ theme }) => ({
 
 const Banner = () => {
 
-    const { profile: { loggedIn } } = useSelector((state: RootState) => state);
+    const { user: { loggedIn } } = useSelector((state: RootState) => state);
 
     return (
     <BannerStyled>

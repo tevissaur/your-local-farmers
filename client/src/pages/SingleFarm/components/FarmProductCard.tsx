@@ -29,15 +29,6 @@ const FarmProduct: FC<FarmProductProps> = ({ product }) => {
 				paddingX: 3,
 			}}
 		>
-			{/* <Box
-        component='img'
-        sx={{
-          maxWidth: '200px'
-        }}
-        objectFit="cover"
-        src={`${foundProductImage}`}
-      /> */}
-
 			<Link
 				component={ReactLink}
 				to={`/farm/${slugify(fname ?? '', {

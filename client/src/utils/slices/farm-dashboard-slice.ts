@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { number, string } from "yargs";
 import { IFarm } from "../../interfaces/IFarm";
 import { IProduct } from "../../interfaces/IProduct";
 
@@ -45,6 +46,10 @@ const initialState: FarmDashboardSlice = {
 		type: "",
 		tags: [],
 		categories: [],
+		quantity: {
+			amount: 0,
+			type: ''
+		}
 	},
 };
 

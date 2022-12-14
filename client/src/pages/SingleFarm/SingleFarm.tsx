@@ -6,7 +6,6 @@ import FarmReviews from "../../components/Review";
 import UtilsService from "../../services/utils.service";
 import { Box, Typography } from "@mui/material";
 import store, { RootState } from "../../utils/store";
-import { setSingleFarm } from "../../utils/actions";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFarmQuery } from "../../services/api.service";
@@ -23,7 +22,6 @@ const Farm = () => {
 	const { isLoading, data, error } = useGetFarmQuery(fid);
 
 	useEffect(() => {
-		isLoading ? null : dispatch(setSingleFarm(data?.farmStore));
 		console.log(data);
 	}, [isLoading, data, error]);
 

@@ -4,11 +4,13 @@ import slugify from 'slugify'
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import React from "react";
+import { IProduct } from "../interfaces/IProduct";
 
 
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }: { product: IProduct}) => {
 
   //finding image matched product from seed
   const cardArr = imageSeeds.map((card) => card);
@@ -21,7 +23,7 @@ const ProductCard = ({ product }) => {
     <>
       <Box p="10px" flex="50%">
         <Box border="green 2px solid" borderRadius="25px" height="100%" width="100%">
-          <Box component='img' src={foundProductImage} style={{ borderRadius: "25px", width: "100%" }} />
+          <Box component='img' style={{ borderRadius: "25px", width: "100%" }} />
           <Link to={`/products/${product._id}`}>
             <Box justifyContent="space-between">
               <Typography
@@ -57,9 +59,9 @@ const ProductCard = ({ product }) => {
               from
             </Typography>
 
-            <Link to={`/farm/${slugify(product.farm.name, { lower: true })}/store?fid=${product.farm._id}`}>
+            <Link to={`/farm/${slugify(product.farm?.name ?? '', { lower: true })}/store?fid=${product.farm?._id}`}>
               <Typography fontSize="2xl" color="primary.darkGreen">
-                {product.farm.name}
+                {product.farm?.name}
               </Typography>
             </Link>
           </Box>

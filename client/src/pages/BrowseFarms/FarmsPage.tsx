@@ -4,93 +4,81 @@ import { QUERY_FARMS } from '../../utils/queries';
 import { Link } from 'react-router-dom'
 import FarmCard from './components/FarmCard'
 import { Box, Button, Checkbox, FormControl, FormLabel, List, ListItem, Typography } from '@mui/material';
-import StoreService from '../../services/store.service';
-import store from '../../utils/store';
+import store, { RootState } from '../../utils/store';
 import { client } from '../../App';
-import { setFarms, setSelectedCategories, setVisibleFarms } from '../../resources/browse-farms/browse-farms.actions';
+import { useSelector } from 'react-redux';
 
 
 
 
 const FarmsPage = () => {
 
-    const {
-        categories: {
-            categories
-        },
-        browseFarms: {
-            farms,
-            ui: {
-                visibleFarms,
-                selectedCategories
-            }
-        }
-    } = useSelector((state: RootState) => state);
+    const state = useSelector((state: RootState) => state);
 
-    const [getFarms, { loading, data, error }] = useLazyQuery(QUERY_FARMS)
+    // const [getFarms, { loading, data, error }] = useLazyQuery(QUERY_FARMS)
 
 
-    // CORS ANYWHERE: https://intense-reef-62305.herokuapp.com/
-    useEffect(async () => {
-        const baseUrl = 'https://intense-reef-62305.herokuapp.com/'
-        store.dispatch(setSelectedCategories(categories))
+    // // CORS ANYWHERE: https://intense-reef-62305.herokuapp.com/
+    // useEffect(async () => {
+    //     const baseUrl = 'https://intense-reef-62305.herokuapp.com/'
+    //     store.dispatch(setSelectedCategories(categories))
 
-        // const response = await fetch(`https://www.usdalocalfoodportal.com/api/csa/?apikey=zBKAMQhIEC&x=-84&y=42&radius=30`, {
-        //     'mode': 'no-cors'
-        // })
-        // const x = await response.json();
-        // console.log(x)
-    }, [])
+    //     // const response = await fetch(`https://www.usdalocalfoodportal.com/api/csa/?apikey=zBKAMQhIEC&x=-84&y=42&radius=30`, {
+    //     //     'mode': 'no-cors'
+    //     // })
+    //     // const x = await response.json();
+    //     // console.log(x)
+    // }, [])
 
-    useEffect(async () => {
-        const cachedFarms = client.readQuery({
-            query: QUERY_FARMS,
-        })
-        if (cachedFarms && !data) {
-            store.dispatch(setFarms(cachedFarms.farms))
-            store.dispatch(setVisibleFarms(cachedFarms.farms))
+    // useEffect(async () => {
+    //     const cachedFarms = client.readQuery({
+    //         query: QUERY_FARMS,
+    //     })
+    //     if (cachedFarms && !data) {
+    //         store.dispatch(setFarms(cachedFarms.farms))
+    //         store.dispatch(setVisibleFarms(cachedFarms.farms))
 
-        } else {
-            await getFarms()
-            store.dispatch(setFarms(data?.farms))
-            store.dispatch(setVisibleFarms(data?.farms))
-        }
-    }, [loading, data])
+    //     } else {
+    //         await getFarms()
+    //         store.dispatch(setFarms(data?.farms))
+    //         store.dispatch(setVisibleFarms(data?.farms))
+    //     }
+    // }, [loading, data])
 
-    useEffect(() => {
-        console.log(visibleFarms)
-    }, [visibleFarms])
+    // useEffect(() => {
+    //     console.log(visibleFarms)
+    // }, [visibleFarms])
 
-    const handleCheckBoxChange = async (e) => {
-        const name = e.target.value
+    // const handleCheckBoxChange = async (e) => {
+    //     const name = e.target.value
 
-        const category = categories.filter(cat => cat.name === name)
+    //     const category = categories.filter(cat => cat.name === name)
 
-        const updatedSelectedCategoriesNames =
-            selectedCategories.includes(category[0])
-                ? selectedCategories.filter(cat => cat.name !== name)
-                : [...selectedCategories, category[0]]
+    //     const updatedSelectedCategoriesNames =
+    //         selectedCategories.includes(category[0])
+    //             ? selectedCategories.filter(cat => cat.name !== name)
+    //             : [...selectedCategories, category[0]]
 
-        await store.dispatch(setSelectedCategories(updatedSelectedCategoriesNames))
+    //     await store.dispatch(setSelectedCategories(updatedSelectedCategoriesNames))
 
 
-        let catNames = updatedSelectedCategoriesNames.map(cat => cat.name)
+    //     let catNames = updatedSelectedCategoriesNames.map(cat => cat.name)
 
-        const updatedVisibleFarms = farms.filter(farm => {
-            console.log(catNames)
-            catNames.forEach(cat => {
-                if (farm.categoriesOffered.includes(cat)) {
-                    console.log(cat, farm)
-                }
-            })
-        })
+    //     const updatedVisibleFarms = farms.filter(farm => {
+    //         console.log(catNames)
+    //         catNames.forEach(cat => {
+    //             if (farm.categoriesOffered.includes(cat)) {
+    //                 console.log(cat, farm)
+    //             }
+    //         })
+    //     })
 
-        await store.dispatch(setVisibleFarms(updatedVisibleFarms))
-    }
+    //     await store.dispatch(setVisibleFarms(updatedVisibleFarms))
+    // }
 
     return (
         <>
-            <Box sx={{
+            {/* <Box sx={{
                 position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
@@ -166,7 +154,6 @@ const FarmsPage = () => {
                                         fontSize='25px'
                                     >
                                         <ListItem >
-                                            {/* <ListIcon as={BsQuestionLg} color='red' /> */}
                                             What if I am are not tech savy?
                                         </ListItem>
                                         <ListItem ms={8} fontSize='22px'
@@ -175,7 +162,6 @@ const FarmsPage = () => {
                                             free as possible with an accessible managment system.
                                         </ListItem>
                                         <ListItem>
-                                            {/* <ListIcon as={BsQuestionLg} color='red' /> */}
                                             Dont you need a lot of land to
                                             be a farmer?
                                         </ListItem>
@@ -187,7 +173,6 @@ const FarmsPage = () => {
                                             way to get involved in your community!
                                         </ListItem>
                                         <ListItem>
-                                            {/* <ListIcon color='red' as={BsQuestionLg} /> */}
                                             Is there a monthly quota you
                                             need to meet to continue being a farmer?
                                         </ListItem>
@@ -197,7 +182,6 @@ const FarmsPage = () => {
                                             you can continue being a farmer as long as you desire!
                                         </ListItem>
                                     </List>
-                                    {/* <Image src={farmerPic}></Image> */}
                                 </Box>
                                 <Link to='/myFarm'>
                                     <Box justifyContent='center'>
@@ -209,7 +193,7 @@ const FarmsPage = () => {
                         </Box>
                     </Box>
                 </Box>
-            </Box>
+            </Box> */}
         </>
     )
 }

@@ -24,9 +24,7 @@ export const cartSlice = createSlice({
 			);
 		},
 		removeProduct: (state, action: PayloadAction<ICartProduct>) => {
-			state.products.filter((product) => {
-				product.productID !== action.payload.productID;
-			});
+			state.products.filter((product) => product.productID !== action.payload.productID);
 			state.total = utilsService.calculateCartTotal(
 				state.products
 			);

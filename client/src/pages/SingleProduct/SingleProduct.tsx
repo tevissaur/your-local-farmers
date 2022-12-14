@@ -30,7 +30,7 @@ const Product = () => {
 	const { isLoading, data, error, isError } = useGetProductQuery(pid);
 
 	useEffect(() => {
-		isLoading ? null : dispatch(setProduct(data));
+		isLoading ? dispatch(setProduct(product)) : dispatch(setProduct(data));
 	}, [isLoading, data]);
 
 	return (

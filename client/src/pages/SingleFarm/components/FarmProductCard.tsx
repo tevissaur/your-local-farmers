@@ -1,9 +1,8 @@
 import { Box, Typography, Link } from "@mui/material";
 import { Link as ReactLink, useParams } from "react-router-dom";
 import React, { useEffect, FC } from "react";
-import { imageSeeds } from "../../../imageSeeds";
 import slugify from "slugify";
-import store, { RootState } from "../../../utils/store";
+import { RootState } from "../../../utils/store";
 import { useSelector } from "react-redux";
 import { IProduct } from "../../../interfaces/IProduct";
 import { UrlParams } from "../../../interfaces/UrlParams";

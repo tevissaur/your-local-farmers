@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { imageSeeds } from "../../../imageSeeds";
 
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -12,20 +11,13 @@ import { FarmProductProps } from "../../SingleFarm/components/FarmProductCard";
 
 const ProductCard: FC<FarmProductProps> = ({ product }) => {
 
-  //finding image matched product from seed
-  const cardArr = imageSeeds.map((card) => card);
-
-  const foundProduct = cardArr.filter((arr) => arr.name === product.name);
-
-  const foundProductImage = foundProduct.map((card) => card.img);
-  console.log(foundProductImage);
 
   return (
     <>
       <Box p="10px" flex="50%">
         <Box border="green 2px solid" borderRadius="25px" height="100%">
           <Box>
-            <img src={`${foundProductImage}`} style={{ borderRadius: "25px" }} />
+            <img src={`https://toppng.com/uploads/preview/clipart-free-seaweed-clipart-draw-food-placeholder-11562968708qhzooxrjly.png`} style={{ borderRadius: "25px" }} />
             <Link to={`/products/${product._id}`}>
               <Box justifyContent="space-between">
                 <Typography

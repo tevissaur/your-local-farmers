@@ -1,9 +1,8 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { typeDefs } from './schemas/typeDefs';
-import { resolvers } from './schemas/resolvers';
+import { resolvers, typeDefs } from './schemas';
 import path from 'path';
-import db from './config/connection';
+import { db } from './config/connection';
 
 interface MyContext {
   token?: String;

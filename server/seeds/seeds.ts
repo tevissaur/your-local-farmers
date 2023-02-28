@@ -6,11 +6,11 @@ import {
 	Farm,
 	PurchaseOrder,
 } from "../models";
-const {
-	Types: { ObjectId },
-} = require("mongoose");
 import { db } from "../config/connection";
-
+import mongoose from "mongoose";
+const {
+  Types: { ObjectId },
+} = mongoose;
 // Generating Ids to hardcode them into the seed references
 let userIds = [ObjectId(), ObjectId(), ObjectId(), ObjectId()];
 
@@ -214,25 +214,55 @@ const reviewData = [
 
 const purchaseOrderData = [
 	{
-		items: [],
-		pickUpTime: "ASAP",
+		orders: [
+			{
+				items: [],
+				pickUpTime: "ASAP",
+			}
+		],
+		orderTotal: 10
+		
 	},
 	{
-		items: [],
-		pickUpTime: "Never",
+		orders: [
+			{
+				items: [],
+				pickUpTime: "5 minutes",
+			}
+		],
+		orderTotal: 10
+		
 	},
 	{
-		items: [],
-		pickUpTime: "Soon",
+		orders: [
+			{
+				items: [],
+				pickUpTime: "Soon",
+			}
+		],
+		orderTotal: 10
+		
 	},
 	{
-		items: [],
-		pickUpTime: "5 minutes",
+		orders: [
+			{
+				items: [],
+				pickUpTime: "Never",
+			}
+		],
+		orderTotal: 10
+		
 	},
 	{
-		items: [],
-		pickUpTime: "idk wtf y u asking me",
-	},
+		orders: [
+			{
+				items: [],
+				pickUpTime: "idk wtf y u asking me",
+			}
+		],
+		orderTotal: 10
+		
+	}
 ];
 
 const productData = [
@@ -607,7 +637,6 @@ const farmData = [
 	{
 		_id: farmIds[0],
 		name: "Cypress Farms",
-		address: "90 Star Lane",
 		reviews: [reviewIds[5], reviewIds[6]],
 		products: [
 			productIds[1],
@@ -618,11 +647,20 @@ const farmData = [
 		owners: [userIds[0]],
 		purchaseOrders: [],
 		story: "Little farm under a cypress tree",
+		address: "90 Star Lane",
+		location: {
+			latitude: 42.00,
+			longitude: -83.00,
+		},
 	},
 	{
 		_id: farmIds[1],
 		name: "Willowbrook Orchards",
-		address: "567 Apples Street",
+		address: "90 Star Lane",
+		location: {
+			latitude: 42.00,
+			longitude: -83.00,
+		},
 		reviews: [reviewIds[7], reviewIds[8]],
 		products: [
 			productIds[24],
@@ -637,7 +675,11 @@ const farmData = [
 	{
 		_id: farmIds[2],
 		name: "Oakenshield Livestock",
-		address: "Down the street",
+		address: "90 Star Lane",
+		location: {
+			latitude: 42.00,
+			longitude: -83.00,
+		},
 		reviews: [reviewIds[5], reviewIds[8]],
 		products: [
 			productIds[2],
@@ -657,7 +699,11 @@ const farmData = [
 	{
 		_id: farmIds[3],
 		name: "Martha's Vineyard",
-		address: "You know where it is",
+		address: "90 Star Lane",
+		location: {
+			latitude: 42.00,
+			longitude: -83.00,
+		},
 		reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
 		products: [
 			productIds[22],
@@ -672,7 +718,11 @@ const farmData = [
 	{
 		_id: farmIds[4],
 		name: "Lenny's House",
-		address: "34 Gumption Lane",
+		address: "90 Star Lane",
+		location: {
+			latitude: 42.00,
+			longitude: -83.00,
+		},
 		reviews: [reviewIds[5], reviewIds[8]],
 		products: [
 			productIds[13],
@@ -687,36 +737,36 @@ const farmData = [
 	},
 ];
 
-const seedData = async () => {
+db.once("open", async () => {
 	try {
 		// Seeding Users
 		await User.deleteMany({});
-		await User.insertMany(userData);
+		await User.create(userData);
 		console.log("============ USERS SEEDED =============");
 
 		// Seeding Categories
 		await Category.deleteMany({});
-		await Category.insertMany(categoryData);
+		await Category.create(categoryData);
 		console.log("============ CATEGORIES SEEDED =============");
 
 		// Seeding Products
 		await Product.deleteMany({});
-		await Product.insertMany(productData);
+		await Product.create(productData);
 		console.log("============ PRODUCTS SEEDED =============");
 
 		// Seeding Farms
 		await Farm.deleteMany({});
-		await Farm.insertMany(farmData);
+		await Farm.create(farmData);
 		console.log("============ FARMS SEEDED =============");
 
 		// Seeding Reviews
 		await Review.deleteMany({});
-		await Review.insertMany(reviewData);
+		await Review.create(reviewData);
 		console.log("============ REVIEWS SEEDED =============");
 
 		// Seeding Purchase Orders
 		await PurchaseOrder.deleteMany({});
-		await PurchaseOrder.insertMany(purchaseOrderData);
+		await PurchaseOrder.create(purchaseOrderData);
 		console.log("============ PURCHASE ORDERS SEEDED =============");
 
 		process.exit(0);
@@ -724,6 +774,5 @@ const seedData = async () => {
 		console.log(err);
 		process.exit(1);
 	}
-};
+});
 
-seedData();

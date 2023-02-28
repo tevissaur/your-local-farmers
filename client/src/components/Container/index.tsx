@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { Flex } from "../Flex";
+import React, { PropsWithChildren } from "react";
+import { Container } from "react-bootstrap";
 
-export const MainContainer: React.FC = ({ children, ...props }) => {
-	return <Flex {...props}>{children}</Flex>;
+
+
+export const BaseContainer: React.FC<any> = ({ children, ...props }) => {
+	return <Container {...props}>{children}</Container>;
 };

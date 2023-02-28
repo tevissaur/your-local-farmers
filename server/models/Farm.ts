@@ -7,18 +7,19 @@ import { ILocation, IUser } from './User';
 
 export interface IFarm {
     name: string; 
-    reviews: Types.Array<IReview>;
-    products: Types.Array<IProduct>;
-    purchaseOrders: Types.Array<IPurchaseOrder>;
-    owners: Types.Array<IUser>;
+    address: string;
+    reviews: IReview[];
+    products: IProduct;
+    purchaseOrders: IPurchaseOrder[];
+    owners: IUser[];
     story: string;
     avgScore: number;
     offersDelivery: boolean;
     type: string;
-    acceptedPayments: Types.Array<string>;
+    acceptedPayments: string[];
     location: ILocation;
     season: ISeason;
-    tags: Types.Array<ITag>;
+    tags: ITag[];
 
 }
 
@@ -67,10 +68,10 @@ const farmSchema = new Schema<IFarm>(
         acceptedPayments: [{
             type: String
         }],
+        address: String,
         location: {
-            address: String,
-            latitude: Schema.Types.Decimal128,
-            longitude: Schema.Types.Decimal128,
+            latitude: Number,
+            longitude: Number,
         },
         season: {
             start: {
@@ -93,7 +94,9 @@ const farmSchema = new Schema<IFarm>(
             virtuals: true
         }
     }
-)
+);
+
+farmSchema.index({ location: "2dsphere" });
 
 // farmSchema.virtual('categoriesOffered', {
 //     ref: 'Category',

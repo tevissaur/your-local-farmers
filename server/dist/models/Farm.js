@@ -44,10 +44,10 @@ const farmSchema = new mongoose_1.Schema({
     acceptedPayments: [{
             type: String
         }],
+    address: String,
     location: {
-        address: String,
-        latitude: mongoose_1.Schema.Types.Decimal128,
-        longitude: mongoose_1.Schema.Types.Decimal128,
+        latitude: Number,
+        longitude: Number,
     },
     season: {
         start: {
@@ -69,6 +69,7 @@ const farmSchema = new mongoose_1.Schema({
         virtuals: true
     }
 });
+farmSchema.index({ location: "2dsphere" });
 // farmSchema.virtual('categoriesOffered', {
 //     ref: 'Category',
 //     localField: 'name',

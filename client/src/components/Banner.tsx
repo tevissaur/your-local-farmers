@@ -1,18 +1,13 @@
 import Box from "@mui/material/Box"
-import styled from '@mui/material/styles/styled';
+import styled from 'styled-components'
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import store, { RootState } from "../utils/store";
+import { Container } from "react-bootstrap";
 
 
-const BannerStyled = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.primary.main,
-    width: '100%',
-    height: '160px',
-    zIndex: 0,
-    marginTop: '119px'
-}))
+const BannerStyled = styled(Container)``;
 
 
 const Banner = () => {

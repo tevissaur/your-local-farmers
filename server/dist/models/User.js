@@ -25,10 +25,10 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: true,
-        set: async (plainTextPassword) => {
-            return await bcrypt_1.default.hash(plainTextPassword, 10);
-        },
-        get: () => undefined,
+        validate: [
+            ({ length }) => length >= 6,
+            "Password should be longer.",
+        ],
     },
     isFarmer: {
         type: Boolean,
@@ -50,9 +50,6 @@ const userSchema = new mongoose_1.Schema({
         },
     ],
     location: {
-        address: {
-            type: String,
-        },
         latitude: Number,
         longitude: Number,
     },

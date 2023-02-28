@@ -43,13 +43,13 @@ const ProductCard: FC<FarmProductProps> = ({ product }) => {
             </Box>
 
             <Box p="10px">
-              <Typography>
+              <div>
                 Available :{" "}
                 <span style={{ fontWeight: "bolder" }}>
-                  {product.quantity}{" "}
+                  {`${product.quantity}`}
                 </span>
                 from{" "}
-              </Typography>
+              </div>
 
               <Link to={`/farm/${product?.farm?.name?.toLowerCase()}`}>
                 <Typography fontSize="2xl" color="primary.darkGreen">

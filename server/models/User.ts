@@ -1,12 +1,11 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types, Decimal128 } from "mongoose";
 import bcrypt from "bcrypt";
 import { IReview } from "./Review";
 import { IPurchaseOrder } from "./PurchaseOrder";
 
 export interface ILocation {
-	address: string;
-	latitude: number;
-	longitude: number;
+	latitude: Types.Decimal128;
+	longitude: Types.Decimal128;
 }
 
 export interface ICartProduct {
@@ -32,7 +31,7 @@ export interface IUser {
 	address: string;
 	reviews: Types.Array<IReview>;
 	orders: Types.Array<IPurchaseOrder>;
-	location: Types.ObjectId;
+	location: ILocation;
 	cart: {
 		total: number;
 		products: Types.Array<ICartProduct>
@@ -59,10 +58,10 @@ const userSchema = new Schema<IUser>({
 	password: {
 		type: String,
 		required: true,
-		set: async (plainTextPassword: string) => {
-			return await bcrypt.hash(plainTextPassword, 10);
-		},
-		get: (): undefined => undefined,
+		validate: [
+			({ length }: { length: number }) => length >= 6,
+			"Password should be longer.",
+		],
 	},
 	isFarmer: {
 		type: Boolean,
@@ -84,9 +83,6 @@ const userSchema = new Schema<IUser>({
 		},
 	],
 	location: {
-		address: {
-			type: String,
-		},
 		latitude: Number,
 		longitude: Number,
 	},

@@ -1,22 +1,17 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 const WhatIs = () => {
 
     return (
-        <Box sx={{
-            marginTop: '20px',
-            width: '100%',
-            backgroundColor: 'ghostwhite',
-        }}>
-            <Typography>
+        <Container>
+            <div>
                 What Is Local Farmers?
-            </Typography>
-            <Box sx={{
-                    padding: '40px'
-                }}>
-                <Typography>
+            </div>
+            <div>
+                <p>
                     "The U.S. food and farming system contributes
                     nearly $1 trillion to the national economy—
                     or more than 13 percent of the gross domes-
@@ -46,9 +41,9 @@ const WhatIs = () => {
                     next 50 years. Many developing nations
                     already are concerned about food security."
 
-                </Typography>
-            </Box>
-        </Box>
+                </p>
+            </div>
+        </Container>
     )
 }
 

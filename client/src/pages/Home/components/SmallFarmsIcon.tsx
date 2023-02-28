@@ -7,20 +7,10 @@ import slugify from 'slugify';
 
 const SmallFarmsIcon = ({ id, name }: { id: string; name: string; }) => {
     return (
-        <Box justifyContent='space-evenly' flexWrap='wrap' className="icon-basket">
+        <div>
 
             <Link to={`/farm/${ slugify(name, { lower: true }) }/store?fid=${ id }`} component={ReactLink} underline='none'>
-                <Box sx={{
-                    marginX: 1.5,
-                    color: 'black',
-                    ':hover': {
-                        '> img': {
-                            transform: 'scale(1.05)',
-                            transition: 'all 300ms',
-                            boxShadow: '0 0 5px black'
-                        },
-                    },
-                }}>
+                <div>
                     {/* <CardMedia
                         src={localFarm}
                         component='img'
@@ -33,10 +23,10 @@ const SmallFarmsIcon = ({ id, name }: { id: string; name: string; }) => {
                             margin: 'auto',
                             borderRadius: '50%'
                         }} /> */}
-                    <Typography textAlign="center" paddingY={1.5}>{ name }</Typography>
-                </Box>
+                    <p>{ name }</p>
+                </div>
             </Link>
-        </Box>
+        </div>
     )
 }
 

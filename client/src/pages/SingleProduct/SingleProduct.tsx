@@ -14,16 +14,19 @@ import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { setProduct } from "../../utils/slices/farm-store-slice";
 import { useGetProductQuery } from "../../services/api.service";
+import Reviews from "../../components/Reviews";
 
 const Product = () => {
 	const {
 		farmStore: { product, farm },
 		user: { loggedIn },
-		ui: { modal: { open } }
+		ui: {
+			modal: { open },
+		},
 	} = useSelector((state: RootState) => state);
 
 	const dispatch = useDispatch();
-	
+
 	const { search } = useLocation();
 	const { pid } = UtilsService.getSearchParams(search);
 
@@ -102,32 +105,7 @@ const Product = () => {
               <h1 key={idx}>{review.content}</h1>
             ))} */}
 
-						{product.reviews?.map((review, idx) => (
-							<Box m="15px" key={idx}>
-								<Box>
-									{Array(review.rating)
-										.fill(0)
-										.map(() => (
-											<AiFillStar color="green" />
-										))}
-								</Box>
-
-								<Box gap={6}>
-									<Box>
-										<RiDoubleQuotesL />
-										<Typography>
-											{review.content}...
-										</Typography>
-										<RiDoubleQuotesR />
-									</Box>
-
-									<Box alignItems="center">
-										<BsPersonFill />
-										<Typography>{review.author}</Typography>
-									</Box>
-								</Box>
-							</Box>
-						))}
+						{product.reviews?.map((review, idx) => (<Reviews />))}
 						<Box>
 							<Box flexDirection="column" alignItems="center">
 								<Box>

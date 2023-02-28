@@ -23,27 +23,25 @@ const FarmersRouter = () => {
   const { user: { userData: { location } } } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if ('geolocation' in navigator && (location?.latitude === 0 && location?.longitude === 0)) {
-
-      navigator.geolocation.getCurrentPosition((e) => {
-        const coords = { 
-          latitude: e.coords.latitude, 
-          longitude: e.coords.longitude
-        }
-      })
-    }
-  }, [])
+  //   if ('geolocation' in navigator && (location?.latitude === 0 && location?.longitude === 0)) {
+  //     navigator.geolocation.getCurrentPosition((e) => {
+  //       const coords = { 
+  //         latitude: e.coords.latitude, 
+  //         longitude: e.coords.longitude
+  //       }
+  //     })
+  //   }
+  // }, [])
 
   return (
-    <Router >
-
+    <Router>
       <Routes>
         <Route path="/*" element={<MainLayout />}>
           <Route index element={<Homepage />} />
           <Route path="home" element={<Homepage />} />
-          <Route path="farm/:fname">
+          {/* <Route path="farm/:fname">
 
             <Route path="about" element={<Farm />} />
 
@@ -67,7 +65,7 @@ const FarmersRouter = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route path="resources" element={<Cart />} />
-          <Route path="*" element={<NoPage />} />
+          <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>
     </Router>

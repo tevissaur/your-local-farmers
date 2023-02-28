@@ -20,17 +20,15 @@ class UtilsService {
 	}
 
 	cleanCart(products: Array<ICartProduct>) {
-		if (products.length == 0) return products;
+		if (products.length === 0) return products;
 
-		return products.map((item: ICartProduct) => {
-			return {
-				price: item.price,
-				quantity: item.quantity,
-				dateAdded: item.dateAdded,
-				productID: item.productID,
-				farmID: item.farmID,
-			};
-		});
+		return products.map((item: ICartProduct) => ({
+			price: item.price,
+			quantity: item.quantity,
+			dateAdded: item.dateAdded,
+			productID: item.productID,
+			farmID: item.farmID,
+		}));
 	}
 
 	getSearchParams(params: string) {

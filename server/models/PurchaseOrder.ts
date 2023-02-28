@@ -8,6 +8,7 @@ export interface IOrder {
     dateCreated: string;
     buyer: Types.ObjectId;
     seller: Types.ObjectId;
+    orderTotal: number;
 }
 
 export interface IPurchaseOrder {
@@ -17,7 +18,7 @@ export interface IPurchaseOrder {
 
 const purchaseOrderSchema = new Schema<IPurchaseOrder>(
     {
-        orders: {
+        orders: [{
             items: [{
                 type: Schema.Types.ObjectId,
                 ref: 'Product'
@@ -38,7 +39,12 @@ const purchaseOrderSchema = new Schema<IPurchaseOrder>(
                 type: Schema.Types.ObjectId,
                 ref: 'Farm'
             },
-        },
+            orderTotal: {
+                type: Schema.Types.Decimal128,
+                required: true,
+                default: 0
+            }
+        }],
         orderTotal: {
             type: Schema.Types.Decimal128,
             required: true,

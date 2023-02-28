@@ -15,3 +15,4 @@ mongoose.connect(uri, {
 });
 
 export const db = mongoose.connection;
+

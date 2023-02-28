@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICategory } from "../../interfaces/ICategory";
-import { IFarm } from "../../interfaces/IFarm";
-import { IProduct } from "../../interfaces/IProduct";
+import { ICategory } from "../../../interfaces/ICategory";
+import { IFarm } from "../../../interfaces/IFarm";
+import { IProduct } from "../../../interfaces/IProduct";
 
 export interface SearchState {
   farms: Array<IFarm>;
@@ -19,16 +19,16 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    setFarms: ((state, action: PayloadAction<Array<IFarm>>) => {
+    setFarms: ((state, action: PayloadAction<IFarm[]>) => {
       state.farms = action.payload;
     }),
-    setProducts: ((state, action: PayloadAction<Array<IProduct>>) => {
+    setProducts: ((state, action: PayloadAction<IProduct[]>) => {
       state.products = action.payload;
     }),
-    setCategories: ((state, action: PayloadAction<Array<ICategory>>) => {
+    setCategories: ((state, action: PayloadAction<ICategory[]>) => {
       state.categories = action.payload;
     }),
-    setSelectedCategories: ((state, action: PayloadAction<Array<ICategory>>) => {
+    setSelectedCategories: ((state, action: PayloadAction<ICategory[]>) => {
       state.categories = action.payload
     })
   },

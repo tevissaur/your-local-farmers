@@ -8,6 +8,17 @@ import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import SmallFarmsIcon from "./SmallFarmsIcon";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { Container } from "react-bootstrap";
+
+const LocalFarmsContainer = styled(Container)`
+	display: "flex";
+	position: "relative";
+	flex-direction: "column";
+	justify-content: "center";
+	flex-wrap: "wrap";
+	margin: "40px auto";
+`;
 
 const TopFarmsWidget = () => {
 	const {
@@ -22,54 +33,7 @@ const TopFarmsWidget = () => {
 
 	return (
 		<>
-			<Box
-				sx={{
-					display: "flex",
-					position: "relative",
-					flexDirection: "column",
-					justifyContent: "center",
-					flexWrap: "wrap",
-					margin: "40px auto",
-				}}
-			>
-				<Box sx={{ display: "flex", justifyContent: "space-between" }}>
-					<Typography
-						variant="h5"
-						sx={{
-							marginY: "10px",
-							fontSize: "28px",
-						}}
-					>
-						Here Are Some Of Our Top Farmers
-					</Typography>
-					<Typography
-						variant="h5"
-						sx={{
-							marginY: "10px",
-							fontSize: "20px",
-							alignSelf: "center",
-						}}
-					>
-						<Link
-							component={ReactLink}
-							to="/farms"
-							underline="none"
-							sx={{ ":hover": { textDecoration: "underline" } }}
-						>
-							See More
-						</Link>
-					</Typography>
-				</Box>
-				<Box
-					sx={{
-						margin: "5px auto",
-						display: "flex",
-						flexWrap: "wrap",
-					}}
-				>
-					
-				</Box>
-			</Box>
+			<LocalFarmsContainer></LocalFarmsContainer>
 		</>
 	);
 };

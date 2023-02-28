@@ -1,8 +1,16 @@
 import { AuthenticationError } from "apollo-server-express";
-import { User, Review, Product, Category, Farm, PurchaseOrder } from "../models";
-import bcrypt from 'bcrypt'
+import {
+	User,
+	Review,
+	Product,
+	Category,
+	Farm,
+	PurchaseOrder,
+} from "../models";
+import bcrypt from "bcrypt";
 
 import { signToken } from "../services/authentication.service";
+import { ResolversTypes } from "../__generated__/resolvers-types";
 
 export const resolvers = {
 	Query: {
@@ -192,8 +200,20 @@ export const resolvers = {
 				},
 			]);
 		},
-		localFarms: async (parent, { _id, coords }) => {
-			return Farm.find({});
+		getLocalFarms: async (parent, { latitude, longitude }) => {
+			return Farm.find({
+				location: {
+					$near: {
+						$maxDistance: 500000,
+						$geometry: {
+							type: "Point",
+							coordinates: [latitude, longitude],
+						},
+					},
+				},
+			}).find((error, results) => {
+				if (error) console.log(error);
+			});
 		},
 	},
 	Mutation: {
@@ -211,15 +231,17 @@ export const resolvers = {
 			try {
 				const user = await User.findOne({ email });
 
-				if (!user) throw new AuthenticationError("No Profile with that email");
+				if (!user)
+					throw new AuthenticationError("No Profile with that email");
 
 				const isPasswordMatching = await bcrypt.compare(
 					password,
-					user.get('password', null, { getters: false })
-				)
+					user.get("password", null, { getters: false })
+				);
 
-				if (!isPasswordMatching) throw new AuthenticationError("Incorrect password!");
-				
+				if (!isPasswordMatching)
+					throw new AuthenticationError("Incorrect password!");
+
 				const token = signToken(user);
 				return { token, user };
 			} catch (err) {
@@ -263,9 +285,9 @@ export const resolvers = {
 			const newProduct = await Product.create(product);
 			const farm = await Farm.findByIdAndUpdate(
 				farmId,
-				{
-					$push: { products: newProduct },
-				},
+				// {
+				// 	$push: { products: newProduct },
+				// },
 				{
 					new: true,
 				}

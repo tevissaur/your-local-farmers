@@ -19,7 +19,7 @@ const authMiddleware = ({ req }) => {
         return req;
     }
     try {
-        const { data } = jsonwebtoken_1.default.verify(token, secret, { maxAge: expiration });
+        const data = jsonwebtoken_1.default.verify(token, secret, { maxAge: expiration });
         req.user = data;
     }
     catch {

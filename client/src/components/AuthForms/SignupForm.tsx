@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../../utils/mutations";
 import AuthService from "../../services/authentication.service";
 import { Box, Modal, FormLabel, FormControl, Input } from "@mui/material";
-import { Button } from "../Button";
+import { BaseButton as Button } from "../Buttons/BaseButton";
 import { RootState } from "../../utils/store";
 import React, { ChangeEvent, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";

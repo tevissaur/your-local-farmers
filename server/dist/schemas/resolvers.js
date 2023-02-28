@@ -196,8 +196,21 @@ exports.resolvers = {
                 },
             ]);
         },
-        localFarms: async (parent, { _id, coords }) => {
-            return models_1.Farm.find({});
+        getLocalFarms: async (parent, { latitude, longitude }) => {
+            return models_1.Farm.find({
+                location: {
+                    $near: {
+                        $maxDistance: 500000,
+                        $geometry: {
+                            type: "Point",
+                            coordinates: [latitude, longitude],
+                        },
+                    },
+                },
+            }).find((error, results) => {
+                if (error)
+                    console.log(error);
+            });
         },
     },
     Mutation: {
@@ -217,7 +230,7 @@ exports.resolvers = {
                 const user = await models_1.User.findOne({ email });
                 if (!user)
                     throw new apollo_server_express_1.AuthenticationError("No Profile with that email");
-                const isPasswordMatching = await bcrypt_1.default.compare(password, user.get('password', null, { getters: false }));
+                const isPasswordMatching = await bcrypt_1.default.compare(password, user.get("password", null, { getters: false }));
                 if (!isPasswordMatching)
                     throw new apollo_server_express_1.AuthenticationError("Incorrect password!");
                 const token = (0, authentication_service_1.signToken)(user);
@@ -249,9 +262,11 @@ exports.resolvers = {
         createProduct: async (parent, { product, farmId }) => {
             console.log(product, farmId);
             const newProduct = await models_1.Product.create(product);
-            const farm = await models_1.Farm.findByIdAndUpdate(farmId, {
-                $push: { products: newProduct },
-            }, {
+            const farm = await models_1.Farm.findByIdAndUpdate(farmId, 
+            // {
+            // 	$push: { products: newProduct },
+            // },
+            {
                 new: true,
             }).populate([
                 {

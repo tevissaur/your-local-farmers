@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import FarmProductCard from "./components/FarmProductCard";
-import FarmReviews from "../../components/Review";
+import FarmReviews from "../../components/Reviews";
 import UtilsService from "../../services/utils.service";
 import { Box, Typography } from "@mui/material";
 import store, { RootState } from "../../utils/store";

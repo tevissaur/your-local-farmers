@@ -1,56 +1,41 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import React from "react";
+import styled from "styled-components";
+import { Container, ListGroup, ListGroupItem } from "react-bootstrap";
+
+const MissionContainer = styled(Container)`
+	margin: "20px auto";
+	display: "flex";
+	flex-direction: "column";
+	padding: "20px";
+	width: "40%";
+	background-color: "ghostwhite";
+	border-radius: "10px";
+	border: "1px solid black";
+	box-shadow: "1px 1px 0 black";
+`;
 
 const MissionStatement = () => {
 	return (
-		<Box
-			sx={{
-				margin: "20px auto",
-				display: "flex",
-				flexDirection: "column",
-				padding: "20px",
-				width: "40%",
-				backgroundColor: "ghostwhite",
-				borderRadius: "10px",
-				border: "1px solid black",
-				boxShadow: "1px 1px 0 black",
-			}}
-		>
-			<Typography
-				variant="h5"
-				sx={{
-					textAlign: "center",
-				}}
-			>
+		<MissionContainer>
+			<header>
 				Our Mission Statement!
-			</Typography>
-			<List
-				sx={{
-					margin: "auto",
-				}}
-			>
-				<ListItem>
-					<ListItemIcon />
+			</header>
+			<ListGroup>
+				<ListGroupItem>
 					Support local farming communities
-				</ListItem>
+				</ListGroupItem>
 
-				<ListItem>
-					<ListItemIcon />
+				<ListGroupItem>
 					To Raise awareness for developing and supporting those that
 					generate goods in a renewable way
-				</ListItem>
+				</ListGroupItem>
 
-				<ListItem>
-					<ListItemIcon />
+				<ListGroupItem>
 					Creating a community where people can get the food and
 					resources they need to survive
-				</ListItem>
-			</List>
-		</Box>
+				</ListGroupItem>
+			</ListGroup>
+		</MissionContainer>
 	);
 };
 

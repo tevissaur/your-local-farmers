@@ -8,7 +8,7 @@ export interface UiState {
 	activePage: string;
 	returnUrl: string;
 	profileDropdown: boolean;
-	modal: IModal;
+	drawer: IModal;
 	login: ILogin;
 	signup: ISignup;
 	openTab: number;
@@ -22,7 +22,7 @@ const initialState: UiState = {
 	activePage: "",
 	returnUrl: '',
 	profileDropdown: false,
-	modal: {
+	drawer: {
 		open: false
 	},
 	login: {
@@ -95,8 +95,8 @@ export const uiSlice = createSlice({
 		toggleProfileDropdown: ((state) => {
 			state.profileDropdown = !state.profileDropdown;
 		}),
-		toggleModal: ((state) => {
-			state.modal.open = !state.modal.open;
+		toggleDrawer: ((state, action: PayloadAction<boolean>) => {
+			state.drawer.open = action.payload;
 		}),
 		setActivePage: ((state, action: PayloadAction<string>) => {
 			state.activePage = action.payload;
@@ -105,19 +105,19 @@ export const uiSlice = createSlice({
 			state.openTab = action.payload;
 		}),
 		setLoginForm: ((state, action: PayloadAction<ILogin>) => {
-			state.login = { ...action.payload };
+			state.login = action.payload;
 		}),
 		setSignupForm: ((state, action: PayloadAction<ISignup>) => {
-			state.signup = { ...action.payload };
+			state.signup = action.payload;
 		}),
 		setReviewForm: ((state, action: PayloadAction<IReview>) => {
-			state.review = { ...action.payload }
+			state.review = action.payload
 		})
 	},
 });
 
 export const {
-	toggleModal,
+	toggleDrawer,
 	toggleProfileDropdown,
 	setActivePage,
 	setOpenTab,

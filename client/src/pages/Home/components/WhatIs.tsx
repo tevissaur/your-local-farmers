@@ -1,16 +1,15 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
+import { StyledCardContainer } from '../../AboutUs/components/MissionStatement'
 
 const WhatIs = () => {
 
     return (
-        <Container>
-            <div>
+        <StyledCardContainer>
+            <Card.Header className="display-6">
                 What Is Local Farmers?
-            </div>
-            <div>
+            </Card.Header>
+            <Card.Body>
                 <p>
                     "The U.S. food and farming system contributes
                     nearly $1 trillion to the national economy—
@@ -42,8 +41,8 @@ const WhatIs = () => {
                     already are concerned about food security."
 
                 </p>
-            </div>
-        </Container>
+            </Card.Body>
+        </StyledCardContainer>
     )
 }
 

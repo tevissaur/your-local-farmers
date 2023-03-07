@@ -1,4 +1,3 @@
-import { AuthenticationError } from "apollo-server-express";
 import {
 	User,
 	Review,
@@ -126,13 +125,7 @@ export const resolvers = {
 			return await Farm.findOne({ _id });
 		},
 		categories: async (parent, args) => {
-			const productCategory = await Category.find().populate([
-				{
-					path: "products",
-					model: "Product",
-				},
-			]);
-			return productCategory;
+			return await Category.find({});
 		},
 		farmStore: async (parent, { _id }) => {
 			return await Farm.findById(_id).populate([
@@ -200,7 +193,7 @@ export const resolvers = {
 				},
 			]);
 		},
-		getLocalFarms: async (parent, { latitude, longitude }) => {
+		localFarms: async (parent, { latitude, longitude }) => {
 			return Farm.find({
 				location: {
 					$near: {
@@ -217,7 +210,7 @@ export const resolvers = {
 		},
 	},
 	Mutation: {
-		createUser: async (parent, args) => {
+		signup: async (parent, args) => {
 			try {
 				const user = await User.create(args);
 				const token = signToken(user);
@@ -232,7 +225,7 @@ export const resolvers = {
 				const user = await User.findOne({ email });
 
 				if (!user)
-					throw new AuthenticationError("No Profile with that email");
+					throw new Error("No Profile with that email");
 
 				const isPasswordMatching = await bcrypt.compare(
 					password,
@@ -240,7 +233,7 @@ export const resolvers = {
 				);
 
 				if (!isPasswordMatching)
-					throw new AuthenticationError("Incorrect password!");
+					throw new Error("Incorrect password!");
 
 				const token = signToken(user);
 				return { token, user };

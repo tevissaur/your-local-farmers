@@ -165,15 +165,14 @@ type Query {
 	categories: [Category]
 	farmDashboard(_id: ID!): Farm
 	farmStore(_id: ID!): Farm
-	getLocalFarms(latitude: Float!, longitude: Float!): [Farm]
+	localFarms(latitude: Float!, longitude: Float!): [Farm]
 }
 
 type Mutation {
-	createUser(
+	signup(
 		username: String!
 		password: String!
 		email: String!
-		firstName: String!
 	): Auth
 	login(email: String!, password: String!): Auth
 	postReview(

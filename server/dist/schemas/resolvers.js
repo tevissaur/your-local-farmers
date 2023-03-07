@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const apollo_server_express_1 = require("apollo-server-express");
 const models_1 = require("../models");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const authentication_service_1 = require("../services/authentication.service");
@@ -122,13 +121,7 @@ exports.resolvers = {
             return await models_1.Farm.findOne({ _id });
         },
         categories: async (parent, args) => {
-            const productCategory = await models_1.Category.find().populate([
-                {
-                    path: "products",
-                    model: "Product",
-                },
-            ]);
-            return productCategory;
+            return await models_1.Category.find({});
         },
         farmStore: async (parent, { _id }) => {
             return await models_1.Farm.findById(_id).populate([
@@ -196,7 +189,7 @@ exports.resolvers = {
                 },
             ]);
         },
-        getLocalFarms: async (parent, { latitude, longitude }) => {
+        localFarms: async (parent, { latitude, longitude }) => {
             return models_1.Farm.find({
                 location: {
                     $near: {
@@ -229,10 +222,10 @@ exports.resolvers = {
             try {
                 const user = await models_1.User.findOne({ email });
                 if (!user)
-                    throw new apollo_server_express_1.AuthenticationError("No Profile with that email");
+                    throw new Error("No Profile with that email");
                 const isPasswordMatching = await bcrypt_1.default.compare(password, user.get("password", null, { getters: false }));
                 if (!isPasswordMatching)
-                    throw new apollo_server_express_1.AuthenticationError("Incorrect password!");
+                    throw new Error("Incorrect password!");
                 const token = (0, authentication_service_1.signToken)(user);
                 return { token, user };
             }

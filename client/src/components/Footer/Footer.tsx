@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
 
-const FooterContainer = styled(Container)``;
+
 
 const Footer = () => {
 	return (
-		<FooterContainer>
+		<Container fluid className="p-5 d-flex justify-content-center bg-">
 			<Row>
 				<Col>Made by Tevis, Alex, Linh and Quentin</Col>
 			</Row>
-		</FooterContainer>
+		</Container>
 	);
 };
 

@@ -31,14 +31,14 @@ export interface IUser {
 }
 
 export interface ILogin {
-	username: string;
-	password: string;
-	email: string;
+	username?: string;
+	password?: string;
+	email?: string;
 }
 export interface ISignup {
-	firstName: string;
+	firstName?: string;
 	lastName?: string;
-	email: string;
-	username: string;
-	password: string;
+	email?: string;
+	username?: string;
+	password?: string;
 }

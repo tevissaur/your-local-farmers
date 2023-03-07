@@ -4,49 +4,7 @@ import { api } from "../utils/api";
 
 export const baseApi = api.injectEndpoints({
 	endpoints: (builder) => ({
-		getMe: builder.query({
-			query: (id) => ({
-				body: gql`
-                query {
-                    me(_id: "${id}") {
-                        _id
-                        firstName
-                        lastName
-                        username
-                        email
-                        address
-                        isFarmer
-                        cart {
-                            total
-                            items {
-                                productID
-                                farmID
-                                dateAdded
-                                price
-                                quantity {
-                                    type
-                                    amount
-                                }
-                            }
-                        }
-                        orders {
-                            _id
-                            seller {
-                                _id
-                                name
-                            }
-                            items {
-                                _id
-                                name
-                            }
-                            dateCreated
-                            orderTotal
-                        }
-                    }
-                }`,
-			}),
-			transformResponse: (response) => response.me,
-		}),
+		
 		getFarm: builder.query({
 			query: (id) => ({
 				body: gql` 
@@ -127,42 +85,12 @@ export const baseApi = api.injectEndpoints({
           `,
 			}),
 		}),
-		login: builder.mutation({
-			query: (login: ILogin) => ({
-				body: gql`
-            mutation {
-                login(username: "${login.username}", password: "${login.password}")) {
-                  token
-                  user {
-                    _id
-                  }
-                }
-            }
-        `,
-			}),
-		}),
-    signup: builder.mutation({
-			query: (login: ILogin) => ({
-				body: gql`
-            mutation {
-                login(username: "${login.username}", password: "${login.password}")) {
-                  token
-                  user {
-                    _id
-                  }
-                }
-            }
-        `,
-			}),
-		}),
+
 	}),
 });
 
 export const {
-	useGetMeQuery,
 	useGetFarmQuery,
 	useGetProductQuery,
 	useGetLocalFarmsQuery,
-  useSignupMutation,
-  useLoginMutation
 } = baseApi;

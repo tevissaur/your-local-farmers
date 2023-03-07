@@ -17,6 +17,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FarmSearch from "./pages/Search/components/FarmSearch";
 import ProductSearch from "./pages/Search/components/ProductSearch";
+import LoginPage from "./pages/Login/Login";
+import SignupPage from "./pages/Signup/Signup";
+import News from "./pages/News/News";
 
 
 const FarmersRouter = () => {
@@ -41,10 +44,14 @@ const FarmersRouter = () => {
         <Route path="/*" element={<MainLayout />}>
           <Route index element={<Homepage />} />
           <Route path="home" element={<Homepage />} />
-          {/* <Route path="farm/:fname">
+          <Route path="news" element={<News />} />
+          <Route path='browse' element={<FarmsPage />} />
+          <Route path="log-in" element={<LoginPage />} />
+          <Route path="sign-up" element={<SignupPage />} />
+          <Route path="profile" element={<SignupPage />} />
 
+          <Route path="farm/:fname">
             <Route path="about" element={<Farm />} />
-
             <Route path="store">
               <Route index element={<Farm />} />
               <Route path="product/:pname" element={<Product />} />
@@ -60,12 +67,10 @@ const FarmersRouter = () => {
           <Route path="product/*">
             <Route path=":pname" element={<Product />} />
           </Route>
-          <Route path='browse-farms' element={<FarmsPage />} />
-          <Route path='myfarm' element={<MyFarm />} />
+          <Route path='my-farm' element={<MyFarm />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="about-us" element={<AboutUs />} />
           <Route path="resources" element={<Cart />} />
-          <Route path="*" element={<NoPage />} /> */}
+          <Route path="*" element={<NoPage />} /> 
         </Route>
       </Routes>
     </Router>

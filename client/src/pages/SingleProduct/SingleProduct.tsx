@@ -21,7 +21,7 @@ const Product = () => {
 		farmStore: { product, farm },
 		user: { loggedIn },
 		ui: {
-			modal: { open },
+			drawer: { open },
 		},
 	} = useSelector((state: RootState) => state);
 

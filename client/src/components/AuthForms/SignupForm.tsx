@@ -1,28 +1,21 @@
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../../utils/mutations";
 import AuthService from "../../services/authentication.service";
-import { Box, Modal, FormLabel, FormControl, Input } from "@mui/material";
 import { BaseButton as Button } from "../Buttons/BaseButton";
-import { RootState } from "../../utils/store";
 import React, { ChangeEvent, MouseEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSignupForm, toggleModal } from "../../utils/slices/ui-slice";
+import { setSignupForm, toggleDrawer } from "../../utils/slices/ui-slice";
+import { Container, Form } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { StyledInput } from "../NavBar/NavBar";
 
 function SignupForm() {
-	const {
-		ui: {
-			modal: { open },
-			signup,
-		},
-	} = useSelector((state: RootState) => state);
-	const dispatch = useDispatch();
+	const { signup } = useAppSelector(state => state.ui);
+
+	const dispatch = useAppDispatch();
 	const isInvalid = signup.password === "" || signup.email === "";
 
 	const [createUser] = useMutation(CREATE_USER);
 
-	const handleModal = async () => {
-		dispatch(toggleModal());
-	};
 
 	const handleFormSubmit = async (e: MouseEvent) => {
 		/* 
@@ -56,104 +49,59 @@ function SignupForm() {
     
 	return (
 		<>
-			<Button onClick={handleModal}>Sign Up</Button>
-
-			<Modal
-				open={open}
-				onClose={handleModal}
-				sx={{
-					borderRadius: "10px",
-				}}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
-			>
-				<Box
-					sx={{
-						position: "fixed",
-						width: 600,
-						top: "50%",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-						border: "1px solid black",
-						borderRadius: "10px",
-						bgcolor: "background.paper",
-						padding: "20px",
-					}}
-				>
-					<Box
-						component={"form"}
-						onChange={() => handleFormChange}
-						sx={{
-							display: "flex",
-							flexWrap: "wrap",
-							justifyContent: "center",
-							margin: "1",
-						}}
-					>
-						<FormControl fullWidth>
-							<FormLabel
-								sx={{
-									margin: "10px 0 0 0",
-								}}
-							>
+				<Container>
+					<Form onChange={() => handleFormChange}>
+						<Form.Group className="my-3">
+							<Form.Label className="display-6" htmlFor="signupUsername">
 								Username
-							</FormLabel>
-							<Input
+							</Form.Label>
+							<StyledInput
+							    className="bg-white"
 								type="text"
-								id="username"
+								id="signupUsername"
 								value={signup.username}
 							/>
-						</FormControl>
-						<FormControl fullWidth>
-							<FormLabel
-								sx={{
-									margin: "10px 0 0 0",
-								}}
-							>
+						</Form.Group>
+						<Form.Group className="my-3">
+							<Form.Label className="display-6" htmlFor="signupFirstName">
 								First Name
-							</FormLabel>
-							<Input
+							</Form.Label>
+							<StyledInput
+							    className="bg-white"
 								type="text"
-								id="firstName"
+								id="signupFirstName"
 								value={signup.firstName}
 							/>
-						</FormControl>
-						<FormControl fullWidth>
-							<FormLabel
-								sx={{
-									margin: "10px 0 0 0",
-								}}
-							>
+						</Form.Group>
+						<Form.Group className="my-3">
+							<Form.Label className="display-6" htmlFor="signupEmail">
 								Email
-							</FormLabel>
-							<Input
+							</Form.Label>
+							<StyledInput
+							    className="bg-white"
 								type="email"
-								id="email"
+								id="signupEmail"
 								value={signup.email}
 							/>
-						</FormControl>
-						<FormControl fullWidth>
-							<FormLabel
-								sx={{
-									margin: "10px 0 0 0",
-								}}
-							>
+						</Form.Group>
+						<Form.Group className="my-3">
+							<Form.Label className="display-6" htmlFor="signupPassword">
 								Password
-							</FormLabel>
-							<Input
+							</Form.Label>
+							<StyledInput
+							    className="bg-white"
 								type="password"
-								id="password"
+								id="signupPassword"
 								value={signup.password}
 							/>
-						</FormControl>
-					</Box>
+						</Form.Group>
+					</Form>
 
 					<Button onClick={handleFormSubmit} disabled={isInvalid}>
 						Signup
 					</Button>
-					<Button onClick={handleModal}>Cancel</Button>
-				</Box>
-			</Modal>
+					<Button>Cancel</Button>
+				</Container>
 		</>
 	);
 }

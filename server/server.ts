@@ -1,38 +1,50 @@
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { resolvers, typeDefs } from './schemas';
-import path from 'path';
-import { db } from './config/connection';
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import path from "path";
+import { typeDefs, resolvers } from "./schemas/index";
+import { authMiddleware } from "./services/authentication.service";
+import cors from "cors";
+import http from "http";
+import { json } from "body-parser";
+
+import { db } from "./config/connection";
+// import routes from './controllers';
 
 interface MyContext {
-  token?: String;
+	token?: string;
 }
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+function startApolloServer() {
+	db.on("error", (error: any) => console.log(`DB Error: ${error}`));
 
-const server = new ApolloServer<MyContext>({
-  resolvers,
-  typeDefs,
-})
+	db.once("open", async () => {
+		const port = Number(process.env.PORT) || 3001;
+		const app = express();
+		const httpServer = http.createServer(app);
+		const server = new ApolloServer<MyContext>({
+			typeDefs, 
+			resolvers,
+			plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+		});
+		await server.start();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+		app.use(
+			"/graphql",
+			cors<cors.CorsRequest>({
+				origin: [process.env.ALLOWED_CORS_ORIGIN, "http://localhost:3000"],
+        credentials: true
+      }),
+			json(),
+			expressMiddleware(server, {
+				context: authMiddleware,
+			})
+		);
 
-// if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+		await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
+		console.log(`Server ready at http://localhost:${port}/graphql`);
+	});
 }
-// app.use(uploadRoute)
-// app.use(routes);
 
-db.once('open', async () => {
-
-  await server.start()
-  server.applyMiddleware({ app })
-  
-  app.listen(PORT, () => {
-    console.log(`🌍 Now listening on localhost:${PORT}`)
-    console.log(`GraphQL server available at http://localhost:${PORT}${server.graphqlPath}`)
-  });
-});
+startApolloServer();

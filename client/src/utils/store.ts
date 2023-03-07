@@ -3,12 +3,13 @@ import { createStore, combineReducers } from "redux";
 import cart from '../utils/slices/cart-slice';
 import search from './slices/search/search-slice'
 import ui from '../utils/slices/ui-slice'
-import user from './slices/user-slice'
+import user from './slices/user/user-slice'
 import farmDashboard from '../utils/slices/farm-dashboard-slice'
 import farmStore from '../utils/slices/farm-store-slice'
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api";
 import { searchApi } from "./slices/search/search-api";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 
 const store = configureStore({
@@ -20,12 +21,15 @@ const store = configureStore({
     farmDashboard,
     farmStore,
     [api.reducerPath]: api.reducer,
-  }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(searchApi.middleware),
+    
 });
+
 
 export type RootState = ReturnType<typeof store.getState>
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 
 
 export default store;

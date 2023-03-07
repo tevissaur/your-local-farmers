@@ -1,14 +1,14 @@
-import { Link as ReactLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import React from "react";
 import styled from "styled-components";
+import { BaseLink } from "../BaseLink";
+import { BaseButton } from "../Buttons/BaseButton";
 
-
-const BaseLinkStyled = styled(ReactLink)`
+const NavLinkStyled = styled(BaseLink)`
+	width: fit-content;
 	border-radius: 25px;
-	padding: auto;
+	padding: 5px 10px;
 	color: black;
-	margin: 2px 5px;
+	margin: auto 10px;
 	background-color: lightgray;
 	border: 1px solid black;
 	box-shadow: 1px 1px 0 black;
@@ -19,14 +19,16 @@ const BaseLinkStyled = styled(ReactLink)`
 		background-color: white;
 		transform: translate(0px, 0px);
 		box-shadow: 0px 0px 0 black;
+		color: black;
 	}
 `;
 
-export const LinkBase: React.FC<any> = ({ children, ...props }) => {
-	const dispatch = useDispatch();
+const NavLink: React.FC<any> = ({ children, to, ...props }) => {
 	return (
-		<BaseLinkStyled {...props}>
+		<NavLinkStyled to={to} {...props}>
 			{children}
-		</BaseLinkStyled>
+		</NavLinkStyled>
 	);
 };
+
+export default NavLink;

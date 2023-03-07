@@ -1,54 +1,44 @@
-import React, { useState, useRef, ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import AuthService from "../../services/authentication.service";
-import { useMutation } from "@apollo/client";
-import {
-	Box,
-	Modal,
-	FormControl,
-	FormLabel,
-	Input,
-	Typography,
-} from "@mui/material";
 import { BaseButton as Button } from "../Buttons/BaseButton";
 import { RootState } from "../../utils/store";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoginForm, toggleModal } from "../../utils/slices/ui-slice";
-import { useLoginMutation } from "../../services/api.service";
-
+import { setLoginForm } from "../../utils/slices/ui-slice";
+import { useLoginMutation } from "../../utils/slices/user/user-api";
+import { Container, Form } from "react-bootstrap";
+import { StyledInput } from "../NavBar/NavBar";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 function LoginForm() {
-	const {
-		ui: {
-			modal: { open },
-			login,
-		},
-	} = useSelector((state: RootState) => state);
+	const { login } = useAppSelector((state: RootState) => state.ui);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const isInvalid = login.password === "" || login.email === "";
-	
 	const [loginUser, { data, isLoading, isSuccess, isError }] =
 		useLoginMutation();
 
-	const handleChange = async (e: ChangeEvent) => {
+	const handleFormChange = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
-		dispatch(setLoginForm(login));
+		dispatch(
+			setLoginForm({
+				...login,
+				[e.currentTarget.name]: e.currentTarget.value,
+			})
+		);
 	};
 
-	const handleModal = () => {
-		dispatch(toggleModal());
-	};
+	useEffect(() => {
+		if (isSuccess && !isLoading && data) {
+			AuthService.login(data.login.token, window.location.pathname);
+		}
+	}, [isLoading, isSuccess, data]);
 
-	const handleFormSubmit = async (e: MouseEvent) => {
+	const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const { email, password } = login;
 
 		try {
-			await loginUser(login);
-
-			AuthService.login(data.token, window.location.pathname);
-			window.location.reload();
+			await loginUser({ email, password });
 		} catch (err) {
 			console.log(err);
 		}
@@ -56,71 +46,44 @@ function LoginForm() {
 
 	return (
 		<>
-			<Button onClick={handleModal}>Login</Button>
-
-			<Modal
-				open={open}
-				onClose={handleModal}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
-			>
-				<Box
-					component={"form"}
-					onChange={() => handleChange}
-					sx={{
-						position: "fixed",
-						width: 600,
-						height: 400,
-						top: "50%",
-						left: "50%",
-						display: "flex",
-						justifyContent: "center",
-						flexDirection: "column",
-						transform: "translate(-50%, -50%)",
-						border: "1px solid",
-						borderRadius: "10px",
-						padding: "auto 1",
-						bgcolor: "ivory",
-					}}
-				>
-					<Typography variant="h6" textAlign="center">
-						Login
-					</Typography>
-					<FormControl
-						sx={{
-							width: "50%",
-							margin: "auto",
-						}}
-					>
-						<FormLabel>Email</FormLabel>
-						<Input
-							placeholder="Email"
+			<Container>
+				<Form>
+					<Form.Group className="my-3">
+						<Form.Label className="display-6" htmlFor="loginEmail">
+							Email
+						</Form.Label>
+						<StyledInput
+							className="bg-white"
 							type="email"
-							id="email"
-							value={login.email}
+							name="email"
+							id="loginEmail"
+							defaultValue={login.email}
+							onChange={handleFormChange}
 						/>
-					</FormControl>
-
-					<FormControl
-						sx={{
-							width: "50%",
-							margin: "auto",
-						}}
-					>
-						<FormLabel>Password</FormLabel>
-						<Input
-							placeholder="Password"
+					</Form.Group>
+					<Form.Group className="my-3">
+						<Form.Label
+							className="display-6"
+							htmlFor="loginPassword"
+						>
+							Password
+						</Form.Label>
+						<StyledInput
+							className="bg-white"
 							type="password"
-							id="password"
-							value={login.password}
+							name="password"
+							id="loginPassword"
+							defaultValue={login.password}
+							onChange={handleFormChange}
 						/>
-					</FormControl>
-					<Button onClick={() => handleFormSubmit} disabled={isInvalid}>
-						Login
-					</Button>
-					<Button onClick={handleModal}>Cancel</Button>
-				</Box>
-			</Modal>
+					</Form.Group>
+				</Form>
+
+				<Button onClick={handleFormSubmit} type="submit">
+					Log In
+				</Button>
+				<Button>Cancel</Button>
+			</Container>
 		</>
 	);
 }

@@ -86,9 +86,9 @@ export type Mutation = {
   createFarm?: Maybe<Farm>;
   createPO?: Maybe<PurchaseOrder>;
   createProduct?: Maybe<Farm>;
-  createUser?: Maybe<Auth>;
   login?: Maybe<Auth>;
   postReview?: Maybe<Review>;
+  signup?: Maybe<Auth>;
   updateCart?: Maybe<User>;
   updateFarm?: Maybe<Farm>;
   updateUser?: Maybe<User>;
@@ -116,14 +116,6 @@ export type MutationCreateProductArgs = {
 };
 
 
-export type MutationCreateUserArgs = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
-};
-
-
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -135,6 +127,13 @@ export type MutationPostReviewArgs = {
   product_id?: InputMaybe<Scalars['ID']>;
   review: NewReview;
   user?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationSignupArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
 };
 
 
@@ -230,8 +229,8 @@ export type Query = {
   farmDashboard?: Maybe<Farm>;
   farmStore?: Maybe<Farm>;
   farms?: Maybe<Array<Maybe<Farm>>>;
-  getLocalFarms?: Maybe<Array<Maybe<Farm>>>;
   getPO?: Maybe<PurchaseOrder>;
+  localFarms?: Maybe<Array<Maybe<Farm>>>;
   me?: Maybe<User>;
   oneProduct?: Maybe<Product>;
   products?: Maybe<Array<Maybe<Product>>>;
@@ -249,14 +248,14 @@ export type QueryFarmStoreArgs = {
 };
 
 
-export type QueryGetLocalFarmsArgs = {
-  latitude: Scalars['Float'];
-  longitude: Scalars['Float'];
+export type QueryGetPoArgs = {
+  _id: Scalars['ID'];
 };
 
 
-export type QueryGetPoArgs = {
-  _id: Scalars['ID'];
+export type QueryLocalFarmsArgs = {
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
 };
 
 
@@ -507,9 +506,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createFarm?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, Partial<MutationCreateFarmArgs>>;
   createPO?: Resolver<Maybe<ResolversTypes['PurchaseOrder']>, ParentType, ContextType, Partial<MutationCreatePoArgs>>;
   createProduct?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, Partial<MutationCreateProductArgs>>;
-  createUser?: Resolver<Maybe<ResolversTypes['Auth']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'firstName' | 'password' | 'username'>>;
   login?: Resolver<Maybe<ResolversTypes['Auth']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
   postReview?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<MutationPostReviewArgs, 'review'>>;
+  signup?: Resolver<Maybe<ResolversTypes['Auth']>, ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'password' | 'username'>>;
   updateCart?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationUpdateCartArgs>>;
   updateFarm?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, Partial<MutationUpdateFarmArgs>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationUpdateUserArgs>>;
@@ -552,8 +551,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   farmDashboard?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, RequireFields<QueryFarmDashboardArgs, '_id'>>;
   farmStore?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, RequireFields<QueryFarmStoreArgs, '_id'>>;
   farms?: Resolver<Maybe<Array<Maybe<ResolversTypes['Farm']>>>, ParentType, ContextType>;
-  getLocalFarms?: Resolver<Maybe<Array<Maybe<ResolversTypes['Farm']>>>, ParentType, ContextType, RequireFields<QueryGetLocalFarmsArgs, 'latitude' | 'longitude'>>;
   getPO?: Resolver<Maybe<ResolversTypes['PurchaseOrder']>, ParentType, ContextType, RequireFields<QueryGetPoArgs, '_id'>>;
+  localFarms?: Resolver<Maybe<Array<Maybe<ResolversTypes['Farm']>>>, ParentType, ContextType, RequireFields<QueryLocalFarmsArgs, 'latitude' | 'longitude'>>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryMeArgs, '_id'>>;
   oneProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryOneProductArgs, '_id'>>;
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;

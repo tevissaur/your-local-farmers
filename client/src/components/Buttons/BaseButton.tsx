@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const BaseButtonStyled = styled(Button)`
 	border-radius: 25px;
-	padding: auto 1.5rem;
+	padding: 5px 10px;
 	color: black;
 	margin: 2px 5px;
 	background-color: lightgray;
@@ -12,17 +12,20 @@ const BaseButtonStyled = styled(Button)`
 	box-shadow: 1px 1px 0 black;
 	transform: translate(-1px, -1px);
 	transition: all 100ms;
+	text-decoration: none;
 	&:hover {
 		background-color: white;
 		transform: translate(0px, 0px);
 		box-shadow: 0px 0px 0 black;
+		color: black;
 	}
 `;
 
 
 export const BaseButton = ({ children, ...props}) => {
 
-
+	const { to } = props;
+	
 	return (
 		<BaseButtonStyled {...props}>{children}</BaseButtonStyled>
 	)

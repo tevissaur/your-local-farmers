@@ -5,9 +5,7 @@ import { useEffect } from "react";
 import store, { RootState } from "../utils/store";
 import Banner from "../components/Banner";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { setActivePage } from "../utils/slices/ui-slice";
-import { useGetMeQuery } from "../services/api.service";
 import authenticationService from "../services/authentication.service";
 import { IAuthToken } from "../interfaces/IUser";
 import utilsService from "../services/utils.service";
@@ -15,6 +13,7 @@ import styled from "styled-components";
 import { Container } from "react-bootstrap";
 
 	const MainContainer = styled(Container)`
+			padding: 0;
 			
 	`;
 
@@ -64,7 +63,7 @@ const MainLayout = () => {
 	return (
 		<>
 			<NavBar />
-			<MainContainer>
+			<MainContainer fluid>
 				<Banner />
 				<Outlet />
 			</MainContainer>

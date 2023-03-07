@@ -14,7 +14,7 @@ export interface ITag {
 }
 export interface IFarm {
 	_id?: string;
-	name?: string;
+	name: string;
 	address?: string;
 	owners?: Array<IUser>;
 	offersDelivery?: boolean;

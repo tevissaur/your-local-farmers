@@ -4,9 +4,9 @@ import { IFarm } from "../../../interfaces/IFarm";
 import { IProduct } from "../../../interfaces/IProduct";
 
 export interface SearchState {
-  farms: Array<IFarm>;
-  products: Array<IProduct>;
-  categories: Array<ICategory>;
+  farms: IFarm[];
+  products: IProduct[];
+  categories: ICategory[];
 }
 
 const initialState: SearchState = {

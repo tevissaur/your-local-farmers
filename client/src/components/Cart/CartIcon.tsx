@@ -1,5 +1,5 @@
 import ShoppingCart from '@mui/icons-material/ShoppingCart'
-import { LinkBase as Link } from '../LinkBase';
+import { BaseLink as Link } from '../BaseLink';
 import IconButton from '@mui/material/IconButton'
 import store, { RootState } from '../../utils/store';
 import React from 'react';

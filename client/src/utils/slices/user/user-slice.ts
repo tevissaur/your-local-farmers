@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../interfaces/IUser";
-import authenticationService from "../../services/authentication.service";
+import { IUser } from "../../../interfaces/IUser";
+import authenticationService from "../../../services/authentication.service";
 
 export interface UserSlice {
 	loggedIn: boolean;
@@ -22,8 +22,8 @@ const initialState: UserSlice = {
 		orders: [],
 		reviews: [],
 		location: {
-			latitude: 0,
-			longitude: 0,
+			latitude: 42.00,
+			longitude: -83.00,
 		},
 	},
 };

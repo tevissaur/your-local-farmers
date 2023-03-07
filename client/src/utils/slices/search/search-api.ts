@@ -73,17 +73,30 @@ export const searchApi = api.injectEndpoints({
 			transformResponse: (response) => (response.product)
 		}),
 		getLocalFarms: builder.query({
-			query: ({ latitude, longitude }) => ({
+			query: (location) => ({
 				body: gql`
                     query {
-                        localFarms(latitude: "${latitude}", longitude: "${longitude}") {
+                        localFarms(latitude: ${location.latitude}, longitude: ${location.longitude}) {
+                            _id
+                            name
+                            avgScore
+                        }
+                    }
+                `
+            }),
+		}),
+        getCategories: builder.query({
+            query: () => ({
+                body: gql`
+                    query {
+                        categories {
                             _id
                             name
                         }
                     }
                 `
-            }),
-		})
+            })
+        }),
     })
 });
 
@@ -91,4 +104,6 @@ export const {
 	useGetFarmQuery,
 	useGetProductQuery,
 	useGetLocalFarmsQuery,
+    useGetCategoriesQuery,
+    useLazyGetCategoriesQuery,
 } = searchApi;

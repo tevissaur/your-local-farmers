@@ -98,7 +98,7 @@ const NavBar = () => {
 				<Navbar.Brand
 					className="d-md-none col-8 text-center"
 					as={BaseLink}
-					to={"/home"}
+					to={homeUrl}
 				>
 					Local Farmers
 				</Navbar.Brand>

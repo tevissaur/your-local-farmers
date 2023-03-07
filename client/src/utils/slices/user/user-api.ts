@@ -62,7 +62,8 @@ export const userApi = api.injectEndpoints({
 				`,
 			}),
 			transformErrorResponse: (e) => {
-				return e.data.login;
+                console.log(e.data.response.errors);
+				return e.data.response.errors[0].message;
 			},
 		}),
 		signup: builder.mutation({

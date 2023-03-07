@@ -6,50 +6,51 @@ import { RootState } from "../../../utils/store";
 import { useSelector } from "react-redux";
 import { IProduct } from "../../../interfaces/IProduct";
 import { UrlParams } from "../../../interfaces/UrlParams";
+import { Card, Col, Container, Row } from "react-bootstrap";
+import { BaseLink } from "../../../components/BaseLink";
+import { BaseButton } from "../../../components/Buttons/BaseButton";
 
 export interface FarmProductProps {
 	product: IProduct;
 }
 
 const FarmProduct: FC<FarmProductProps> = ({ product }) => {
-
 	const {
 		farmStore: { farm },
 	} = useSelector((state: RootState) => state);
 	const { fname } = useParams<UrlParams>();
-	
+
 	return (
-		<Box
-			sx={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignContent: "space-between",
-				paddingX: 3,
-			}}
-		>
-			<Link
-				component={ReactLink}
-				to={`/farm/${slugify(fname ?? '', {
-					lower: true,
-				})}/store/product/${slugify(product.name, {
-					lower: true,
-				})}?fid=${farm._id}&pid=${product._id}`}
-			>
-				<Box flexDirection="column" alignItems="center">
-					<Typography fontSize="2xl">{product.name}</Typography>
+		<Col xs={12} sm={6}>
+			<Card className="my-3">
+				<Card.Header
+					as={BaseLink}
+					to={`/farm/${slugify(fname ?? "", {
+						lower: true,
+					})}/store/product/${slugify(product.name, {
+						lower: true,
+					})}?fid=${farm._id}&pid=${product._id}`}
+					className="d-flex justify-content-between align-items-center"
+				>
+					<Card.Title className="h5 d-flex">
+						{product.name}
+					</Card.Title>
+				</Card.Header>
+				<Card.Body>
+					<BaseButton as={BaseLink}>Add to Cart</BaseButton>
+					<div>
+						<div>${product.price}</div>
+					</div>
 
-					<Typography fontSize="2xl">${product.price}</Typography>
-				</Box>
-			</Link>
-
-			<Typography>
-				Available:{" "}
-				<span style={{ fontWeight: "bolder" }}>
-					{product.quantity?.amount}/{product.quantity?.type}
-				</span>
-			</Typography>
-		</Box>
+					<div>
+						Available:{" "}
+						<span style={{ fontWeight: "bolder" }}>
+							{product.quantity?.amount}/{product.quantity?.type}
+						</span>
+					</div>
+				</Card.Body>
+			</Card>
+		</Col>
 	);
 };
 

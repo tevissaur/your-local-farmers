@@ -53,11 +53,14 @@ export const farmStoreSlice = createSlice({
 			state.farm = action.payload;
 		}),
 		setProduct: ((state, action: PayloadAction<IProduct>) => {
-			state.farm = action.payload;
-		})
+			state.product = action.payload;
+		}),
+		resetFarmData: ((state) => {
+			state.farm = initialState.farm;
+		}),
 	},
 });
 
-export const { setFarmData, setProduct } = farmStoreSlice.actions;
+export const { setFarmData, setProduct, resetFarmData } = farmStoreSlice.actions;
 
 export default farmStoreSlice.reducer;

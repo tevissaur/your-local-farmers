@@ -1,99 +1,62 @@
-import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import FarmProductCard from "./components/FarmProductCard";
 import FarmReviews from "../../components/Reviews";
 import UtilsService from "../../services/utils.service";
-import { Box, Typography } from "@mui/material";
-import store, { RootState } from "../../utils/store";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import { useDispatch, useSelector } from "react-redux";
-import { useGetFarmQuery } from "../../services/api.service";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useGetFarmQuery } from "../../utils/slices/search/search-api";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+	resetFarmData,
+	setFarmData,
+} from "../../utils/slices/farm-store-slice";
+import FarmInfo from "./components/FarmInfoCard";
 
 const Farm = () => {
-	const {
-		farmStore: {
-			farm: { _id, address, name, owners, products, story },
-		},
-	} = useSelector((state: RootState) => state);
-	const dispatch = useDispatch();
+	const { _id, name, owners, products, story } = useAppSelector(
+		(state) => state.farmStore.farm
+	);
+	const dispatch = useAppDispatch();
 	const { search } = useLocation();
 	const { fid } = UtilsService.getSearchParams(search);
-	const { isLoading, data, error } = useGetFarmQuery(fid);
+	const { isLoading, isSuccess, isError, data, error } = useGetFarmQuery(fid);
 
 	useEffect(() => {
+		if (fid === _id) {
+			dispatch(resetFarmData());
+		}
+	}, []);
+
+	useEffect(() => {
+		if (isSuccess && !isLoading && data) {
+			dispatch(setFarmData(data));
+		}
 		console.log(data);
 	}, [isLoading, data, error]);
 
 	return (
-		<>
-			{isLoading ? (
-				<></>
-			) : (
-				<Box>
-					<Typography variant="h4" textAlign="center" marginY={2}>
-						{name}
-					</Typography>
-					<Box
-						sx={{
-							display: "flex",
-							flexDirection: "row",
-							justifyContent: "space-around",
-							paddingX: 3,
-						}}
-					>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
-								width: "40%",
-							}}
-						>
-							<Box
-								component="img"
-								sx={{
-									width: "350px",
-									border: "5px double black",
-									borderRadius: "10px",
-								}}
-							/>
-							{owners?.map((owner, idx) => (
-								<Typography
-									key={owner._id}
-									fontWeight="600"
-									mt={1}
-								>
-									{owner.fullName}
-								</Typography>
-							))}
-
-							{/* <Typography fontWeight="600" mt={1}>
-                {address}
-              </Typography> */}
-
-							<Typography>{story}</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								width: "50%",
-								flexWrap: "wrap",
-							}}
-						>
-							{products?.map((product, idx) => (
-								<FarmProductCard
-									key={product._id}
-									product={product}
-								/>
-							))}
-						</Box>
-					</Box>
-					<FarmReviews />
-				</Box>
-			)}
-		</>
+		<Container fluid className="p-5">
+			<Row>
+				{isLoading ? (
+					<>
+						<Col>
+							<Spinner animation="grow" />
+						</Col>
+					</>
+				) : (
+					<>
+						<FarmInfo />
+						<Col xs={12} md={8}>
+							<Row>
+								{products?.map((product) => (
+									<FarmProductCard product={product} />
+								))}
+							</Row>
+						</Col>
+					</>
+				)}
+			</Row>
+		</Container>
 	);
 };
 

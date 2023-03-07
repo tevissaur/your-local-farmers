@@ -48,7 +48,10 @@ const FarmersRouter = () => {
           <Route path='browse' element={<FarmsPage />} />
           <Route path="log-in" element={<LoginPage />} />
           <Route path="sign-up" element={<SignupPage />} />
-          <Route path="profile" element={<SignupPage />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path='my-farm' element={<MyFarm />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="resources" element={<Cart />} />
 
           <Route path="farm/:fname">
             <Route path="about" element={<Farm />} />
@@ -59,7 +62,6 @@ const FarmersRouter = () => {
 
 
           </Route>
-          <Route path="profile" element={<Profile />} />
           <Route path="category/*" element={<Search />}>
             <Route path="farms" element={<FarmSearch />} />
             <Route path="products" element={<ProductSearch />} />
@@ -67,9 +69,6 @@ const FarmersRouter = () => {
           <Route path="product/*">
             <Route path=":pname" element={<Product />} />
           </Route>
-          <Route path='my-farm' element={<MyFarm />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="resources" element={<Cart />} />
           <Route path="*" element={<NoPage />} /> 
         </Route>
       </Routes>

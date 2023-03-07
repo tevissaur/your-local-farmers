@@ -2,7 +2,7 @@ import WhatIs from "./components/WhatIs";
 import MissionStatement from "../AboutUs/components/MissionStatement";
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Carousel, Col, Container, Row } from "react-bootstrap";
+import { Carousel, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import {
 	useGetCategoriesQuery,
@@ -63,17 +63,21 @@ const Homepage = () => {
 					<h2 className="mb-4 display-6">
 						Explore Our Most Popular Categories
 					</h2>
-					<div className="d-flex flex-wrap">
-						{categories.map((category) => (
-							<SmallIcon
-								key={category._id}
-								to={`/category/${slugify(category.name, {
-									lower: true,
-								})}?cid=${category._id}`}
-								label={category.name}
-							/>
-						))}
-					</div>
+					{categoriesLoading ? (
+						<Spinner animation="grow" />
+					) : (
+						<div className="d-flex flex-wrap">
+							{categories.map((category) => (
+								<SmallIcon
+									key={category._id}
+									to={`/category/${slugify(category.name, {
+										lower: true,
+									})}?cid=${category._id}`}
+									label={category.name}
+								/>
+							))}
+						</div>
+					)}
 				</WidgetCol>
 				<WidgetCol>
 					<h2 className="mb-4 display-6">Local Farms Near You</h2>
@@ -83,7 +87,7 @@ const Homepage = () => {
 								key={farm._id}
 								to={`/farm/${slugify(farm.name, {
 									lower: true,
-								})}?fid=${farm._id}`}
+								})}/store?fid=${farm._id}`}
 								label={farm.name}
 							/>
 						))}

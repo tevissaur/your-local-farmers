@@ -6,6 +6,7 @@ export const myFarmUrl = "/my-farm";
 export const myOrdersUrl = "/my-orders";
 export const loginUrl = "/log-in";
 export const signUpUrl = "/sign-up";
+export const profileUrl = "/profile";
 
 export const categoriesString = "categories";
 export const farmString = "farm";

@@ -7,54 +7,51 @@ export const searchApi = api.injectEndpoints({
 			query: (id) => ({
 				body: gql` 
                     query {
-                        farm(_id: "${id}") {
-                        _id
-                        name
-                        address
-                        story
-                        reviews {
-                            author{
-                            firstName
-                            }
-                            content
-                            rating
-                        }
-                        products {
+                        farmStore(_id: "${id}") {
                             _id
                             name
-                            price
-                            quantity {
-                            type
-                            amount
+                            story
+                            reviews {
+                                author{
+                                    firstName
+                                }
+                                content
+                                rating
                             }
-                            categories {
-                            name
+                            products {
+                                _id
+                                name
+                                price
+                                quantity {
+                                    type
+                                    amount
+                                }
+                                categories {
+                                    name
+                                }
                             }
-                        }
-                        owners {
-                            fullName
-                        }
+                            owners {
+                                fullName
+                            }
                         }
                     }
                 `
             }),
-			transformResponse: (response) => (response.farm)
+			transformResponse: (response) => {
+                return response.farmStore;
+            }
 		}),
 		getProduct: builder.query({
 			query: (id) => ({
 				body: gql`
                     query {
-                        product(_id: "${id}") {
+                        oneProduct(_id: "${id}") {
                             _id
                             name
                             price
                             quantity {
                                 type
                                 amount
-                            }
-                            inSeason
-                            farm {
-                                name
                             }
                             categories {
                                 name
@@ -70,7 +67,7 @@ export const searchApi = api.injectEndpoints({
                     }
         `,
 			}),
-			transformResponse: (response) => (response.product)
+			transformResponse: (response) => (response.oneProduct)
 		}),
 		getLocalFarms: builder.query({
 			query: (location) => ({

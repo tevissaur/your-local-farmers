@@ -86,7 +86,7 @@ function LoginForm() {
 					</Form.Group>
 				</Form>
 
-				<Button onClick={handleFormSubmit} type="submit">
+				<Button disabled={isLoading}  onClick={handleFormSubmit} type="submit">
 					Log In
 				</Button>
 			</Container>

@@ -62,7 +62,7 @@ export const userApi = api.injectEndpoints({
 				`,
 			}),
 			transformErrorResponse: (e) => {
-                console.log(e.data.response.errors);
+				console.log(e.data.response.errors);
 				return e.data.response.errors[0].message;
 			},
 		}),
@@ -70,7 +70,7 @@ export const userApi = api.injectEndpoints({
 			query: (signup: ISignup) => ({
 				body: gql`
             mutation {
-                login(username: "${signup.username}", password: "${signup.password}", email: "${signup.email}") {
+                signup(username: "${signup.username}", password: "${signup.password}", email: "${signup.email}") {
                   token
                   user {
                     _id
@@ -79,6 +79,10 @@ export const userApi = api.injectEndpoints({
             }
         `,
 			}),
+			transformErrorResponse: (e) => {
+				console.log(e.data.response.errors);
+				return e.data.response.errors[0].message;
+			},
 		}),
 	}),
 });

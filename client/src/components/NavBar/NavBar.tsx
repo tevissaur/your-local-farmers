@@ -31,6 +31,7 @@ import {
 	signUpUrl,
 } from "../../services/constants.service";
 import ProfileDropdown from "./ProfileDropdown";
+import { CartIcon } from "../Cart";
 
 export const StyledInput = styled(Form.Control)`
 	width: 100%;
@@ -149,7 +150,10 @@ const NavBar = () => {
 								lg={3}
 							>
 								{loggedIn ? (
-									<ProfileDropdown />
+									<>
+										<ProfileDropdown />
+										<CartIcon />
+									</>
 								) : (
 									<>
 										<NavButton to={loginUrl}>

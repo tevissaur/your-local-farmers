@@ -16,7 +16,6 @@ const StyledProfileDropdownContainer = styled(Dropdown)`
 	border-radius: 50px;
 	position: relative;
 	transition: all 0.5s;
-	width: 100%;
 `;
 
 const StyledProfileDropdownMenuContainer = styled(Dropdown.Menu)`

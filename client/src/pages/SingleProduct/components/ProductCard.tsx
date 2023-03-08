@@ -10,37 +10,37 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { BaseLink } from "../../../components/BaseLink";
 import { BaseButton } from "../../../components/Buttons/BaseButton";
 import { useAppSelector } from "../../../hooks";
+import AddToCardBtn from "../../../components/Buttons/AddToCartBtn";
 
 
 const FarmProduct: React.FC = () => {
-	const { farm, product: { _id, name, price, quantity } } = useAppSelector((state) => state.farmStore);
+	const { farm, product } = useAppSelector((state) => state.farmStore);
 	const { fname } = useParams<UrlParams>();
 
 
 	useEffect(() => {
-		console.log(name, price, quantity);
+		console.log(product);
 	})
 
 
 	return (
 		<Col xs={12} sm={6}>
 			<Card className="my-3">
-				<Card.Header className="d-flex justify-content-between align-items-center"
-				>
+				<Card.Header className="d-flex justify-content-between align-items-center">
 					<Card.Title className="h5 d-flex">
-						{name}
+						{product.name}
 					</Card.Title>
 				</Card.Header>
 				<Card.Body>
-					<BaseButton as={BaseLink}>Add to Cart</BaseButton>
+					<AddToCardBtn product={product} />
 					<div>
-						<div>${price}</div>
+						<div>${product.price}</div>
 					</div>
 
 					<div>
 						Available:{" "}
 						<span style={{ fontWeight: "bolder" }}>
-							{quantity?.amount}/{quantity?.type}
+							{product.quantity?.amount}/{product.quantity?.type}
 						</span>
 					</div>
 				</Card.Body>

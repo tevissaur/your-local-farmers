@@ -9,6 +9,7 @@ import { UrlParams } from "../../../interfaces/UrlParams";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { BaseLink } from "../../../components/BaseLink";
 import { BaseButton } from "../../../components/Buttons/BaseButton";
+import AddToCardBtn from "../../../components/Buttons/AddToCartBtn";
 
 export interface FarmProductProps {
 	product: IProduct;
@@ -37,11 +38,10 @@ const FarmProduct: FC<FarmProductProps> = ({ product }) => {
 					</Card.Title>
 				</Card.Header>
 				<Card.Body>
-					<BaseButton as={BaseLink}>Add to Cart</BaseButton>
+					<AddToCardBtn product={product} />{" "}
 					<div>
 						<div>${product.price}</div>
 					</div>
-
 					<div>
 						Available:{" "}
 						<span style={{ fontWeight: "bolder" }}>

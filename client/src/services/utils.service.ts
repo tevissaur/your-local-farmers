@@ -11,11 +11,10 @@ class UtilsService {
 	}
 
 	isCartDuplicate(products: Array<ICartProduct>, newItem: ICartProduct) {
-		for (let item of products) {
-			if (item.productID === newItem.productID) {
+		for (let item of products)
+			if (item.productID === newItem.productID)
 				return true;
-			}
-		}
+				
 		return false;
 	}
 

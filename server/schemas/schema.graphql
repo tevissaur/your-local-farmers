@@ -69,10 +69,11 @@ type User {
 }
 type Cart {
 	total: Int
-	items: [CartProduct]
+	products: [CartProduct]
 }
 type CartProduct {
 	price: Int!
+	name: String
 	quantity: Quantity!
 	dateAdded: String
 	farmID: ID!
@@ -92,10 +93,11 @@ input UpdateCartInput {
 }
 input CartInput {
 	total: Int
-	items: [CartProductInput]
+	products: [CartProductInput]
 }
 input CartProductInput {
 	price: Int!
+	name: String
 	quantity: QuantityInput!
 	dateAdded: String
 	farmID: ID!

@@ -22,12 +22,12 @@ export type Auth = {
 
 export type Cart = {
   __typename?: 'Cart';
-  items?: Maybe<Array<Maybe<CartProduct>>>;
+  products?: Maybe<Array<Maybe<CartProduct>>>;
   total?: Maybe<Scalars['Int']>;
 };
 
 export type CartInput = {
-  items?: InputMaybe<Array<InputMaybe<CartProductInput>>>;
+  products?: InputMaybe<Array<InputMaybe<CartProductInput>>>;
   total?: InputMaybe<Scalars['Int']>;
 };
 
@@ -43,6 +43,7 @@ export type CartProduct = {
 export type CartProductInput = {
   dateAdded?: InputMaybe<Scalars['String']>;
   farmID: Scalars['ID'];
+  name?: InputMaybe<Scalars['String']>;
   price: Scalars['Int'];
   productID: Scalars['ID'];
   quantity: QuantityInput;
@@ -460,7 +461,7 @@ export type AuthResolvers<ContextType = any, ParentType extends ResolversParentT
 }>;
 
 export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = ResolversObject<{
-  items?: Resolver<Maybe<Array<Maybe<ResolversTypes['CartProduct']>>>, ParentType, ContextType>;
+  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['CartProduct']>>>, ParentType, ContextType>;
   total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

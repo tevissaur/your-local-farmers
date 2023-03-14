@@ -2,20 +2,31 @@ import { ICartProduct } from "../interfaces/ICart";
 
 class UtilsService {
 	calculateCartTotal(products: Array<ICartProduct>) {
-		return products
-			.map((prod) => prod.price)
-			.reduce(
-				(accumulator: number, currentValue: number) =>
-					accumulator + currentValue
-			);
+		try {
+			if (products.length === 0) return 0;
+			return products
+				.map((prod) => prod?.price || 0)
+				.reduce(
+					(accumulator: number, currentValue: number) =>
+						accumulator + currentValue
+				);
+		} catch (error) {
+			console.error(error);
+			return 0;
+		}
 	}
 
-	isCartDuplicate(products: Array<ICartProduct>, newItem: ICartProduct) {
-		for (let item of products)
-			if (item.productID === newItem.productID)
-				return true;
-				
-		return false;
+	isCartDuplicate(products: Array<ICartProduct>, newItemId: string) {
+		try {
+			console.log(products, newItemId)
+			if (products.length === 0) return false;
+			for (let item of products)
+				if (item.productId._id === newItemId) return true;
+
+			return false;
+		} catch (error) {
+			return false;
+		}
 	}
 
 	cleanCart(products: Array<ICartProduct>) {
@@ -25,8 +36,8 @@ class UtilsService {
 			price: item.price,
 			quantity: item.quantity,
 			dateAdded: item.dateAdded,
-			productID: item.productID,
-			farmID: item.farmID,
+			productID: item.productId,
+			farmID: item.farmId,
 		}));
 	}
 

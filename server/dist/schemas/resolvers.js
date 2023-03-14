@@ -207,7 +207,7 @@ exports.resolvers = {
         },
     },
     Mutation: {
-        createUser: async (parent, args) => {
+        signup: async (parent, args) => {
             try {
                 const user = await models_1.User.create(args);
                 const token = (0, authentication_service_1.signToken)(user);
@@ -343,18 +343,13 @@ exports.resolvers = {
             });
             return updatedUser;
         },
-        updateCart: async (parent, { cart: { owner, cart } }) => {
-            console.log(cart);
-            let cartTotal = cart.reduce((total, num) => total + num);
-            return await models_1.User.findByIdAndUpdate(owner, {
-                $set: {
-                    cart: {
-                        total: cartTotal,
-                    },
-                },
-            }, {
-                new: true,
+        upsertCart: async (parent, { cart: { owner, newItem } }) => {
+            const cart = await models_1.Cart.findOneAndUpdate({ owner }, { $push: newItem }, { new: true, upsert: true }, (err, doc) => {
+                if (err)
+                    return err.message;
+                return "Successfully saved cart!";
             });
+            return cart;
         },
         updateFarm: async (parent, { farm }) => {
             const updatedFarm = await models_1.Farm.findByIdAndUpdate(farm._id, {

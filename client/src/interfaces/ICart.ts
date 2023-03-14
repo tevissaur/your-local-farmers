@@ -1,5 +1,8 @@
+import { IFarm } from "./IFarm";
+import { IProduct } from "./IProduct";
+
 export interface ICartProduct {
-    productID: string;
+    productId: IProduct;
     name?: string;
     price: number;
     quantity?: {
@@ -7,7 +10,7 @@ export interface ICartProduct {
         type?: string
     };
     dateAdded?: string;
-    farmID: string;
+    farmId: IFarm;
 }
 
 

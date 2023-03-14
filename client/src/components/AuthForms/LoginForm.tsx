@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AuthService from "../../services/authentication.service";
 import { BaseButton as Button } from "../Buttons/BaseButton";
 import { RootState } from "../../utils/store";
-import { setLoginForm } from "../../utils/slices/ui-slice";
+import { setLoginForm } from "../../utils/slices/ui/ui-slice";
 import { useLoginMutation } from "../../utils/slices/user/user-api";
 import { Alert, Container, Form } from "react-bootstrap";
 import { StyledInput } from "../NavBar/NavBar";

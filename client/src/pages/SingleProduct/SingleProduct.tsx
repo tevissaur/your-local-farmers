@@ -8,7 +8,7 @@ import {
 	resetFarmData,
 	setFarmData,
 	setProduct,
-} from "../../utils/slices/farm-store-slice";
+} from "../../utils/slices/farm-store/farm-store-slice";
 import ProductCard from "./components/ProductCard";
 
 const Product = () => {

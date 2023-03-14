@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IFarm } from "../../interfaces/IFarm";
-import { IProduct } from "../../interfaces/IProduct";
+import { number, string } from "yargs";
+import { IFarm } from "../../../interfaces/IFarm";
+import { IProduct } from "../../../interfaces/IProduct";
 
-export interface FarmStoreSlice {
+export interface FarmDashboardSlice {
 	farm: IFarm;
 	product: IProduct;
 }
 
-const initialState: FarmStoreSlice = {
+const initialState: FarmDashboardSlice = {
 	farm: {
 		_id: "",
 		name: "",
@@ -22,6 +23,13 @@ const initialState: FarmStoreSlice = {
 			start: 0,
 			end: 0,
 		},
+		acceptedPayments: [],
+		location: {
+			longitude: 0,
+			latitude: 0,
+		},
+		avgScore: 0,
+		purchaseOrders: [],
 	},
 	product: {
 		_id: "",
@@ -42,25 +50,22 @@ const initialState: FarmStoreSlice = {
 			amount: 0,
 			type: ''
 		}
-	}
+	},
 };
 
-export const farmStoreSlice = createSlice({
-	name: "farm-store",
+export const farmDashboardSlice = createSlice({
+	name: "farm-dashboard",
 	initialState,
 	reducers: {
 		setFarmData: ((state, action: PayloadAction<IFarm>) => {
 			state.farm = action.payload;
 		}),
-		setProduct: ((state, action: PayloadAction<IProduct>) => {
-			state.product = action.payload;
-		}),
-		resetFarmData: ((state) => {
-			state.farm = initialState.farm;
+		setProductData: ((state, action: PayloadAction<IProduct>) => {
+			state.farm = action.payload;
 		}),
 	},
 });
 
-export const { setFarmData, setProduct, resetFarmData } = farmStoreSlice.actions;
+export const { setFarmData } = farmDashboardSlice.actions;
 
-export default farmStoreSlice.reducer;
+export default farmDashboardSlice.reducer;

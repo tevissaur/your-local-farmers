@@ -5,6 +5,7 @@ import {
 	Category,
 	Farm,
 	PurchaseOrder,
+	Cart,
 } from "../models";
 import bcrypt from "bcrypt";
 
@@ -14,23 +15,28 @@ import { ResolversTypes } from "../__generated__/resolvers-types";
 export const resolvers = {
 	Query: {
 		me: async (parent, { _id }) => {
-			const user = await User.findById(_id).populate([
-				{
-					path: "purchasedOrders",
-					model: "PurchaseOrder",
-					populate: [
-						{
-							path: "seller",
-							model: "Farm",
-						},
-						{
-							path: "items",
-							model: "Product",
-						},
-					],
-				},
-			]);
-			return user;
+			try {
+				const user = await User.findById(_id).populate([
+					{
+						path: "cart",
+						model: "Cart",
+						populate: [
+							{
+								path: "products.productId",
+								model: "Product",
+							},
+							{
+								path: "products.farmId",
+								model: "Farm",
+							},
+						],
+					},
+				]);
+				if (!user) throw new Error("User not found");
+				return user;
+			} catch (error) {
+				return error;
+			}
 		},
 		reviews: async (parent, args) => {
 			return await Review.find().populate("author");
@@ -224,16 +230,14 @@ export const resolvers = {
 			try {
 				const user = await User.findOne({ email });
 
-				if (!user)
-					throw new Error("No Profile with that email");
+				if (!user) throw new Error("No Profile with that email");
 
 				const isPasswordMatching = await bcrypt.compare(
 					password,
 					user.get("password", null, { getters: false })
 				);
 
-				if (!isPasswordMatching)
-					throw new Error("Incorrect password!");
+				if (!isPasswordMatching) throw new Error("Incorrect password!");
 
 				const token = signToken(user);
 				return { token, user };
@@ -384,22 +388,34 @@ export const resolvers = {
 			);
 			return updatedUser;
 		},
-		updateCart: async (parent, { cart: { owner, cart } }) => {
-			console.log(cart);
-			let cartTotal = cart.reduce((total, num) => total + num);
-			return await User.findByIdAndUpdate(
-				owner,
-				{
-					$set: {
-						cart: {
-							total: cartTotal,
+		upsertCart: async (parent, { ownerId, products }) => {
+			try {
+				const cart = await Cart.findOneAndUpdate(
+					{ owner: ownerId },
+					{
+						$push: {
+							products: products,
 						},
 					},
-				},
-				{
-					new: true,
-				}
-			);
+					{ upsert: true, new: true }
+				);
+				return cart;
+			} catch (error) {
+				return error;
+			}
+		},
+		addProductToCart: async (parent, { ownerId, product }) => {
+			try {
+				const cart = await Cart.findOneAndUpdate(
+					{ owner: ownerId },
+					{ $push: { products: product } },
+					{ upsert: true, new: true }
+				).populate("products.productId");
+
+				return cart;
+			} catch (error) {
+				return error;
+			}
 		},
 		updateFarm: async (parent, { farm }) => {
 			const updatedFarm = await Farm.findByIdAndUpdate(

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import {
 	BsArrowUpRight,
@@ -13,6 +13,7 @@ import { useAppSelector } from "../../hooks";
 import authenticationService from "../../services/authentication.service";
 import { profileUrl } from "../../services/constants.service";
 import { BaseLink } from "../BaseLink";
+import { BaseButton } from "../Buttons/BaseButton";
 
 const StyledCartDropdownContainer = styled(Dropdown)`
 	border-radius: 50px;
@@ -47,23 +48,15 @@ const StyledCartDropdownToggle = styled(Dropdown.Toggle)`
 		border: 1px solid black;
 	}
 `;
-const Arrow = styled.span`
-	position: absolute;
-	left: 20px;
-	top: -5px;
-	width: 10px;
-	height: 10px;
-	background-color: white;
-	transform: rotate(45deg);
-	border-style: solid;
-	border-width: 1px 1px 1px 1px;
-	border-color: black transparent transparent black;
-`;
 const CartDropdown = () => {
     const { products, total } = useAppSelector(state => state.cart);
 	const handleLogout = () => {
 		authenticationService.logout();
 	};
+
+	useEffect(() => {
+		console.log("Cart icon: ", products)
+	}, [products])
 
 	return (
 		<StyledCartDropdownContainer>
@@ -80,14 +73,22 @@ const CartDropdown = () => {
 				<BsCart />
 			</StyledCartDropdownToggle>
 
-			<StyledCartDropdownMenuContainer className="mt-2">
-				<Arrow className="d-none d-md-block" />
-				{products.map(product => (
-                    <Dropdown.Item>
-                        {`${product.name} qty: ${product.quantity?.amount} / ${product.quantity?.type}`}
+			<StyledCartDropdownMenuContainer align={{ sm: "end" }} className="mt-2">
+				{products?.length > 0 ? (products.map(product => (
+                    <Dropdown.Item key={product.productId._id}>
+                        {`${product.productId?.name} qty: ${product.quantity?.amount} / ${product.quantity?.type}`}
                     </Dropdown.Item>
-                ))}
-                <Dropdown.Item as={BaseLink} to={"/cart"}>Go to cart</Dropdown.Item>
+                ))) : <></>}
+				<Dropdown.Divider />
+                <Dropdown.ItemText>
+					<BaseButton as={BaseLink} to={"/cart"}>
+						Go to cart
+					</BaseButton>
+					<BaseButton as={BaseLink} to={"/checkout"}>
+						Checkout
+					</BaseButton>
+
+				</Dropdown.ItemText>
 			</StyledCartDropdownMenuContainer>
 		</StyledCartDropdownContainer>
 	);

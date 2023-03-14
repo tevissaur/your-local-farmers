@@ -19,7 +19,7 @@ import {
 import NavButton from "./NavLink";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { toggleDrawer } from "../../utils/slices/ui-slice";
+import { toggleDrawer } from "../../utils/slices/ui/ui-slice";
 import {
 	aboutUsUrl,
 	browseUrl,

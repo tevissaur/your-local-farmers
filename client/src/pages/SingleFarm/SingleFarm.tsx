@@ -9,7 +9,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import {
 	resetFarmData,
 	setFarmData,
-} from "../../utils/slices/farm-store-slice";
+} from "../../utils/slices/farm-store/farm-store-slice";
 import FarmInfo from "./components/FarmInfoCard";
 
 const Farm = () => {
@@ -31,7 +31,6 @@ const Farm = () => {
 		if (isSuccess && !isLoading && data) {
 			dispatch(setFarmData(data));
 		}
-		console.log(data);
 	}, [isLoading, data, error]);
 
 	return (
@@ -49,7 +48,7 @@ const Farm = () => {
 						<Col xs={12} md={8}>
 							<Row>
 								{products?.map((product) => (
-									<FarmProductCard product={product} />
+									<FarmProductCard key={product._id} product={product} />
 								))}
 							</Row>
 						</Col>

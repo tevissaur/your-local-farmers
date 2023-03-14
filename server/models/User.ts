@@ -2,6 +2,7 @@ import { Schema, model, Types, Decimal128 } from "mongoose";
 import bcrypt from "bcrypt";
 import { IReview } from "./Review";
 import { IPurchaseOrder } from "./PurchaseOrder";
+import { Cart } from "../__generated__/resolvers-types";
 
 export interface ILocation {
 	latitude: Types.Decimal128;
@@ -32,10 +33,7 @@ export interface IUser {
 	reviews: Types.Array<IReview>;
 	orders: Types.Array<IPurchaseOrder>;
 	location: ILocation;
-	cart: {
-		total: number;
-		products: Types.Array<ICartProduct>
-	}
+	cart: Cart;
 }
 
 const userSchema = new Schema<IUser>({
@@ -87,34 +85,8 @@ const userSchema = new Schema<IUser>({
 		longitude: Number,
 	},
 	cart: {
-		total: {
-			type: Number,
-		},
-		products: [
-			{
-				price: {
-					type: Number,
-				},
-				dateAdded: {
-					type: Date,
-					default: new Date().toUTCString(),
-				},
-				quantity: {
-					type: {
-						type: String,
-					},
-					amount: Number,
-				},
-				productID: {
-					type: Schema.Types.ObjectId,
-					ref: "Product",
-				},
-				farmID: {
-					type: Schema.Types.ObjectId,
-					ref: 'Farm'
-				}
-			},
-		],
+		type: Schema.Types.ObjectId,
+		ref: "Cart",
 	},
 	userType: {
 		type: String,

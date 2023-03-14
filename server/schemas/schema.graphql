@@ -68,6 +68,7 @@ type User {
 	cart: Cart
 }
 type Cart {
+	_id: ID!
 	total: Int
 	products: [CartProduct]
 }
@@ -76,8 +77,8 @@ type CartProduct {
 	name: String
 	quantity: Quantity!
 	dateAdded: String
-	farmID: ID!
-	productID: ID!
+	farmId: Farm
+	productId: Product
 }
 type Auth {
 	token: ID!
@@ -100,8 +101,8 @@ input CartProductInput {
 	name: String
 	quantity: QuantityInput!
 	dateAdded: String
-	farmID: ID!
-	productID: ID!
+	farmId: ID!
+	productId: ID!
 }
 
 input EditLocation {
@@ -189,5 +190,8 @@ type Mutation {
 	createPO(PO: NewPurchaseOrder): PurchaseOrder
 	updateUser(user: UpdatedUser): User
 	updateFarm(farm: UpdatedFarm): Farm
-	updateCart(cart: CartInput): User
+	upsertCart(products: [CartProductInput]!, ownerId: ID): Cart
+	addProductToCart(product: CartProductInput!, ownerId: ID): Cart
 }
+
+

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AuthService from "../../services/authentication.service";
 import { BaseButton as Button } from "../Buttons/BaseButton";
-import { setSignupForm } from "../../utils/slices/ui-slice";
+import { setSignupForm } from "../../utils/slices/ui/ui-slice";
 import {
 	useLoginMutation,
 	useSignupMutation,

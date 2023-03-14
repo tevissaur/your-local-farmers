@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useLazyQuery, useQuery } from '@apollo/client'
-import { QUERY_FARMS } from '../../utils/queries';
-import { Link } from 'react-router-dom'
-import FarmCard from './components/FarmCard'
-import { Box, Button, Checkbox, FormControl, FormLabel, List, ListItem, Typography } from '@mui/material';
 import store, { RootState } from '../../utils/store';
 import { client } from '../../App';
 import { useSelector } from 'react-redux';

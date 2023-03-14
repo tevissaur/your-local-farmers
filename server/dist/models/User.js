@@ -54,34 +54,8 @@ const userSchema = new mongoose_1.Schema({
         longitude: Number,
     },
     cart: {
-        total: {
-            type: Number,
-        },
-        products: [
-            {
-                price: {
-                    type: Number,
-                },
-                dateAdded: {
-                    type: Date,
-                    default: new Date().toUTCString(),
-                },
-                quantity: {
-                    type: {
-                        type: String,
-                    },
-                    amount: Number,
-                },
-                productID: {
-                    type: mongoose_1.Schema.Types.ObjectId,
-                    ref: "Product",
-                },
-                farmID: {
-                    type: mongoose_1.Schema.Types.ObjectId,
-                    ref: 'Farm'
-                }
-            },
-        ],
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Cart",
     },
     userType: {
         type: String,

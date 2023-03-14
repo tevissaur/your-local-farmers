@@ -22,6 +22,7 @@ export type Auth = {
 
 export type Cart = {
   __typename?: 'Cart';
+  _id: Scalars['ID'];
   products?: Maybe<Array<Maybe<CartProduct>>>;
   total?: Maybe<Scalars['Int']>;
 };
@@ -34,18 +35,19 @@ export type CartInput = {
 export type CartProduct = {
   __typename?: 'CartProduct';
   dateAdded?: Maybe<Scalars['String']>;
-  farmID: Scalars['ID'];
+  farmId?: Maybe<Farm>;
+  name?: Maybe<Scalars['String']>;
   price: Scalars['Int'];
-  productID: Scalars['ID'];
+  productId?: Maybe<Product>;
   quantity: Quantity;
 };
 
 export type CartProductInput = {
   dateAdded?: InputMaybe<Scalars['String']>;
-  farmID: Scalars['ID'];
+  farmId: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
   price: Scalars['Int'];
-  productID: Scalars['ID'];
+  productId: Scalars['ID'];
   quantity: QuantityInput;
 };
 
@@ -83,6 +85,7 @@ export type Location = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addProductToCart?: Maybe<Cart>;
   createCategory?: Maybe<Category>;
   createFarm?: Maybe<Farm>;
   createPO?: Maybe<PurchaseOrder>;
@@ -90,9 +93,15 @@ export type Mutation = {
   login?: Maybe<Auth>;
   postReview?: Maybe<Review>;
   signup?: Maybe<Auth>;
-  updateCart?: Maybe<User>;
   updateFarm?: Maybe<Farm>;
   updateUser?: Maybe<User>;
+  upsertCart?: Maybe<Cart>;
+};
+
+
+export type MutationAddProductToCartArgs = {
+  ownerId?: InputMaybe<Scalars['ID']>;
+  product: CartProductInput;
 };
 
 
@@ -138,11 +147,6 @@ export type MutationSignupArgs = {
 };
 
 
-export type MutationUpdateCartArgs = {
-  cart?: InputMaybe<CartInput>;
-};
-
-
 export type MutationUpdateFarmArgs = {
   farm?: InputMaybe<UpdatedFarm>;
 };
@@ -150,6 +154,12 @@ export type MutationUpdateFarmArgs = {
 
 export type MutationUpdateUserArgs = {
   user?: InputMaybe<UpdatedUser>;
+};
+
+
+export type MutationUpsertCartArgs = {
+  ownerId?: InputMaybe<Scalars['ID']>;
+  products: Array<InputMaybe<CartProductInput>>;
 };
 
 export type NewCategory = {
@@ -461,6 +471,7 @@ export type AuthResolvers<ContextType = any, ParentType extends ResolversParentT
 }>;
 
 export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['CartProduct']>>>, ParentType, ContextType>;
   total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -468,9 +479,10 @@ export type CartResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type CartProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartProduct'] = ResolversParentTypes['CartProduct']> = ResolversObject<{
   dateAdded?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  farmID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  farmId?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  productID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  productId?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Quantity'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -503,6 +515,7 @@ export type LocationResolvers<ContextType = any, ParentType extends ResolversPar
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  addProductToCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationAddProductToCartArgs, 'product'>>;
   createCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, Partial<MutationCreateCategoryArgs>>;
   createFarm?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, Partial<MutationCreateFarmArgs>>;
   createPO?: Resolver<Maybe<ResolversTypes['PurchaseOrder']>, ParentType, ContextType, Partial<MutationCreatePoArgs>>;
@@ -510,9 +523,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   login?: Resolver<Maybe<ResolversTypes['Auth']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
   postReview?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<MutationPostReviewArgs, 'review'>>;
   signup?: Resolver<Maybe<ResolversTypes['Auth']>, ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'password' | 'username'>>;
-  updateCart?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationUpdateCartArgs>>;
   updateFarm?: Resolver<Maybe<ResolversTypes['Farm']>, ParentType, ContextType, Partial<MutationUpdateFarmArgs>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationUpdateUserArgs>>;
+  upsertCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpsertCartArgs, 'products'>>;
 }>;
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = ResolversObject<{

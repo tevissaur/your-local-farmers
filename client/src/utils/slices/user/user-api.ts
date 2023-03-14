@@ -18,9 +18,14 @@ export const userApi = api.injectEndpoints({
                             isFarmer
                             cart {
                                 total
-                                items {
-                                    productID
-                                    farmID
+                                products {
+                                    productId {
+                                        _id
+                                        name
+                                    }
+                                    farmId {
+                                        _id
+                                    }
                                     dateAdded
                                     price
                                     quantity {
@@ -28,19 +33,6 @@ export const userApi = api.injectEndpoints({
                                         amount
                                     }
                                 }
-                            }
-                            orders {
-                                _id
-                                seller {
-                                    _id
-                                    name
-                                }
-                                items {
-                                    _id
-                                    name
-                                }
-                                dateCreated
-                                orderTotal
                             }
                         }
                     }
@@ -83,8 +75,13 @@ export const userApi = api.injectEndpoints({
 				console.log(e.data.response.errors);
 				return e.data.response.errors[0].message;
 			},
-		}),
+		})
 	}),
 });
 
-export const { useGetMeQuery, useLoginMutation, useSignupMutation } = userApi;
+export const {
+	useGetMeQuery,
+    useLazyGetMeQuery,
+	useLoginMutation,
+	useSignupMutation,
+} = userApi;

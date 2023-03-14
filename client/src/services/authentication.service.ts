@@ -10,8 +10,11 @@ class AuthService {
 		try {
 			return jwt_decode<IAuthToken>(this.getToken());
 		} catch (err) {
-			console.log(err)
-			return err;
+			return {
+				data: {
+					_id: null
+				},
+			};
 		}
 	}
 

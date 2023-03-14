@@ -5,15 +5,16 @@ import {
 	Category,
 	Farm,
 	PurchaseOrder,
+	Cart,
 } from "../models";
 import { db } from "../config/connection";
 import mongoose from "mongoose";
 const {
-  Types: { ObjectId },
+	Types: { ObjectId },
 } = mongoose;
 // Generating Ids to hardcode them into the seed references
 let userIds = [ObjectId(), ObjectId(), ObjectId(), ObjectId()];
-
+let cartIds = [ObjectId(), ObjectId(), ObjectId(), ObjectId()];
 let categoryIds = [
 	ObjectId(),
 	ObjectId(),
@@ -119,6 +120,7 @@ const userData = [
 		isFarmer: false,
 		reviews: [],
 		address: "123 Address Lane, City, State",
+		cart: cartIds[0],
 	},
 	{
 		_id: userIds[1],
@@ -130,6 +132,7 @@ const userData = [
 		isFarmer: false,
 		reviews: [],
 		address: "123 Address Lane, City, State",
+		cart: cartIds[1],
 	},
 	{
 		_id: userIds[2],
@@ -141,6 +144,7 @@ const userData = [
 		isFarmer: false,
 		reviews: [],
 		address: "420 Stoner Lane, City, State",
+		cart: cartIds[2],
 	},
 	{
 		_id: userIds[3],
@@ -152,6 +156,74 @@ const userData = [
 		isFarmer: false,
 		reviews: [],
 		address: "123 Address Lane, City, State",
+		cart: cartIds[3],
+	},
+];
+
+const cartData = [
+	{
+		_id: cartIds[0],
+		products: [
+			{
+				price: 1,
+				quantity: {
+					type: "each",
+					amount: 1,
+				},
+				productId: productIds[0],
+				farmId: farmIds[0],
+			},
+		],
+		total: 0,
+		owner: userIds[0],
+	},
+	{
+		_id: cartIds[1],
+		products: [
+			{
+				price: 1,
+				quantity: {
+					type: "each",
+					amount: 1,
+				},
+				productId: productIds[0],
+				farmId: farmIds[0],
+			},
+		],
+		total: 0,
+		owner: userIds[1],
+	},
+	{
+		_id: cartIds[2],
+		products: [
+			{
+				price: 1,
+				quantity: {
+					type: "each",
+					amount: 1,
+				},
+				productId: productIds[0],
+				farmId: farmIds[0],
+			},
+		],
+		total: 0,
+		owner: userIds[2],
+	},
+	{
+		_id: cartIds[3],
+		products: [
+			{
+				price: 1,
+				quantity: {
+					type: "each",
+					amount: 1,
+				},
+				productId: productIds[0],
+				farmId: farmIds[0],
+			},
+		],
+		total: 0,
+		owner: userIds[3],
 	},
 ];
 
@@ -218,51 +290,46 @@ const purchaseOrderData = [
 			{
 				items: [],
 				pickUpTime: "ASAP",
-			}
+			},
 		],
-		orderTotal: 10
-		
+		orderTotal: 10,
 	},
 	{
 		orders: [
 			{
 				items: [],
 				pickUpTime: "5 minutes",
-			}
+			},
 		],
-		orderTotal: 10
-		
+		orderTotal: 10,
 	},
 	{
 		orders: [
 			{
 				items: [],
 				pickUpTime: "Soon",
-			}
+			},
 		],
-		orderTotal: 10
-		
+		orderTotal: 10,
 	},
 	{
 		orders: [
 			{
 				items: [],
 				pickUpTime: "Never",
-			}
+			},
 		],
-		orderTotal: 10
-		
+		orderTotal: 10,
 	},
 	{
 		orders: [
 			{
 				items: [],
 				pickUpTime: "idk wtf y u asking me",
-			}
+			},
 		],
-		orderTotal: 10
-		
-	}
+		orderTotal: 10,
+	},
 ];
 
 const productData = [
@@ -649,8 +716,8 @@ const farmData = [
 		story: "Little farm under a cypress tree",
 		address: "90 Star Lane",
 		location: {
-			latitude: 42.00,
-			longitude: -83.00,
+			latitude: 42.0,
+			longitude: -83.0,
 		},
 	},
 	{
@@ -658,8 +725,8 @@ const farmData = [
 		name: "Willowbrook Orchards",
 		address: "90 Star Lane",
 		location: {
-			latitude: 42.00,
-			longitude: -83.00,
+			latitude: 42.0,
+			longitude: -83.0,
 		},
 		reviews: [reviewIds[7], reviewIds[8]],
 		products: [
@@ -677,8 +744,8 @@ const farmData = [
 		name: "Oakenshield Livestock",
 		address: "90 Star Lane",
 		location: {
-			latitude: 42.00,
-			longitude: -83.00,
+			latitude: 42.0,
+			longitude: -83.0,
 		},
 		reviews: [reviewIds[5], reviewIds[8]],
 		products: [
@@ -701,8 +768,8 @@ const farmData = [
 		name: "Martha's Vineyard",
 		address: "90 Star Lane",
 		location: {
-			latitude: 42.00,
-			longitude: -83.00,
+			latitude: 42.0,
+			longitude: -83.0,
 		},
 		reviews: [reviewIds[7], reviewIds[8], reviewIds[5]],
 		products: [
@@ -720,8 +787,8 @@ const farmData = [
 		name: "Lenny's House",
 		address: "90 Star Lane",
 		location: {
-			latitude: 42.00,
-			longitude: -83.00,
+			latitude: 42.0,
+			longitude: -83.0,
 		},
 		reviews: [reviewIds[5], reviewIds[8]],
 		products: [
@@ -769,10 +836,14 @@ db.once("open", async () => {
 		await PurchaseOrder.create(purchaseOrderData);
 		console.log("============ PURCHASE ORDERS SEEDED =============");
 
+		// Seeding Carts
+		await Cart.deleteMany({});
+		await Cart.create(cartData);
+		console.log("============ CARTS SEEDED =============");
+
 		process.exit(0);
 	} catch (err) {
 		console.log(err);
 		process.exit(1);
 	}
 });
-

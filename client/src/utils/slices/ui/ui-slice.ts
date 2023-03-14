@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IFarm } from "../../interfaces/IFarm";
-import { IProduct } from "../../interfaces/IProduct";
-import { IModal, IReview } from "../../interfaces/IReview";
-import { ILogin, ISignup, IUser } from "../../interfaces/IUser";
+import { IFarm } from "../../../interfaces/IFarm";
+import { IProduct } from "../../../interfaces/IProduct";
+import { IModal, IReview } from "../../../interfaces/IReview";
+import { ILogin, ISignup, IUser } from "../../../interfaces/IUser";
 
 export interface UiState {
 	activePage: string;

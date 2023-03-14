@@ -1,18 +1,17 @@
 import { BaseButton as Button } from "./BaseButton";
-import { RootState } from "../../utils/store";
-import { addProduct, setCartData } from "../../utils/slices/cart-slice";
-import { FC, useEffect } from "react";
+import { addProduct, setCartData, updateQuantityToAdd } from "../../utils/slices/cart/cart-slice";
+import { ChangeEvent, ChangeEventHandler, FC, useEffect } from "react";
 import UtilsService from "../../services/utils.service";
 import AuthService from "../../services/authentication.service";
-import { UPDATE_CART } from "../../utils/mutations";
-import { useMutation } from "@apollo/client";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { ICartProduct } from "../../interfaces/ICart";
 import { FarmProductProps } from "../../pages/SingleFarm/components/FarmProductCard";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Form, InputGroup } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { useAddProductToCartMutation, useUpdateCartMutation } from "../../utils/slices/cart/cart-api";
+
+type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 const AddToCardBtn: FC<FarmProductProps> = ({ product }) => {
 	const {
@@ -21,49 +20,70 @@ const AddToCardBtn: FC<FarmProductProps> = ({ product }) => {
 	const dispatch = useAppDispatch();
 	const { search } = useLocation();
 	const {
-		data: { _id },
-	} = AuthService.getProfile();
+		data: { _id: ownerId },
+	} = AuthService.getProfile() || "";
 	const { fid, pid } = UtilsService.getSearchParams(search);
+	const [addProductToCart, { data: addToCartResponse, isLoading: addToCartLoading, isSuccess: addToCartSuccess }] = useAddProductToCartMutation();
 
-	const handleAddToCart = async () => {
-		let newItem: ICartProduct = {
-			price: product.price,
-			quantity: {
-				type: product.quantity.type,
-				amount: product.quantity.amount,
-			},
-			farmID: fid,
-			productID: pid || product._id || "",
-			name: product.name,
-		};
+	const handleAddToCart = async (e: React.FormEvent<HTMLFormElement>) => {
+		try {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log(e.currentTarget)
+			let newItem = {
+				price: product.price,
+				quantity: {
+					type: product.quantity.type,
+					amount: product.quantity.amount,
+				},
+				farmId: fid,
+				productId: product._id || pid,
+				name: product.name,
+			};
+			console.log(UtilsService.isCartDuplicate(products, product._id || pid))
+			if (UtilsService.isCartDuplicate(products, product._id || pid))
+				throw new Error("Item is already in your cart!");
 
-		if (UtilsService.isCartDuplicate(products, newItem)) {
-			window.alert("This item is already in your cart!");
-			return;
+		await addProductToCart({ product: newItem, ownerId });
+		} catch (error) {
+			alert(error.message);
+			console.error(error);
 		}
-
-		dispatch(addProduct(newItem));
 	};
 
+	const handleQuantityChange = async (e: ChangeEvent<FormControlElement>) => {
+		try {
+            e.preventDefault();
+            e.stopPropagation();
+			dispatch(updateQuantityToAdd(e.currentTarget.value))
+
+        } catch (error) {
+            alert(error.message);
+            console.error(error);
+        }
+	}
+
 	useEffect(() => {
-		console.log(products);
-	}, [products]);
+		console.log(addToCartResponse)
+		if (addToCartSuccess && !addToCartLoading && addToCartResponse) dispatch(setCartData(addToCartResponse))
+	}, [addToCartResponse, addToCartLoading, addToCartSuccess]);
 
 	return (
-		<Form className="d-flex">
-			<Form.Group >
+		<Form className="d-flex" onSubmit={handleAddToCart}>
+			<Form.Group>
 				<Form.Label htmlFor="quantity">Quantity</Form.Label>
-				<InputGroup className="w-25">
+				<InputGroup className="w-75">
 					<Form.Control
 						type="number"
 						id="quantity"
 						name="quantity"
-						defaultValue={0}
+						onChange={handleQuantityChange}
+						defaultValue={product.quantity.amount}
 					></Form.Control>
-					<InputGroup.Text>{product.quantity.type}</InputGroup.Text>
+					<InputGroup.Text>{product?.quantity.type}</InputGroup.Text>
 				</InputGroup>
+			<Button className="m-2" type="submit">Add To Cart</Button>
 			</Form.Group>
-			<Button onSubmit={handleAddToCart}>Add To Cart</Button>
 		</Form>
 	);
 };
